@@ -1,5 +1,5 @@
 <div align ="center"> 
-  <h1>V-CEC Web</h1> 
+  <h1>V-CEC Application</h1> 
 <div>
 
 <div align = "center">
@@ -7,7 +7,7 @@
 </div>
 
 <p>
- <b>V-CEC Web</b> is an integral component of the application that allows you to manage the various events and programs at the administrator level. The web component is used to make adding or removing of entries to various components of the application. End-users (students) shall have no access to the component. Only authorised members representing the various forums in the college shall be granted access to modify information concerned with their respective forums. 
+ <b>V-CEC Application</b> is a comprehensive software tool designed for efficient management of various events and programs at the administrator level within the college environment. This mobile application provides a user-friendly interface for overseeing and controlling different aspects of event planning, execution, and management.
 </p>
 
 <div align="left">
