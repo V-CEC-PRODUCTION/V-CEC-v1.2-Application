@@ -1,0 +1,166 @@
+// coverage:ignore-file
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
+
+part of 'department_search_cubit.dart';
+
+// **************************************************************************
+// FreezedGenerator
+// **************************************************************************
+
+T _$identity<T>(T value) => value;
+
+final _privateConstructorUsedError = UnsupportedError(
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+
+/// @nodoc
+mixin _$DepartmentSearchState {
+  List<Staff> get staffs => throw _privateConstructorUsedError;
+  Option<Either<MainFailure, List<Staff>>> get failureOrSuccess =>
+      throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $DepartmentSearchStateCopyWith<DepartmentSearchState> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $DepartmentSearchStateCopyWith<$Res> {
+  factory $DepartmentSearchStateCopyWith(DepartmentSearchState value,
+          $Res Function(DepartmentSearchState) then) =
+      _$DepartmentSearchStateCopyWithImpl<$Res, DepartmentSearchState>;
+  @useResult
+  $Res call(
+      {List<Staff> staffs,
+      Option<Either<MainFailure, List<Staff>>> failureOrSuccess});
+}
+
+/// @nodoc
+class _$DepartmentSearchStateCopyWithImpl<$Res,
+        $Val extends DepartmentSearchState>
+    implements $DepartmentSearchStateCopyWith<$Res> {
+  _$DepartmentSearchStateCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? staffs = null,
+    Object? failureOrSuccess = null,
+  }) {
+    return _then(_value.copyWith(
+      staffs: null == staffs
+          ? _value.staffs
+          : staffs // ignore: cast_nullable_to_non_nullable
+              as List<Staff>,
+      failureOrSuccess: null == failureOrSuccess
+          ? _value.failureOrSuccess
+          : failureOrSuccess // ignore: cast_nullable_to_non_nullable
+              as Option<Either<MainFailure, List<Staff>>>,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_InitialCopyWith<$Res>
+    implements $DepartmentSearchStateCopyWith<$Res> {
+  factory _$$_InitialCopyWith(
+          _$_Initial value, $Res Function(_$_Initial) then) =
+      __$$_InitialCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {List<Staff> staffs,
+      Option<Either<MainFailure, List<Staff>>> failureOrSuccess});
+}
+
+/// @nodoc
+class __$$_InitialCopyWithImpl<$Res>
+    extends _$DepartmentSearchStateCopyWithImpl<$Res, _$_Initial>
+    implements _$$_InitialCopyWith<$Res> {
+  __$$_InitialCopyWithImpl(_$_Initial _value, $Res Function(_$_Initial) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? staffs = null,
+    Object? failureOrSuccess = null,
+  }) {
+    return _then(_$_Initial(
+      staffs: null == staffs
+          ? _value._staffs
+          : staffs // ignore: cast_nullable_to_non_nullable
+              as List<Staff>,
+      failureOrSuccess: null == failureOrSuccess
+          ? _value.failureOrSuccess
+          : failureOrSuccess // ignore: cast_nullable_to_non_nullable
+              as Option<Either<MainFailure, List<Staff>>>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_Initial implements _Initial {
+  const _$_Initial(
+      {required final List<Staff> staffs, required this.failureOrSuccess})
+      : _staffs = staffs;
+
+  final List<Staff> _staffs;
+  @override
+  List<Staff> get staffs {
+    if (_staffs is EqualUnmodifiableListView) return _staffs;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_staffs);
+  }
+
+  @override
+  final Option<Either<MainFailure, List<Staff>>> failureOrSuccess;
+
+  @override
+  String toString() {
+    return 'DepartmentSearchState(staffs: $staffs, failureOrSuccess: $failureOrSuccess)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_Initial &&
+            const DeepCollectionEquality().equals(other._staffs, _staffs) &&
+            (identical(other.failureOrSuccess, failureOrSuccess) ||
+                other.failureOrSuccess == failureOrSuccess));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType,
+      const DeepCollectionEquality().hash(_staffs), failureOrSuccess);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_InitialCopyWith<_$_Initial> get copyWith =>
+      __$$_InitialCopyWithImpl<_$_Initial>(this, _$identity);
+}
+
+abstract class _Initial implements DepartmentSearchState {
+  const factory _Initial(
+      {required final List<Staff> staffs,
+      required final Option<Either<MainFailure, List<Staff>>>
+          failureOrSuccess}) = _$_Initial;
+
+  @override
+  List<Staff> get staffs;
+  @override
+  Option<Either<MainFailure, List<Staff>>> get failureOrSuccess;
+  @override
+  @JsonKey(ignore: true)
+  _$$_InitialCopyWith<_$_Initial> get copyWith =>
+      throw _privateConstructorUsedError;
+}

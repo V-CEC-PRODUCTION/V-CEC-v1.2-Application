@@ -1,0 +1,31 @@
+import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
+import 'package:injectable/injectable.dart';
+import 'package:vcec/domain/failure/main_failure.dart';
+import 'package:vcec/domain/notices/notice_model/notice_model.dart';
+import 'package:vcec/domain/notices/notice_model/notices_result.dart';
+import 'package:vcec/domain/notices/notices_service.dart';
+import 'package:vcec/strings/strings.dart';
+
+@LazySingleton(as: NoticesService)
+class NoticesRepo extends NoticesService {
+  @override
+  Future<Either<MainFailure, List<NoticesResult>>> getnotices(
+      {required NoticeType type}) async {
+    final String source = type == NoticeType.cec ? 'cec' : 'ktu';
+    try {
+      final response = await Dio(BaseOptions(contentType: 'application/json'))
+          .get(baseUrl + 'notices/nav/$source');
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        final _notices = NoticeModel.fromJson(response.toString());
+
+        final notices = _notices.noticesResult;
+        return Right(notices ?? []);
+      } else {
+        return const Left(MainFailure.serverFailure());
+      }
+    } catch (e) {
+      return const Left(MainFailure.clientFailure());
+    }
+  }
+}
