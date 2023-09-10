@@ -64,10 +64,6 @@ class NoticesScreen extends StatelessWidget {
                         fontWeight: FontWeight.w700,
                       ),
                     ),
-                    Text(
-                      '52 unnoticed notifications',
-                      style: TextStyle(color: Colors.white, fontSize: 12.5),
-                    ),
                   ],
                 ),
               ),

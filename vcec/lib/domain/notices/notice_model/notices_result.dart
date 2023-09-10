@@ -7,19 +7,19 @@ class NoticesResult {
   String? details;
   String? headline;
   List<NoticeUrl>? noticeUrls;
-  String? timeOfUpload;
+ 
 
   NoticesResult({
     this.dateOfUpload,
     this.details,
     this.headline,
     this.noticeUrls,
-    this.timeOfUpload,
+   
   });
 
   @override
   String toString() {
-    return 'NoticesResult(dateOfUpload: $dateOfUpload, details: $details, headline: $headline, noticeUrls: $noticeUrls, timeOfUpload: $timeOfUpload)';
+    return 'NoticesResult(dateOfUpload: $dateOfUpload, details: $details, headline: $headline, noticeUrls: $noticeUrls,)';
   }
 
   factory NoticesResult.fromMap(Map<String, dynamic> data) => NoticesResult(
@@ -29,7 +29,6 @@ class NoticesResult {
         noticeUrls: (data['notice_urls'] as List<dynamic>?)
             ?.map((e) => NoticeUrl.fromMap(e as Map<String, dynamic>))
             .toList(),
-        timeOfUpload: data['time_of_upload'] as String?,
       );
 
   Map<String, dynamic> toMap() => {
@@ -37,7 +36,6 @@ class NoticesResult {
         'details': details,
         'headline': headline,
         'notice_urls': noticeUrls?.map((e) => e.toMap()).toList(),
-        'time_of_upload': timeOfUpload,
       };
 
   /// `dart:convert`

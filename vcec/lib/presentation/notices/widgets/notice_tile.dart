@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:vcec/core/constants.dart';
 import 'package:vcec/domain/notices/notice_model/notices_result.dart';
+import 'package:vcec/domain/notices/notices_service.dart';
 
 class NoticeTileWidget extends StatelessWidget {
   NoticeTileWidget(
-      {super.key, required this.expanpsionNeeded, required this.notice});
+      {super.key, required this.expanpsionNeeded, required this.notice, required this.type});
   final NoticesResult notice;
   final bool expanpsionNeeded;
+  final NoticeType type;
   ValueNotifier<bool> _isexpanded = ValueNotifier(false);
 
   @override
@@ -70,8 +73,11 @@ class NoticeTileWidget extends StatelessWidget {
       iconColor: expanpsionNeeded ? Colors.black : null,
       children: expanpsionNeeded
           ? List.generate(
-              2,
-              (index) => InnerTileWidget(),
+              notice.noticeUrls!.length,
+              (index) => InnerTileWidget(
+                notice: notice,
+                index: index, type: type,
+              ),
             )
           : const <Widget>[],
     );
@@ -79,10 +85,15 @@ class NoticeTileWidget extends StatelessWidget {
 }
 
 class InnerTileWidget extends StatelessWidget {
-  const InnerTileWidget({super.key});
+  final NoticesResult notice;
+  final NoticeType type;
+  final int index;
+  const InnerTileWidget({super.key, required this.notice, required this.index, required this.type});
 
   @override
   Widget build(BuildContext context) {
+    final noticeUrl = notice.noticeUrls![index];
+    final Uri _url = Uri.parse(noticeUrl.url!);
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(border: Border.all(color: Colors.black12)),
@@ -99,7 +110,7 @@ class InnerTileWidget extends StatelessWidget {
           kwidth5,
           SizedBox(
             width: MediaQuery.of(context).size.width - 135,
-            child: Text('Training and Placement G fordfdd dd d dddddddddddm',
+            child: Text(noticeUrl.urlHead!,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
@@ -108,35 +119,45 @@ class InnerTileWidget extends StatelessWidget {
                 )),
           ),
           Expanded(child: Container()),
-          GestureDetector(
-            onTap: () {},
-            child: Icon(
-              Icons.link,
-              size: 20,
-            ),
-          ),
+          IconButton(
+              onPressed: () {
+                _launchUrl(_url);
+              },
+              icon: Icon(
+                Icons.link,
+                size: 20,
+              )),
           kwidth10,
+          type == NoticeType.cec ? 
           GestureDetector(
             onTap: () {},
             child: Icon(
               Icons.file_download_outlined,
               size: 20,
             ),
-          ),
+          ) : SizedBox(),
           kwidth10,
+          type == NoticeType.cec ? 
           GestureDetector(
             onTap: () {},
             child: Icon(
               Icons.open_in_new,
               size: 20,
             ),
-          ),
+          ) : SizedBox(),
           kwidth10,
         ],
       ),
     );
   }
+
+  Future<void> _launchUrl(Uri url1) async {
+    if (!await launchUrl(url1)) {
+      throw Exception('Could not launch $url1');
+    }
+  }
 }
+
 
 // import 'package:flutter/material.dart';
 
