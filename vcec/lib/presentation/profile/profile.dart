@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:vcec/presentation/common_widgets/multiple_column_text_widget.dart';
 import 'package:vcec/presentation/common_widgets/profile_menu_widget.dart';
+import 'package:vcec/presentation/profile/subpages/edit_profile.dart';
+import 'package:vcec/presentation/profile/subpages/settings.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -12,7 +14,9 @@ class ProfileScreen extends StatelessWidget {
       appBar: AppBar(
           leading: IconButton(
               iconSize: size1 * 0.05,
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pop(context);
+              },
               icon: const Icon(Icons.arrow_back_ios)),
           title: Padding(
             padding: EdgeInsets.only(left: size1 * 0.24),
@@ -33,7 +37,7 @@ class ProfileScreen extends StatelessWidget {
                 decoration: const BoxDecoration(
                     shape: BoxShape.circle,
                     image: DecorationImage(
-                        fit: BoxFit.fill,
+                        fit: BoxFit.cover,
                         image: NetworkImage(
                             'https://i.pinimg.com/originals/d7/bd/93/d7bd934adc5e5a50da570cb1bc98e946.jpg'))),
               ),
@@ -75,7 +79,13 @@ class ProfileScreen extends StatelessWidget {
             SizedBox(
               width: size1 * 0.35,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => EditProfileScreen(),
+                      ));
+                },
                 style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.yellow,
                     side: BorderSide.none,
@@ -121,7 +131,15 @@ class ProfileScreen extends StatelessWidget {
               child: Column(
                 children: [
                   ProfileMenuWidget(
-                      title: "Settings", icon: Icons.settings, onPress: () {}),
+                      title: "Settings",
+                      icon: Icons.settings,
+                      onPress: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => SettingsPage(),
+                            ));
+                      }),
                   ProfileMenuWidget(
                       title: "Notification",
                       icon: Icons.notifications,

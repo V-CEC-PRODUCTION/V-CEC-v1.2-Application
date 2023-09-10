@@ -7,6 +7,8 @@ import 'package:vcec/presentation/common_widgets/message_icon.dart';
 import 'package:vcec/presentation/common_widgets/notification_icon.dart';
 import 'dart:developer';
 
+import 'package:vcec/presentation/profile/profile.dart';
+
 class MainmenuAppbar extends StatefulWidget {
   MainmenuAppbar(
       {super.key,
@@ -87,7 +89,16 @@ class _MainmenuAppbarState extends State<MainmenuAppbar> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          Avatar(),
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const ProfileScreen()));
+                            },
+                            child: Avatar(),
+                          ),
                           GestureDetector(
                             onTap: () {
                               widget.timeTable == null

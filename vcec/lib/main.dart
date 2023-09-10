@@ -13,8 +13,6 @@ import 'package:vcec/core/di/injectable.dart';
 import 'package:vcec/presentation/home/home.dart';
 
 
-
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await configureInjection(Environment.prod);

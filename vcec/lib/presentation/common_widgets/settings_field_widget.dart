@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vcec/core/constants.dart';
 
 class SettingsFieldWidget extends StatelessWidget {
   const SettingsFieldWidget(
@@ -16,9 +17,13 @@ class SettingsFieldWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(left: size1 * 0.1, right: size1 * 0.09),
+      padding: EdgeInsets.only(
+        left: size1 * 0.1,
+        right: size1 * 0.09,
+      ),
       child: Column(
         children: [
+          kheight10,
           ListTile(
             onTap: onPress,
             leading: Icon(icon),
@@ -26,13 +31,15 @@ class SettingsFieldWidget extends StatelessWidget {
               padding: EdgeInsets.only(left: size1 * 0.06),
               child: Text(
                 text,
-                style: const TextStyle(fontWeight: FontWeight.w500),
+                style:
+                    const TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
               ),
             ),
           ),
+          kheight10,
           Container(
             width: size1 * 0.8,
-            height: 1,
+            height: 0.6,
             decoration: const BoxDecoration(color: Colors.grey),
           )
         ],

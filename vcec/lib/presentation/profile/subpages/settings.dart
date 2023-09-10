@@ -13,7 +13,9 @@ class SettingsPage extends StatelessWidget {
               padding: EdgeInsets.only(left: size1 * 0.05),
               child: IconButton(
                   iconSize: size1 * 0.06,
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
                   icon: const Icon(Icons.arrow_back_ios)),
             ),
             title: Padding(
@@ -25,7 +27,7 @@ class SettingsPage extends StatelessWidget {
               ),
             )),
         body: Padding(
-          padding: EdgeInsets.only(top: size1 * 0.1),
+          padding: EdgeInsets.only(top: size1 * 0.09),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -39,41 +41,29 @@ class SettingsPage extends StatelessWidget {
                         text: 'CEC website',
                         onPress: () {},
                       ),
-                      Padding(
-                        padding: EdgeInsets.only(top: size1 * 0.02),
-                        child: SettingsFieldWidget(
-                          size1: size1,
-                          icon: Icons.password,
-                          text: 'Change Password',
-                          onPress: () {},
-                        ),
+                      SettingsFieldWidget(
+                        size1: size1,
+                        icon: Icons.password,
+                        text: 'Change Password',
+                        onPress: () {},
                       ),
-                      Padding(
-                        padding: EdgeInsets.only(top: size1 * 0.02),
-                        child: SettingsFieldWidget(
-                          size1: size1,
-                          icon: Icons.lock,
-                          text: 'Privacy Policy',
-                          onPress: () {},
-                        ),
+                      SettingsFieldWidget(
+                        size1: size1,
+                        icon: Icons.lock_outline,
+                        text: 'Privacy Policy',
+                        onPress: () {},
                       ),
-                      Padding(
-                        padding: EdgeInsets.only(top: size1 * 0.02),
-                        child: SettingsFieldWidget(
-                          size1: size1,
-                          icon: Icons.question_mark_outlined,
-                          text: 'About us',
-                          onPress: () {},
-                        ),
+                      SettingsFieldWidget(
+                        size1: size1,
+                        icon: Icons.question_mark_outlined,
+                        text: 'About us',
+                        onPress: () {},
                       ),
-                      Padding(
-                        padding: EdgeInsets.only(top: size1 * 0.02),
-                        child: SettingsFieldWidget(
-                          size1: size1,
-                          icon: Icons.star_border_outlined,
-                          text: 'Rate us',
-                          onPress: () {},
-                        ),
+                      SettingsFieldWidget(
+                        size1: size1,
+                        icon: Icons.star_border_outlined,
+                        text: 'Rate us',
+                        onPress: () {},
                       ),
                       Padding(
                         padding: EdgeInsets.only(

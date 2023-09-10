@@ -13,11 +13,13 @@
         </intent> 
    </queries>    
    <application
+        android:requestLegacyExternalStorage="true"
         android:label="vcec"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
+            android:screenOrientation="portrait"
             android:exported="true"
             android:launchMode="singleTop"
             android:theme="@style/LaunchTheme"
