@@ -1,6 +1,55 @@
 import 'package:flutter/material.dart';
-import 'package:vcec/presentation/auth/widgets/email_pass_widget.dart';
-import 'package:vcec/presentation/auth/widgets/title_details.dart';
+import 'package:vcec/presentation/auth_screens/sign_up/sign_up_screen.dart';
+
+class EmailPassWidget extends StatelessWidget {
+  final IconData icon;
+  final String text;
+  final Color color;
+  const EmailPassWidget({
+    super.key,
+    required this.icon,
+    required this.text,
+    required this.color,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Icon(
+          icon,
+          color: color,
+        ),
+        const SizedBox(
+          width: 10,
+        ),
+        Expanded(
+          child: TextFormField(
+            decoration: InputDecoration(labelText: text),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class TitleDetails extends StatelessWidget {
+  final String name;
+  final double fontsize;
+  const TitleDetails({
+    super.key,
+    required this.name,
+    required this.fontsize,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      name,
+      style: TextStyle(fontSize: fontsize, fontWeight: FontWeight.bold),
+    );
+  }
+}
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -131,7 +180,8 @@ class LoginPage extends StatelessWidget {
                                           size1 * 0.02)))),
                           child: Text(
                             'Login',
-                            style: TextStyle(fontSize: size1 * 0.045),
+                            style: TextStyle(
+                                fontSize: size1 * 0.045, color: Colors.white),
                           ),
                         ),
                       ),
@@ -221,7 +271,10 @@ class LoginPage extends StatelessWidget {
                                   fontWeight: FontWeight.bold),
                             ),
                             TextButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (context) => SignUpScreen()));
+                                },
                                 child: const Text(
                                   'Sign Up',
                                   style: TextStyle(color: Colors.black),
