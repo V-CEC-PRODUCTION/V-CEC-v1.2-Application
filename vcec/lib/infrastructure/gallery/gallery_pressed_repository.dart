@@ -10,9 +10,10 @@ import 'package:vcec/strings/strings.dart';
 import '../../domain/failure/main_failure.dart';
 
 @LazySingleton(as: GalleryPressedService)
-class GalleryRepository extends GalleryPressedService{ 
+class GalleryRepository extends GalleryPressedService {
   @override
-  Future<Either<MainFailure, GalleryPressedModel>> getGalleryDeatils(String id) async{
+  Future<Either<MainFailure, GalleryPressedModel>> getGalleryDeatils(
+      String id) async {
     try {
       final response = await Dio(BaseOptions(contentType: 'application/json'))
           .get('${baseUrl}gallery/cec/files/$id');
@@ -29,5 +30,4 @@ class GalleryRepository extends GalleryPressedService{
       return const Left(MainFailure.clientFailure());
     }
   }
-
 }

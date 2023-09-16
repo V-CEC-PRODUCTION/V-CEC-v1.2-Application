@@ -41,6 +41,7 @@ dependencies:
   flutter_carousel_slider: ^1.1.0
   flutter_getit: ^1.2.1
   flutter_instagram_storyboard: null
+  flutter_otp_text_field: ^1.1.1
   flutter_profile_picture: ^2.0.0
   flutter_swipe_detector: ^2.0.0
   flutter_wall_layout: ^2.1.1
@@ -83,6 +84,8 @@ flutter:
     - assets/img/deps/gs.png
     - assets/img/deps/asc.png
     - assets/img/login_image.jpg
+    - assets/img/sign_up.png
+    - assets/img/verify.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
   # For details regarding adding assets from package dependencies, see

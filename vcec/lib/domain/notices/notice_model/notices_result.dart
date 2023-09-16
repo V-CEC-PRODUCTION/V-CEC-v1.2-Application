@@ -7,14 +7,12 @@ class NoticesResult {
   String? details;
   String? headline;
   List<NoticeUrl>? noticeUrls;
- 
 
   NoticesResult({
     this.dateOfUpload,
     this.details,
     this.headline,
     this.noticeUrls,
-   
   });
 
   @override

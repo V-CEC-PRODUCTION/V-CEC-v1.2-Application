@@ -6,7 +6,7 @@ import 'package:vcec/presentation/common_widgets/message_icon.dart';
 import 'package:vcec/presentation/common_widgets/notification_icon.dart';
 import 'package:vcec/presentation/common_widgets/search_field.dart';
 
-enum Department { cs, ec, eee, gs, as ,lib}
+enum Department { cs, ec, eee, gs, as, lib }
 
 class AppbarWithSearch extends PreferredSize {
   final String hintText;

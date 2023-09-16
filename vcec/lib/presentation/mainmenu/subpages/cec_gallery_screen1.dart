@@ -78,7 +78,7 @@ class CecGalleryScreen extends StatelessWidget {
                     kwidth20,
                   ],
                 ),
-                body:const Column(
+                body: const Column(
                   children: [
                     Padding(
                       padding: EdgeInsets.only(right: 150),
@@ -99,14 +99,12 @@ class CecGalleryScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                  const  Expanded(
+                    const Expanded(
                       child: TabBarView(
                         children: [
                           GalleryTab(),
-                           GalleryTabImg( ),
-                            GalleryTabVid(),
-
-                         
+                          GalleryTabImg(),
+                          GalleryTabVid(),
                         ],
                       ),
                     ),

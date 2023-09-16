@@ -9,9 +9,12 @@ import 'package:vcec/application/main_menu/carousel/carousel_cubit.dart';
 import 'package:vcec/application/main_menu/highlights/highlights_cubit.dart';
 import 'package:vcec/application/main_menu/timetable/timetable_cubit.dart';
 import 'package:vcec/application/notices/notices_cubit_cubit.dart';
+import 'package:vcec/application/otp/otp_cubit.dart';
+import 'package:vcec/application/verification/verification_cubit.dart';
 import 'package:vcec/core/di/injectable.dart';
+import 'package:vcec/presentation/auth_screens/otp_verification/otp_verification_screen.dart';
+import 'package:vcec/presentation/auth_screens/sign_up/sign_up_screen.dart';
 import 'package:vcec/presentation/home/home.dart';
-
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -40,11 +43,17 @@ class MyApp extends StatelessWidget {
         BlocProvider<NoticesCubit>(
           create: (context) => getIt<NoticesCubit>(),
         ),
-         BlocProvider<GalleryCubit>(
+        BlocProvider<GalleryCubit>(
           create: (context) => getIt<GalleryCubit>(),
         ),
-         BlocProvider<GalleryIndividualCubit>(
+        BlocProvider<GalleryIndividualCubit>(
           create: (context) => getIt<GalleryIndividualCubit>(),
+        ),
+        BlocProvider<OtpCubit>(
+          create: (context) => getIt<OtpCubit>(),
+        ),
+        BlocProvider<VerificationCubit>(
+          create: (context) => getIt<VerificationCubit>(),
         ),
       ],
       child: MaterialApp(
@@ -53,7 +62,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           useMaterial3: true,
         ),
-        home: HomeScreen(),
+        home: OtpVerificationScreen(email: ''),
       ),
     );
   }

@@ -14,10 +14,9 @@ class VerificationRepository extends VerificationService {
   @override
   Future<Either<MainFailure, OtpModel>> postCode(String code) async {
     try {
-      log(code);
-      final response = await Dio(BaseOptions())
+      final response = await Dio(BaseOptions(contentType: 'application/json'))
           .post('${baseUrl}users/auth/verify-otp/', data: {
-           "user_otp": "896537",
+           "user_otp": code,
       });
       if (response.statusCode == 200 || response.statusCode == 201) {
         final OtpModel message = OtpModel.fromJson(response.toString());

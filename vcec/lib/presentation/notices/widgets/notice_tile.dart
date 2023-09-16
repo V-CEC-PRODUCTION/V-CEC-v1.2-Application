@@ -6,7 +6,10 @@ import 'package:vcec/domain/notices/notices_service.dart';
 
 class NoticeTileWidget extends StatelessWidget {
   NoticeTileWidget(
-      {super.key, required this.expanpsionNeeded, required this.notice, required this.type});
+      {super.key,
+      required this.expanpsionNeeded,
+      required this.notice,
+      required this.type});
   final NoticesResult notice;
   final bool expanpsionNeeded;
   final NoticeType type;
@@ -76,7 +79,8 @@ class NoticeTileWidget extends StatelessWidget {
               notice.noticeUrls!.length,
               (index) => InnerTileWidget(
                 notice: notice,
-                index: index, type: type,
+                index: index,
+                type: type,
               ),
             )
           : const <Widget>[],
@@ -88,7 +92,11 @@ class InnerTileWidget extends StatelessWidget {
   final NoticesResult notice;
   final NoticeType type;
   final int index;
-  const InnerTileWidget({super.key, required this.notice, required this.index, required this.type});
+  const InnerTileWidget(
+      {super.key,
+      required this.notice,
+      required this.index,
+      required this.type});
 
   @override
   Widget build(BuildContext context) {
@@ -128,23 +136,25 @@ class InnerTileWidget extends StatelessWidget {
                 size: 20,
               )),
           kwidth10,
-          type == NoticeType.cec ? 
-          GestureDetector(
-            onTap: () {},
-            child: Icon(
-              Icons.file_download_outlined,
-              size: 20,
-            ),
-          ) : SizedBox(),
+          type == NoticeType.cec
+              ? GestureDetector(
+                  onTap: () {},
+                  child: Icon(
+                    Icons.file_download_outlined,
+                    size: 20,
+                  ),
+                )
+              : SizedBox(),
           kwidth10,
-          type == NoticeType.cec ? 
-          GestureDetector(
-            onTap: () {},
-            child: Icon(
-              Icons.open_in_new,
-              size: 20,
-            ),
-          ) : SizedBox(),
+          type == NoticeType.cec
+              ? GestureDetector(
+                  onTap: () {},
+                  child: Icon(
+                    Icons.open_in_new,
+                    size: 20,
+                  ),
+                )
+              : SizedBox(),
           kwidth10,
         ],
       ),
@@ -157,7 +167,6 @@ class InnerTileWidget extends StatelessWidget {
     }
   }
 }
-
 
 // import 'package:flutter/material.dart';
 
