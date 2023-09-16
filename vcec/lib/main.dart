@@ -11,10 +11,14 @@ import 'package:vcec/application/main_menu/timetable/timetable_cubit.dart';
 import 'package:vcec/application/notices/notices_cubit_cubit.dart';
 import 'package:vcec/core/di/injectable.dart';
 import 'package:vcec/presentation/home/home.dart';
-
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   await configureInjection(Environment.prod);
   runApp(const MyApp());
 }
@@ -40,10 +44,10 @@ class MyApp extends StatelessWidget {
         BlocProvider<NoticesCubit>(
           create: (context) => getIt<NoticesCubit>(),
         ),
-         BlocProvider<GalleryCubit>(
+        BlocProvider<GalleryCubit>(
           create: (context) => getIt<GalleryCubit>(),
         ),
-         BlocProvider<GalleryIndividualCubit>(
+        BlocProvider<GalleryIndividualCubit>(
           create: (context) => getIt<GalleryIndividualCubit>(),
         ),
       ],
