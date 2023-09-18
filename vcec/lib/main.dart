@@ -5,13 +5,16 @@ import 'package:injectable/injectable.dart';
 import 'package:vcec/application/departments/rsearch/department_search_cubit.dart';
 import 'package:vcec/application/gallery/gallery_cubit.dart';
 import 'package:vcec/application/gallery/gallery_individual_cubit.dart';
+import 'package:vcec/application/google/google_cubit.dart';
 import 'package:vcec/application/main_menu/carousel/carousel_cubit.dart';
 import 'package:vcec/application/main_menu/highlights/highlights_cubit.dart';
 import 'package:vcec/application/main_menu/timetable/timetable_cubit.dart';
 import 'package:vcec/application/notices/notices_cubit_cubit.dart';
+import 'package:vcec/application/otp/otp_cubit.dart';
+import 'package:vcec/application/verification/verification_cubit.dart';
 import 'package:vcec/core/di/injectable.dart';
-import 'package:vcec/presentation/home/home.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:vcec/presentation/auth_screens/sign_up/sign_up_screen.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -50,6 +53,16 @@ class MyApp extends StatelessWidget {
         BlocProvider<GalleryIndividualCubit>(
           create: (context) => getIt<GalleryIndividualCubit>(),
         ),
+        BlocProvider<OtpCubit>(
+          create: (context) => getIt<OtpCubit>(),
+        ),
+        BlocProvider<VerificationCubit>(
+          create: (context) => getIt<VerificationCubit>(),
+        ),
+        BlocProvider<GoogleCubit>(
+          create: (context) => getIt<GoogleCubit>(),
+        ),
+        
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -57,7 +70,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           useMaterial3: true,
         ),
-        home: HomeScreen(),
+        home: SignUpScreen(),
       ),
     );
   }

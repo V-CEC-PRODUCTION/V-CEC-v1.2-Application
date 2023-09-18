@@ -8,7 +8,7 @@ class GalleryIndividualState with _$GalleryIndividualState {
           failureOrSuccess}) = _GalleryIndividualState;
   factory GalleryIndividualState.initial() {
     return _GalleryIndividualState(
-       galleryIndividual: null,
+      galleryIndividual: null,
       failureOrSuccess: none(),
     );
   }

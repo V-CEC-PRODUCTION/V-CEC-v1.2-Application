@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter/src/widgets/framework.dart';
 
-
 import 'package:vcec/core/constants.dart';
 import 'package:vcec/presentation/mainmenu/widgets/story_data.dart';
 

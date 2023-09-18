@@ -5,11 +5,13 @@ class EmailPassWidget extends StatelessWidget {
   final IconData icon;
   final String text;
   final Color color;
-  const EmailPassWidget({
-    super.key,
+  final TextEditingController? controller; 
+  
+  const EmailPassWidget({super.key, 
     required this.icon,
     required this.text,
     required this.color,
+    this.controller, 
   });
 
   @override
@@ -26,12 +28,14 @@ class EmailPassWidget extends StatelessWidget {
         Expanded(
           child: TextFormField(
             decoration: InputDecoration(labelText: text),
+            controller: controller,
           ),
         ),
       ],
     );
   }
 }
+
 
 class TitleDetails extends StatelessWidget {
   final String name;

@@ -15,11 +15,11 @@ class NoticesRepo extends NoticesService {
     final String source = type == NoticeType.cec ? 'cec' : 'ktu';
     try {
       final response = await Dio(BaseOptions(contentType: 'application/json'))
-          .get(baseUrl + 'notices/nav/$source');
+          .get('${baseUrl}notices/nav/$source');
       if (response.statusCode == 200 || response.statusCode == 201) {
-        final _notices = NoticeModel.fromJson(response.toString());
+        final notices0 = NoticeModel.fromJson(response.toString());
 
-        final notices = _notices.noticesResult;
+        final notices = notices0.noticesResult;
         return Right(notices ?? []);
       } else {
         return const Left(MainFailure.serverFailure());

@@ -5,8 +5,9 @@ import 'package:vcec/domain/notices/notices_service.dart';
 import 'package:vcec/presentation/notices/widgets/notice_tile.dart';
 
 class CECNoticesTab extends StatelessWidget {
- 
-  const CECNoticesTab({super.key, });
+  const CECNoticesTab({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

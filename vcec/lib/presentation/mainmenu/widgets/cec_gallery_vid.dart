@@ -13,9 +13,11 @@ class GalleryTabVid extends StatelessWidget {
       BlocProvider.of<GalleryCubit>(context).getGalleryImages();
     });
     return BlocBuilder<GalleryCubit, GalleryState>(builder: (context, state) {
-      final filteredGalleryFiles = state.galleryfiles!.where(
-        (element) => element.tag == 'vid',
-      ).toList();
+      final filteredGalleryFiles = state.galleryfiles!
+          .where(
+            (element) => element.tag == 'vid',
+          )
+          .toList();
       return WallLayout(
         layersCount: 5,
         stones: List.generate(
