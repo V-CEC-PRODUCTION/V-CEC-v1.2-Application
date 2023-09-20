@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vcec/application/google/google_cubit.dart';
 import 'package:vcec/presentation/auth_screens/login/login_screen.dart';
-import 'package:vcec/presentation/auth_screens/otp__verification/otp_verification_screen.dart';
+import 'package:vcec/presentation/auth_screens/otp_verification/otp_verification_screen.dart';
 
 import '../../../application/otp/otp_cubit.dart';
 

@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
-import 'package:vcec/presentation/auth_screens/otp__verification/otp_verification_screen.dart';
+//import 'package:vcec/presentation/auth_screens/otp__verification/otp_verification_screen.dart';
+import 'package:vcec/presentation/auth_screens/otp_verification/otp_verification_screen.dart';
 
 class OtpTextfieldWidget extends StatelessWidget {
   const OtpTextfieldWidget({super.key});

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:vcec/core/constants.dart';
 import 'package:vcec/presentation/auth_screens/create_password/create_password_screen.dart';
-import 'package:vcec/presentation/auth_screens/otp__verification/otp_verification_screen.dart';
+import 'package:vcec/presentation/auth_screens/otp_verification/otp_verification_screen.dart';
 
 class VerifiedScreen extends StatelessWidget {
   const VerifiedScreen({super.key});

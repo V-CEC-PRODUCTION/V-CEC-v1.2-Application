@@ -3,7 +3,8 @@ import 'package:vcec/core/constants.dart';
 import 'package:vcec/presentation/auth_screens/account_details/widgets/account_drop_down.dart';
 import 'package:vcec/presentation/auth_screens/account_details/widgets/account_text_field.dart';
 import 'package:vcec/presentation/auth_screens/create_password/create_password_screen.dart';
-import 'package:vcec/presentation/auth_screens/otp__verification/otp_verification_screen.dart';
+import 'package:vcec/presentation/auth_screens/otp_verification/otp_verification_screen.dart';
+//import 'package:vcec/presentation/auth_screens/otp__verification/otp_verification_screen.dart';
 import 'package:vcec/presentation/auth_screens/widgets/auth_button_widget.dart';
 
 class AccountDetailsScreen extends StatelessWidget {
