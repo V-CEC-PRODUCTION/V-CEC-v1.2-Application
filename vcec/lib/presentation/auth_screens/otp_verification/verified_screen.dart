@@ -15,7 +15,7 @@ class VerifiedScreen extends StatelessWidget {
           child: Stack(
         children: [
           Container(
-            color: theme,
+            color: auththeme,
           ),
           Column(
             children: [

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:injectable/injectable.dart';
 import 'package:vcec/application/departments/rsearch/department_search_cubit.dart';
 import 'package:vcec/application/gallery/gallery_cubit.dart';
@@ -15,6 +16,7 @@ import 'package:vcec/application/verification/verification_cubit.dart';
 import 'package:vcec/core/di/injectable.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:vcec/presentation/auth_screens/sign_up/sign_up_screen.dart';
+import 'package:vcec/presentation/notification/notification_screen.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -31,47 +33,49 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: [
-        BlocProvider<CarouselCubit>(
-          create: (context) => getIt<CarouselCubit>(),
-        ),
-        BlocProvider<TimetableCubit>(
-          create: (context) => getIt<TimetableCubit>(),
-        ),
-        BlocProvider<DepartmentSearchCubit>(
-          create: (context) => getIt<DepartmentSearchCubit>(),
-        ),
-        BlocProvider<HighlightsCubit>(
-          create: (context) => getIt<HighlightsCubit>(),
-        ),
-        BlocProvider<NoticesCubit>(
-          create: (context) => getIt<NoticesCubit>(),
-        ),
-        BlocProvider<GalleryCubit>(
-          create: (context) => getIt<GalleryCubit>(),
-        ),
-        BlocProvider<GalleryIndividualCubit>(
-          create: (context) => getIt<GalleryIndividualCubit>(),
-        ),
-        BlocProvider<OtpCubit>(
-          create: (context) => getIt<OtpCubit>(),
-        ),
-        BlocProvider<VerificationCubit>(
-          create: (context) => getIt<VerificationCubit>(),
-        ),
-        BlocProvider<GoogleCubit>(
-          create: (context) => getIt<GoogleCubit>(),
-        ),
-        
-      ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'V CEC',
-        theme: ThemeData(
-          useMaterial3: true,
-        ),
-        home: SignUpScreen(),
-      ),
-    );
+        providers: [
+          BlocProvider<CarouselCubit>(
+            create: (context) => getIt<CarouselCubit>(),
+          ),
+          BlocProvider<TimetableCubit>(
+            create: (context) => getIt<TimetableCubit>(),
+          ),
+          BlocProvider<DepartmentSearchCubit>(
+            create: (context) => getIt<DepartmentSearchCubit>(),
+          ),
+          BlocProvider<HighlightsCubit>(
+            create: (context) => getIt<HighlightsCubit>(),
+          ),
+          BlocProvider<NoticesCubit>(
+            create: (context) => getIt<NoticesCubit>(),
+          ),
+          BlocProvider<GalleryCubit>(
+            create: (context) => getIt<GalleryCubit>(),
+          ),
+          BlocProvider<GalleryIndividualCubit>(
+            create: (context) => getIt<GalleryIndividualCubit>(),
+          ),
+          BlocProvider<OtpCubit>(
+            create: (context) => getIt<OtpCubit>(),
+          ),
+          BlocProvider<VerificationCubit>(
+            create: (context) => getIt<VerificationCubit>(),
+          ),
+          BlocProvider<GoogleCubit>(
+            create: (context) => getIt<GoogleCubit>(),
+          ),
+        ],
+        child: ScreenUtilInit(
+            designSize: const Size(360, 690),
+            builder: (_, child) {
+              return MaterialApp(
+                debugShowCheckedModeBanner: false,
+                title: 'V CEC',
+                theme: ThemeData(
+                  useMaterial3: true,
+                ),
+                home: NotificationScreen(),
+              );
+            }));
   }
 }

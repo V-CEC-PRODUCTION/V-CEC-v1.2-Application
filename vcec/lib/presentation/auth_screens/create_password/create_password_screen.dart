@@ -29,7 +29,7 @@ class CreatePasswordScreen extends StatelessWidget {
                   decoration: BoxDecoration(
                       borderRadius:
                           BorderRadius.only(bottomLeft: Radius.circular(100)),
-                      color: theme),
+                      color: auththeme),
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -120,7 +120,7 @@ class CreatePasswordScreen extends StatelessWidget {
               ),
               ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                      backgroundColor: theme,
+                      backgroundColor: auththeme,
                       shadowColor: Colors.white,
                       elevation: 10,
                       shape: RoundedRectangleBorder(
