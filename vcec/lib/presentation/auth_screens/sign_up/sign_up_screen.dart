@@ -15,11 +15,14 @@ class SignUpScreen extends StatelessWidget {
     final sizeh = MediaQuery.of(context).size.height;
     final sizew = MediaQuery.of(context).size.width;
     return BlocListener<OtpCubit, OtpState>(
-      listenWhen: (previous, current) => previous.value != current.value  ,
+      listenWhen: (previous, current) => previous.value != current.value,
       listener: (context, state) {
         state.otpFailureOrSuccess.fold(() {}, (r) {
           Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) =>  OtpVerificationScreen(otp: state.otp!.otp!, email:controller.text , ),
+            builder: (context) => OtpVerificationScreen(
+              otp: state.otp!.otp!,
+              email: controller.text,
+            ),
           ));
         });
       },

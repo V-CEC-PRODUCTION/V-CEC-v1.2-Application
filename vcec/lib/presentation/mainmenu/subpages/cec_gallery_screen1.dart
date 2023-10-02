@@ -99,7 +99,7 @@ class CecGalleryScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                  Expanded(
+                    Expanded(
                       child: TabBarView(
                         children: [
                           GalleryTab(),

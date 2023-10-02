@@ -12,15 +12,15 @@ part 'otp_cubit.freezed.dart';
 @injectable
 class OtpCubit extends Cubit<OtpState> {
   final OtpService _otpService;
-  OtpCubit(this._otpService) : super( OtpState.initial());
+  OtpCubit(this._otpService) : super(OtpState.initial());
   postEmail({required String email}) async {
     await _otpService.postEmail(email).then((value) {
       value.fold(
         (failure) => emit(state.copyWith(
-            value: true,otp: null,
-            otpFailureOrSuccess: Some(Left(failure)))),
+            value: true, otp: null, otpFailureOrSuccess: Some(Left(failure)))),
         (success) => emit(state.copyWith(
-          value: false,otp: success,
+            value: false,
+            otp: success,
             otpFailureOrSuccess: Some(Right(success)))),
       );
     });

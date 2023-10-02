@@ -1,16 +1,33 @@
+//import 'dart:developer';
+
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:vcec/application/email/email_cubit.dart';
 import 'package:vcec/core/constants.dart';
 import 'package:vcec/presentation/auth_screens/account_details/account_details_screen.dart';
-import 'package:vcec/presentation/auth_screens/login/login_screen.dart';
+//import 'package:vcec/presentation/auth_screens/login/login_screen.dart';
 import 'package:vcec/presentation/auth_screens/otp_verification/otp_verification_screen.dart';
 //import 'package:vcec/presentation/auth_screens/otp__verification/otp_verification_screen.dart';
 
-class CreatePasswordScreen extends StatelessWidget {
-  const CreatePasswordScreen({super.key});
+class CreatePasswordScreen extends StatefulWidget {
+  final String? email;
+  const CreatePasswordScreen({super.key, this.email});
 
+  @override
+  State<CreatePasswordScreen> createState() => _CreatePasswordScreenState();
+}
+
+class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
   @override
   Widget build(BuildContext context) {
     ValueNotifier<bool> obtext = ValueNotifier<bool>(false);
+    final TextEditingController controller = TextEditingController();
+    final TextEditingController controller1 = TextEditingController();
+    //String? password;
+
+   // final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
     void passwordVisibility() {
       obtext.value = !obtext.value;
@@ -90,6 +107,7 @@ class CreatePasswordScreen extends StatelessWidget {
                                       : Icons.visibility_off),
                                 ),
                               ),
+                              controller: controller,
                             );
                           }),
                     ),
@@ -99,10 +117,24 @@ class CreatePasswordScreen extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.only(
                     left: sizew * 0.07, right: sizew * 0.05, top: sizew * 0.03),
-                child: const EmailPassWidget(
-                  icon: Icons.lock_reset,
-                  text: 'Confirm Password',
-                  color: Colors.grey,
+                child: Row(
+                  children: [
+                    const Icon(
+                      Icons.lock_reset,
+                      color: Colors.grey,
+                    ),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    Expanded(
+                      child: TextFormField(
+                        controller: controller1,
+                        decoration: const InputDecoration(
+                          labelText: 'Confirm Password',
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
               kheight10,
@@ -111,10 +143,6 @@ class CreatePasswordScreen extends StatelessWidget {
                   Padding(
                     padding: EdgeInsets.only(
                         left: sizew * 0.15, bottom: sizeh * .15),
-                    child: Text(
-                      'Must be at least 8 characters',
-                      style: TextStyle(fontFamily: 'Inter'),
-                    ),
                   ),
                 ],
               ),
@@ -127,9 +155,21 @@ class CreatePasswordScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(12.0),
                       )),
                   onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => AccountDetailsScreen(),
-                    ));
+                    BlocListener<EmailCubit, EmailState>(
+                      listener: (context, state) {
+                        state.failureOrSuccess.fold(() => {}, (a) {
+                          String? access = state.accessToken!.accessToken;
+                          String? refresh = state.accessToken!.refreshToken;
+                          log(access.toString());
+                          log(refresh.toString());
+                        });
+                      },
+                    );
+
+                    //  Navigator.of(context).push(MaterialPageRoute(
+                    //    builder: (context) => AccountDetailsScreen(),
+                    //  ));
+                    // log(password.toString());
                   },
                   child: Padding(
                     padding: EdgeInsets.symmetric(

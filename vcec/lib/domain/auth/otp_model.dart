@@ -4,7 +4,7 @@ class OtpModel {
   String? message;
   String? otp;
 
-  OtpModel({this.message,this.otp});
+  OtpModel({this.message, this.otp});
 
   @override
   String toString() => 'OtpModel(message: $message, otp: $otp)';

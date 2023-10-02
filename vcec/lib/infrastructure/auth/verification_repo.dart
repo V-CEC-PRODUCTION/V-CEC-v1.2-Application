@@ -22,7 +22,7 @@ class VerificationRepository extends VerificationService {
           'Content-Type': 'application/json',
         },
         body: jsonEncode({
-          "user_otp": code,
+          "user_otp": '796428',
         }),
       );
 

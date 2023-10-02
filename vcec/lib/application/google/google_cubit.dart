@@ -15,9 +15,10 @@ class GoogleCubit extends Cubit<GoogleState> {
   GoogleCubit(this.authservice) : super(GoogleState.initial());
 
   void googleSignIn() async {
-    await authservice
-        .googleSignIn()
-        .then((value) => value.fold((l) => emit(state.copyWith(isSubmitting:false,authfailureorsuccess:Some(left(l)) )),
-         (r) => state.copyWith(isSubmitting: true, authfailureorsuccess: Some(Right(r)))));
+    await authservice.googleSignIn().then((value) => value.fold(
+        (l) => emit(state.copyWith(
+            isSubmitting: false, authfailureorsuccess: Some(left(l)))),
+        (r) => state.copyWith(
+            isSubmitting: true, authfailureorsuccess: Some(Right(r)))));
   }
 }

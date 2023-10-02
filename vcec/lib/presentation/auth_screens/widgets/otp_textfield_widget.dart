@@ -18,7 +18,7 @@ class OtpTextfieldWidget extends StatelessWidget {
       fieldWidth: MediaQuery.of(context).size.width * 56 / 470.30,
       filled: true,
       fillColor: theme,
-      borderColor: theme, 
+      borderColor: theme,
       enabledBorderColor: theme,
       focusedBorderColor: theme,
       //set to true to show as box or false to show as dash

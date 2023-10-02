@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vcec/application/departments/rsearch/department_search_cubit.dart';
+import 'package:vcec/application/email/email_cubit.dart';
 import 'package:vcec/application/gallery/gallery_cubit.dart';
 import 'package:vcec/application/gallery/gallery_individual_cubit.dart';
 import 'package:vcec/application/google/google_cubit.dart';
@@ -17,6 +19,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:vcec/presentation/auth_screens/sign_up/sign_up_screen.dart';
 import 'firebase_options.dart';
 
+late SharedPreferences sharedPreferences;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
@@ -62,7 +65,9 @@ class MyApp extends StatelessWidget {
         BlocProvider<GoogleCubit>(
           create: (context) => getIt<GoogleCubit>(),
         ),
-        
+        BlocProvider<EmailCubit>(
+          create: (context) => getIt<EmailCubit>(),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

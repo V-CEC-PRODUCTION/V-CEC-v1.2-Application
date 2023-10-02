@@ -135,11 +135,11 @@ class OtpVerificationScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(12.0),
                     )),
                 onPressed: ()  {
-                    if (otp == code2) {
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const VerifiedScreen(),
-                      ));
-                    }
+                  if (otp == code2) {
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) =>  VerifiedScreen(email: email,),
+                    ));
+                  }
                 },
                 child: Padding(
                   padding: EdgeInsets.symmetric(
