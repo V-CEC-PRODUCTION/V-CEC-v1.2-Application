@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vcec/application/departments/rsearch/department_search_cubit.dart';
@@ -17,6 +18,7 @@ import 'package:vcec/application/verification/verification_cubit.dart';
 import 'package:vcec/core/di/injectable.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:vcec/presentation/auth_screens/sign_up/sign_up_screen.dart';
+import 'package:vcec/presentation/notification/notification_screen.dart';
 import 'firebase_options.dart';
 
 late SharedPreferences sharedPreferences;

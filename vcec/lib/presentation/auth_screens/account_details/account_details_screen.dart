@@ -63,7 +63,7 @@ class AccountDetailsScreen extends StatelessWidget {
                 decoration: BoxDecoration(
                     borderRadius:
                         BorderRadius.only(bottomLeft: Radius.circular(100)),
-                    color: theme),
+                    color: auththeme),
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -160,7 +160,7 @@ class AccountDetailsScreen extends StatelessWidget {
               ],
             ),
             AuthButtonWidget(
-              bgcolor: theme,
+              bgcolor: auththeme,
               tcolor: Colors.black,
               title: 'Submit',
               onclick: () {

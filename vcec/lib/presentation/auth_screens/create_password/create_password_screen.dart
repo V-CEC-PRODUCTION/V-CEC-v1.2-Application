@@ -24,10 +24,9 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
   Widget build(BuildContext context) {
     ValueNotifier<bool> obtext = ValueNotifier<bool>(false);
     final TextEditingController controller = TextEditingController();
-    final TextEditingController controller1 = TextEditingController();
     //String? password;
 
-   // final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+    final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
     void passwordVisibility() {
       obtext.value = !obtext.value;
@@ -46,7 +45,7 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                   decoration: BoxDecoration(
                       borderRadius:
                           BorderRadius.only(bottomLeft: Radius.circular(100)),
-                      color: theme),
+                      color: auththeme),
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -76,43 +75,55 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                   ],
                 ),
               ]),
-              Padding(
-                padding: EdgeInsets.only(
-                    left: sizew * 0.07,
-                    right: sizew * 0.05,
-                    top: sizeh * 140 / 1019),
-                child: Row(
-                  children: [
-                    const Icon(
-                      Icons.lock,
-                      color: Colors.grey,
-                    ),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    Expanded(
-                      child: ValueListenableBuilder<bool>(
-                          valueListenable: obtext,
-                          builder: (context, value, child) {
-                            return TextFormField(
-                              obscureText: !value,
-                              decoration: InputDecoration(
-                                labelText: 'New Password',
-                                suffixIcon: IconButton(
-                                  onPressed: () {
-                                    passwordVisibility();
+              Column(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(
+                        left: sizew * 0.07,
+                        right: sizew * 0.05,
+                        top: sizeh * 140 / 1019),
+                    child: Row(
+                      children: [
+                        const Icon(
+                          Icons.lock,
+                          color: Colors.grey,
+                        ),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        Expanded(
+                          child: ValueListenableBuilder<bool>(
+                              valueListenable: obtext,
+                              builder: (context, value, child) {
+                                return TextFormField(
+                                  obscureText: !value,
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Password is required';
+                                    } else if (value.length < 8) {
+                                      return 'Password must be at least 8 characters';
+                                    }
+                                    return null;
                                   },
-                                  icon: Icon(value
-                                      ? Icons.visibility
-                                      : Icons.visibility_off),
-                                ),
-                              ),
-                              controller: controller,
-                            );
-                          }),
+                                  decoration: InputDecoration(
+                                    labelText: 'New Password',
+                                    suffixIcon: IconButton(
+                                      onPressed: () {
+                                        passwordVisibility();
+                                      },
+                                      icon: Icon(value
+                                          ? Icons.visibility
+                                          : Icons.visibility_off),
+                                    ),
+                                  ),
+                                  controller: controller,
+                                );
+                              }),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
               Padding(
                 padding: EdgeInsets.only(
@@ -128,7 +139,14 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                     ),
                     Expanded(
                       child: TextFormField(
-                        controller: controller1,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Password is required';
+                          } else if (value != controller.text) {
+                            return 'Password must be same';
+                          }
+                          return null;
+                        },
                         decoration: const InputDecoration(
                           labelText: 'Confirm Password',
                         ),
@@ -148,7 +166,7 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
               ),
               ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                      backgroundColor: theme,
+                      backgroundColor: auththeme,
                       shadowColor: Colors.white,
                       elevation: 10,
                       shape: RoundedRectangleBorder(

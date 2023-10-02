@@ -8,7 +8,7 @@ import 'package:vcec/presentation/auth_screens/otp_verification/verified_screen.
 
 import '../../../application/otp/otp_cubit.dart';
 
-const theme = Color(0xFFE4DEE5);
+const auththeme = Color(0xFFE4DEE5);
 
 class OtpVerificationScreen extends StatelessWidget {
   final String email;
@@ -34,7 +34,7 @@ class OtpVerificationScreen extends StatelessWidget {
                 decoration: BoxDecoration(
                     borderRadius:
                         BorderRadius.only(bottomLeft: Radius.circular(100)),
-                    color: theme),
+                    color: auththeme),
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -80,10 +80,10 @@ class OtpVerificationScreen extends StatelessWidget {
               borderRadius: BorderRadius.all(Radius.circular(15)),
               fieldWidth: MediaQuery.of(context).size.width * 56 / 470.30,
               filled: true,
-              fillColor: theme,
-              borderColor: theme,
-              enabledBorderColor: theme,
-              focusedBorderColor: theme,
+              fillColor: auththeme,
+              borderColor: auththeme,
+              enabledBorderColor: auththeme,
+              focusedBorderColor: auththeme,
               //set to true to show as box or false to show as dash
               showFieldAsBox: true,
               onCodeChanged: (String code) {
@@ -130,7 +130,7 @@ class OtpVerificationScreen extends StatelessWidget {
                     disabledForegroundColor: Colors.white,
                     elevation: 10,
                     //shadowColor: Colors.transparent,
-                    backgroundColor: theme,
+                    backgroundColor: auththeme,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12.0),
                     )),
