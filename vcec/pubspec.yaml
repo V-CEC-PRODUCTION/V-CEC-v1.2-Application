@@ -28,12 +28,14 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  another_flushbar: ^1.12.30
   auto_size_text: ^3.0.0
   bloc: ^8.1.1
   cached_network_image: ^3.2.3
   crop_image: ^1.0.11
   cupertino_icons: ^1.0.2
   dartz: ^0.10.1
+  device_info_plus: 
   dio: ^5.1.2
   firebase_auth: ^4.9.0
   firebase_core: ^2.15.1
@@ -60,7 +62,7 @@ dependencies:
   pin_input_text_field: ^4.5.1
   pinput: null
   progressive_image: ^2.0.1
-  shared_preferences: 
+  shared_preferences: null
   shimmer: ^2.0.0
   story: ^1.0.0+1
   url_launcher: null
