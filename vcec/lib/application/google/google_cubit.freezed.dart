@@ -17,9 +17,16 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$GoogleState {
   bool get isSubmitting => throw _privateConstructorUsedError;
-  bool get showerrormessages => throw _privateConstructorUsedError;
-  Option<Either<MainFailure, User>> get authfailureorsuccess =>
+  User? get user => throw _privateConstructorUsedError;
+  OtpModel? get otp => throw _privateConstructorUsedError;
+  Option<Either<MainFailure, bool>> get authfailureorsuccess =>
       throw _privateConstructorUsedError;
+  Option<Either<MainFailure, OtpModel>> get otpFailureOrSuccess =>
+      throw _privateConstructorUsedError;
+  Option<Either<MainFailure, bool>> get FailureOrSuccess =>
+      throw _privateConstructorUsedError;
+  String get deviceId => throw _privateConstructorUsedError;
+  bool get loading => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $GoogleStateCopyWith<GoogleState> get copyWith =>
@@ -34,8 +41,13 @@ abstract class $GoogleStateCopyWith<$Res> {
   @useResult
   $Res call(
       {bool isSubmitting,
-      bool showerrormessages,
-      Option<Either<MainFailure, User>> authfailureorsuccess});
+      User? user,
+      OtpModel? otp,
+      Option<Either<MainFailure, bool>> authfailureorsuccess,
+      Option<Either<MainFailure, OtpModel>> otpFailureOrSuccess,
+      Option<Either<MainFailure, bool>> FailureOrSuccess,
+      String deviceId,
+      bool loading});
 }
 
 /// @nodoc
@@ -52,22 +64,47 @@ class _$GoogleStateCopyWithImpl<$Res, $Val extends GoogleState>
   @override
   $Res call({
     Object? isSubmitting = null,
-    Object? showerrormessages = null,
+    Object? user = freezed,
+    Object? otp = freezed,
     Object? authfailureorsuccess = null,
+    Object? otpFailureOrSuccess = null,
+    Object? FailureOrSuccess = null,
+    Object? deviceId = null,
+    Object? loading = null,
   }) {
     return _then(_value.copyWith(
       isSubmitting: null == isSubmitting
           ? _value.isSubmitting
           : isSubmitting // ignore: cast_nullable_to_non_nullable
               as bool,
-      showerrormessages: null == showerrormessages
-          ? _value.showerrormessages
-          : showerrormessages // ignore: cast_nullable_to_non_nullable
-              as bool,
+      user: freezed == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User?,
+      otp: freezed == otp
+          ? _value.otp
+          : otp // ignore: cast_nullable_to_non_nullable
+              as OtpModel?,
       authfailureorsuccess: null == authfailureorsuccess
           ? _value.authfailureorsuccess
           : authfailureorsuccess // ignore: cast_nullable_to_non_nullable
-              as Option<Either<MainFailure, User>>,
+              as Option<Either<MainFailure, bool>>,
+      otpFailureOrSuccess: null == otpFailureOrSuccess
+          ? _value.otpFailureOrSuccess
+          : otpFailureOrSuccess // ignore: cast_nullable_to_non_nullable
+              as Option<Either<MainFailure, OtpModel>>,
+      FailureOrSuccess: null == FailureOrSuccess
+          ? _value.FailureOrSuccess
+          : FailureOrSuccess // ignore: cast_nullable_to_non_nullable
+              as Option<Either<MainFailure, bool>>,
+      deviceId: null == deviceId
+          ? _value.deviceId
+          : deviceId // ignore: cast_nullable_to_non_nullable
+              as String,
+      loading: null == loading
+          ? _value.loading
+          : loading // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -82,8 +119,13 @@ abstract class _$$_GoogleStateCopyWith<$Res>
   @useResult
   $Res call(
       {bool isSubmitting,
-      bool showerrormessages,
-      Option<Either<MainFailure, User>> authfailureorsuccess});
+      User? user,
+      OtpModel? otp,
+      Option<Either<MainFailure, bool>> authfailureorsuccess,
+      Option<Either<MainFailure, OtpModel>> otpFailureOrSuccess,
+      Option<Either<MainFailure, bool>> FailureOrSuccess,
+      String deviceId,
+      bool loading});
 }
 
 /// @nodoc
@@ -98,22 +140,47 @@ class __$$_GoogleStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? isSubmitting = null,
-    Object? showerrormessages = null,
+    Object? user = freezed,
+    Object? otp = freezed,
     Object? authfailureorsuccess = null,
+    Object? otpFailureOrSuccess = null,
+    Object? FailureOrSuccess = null,
+    Object? deviceId = null,
+    Object? loading = null,
   }) {
     return _then(_$_GoogleState(
       isSubmitting: null == isSubmitting
           ? _value.isSubmitting
           : isSubmitting // ignore: cast_nullable_to_non_nullable
               as bool,
-      showerrormessages: null == showerrormessages
-          ? _value.showerrormessages
-          : showerrormessages // ignore: cast_nullable_to_non_nullable
-              as bool,
+      user: freezed == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User?,
+      otp: freezed == otp
+          ? _value.otp
+          : otp // ignore: cast_nullable_to_non_nullable
+              as OtpModel?,
       authfailureorsuccess: null == authfailureorsuccess
           ? _value.authfailureorsuccess
           : authfailureorsuccess // ignore: cast_nullable_to_non_nullable
-              as Option<Either<MainFailure, User>>,
+              as Option<Either<MainFailure, bool>>,
+      otpFailureOrSuccess: null == otpFailureOrSuccess
+          ? _value.otpFailureOrSuccess
+          : otpFailureOrSuccess // ignore: cast_nullable_to_non_nullable
+              as Option<Either<MainFailure, OtpModel>>,
+      FailureOrSuccess: null == FailureOrSuccess
+          ? _value.FailureOrSuccess
+          : FailureOrSuccess // ignore: cast_nullable_to_non_nullable
+              as Option<Either<MainFailure, bool>>,
+      deviceId: null == deviceId
+          ? _value.deviceId
+          : deviceId // ignore: cast_nullable_to_non_nullable
+              as String,
+      loading: null == loading
+          ? _value.loading
+          : loading // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -123,19 +190,34 @@ class __$$_GoogleStateCopyWithImpl<$Res>
 class _$_GoogleState implements _GoogleState {
   const _$_GoogleState(
       {required this.isSubmitting,
-      required this.showerrormessages,
-      required this.authfailureorsuccess});
+      required this.user,
+      required this.otp,
+      required this.authfailureorsuccess,
+      required this.otpFailureOrSuccess,
+      required this.FailureOrSuccess,
+      required this.deviceId,
+      required this.loading});
 
   @override
   final bool isSubmitting;
   @override
-  final bool showerrormessages;
+  final User? user;
   @override
-  final Option<Either<MainFailure, User>> authfailureorsuccess;
+  final OtpModel? otp;
+  @override
+  final Option<Either<MainFailure, bool>> authfailureorsuccess;
+  @override
+  final Option<Either<MainFailure, OtpModel>> otpFailureOrSuccess;
+  @override
+  final Option<Either<MainFailure, bool>> FailureOrSuccess;
+  @override
+  final String deviceId;
+  @override
+  final bool loading;
 
   @override
   String toString() {
-    return 'GoogleState(isSubmitting: $isSubmitting, showerrormessages: $showerrormessages, authfailureorsuccess: $authfailureorsuccess)';
+    return 'GoogleState(isSubmitting: $isSubmitting, user: $user, otp: $otp, authfailureorsuccess: $authfailureorsuccess, otpFailureOrSuccess: $otpFailureOrSuccess, FailureOrSuccess: $FailureOrSuccess, deviceId: $deviceId, loading: $loading)';
   }
 
   @override
@@ -145,15 +227,30 @@ class _$_GoogleState implements _GoogleState {
             other is _$_GoogleState &&
             (identical(other.isSubmitting, isSubmitting) ||
                 other.isSubmitting == isSubmitting) &&
-            (identical(other.showerrormessages, showerrormessages) ||
-                other.showerrormessages == showerrormessages) &&
+            (identical(other.user, user) || other.user == user) &&
+            (identical(other.otp, otp) || other.otp == otp) &&
             (identical(other.authfailureorsuccess, authfailureorsuccess) ||
-                other.authfailureorsuccess == authfailureorsuccess));
+                other.authfailureorsuccess == authfailureorsuccess) &&
+            (identical(other.otpFailureOrSuccess, otpFailureOrSuccess) ||
+                other.otpFailureOrSuccess == otpFailureOrSuccess) &&
+            (identical(other.FailureOrSuccess, FailureOrSuccess) ||
+                other.FailureOrSuccess == FailureOrSuccess) &&
+            (identical(other.deviceId, deviceId) ||
+                other.deviceId == deviceId) &&
+            (identical(other.loading, loading) || other.loading == loading));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, isSubmitting, showerrormessages, authfailureorsuccess);
+      runtimeType,
+      isSubmitting,
+      user,
+      otp,
+      authfailureorsuccess,
+      otpFailureOrSuccess,
+      FailureOrSuccess,
+      deviceId,
+      loading);
 
   @JsonKey(ignore: true)
   @override
@@ -165,16 +262,30 @@ class _$_GoogleState implements _GoogleState {
 abstract class _GoogleState implements GoogleState {
   const factory _GoogleState(
       {required final bool isSubmitting,
-      required final bool showerrormessages,
-      required final Option<Either<MainFailure, User>>
-          authfailureorsuccess}) = _$_GoogleState;
+      required final User? user,
+      required final OtpModel? otp,
+      required final Option<Either<MainFailure, bool>> authfailureorsuccess,
+      required final Option<Either<MainFailure, OtpModel>> otpFailureOrSuccess,
+      required final Option<Either<MainFailure, bool>> FailureOrSuccess,
+      required final String deviceId,
+      required final bool loading}) = _$_GoogleState;
 
   @override
   bool get isSubmitting;
   @override
-  bool get showerrormessages;
+  User? get user;
   @override
-  Option<Either<MainFailure, User>> get authfailureorsuccess;
+  OtpModel? get otp;
+  @override
+  Option<Either<MainFailure, bool>> get authfailureorsuccess;
+  @override
+  Option<Either<MainFailure, OtpModel>> get otpFailureOrSuccess;
+  @override
+  Option<Either<MainFailure, bool>> get FailureOrSuccess;
+  @override
+  String get deviceId;
+  @override
+  bool get loading;
   @override
   @JsonKey(ignore: true)
   _$$_GoogleStateCopyWith<_$_GoogleState> get copyWith =>

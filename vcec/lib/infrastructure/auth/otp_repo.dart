@@ -20,7 +20,7 @@ class OtpRepository extends OtpService {
       });
       if (response.statusCode == 200 || response.statusCode == 201) {
         final OtpModel message = OtpModel.fromJson(response.toString());
-        log(message.toString());
+        print(message);
         return Right(message);
       } else {
         log('Server Error');
