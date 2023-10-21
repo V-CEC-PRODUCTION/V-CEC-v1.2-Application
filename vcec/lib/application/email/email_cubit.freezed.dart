@@ -16,9 +16,11 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$EmailState {
-  Option<Either<MainFailure, EmailModel>> get failureOrSuccess =>
+  Option<Either<MainFailure, bool>> get failureOrSuccess =>
       throw _privateConstructorUsedError;
-  EmailModel? get accessToken => throw _privateConstructorUsedError;
+  bool get submit => throw _privateConstructorUsedError;
+  bool get loading => throw _privateConstructorUsedError;
+  String get deviceId => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $EmailStateCopyWith<EmailState> get copyWith =>
@@ -32,8 +34,10 @@ abstract class $EmailStateCopyWith<$Res> {
       _$EmailStateCopyWithImpl<$Res, EmailState>;
   @useResult
   $Res call(
-      {Option<Either<MainFailure, EmailModel>> failureOrSuccess,
-      EmailModel? accessToken});
+      {Option<Either<MainFailure, bool>> failureOrSuccess,
+      bool submit,
+      bool loading,
+      String deviceId});
 }
 
 /// @nodoc
@@ -50,17 +54,27 @@ class _$EmailStateCopyWithImpl<$Res, $Val extends EmailState>
   @override
   $Res call({
     Object? failureOrSuccess = null,
-    Object? accessToken = freezed,
+    Object? submit = null,
+    Object? loading = null,
+    Object? deviceId = null,
   }) {
     return _then(_value.copyWith(
       failureOrSuccess: null == failureOrSuccess
           ? _value.failureOrSuccess
           : failureOrSuccess // ignore: cast_nullable_to_non_nullable
-              as Option<Either<MainFailure, EmailModel>>,
-      accessToken: freezed == accessToken
-          ? _value.accessToken
-          : accessToken // ignore: cast_nullable_to_non_nullable
-              as EmailModel?,
+              as Option<Either<MainFailure, bool>>,
+      submit: null == submit
+          ? _value.submit
+          : submit // ignore: cast_nullable_to_non_nullable
+              as bool,
+      loading: null == loading
+          ? _value.loading
+          : loading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      deviceId: null == deviceId
+          ? _value.deviceId
+          : deviceId // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -74,8 +88,10 @@ abstract class _$$_EmailStateCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {Option<Either<MainFailure, EmailModel>> failureOrSuccess,
-      EmailModel? accessToken});
+      {Option<Either<MainFailure, bool>> failureOrSuccess,
+      bool submit,
+      bool loading,
+      String deviceId});
 }
 
 /// @nodoc
@@ -90,17 +106,27 @@ class __$$_EmailStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? failureOrSuccess = null,
-    Object? accessToken = freezed,
+    Object? submit = null,
+    Object? loading = null,
+    Object? deviceId = null,
   }) {
     return _then(_$_EmailState(
       failureOrSuccess: null == failureOrSuccess
           ? _value.failureOrSuccess
           : failureOrSuccess // ignore: cast_nullable_to_non_nullable
-              as Option<Either<MainFailure, EmailModel>>,
-      accessToken: freezed == accessToken
-          ? _value.accessToken
-          : accessToken // ignore: cast_nullable_to_non_nullable
-              as EmailModel?,
+              as Option<Either<MainFailure, bool>>,
+      submit: null == submit
+          ? _value.submit
+          : submit // ignore: cast_nullable_to_non_nullable
+              as bool,
+      loading: null == loading
+          ? _value.loading
+          : loading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      deviceId: null == deviceId
+          ? _value.deviceId
+          : deviceId // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -109,16 +135,23 @@ class __$$_EmailStateCopyWithImpl<$Res>
 
 class _$_EmailState implements _EmailState {
   const _$_EmailState(
-      {required this.failureOrSuccess, required this.accessToken});
+      {required this.failureOrSuccess,
+      required this.submit,
+      required this.loading,
+      required this.deviceId});
 
   @override
-  final Option<Either<MainFailure, EmailModel>> failureOrSuccess;
+  final Option<Either<MainFailure, bool>> failureOrSuccess;
   @override
-  final EmailModel? accessToken;
+  final bool submit;
+  @override
+  final bool loading;
+  @override
+  final String deviceId;
 
   @override
   String toString() {
-    return 'EmailState(failureOrSuccess: $failureOrSuccess, accessToken: $accessToken)';
+    return 'EmailState(failureOrSuccess: $failureOrSuccess, submit: $submit, loading: $loading, deviceId: $deviceId)';
   }
 
   @override
@@ -128,12 +161,15 @@ class _$_EmailState implements _EmailState {
             other is _$_EmailState &&
             (identical(other.failureOrSuccess, failureOrSuccess) ||
                 other.failureOrSuccess == failureOrSuccess) &&
-            (identical(other.accessToken, accessToken) ||
-                other.accessToken == accessToken));
+            (identical(other.submit, submit) || other.submit == submit) &&
+            (identical(other.loading, loading) || other.loading == loading) &&
+            (identical(other.deviceId, deviceId) ||
+                other.deviceId == deviceId));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, failureOrSuccess, accessToken);
+  int get hashCode =>
+      Object.hash(runtimeType, failureOrSuccess, submit, loading, deviceId);
 
   @JsonKey(ignore: true)
   @override
@@ -144,13 +180,19 @@ class _$_EmailState implements _EmailState {
 
 abstract class _EmailState implements EmailState {
   const factory _EmailState(
-      {required final Option<Either<MainFailure, EmailModel>> failureOrSuccess,
-      required final EmailModel? accessToken}) = _$_EmailState;
+      {required final Option<Either<MainFailure, bool>> failureOrSuccess,
+      required final bool submit,
+      required final bool loading,
+      required final String deviceId}) = _$_EmailState;
 
   @override
-  Option<Either<MainFailure, EmailModel>> get failureOrSuccess;
+  Option<Either<MainFailure, bool>> get failureOrSuccess;
   @override
-  EmailModel? get accessToken;
+  bool get submit;
+  @override
+  bool get loading;
+  @override
+  String get deviceId;
   @override
   @JsonKey(ignore: true)
   _$$_EmailStateCopyWith<_$_EmailState> get copyWith =>

@@ -1,6 +1,8 @@
 import 'dart:convert';
 
 class EmailModel {
+  EmailModel._internal();
+  static EmailModel instance = EmailModel._internal();
   String? accessToken;
   String? refreshToken;
 
