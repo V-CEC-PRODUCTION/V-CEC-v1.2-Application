@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart'; 
+import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 //import 'package:vcec/presentation/auth_screens/otp__verification/otp_verification_screen.dart';
@@ -17,7 +17,7 @@ class OtpTextfieldWidget extends StatelessWidget {
       fieldWidth: MediaQuery.of(context).size.width * 56 / 470.30,
       filled: true,
       fillColor: auththeme,
-      borderColor: auththeme, 
+      borderColor: auththeme,
       enabledBorderColor: auththeme,
       focusedBorderColor: auththeme,
       //set to true to show as box or false to show as dash

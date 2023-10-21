@@ -53,7 +53,9 @@ class VerifiedScreen extends StatelessWidget {
                       )),
                   onPressed: () {
                     Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => CreatePasswordScreen(email: email,),
+                      builder: (context) => CreatePasswordScreen(
+                        email: email,
+                      ),
                     ));
                   },
                   child: Padding(

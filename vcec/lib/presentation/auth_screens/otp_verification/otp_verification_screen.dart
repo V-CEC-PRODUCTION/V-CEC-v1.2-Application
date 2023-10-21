@@ -3,10 +3,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
+import 'package:vcec/application/google/google_cubit.dart';
 import 'package:vcec/core/constants.dart';
 import 'package:vcec/presentation/auth_screens/otp_verification/verified_screen.dart';
-
-import '../../../application/otp/otp_cubit.dart';
 
 const auththeme = Color(0xFFE4DEE5);
 
@@ -86,20 +85,8 @@ class OtpVerificationScreen extends StatelessWidget {
               focusedBorderColor: auththeme,
               //set to true to show as box or false to show as dash
               showFieldAsBox: true,
-              onCodeChanged: (String code) {
-                code2 += code;
-                print(code2);
-              },
               onSubmit: (String verificationCode) {
-                // log(i.toString());
-                //  log((i++).toString());
-                //  code2 += verificationCode;
-                //  log(verificationCode);
-                // try {
-                //  log
-                //  } catch (e) {
-                //     log(e.toString());
-                //   }
+                code2 = verificationCode;
               },
             ),
             SizedBox(
@@ -111,7 +98,7 @@ class OtpVerificationScreen extends StatelessWidget {
                 Text("Didn't recieve an OTP?"),
                 TextButton(
                     onPressed: () async {
-                      final otpcubit = context.read<OtpCubit>();
+                      final otpcubit = context.read<GoogleCubit>();
                       otpcubit.postEmail(email: email);
                     },
                     child: Text(
@@ -134,10 +121,12 @@ class OtpVerificationScreen extends StatelessWidget {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12.0),
                     )),
-                onPressed: ()  {
+                onPressed: () {
                   if (otp == code2) {
                     Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) =>  VerifiedScreen(email: email,),
+                      builder: (context) => VerifiedScreen(
+                        email: email,
+                      ),
                     ));
                   }
                 },

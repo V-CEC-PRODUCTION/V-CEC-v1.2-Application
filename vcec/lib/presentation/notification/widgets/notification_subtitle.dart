@@ -5,6 +5,6 @@ class NotificationSubtitleWidget extends StatelessWidget {
   final title;
   @override
   Widget build(BuildContext context) {
-    return  Text(title);
+    return Text(title);
   }
 }

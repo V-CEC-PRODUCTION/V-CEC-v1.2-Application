@@ -4,21 +4,26 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:vcec/application/adduser/adduser_cubit.dart';
 import 'package:vcec/application/departments/rsearch/department_search_cubit.dart';
 import 'package:vcec/application/email/email_cubit.dart';
 import 'package:vcec/application/gallery/gallery_cubit.dart';
 import 'package:vcec/application/gallery/gallery_individual_cubit.dart';
 import 'package:vcec/application/google/google_cubit.dart';
+import 'package:vcec/application/loggedIn/isloggedin_cubit.dart';
 import 'package:vcec/application/main_menu/carousel/carousel_cubit.dart';
 import 'package:vcec/application/main_menu/highlights/highlights_cubit.dart';
 import 'package:vcec/application/main_menu/timetable/timetable_cubit.dart';
 import 'package:vcec/application/notices/notices_cubit_cubit.dart';
-import 'package:vcec/application/otp/otp_cubit.dart';
+//import 'package:vcec/application/signingoogle/signingoogle_cubit.dart';
+import 'package:vcec/application/user/user_cubit.dart';
 import 'package:vcec/application/verification/verification_cubit.dart';
 import 'package:vcec/core/di/injectable.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:vcec/presentation/auth_screens/login/login_screen.dart';
+import 'package:vcec/presentation/auth_screens/login/splash_screen.dart';
 import 'package:vcec/presentation/auth_screens/sign_up/sign_up_screen.dart';
-import 'package:vcec/presentation/notification/notification_screen.dart';
+//import 'package:vcec/presentation/notification/notification_screen.dart';
 import 'firebase_options.dart';
 
 late SharedPreferences sharedPreferences;
@@ -58,9 +63,6 @@ class MyApp extends StatelessWidget {
         BlocProvider<GalleryIndividualCubit>(
           create: (context) => getIt<GalleryIndividualCubit>(),
         ),
-        BlocProvider<OtpCubit>(
-          create: (context) => getIt<OtpCubit>(),
-        ),
         BlocProvider<VerificationCubit>(
           create: (context) => getIt<VerificationCubit>(),
         ),
@@ -70,6 +72,15 @@ class MyApp extends StatelessWidget {
         BlocProvider<EmailCubit>(
           create: (context) => getIt<EmailCubit>(),
         ),
+         BlocProvider<UserCubit>(
+          create: (context) => getIt<UserCubit>(),
+        ),
+         BlocProvider<AddUserCubit>(
+          create: (context) => getIt<AddUserCubit>(),
+        ),
+         BlocProvider<IsloggedInCubit>(
+          create: (context) => getIt<IsloggedInCubit>(),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -77,7 +88,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           useMaterial3: true,
         ),
-        home: SignUpScreen(),
+        home: SplashScreen(),
       ),
     );
   }

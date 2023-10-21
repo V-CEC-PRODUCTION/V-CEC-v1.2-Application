@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 
 class AccountDropDownWidget extends StatelessWidget {
-  AccountDropDownWidget(
-      {Key? key, required this.title, required this.dropdownItems})
+  AccountDropDownWidget({Key? key, required this.title, required this.dropdownItems})
       : super(key: key);
 
   final String title;
 
-  final ValueNotifier<String?> selectedValueNotifier =
-      ValueNotifier<String?>(null);
+  final ValueNotifier<String?> selectedValueNotifier = ValueNotifier<String?>(null);
 
   List<DropdownMenuItem<String>> dropdownItems;
+
+  String getSelectedValue() {
+    return selectedValueNotifier.value ?? "";
+  }
 
   @override
   Widget build(BuildContext context) {
