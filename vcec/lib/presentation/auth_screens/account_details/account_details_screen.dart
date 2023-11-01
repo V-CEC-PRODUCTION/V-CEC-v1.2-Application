@@ -1,6 +1,4 @@
 import 'package:another_flushbar/flushbar_helper.dart';
-import 'package:device_info_plus/device_info_plus.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vcec/application/adduser/adduser_cubit.dart';
@@ -15,15 +13,24 @@ import 'package:vcec/presentation/auth_screens/otp_verification/otp_verification
 import 'package:vcec/presentation/auth_screens/widgets/auth_button_widget.dart';
 import 'package:vcec/presentation/home/home.dart';
 
-class AccountDetailsScreen extends StatelessWidget {
+class AccountDetailsScreen extends StatefulWidget {
   final String deviceId;
   AccountDetailsScreen({
     super.key,
     required this.deviceId,
   });
+
+  @override
+  State<AccountDetailsScreen> createState() => _AccountDetailsScreenState();
+}
+
+class _AccountDetailsScreenState extends State<AccountDetailsScreen> {
   TextEditingController controller = TextEditingController();
+
   TextEditingController controller1 = TextEditingController();
+
   TextEditingController controller2 = TextEditingController();
+
   List<DropdownMenuItem<String>> get semesterdropdownItems {
     List<DropdownMenuItem<String>> menuItems = [
       DropdownMenuItem(child: Text("S1"), value: "S1"),
@@ -60,33 +67,41 @@ class AccountDetailsScreen extends StatelessWidget {
     return menuItems;
   }
 
+  late AccountDropDownWidget semesterDropDownWidget;
+  late AccountDropDownWidget batchDropDownWidget;
+  late AccountDropDownWidget genderDropDownWidget;
   ValueNotifier<bool> isTermsChecked = ValueNotifier<bool>(false);
-
   @override
-  Widget build(BuildContext context) {
-    AccountDropDownWidget semesterDropDownWidget = AccountDropDownWidget(
+  initState() {
+    semesterDropDownWidget = AccountDropDownWidget(
       title: '* Semester  ',
       dropdownItems: semesterdropdownItems,
     );
 
-    AccountDropDownWidget batchDropDownWidget = AccountDropDownWidget(
+    batchDropDownWidget = AccountDropDownWidget(
       title: '* Batch \t     ',
       dropdownItems: batchdropdownItems,
     );
 
-    AccountDropDownWidget genderDropDownWidget = AccountDropDownWidget(
+    genderDropDownWidget = AccountDropDownWidget(
       title: "* Gender\t\t\t\t\t\t",
       dropdownItems: genderdropdownItems,
     );
+    super.initState();
+  }
 
+  @override
+  Widget build(BuildContext context) {
     final sizeh = MediaQuery.of(context).size.height;
     final sizew = MediaQuery.of(context).size.width;
     return BlocListener<AddUserCubit, AddUserState>(
       listenWhen: (previous, current) => previous.value != current.value,
       listener: (context, state) {
-        Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => HomeScreen(),
-        ));
+        Navigator.of(context).pushAndRemoveUntil(
+            MaterialPageRoute(
+              builder: (context) => HomeScreen(),
+            ),
+            (route) => false);
       },
       child: Scaffold(
         body: SafeArea(
@@ -145,13 +160,8 @@ class AccountDetailsScreen extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      AccountDropDownWidget(
-                        title: '* Semester  ',
-                        dropdownItems: semesterdropdownItems,
-                      ),
-                      AccountDropDownWidget(
-                          title: '* Batch \t     ',
-                          dropdownItems: batchdropdownItems)
+                      semesterDropDownWidget,
+                      batchDropDownWidget,
                     ],
                   )),
               Row(
@@ -160,9 +170,7 @@ class AccountDetailsScreen extends StatelessWidget {
                   SizedBox(
                     width: MediaQuery.of(context).size.width * 63 / 470,
                   ),
-                  AccountDropDownWidget(
-                      title: "* Gender\t\t\t\t\t\t",
-                      dropdownItems: genderdropdownItems),
+                  genderDropDownWidget,
                 ],
               ),
               AccountTextFieldWidget(
@@ -190,16 +198,17 @@ class AccountDetailsScreen extends StatelessWidget {
                   ),
                   Text('Agree to'),
                   TextButton(
-                      onPressed: () {},
-                      child: Row(
-                        children: [
-                          Text(
-                            'terms and conditions',
-                            style: TextStyle(),
-                          ),
-                          Icon(Icons.open_in_new)
-                        ],
-                      ))
+                    onPressed: () {},
+                    child: Row(
+                      children: [
+                        Text(
+                          'terms and conditions',
+                          style: TextStyle(),
+                        ),
+                        Icon(Icons.open_in_new)
+                      ],
+                    ),
+                  ),
                 ],
               ),
               AuthButtonWidget(
@@ -207,47 +216,53 @@ class AccountDetailsScreen extends StatelessWidget {
                 tcolor: Colors.black,
                 title: 'Submit',
                 onclick: () {
-                  if (isTermsChecked.value == true)
-                  {
-                      print(deviceId);
-                  String selectedSemester =
-                      semesterDropDownWidget.getSelectedValue();
-                  String selectedBatch = batchDropDownWidget.getSelectedValue();
-                  String selectedGender =
-                      genderDropDownWidget.getSelectedValue();
-                  if (UserModel.instance.role == "guest") {
-                    final UserRole user = UserRole(
-                      role: Role.guest,
-                      name: controller.text,
-                      id: deviceId,
-                    );
-
-                    final cubit = context.read<AddUserCubit>();
-                    cubit.accountDetails(user.name, user.branch, user.semester,
-                        user.batch, user.adno, user.gender, user.id);
-                  } else {
+                  if (isTermsChecked.value == true) {
+                    print(widget.deviceId);
+                    String selectedSemester =
+                        semesterDropDownWidget.getSelectedValue();
+                    String selectedBatch =
+                        batchDropDownWidget.getSelectedValue();
+                    String selectedGender =
+                        genderDropDownWidget.getSelectedValue();
                     final UserRole user = UserRole(
                         role: Role.student,
                         name: controller.text,
-                        id: deviceId,
+                        id: widget.deviceId,
                         branch: controller1.text,
                         adno: controller2.text,
                         semester: selectedSemester,
                         batch: selectedBatch,
                         gender: selectedGender);
-
-                    final cubit = context.read<AddUserCubit>();
-                    cubit.accountDetails(user.name, user.branch, user.semester,
-                        user.batch, user.adno, user.gender, user.id);
+                    if (UserModel.instance.role == "guest") {
+                      final cubit = context.read<AddUserCubit>();
+                      cubit.accountDetails(
+                        user.name,
+                        user.branch,
+                        user.semester,
+                        user.batch,
+                        user.adno,
+                        user.gender,
+                        user.id,
+                      );
+                    } else {
+                      final cubit = context.read<AddUserCubit>();
+                      cubit.accountDetails(
+                        user.name,
+                        user.branch,
+                        user.semester,
+                        user.batch,
+                        user.adno,
+                        user.gender,
+                        user.id,
+                      );
+                    }
+                  } else {
+                    FlushbarHelper.createError(
+                            message:
+                                'Please agree to the terms and conditions to proceed')
+                        .show(context);
                   }
-                  }
-                else{
-                   FlushbarHelper.createError(
-                                message: 'Please agree to the terms and conditions to proceed')
-                            .show(context);
-                }
-                }
-                ,
+                },
               ),
             ],
           ),

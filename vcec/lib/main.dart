@@ -10,19 +10,20 @@ import 'package:vcec/application/email/email_cubit.dart';
 import 'package:vcec/application/gallery/gallery_cubit.dart';
 import 'package:vcec/application/gallery/gallery_individual_cubit.dart';
 import 'package:vcec/application/google/google_cubit.dart';
-import 'package:vcec/application/loggedIn/isloggedin_cubit.dart';
 import 'package:vcec/application/main_menu/carousel/carousel_cubit.dart';
 import 'package:vcec/application/main_menu/highlights/highlights_cubit.dart';
 import 'package:vcec/application/main_menu/timetable/timetable_cubit.dart';
 import 'package:vcec/application/notices/notices_cubit_cubit.dart';
+import 'package:vcec/application/splash_screen/splash_screen_cubit.dart';
 //import 'package:vcec/application/signingoogle/signingoogle_cubit.dart';
 import 'package:vcec/application/user/user_cubit.dart';
 import 'package:vcec/application/verification/verification_cubit.dart';
 import 'package:vcec/core/di/injectable.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:vcec/presentation/auth_screens/login/login_screen.dart';
-import 'package:vcec/presentation/auth_screens/login/splash_screen.dart';
+import 'package:vcec/presentation/splash_screen.dart/splash_screen.dart';
 import 'package:vcec/presentation/auth_screens/sign_up/sign_up_screen.dart';
+import 'package:vcec/presentation/home/home.dart';
 //import 'package:vcec/presentation/notification/notification_screen.dart';
 import 'firebase_options.dart';
 
@@ -72,24 +73,34 @@ class MyApp extends StatelessWidget {
         BlocProvider<EmailCubit>(
           create: (context) => getIt<EmailCubit>(),
         ),
-         BlocProvider<UserCubit>(
+        BlocProvider<UserCubit>(
           create: (context) => getIt<UserCubit>(),
         ),
-         BlocProvider<AddUserCubit>(
+        BlocProvider<AddUserCubit>(
           create: (context) => getIt<AddUserCubit>(),
         ),
-         BlocProvider<IsloggedInCubit>(
-          create: (context) => getIt<IsloggedInCubit>(),
+        BlocProvider<SplashScreenCubit>(
+          create: (context) => getIt<SplashScreenCubit>(),
         ),
       ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'V CEC',
-        theme: ThemeData(
-          useMaterial3: true,
-        ),
-        home: SplashScreen(),
-      ),
+      child: ScreenUtilInit(
+          designSize: const Size(480, 1019),
+          builder: (context, _) {
+            return MaterialApp(
+              debugShowCheckedModeBanner: false,
+              title: 'V CEC',
+              theme: ThemeData(
+                useMaterial3: true,
+              ),
+              initialRoute: '/',
+              routes: {
+                '/': (context) => const SplashScreen(),
+                '/login': (context) => LoginPage(),
+                '/signup': (context) => SignUpScreen(),
+                '/home': (context) => HomeScreen(),
+              },
+            );
+          }),
     );
   }
 }

@@ -16,6 +16,7 @@ class AddUserCubit extends Cubit<AddUserState> {
 
   accountDetails(String name,String? branch,String? sem,String? batch
   ,String? adno,String? gender,String deviceid) async {
+    
     await _addUserService
         .accountDeatils(name, branch, sem, batch, adno, gender, deviceid)
         .then((value) => value.fold((l) => {}, (r) => emit(state.copyWith(value: false))));

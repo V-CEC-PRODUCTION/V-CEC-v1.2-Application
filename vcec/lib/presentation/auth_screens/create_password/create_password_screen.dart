@@ -3,7 +3,7 @@ import 'package:another_flushbar/flushbar_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vcec/application/email/email_cubit.dart';
-import 'package:vcec/application/user/user_cubit.dart';
+
 import 'package:vcec/core/constants.dart';
 import 'package:vcec/presentation/auth_screens/account_details/account_details_screen.dart';
 import 'package:vcec/presentation/auth_screens/otp_verification/otp_verification_screen.dart';

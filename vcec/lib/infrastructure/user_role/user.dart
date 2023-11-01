@@ -3,7 +3,7 @@ import 'package:device_info_plus/device_info_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:vcec/domain/email/email_model.dart';
+import 'package:vcec/domain/auth_token_manager/auth_token_manager.dart';
 import 'package:vcec/domain/failure/main_failure.dart';
 import 'package:vcec/domain/user/user_model.dart';
 import 'package:vcec/domain/user/user_service.dart';
@@ -14,7 +14,7 @@ class UserRepo implements UserService {
   @override
   Future<Either<dynamic, bool>> getAccess() async {
     try {
-      final accessToken = EmailModel.instance.accessToken;
+      final accessToken = AuthTokenManager.instance.accessToken;
       final Map<String, dynamic> headers = {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $accessToken',

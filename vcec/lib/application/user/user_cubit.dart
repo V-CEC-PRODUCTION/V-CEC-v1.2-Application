@@ -7,13 +7,7 @@ import 'package:injectable/injectable.dart';
 import 'package:vcec/domain/auth/google_service1.dart';
 import 'package:vcec/domain/email/login_google_service.dart';
 import 'package:vcec/domain/email/login_service.dart';
-import 'package:vcec/domain/email/sign_in_google_service.dart';
-import 'package:vcec/domain/failure/auth_failure.dart';
 import 'package:vcec/domain/failure/main_failure.dart';
-//import 'package:vcec/domain/failure/main_failure.dart';
-import 'package:vcec/domain/user/request_service.dart';
-
-import 'package:vcec/domain/user/user_service.dart';
 part 'user_state.dart';
 part 'user_cubit.freezed.dart';
 
@@ -41,24 +35,26 @@ class UserCubit extends Cubit<UserState> {
                   authfailureorsuccess: Some(Left(failure)), value: true)),
               (success) {
                 emit(state.copyWith(
-                    authfailureorsuccess: Some(Right(success)), value: false,loading: true));
+                    authfailureorsuccess: Some(Right(success)),
+                    value: false,
+                    loading: true));
               },
             );
           });
           emit(state.copyWith(
             value: false,
-              user: r,
-              ));
+            user: r,
+          ));
         }));
   }
-   login({required String email, required String password}) async {
-    await emailService.getAccess(email, password).then((value) {
-      value.fold(
-        (failure) => emit(state.copyWith(
-            value: false, FailureOrSuccess: Some(Left(failure)))),
-        (success) => emit(state.copyWith(
-            FailureOrSuccess: Some(Right(success)), value: true)),
-      );
-    });
+
+  login({required String email, required String password}) async {
+    final response = await emailService.getAccess(email, password);
+    response.fold(
+      (failure) => emit(
+          state.copyWith(value: false, FailureOrSuccess: Some(Left(failure)))),
+      (success) => emit(
+          state.copyWith(FailureOrSuccess: Some(Right(success)), value: true)),
+    );
   }
 }

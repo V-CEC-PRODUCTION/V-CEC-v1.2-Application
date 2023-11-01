@@ -8,6 +8,8 @@ import 'package:vcec/presentation/auth_screens/account_details/account_details_s
 //import 'package:vcec/domain/email/sign_in_google_service.dart';
 import 'package:vcec/presentation/auth_screens/login/login_screen.dart';
 import 'package:vcec/presentation/auth_screens/otp_verification/otp_verification_screen.dart';
+import 'package:vcec/presentation/auth_screens/widgets/auth_page_title.dart';
+import 'package:vcec/presentation/auth_screens/widgets/email_text_field.dart';
 
 //import '../../../application/otp/otp_cubit.dart';
 
@@ -75,7 +77,7 @@ class SignUpScreen extends StatelessWidget {
                       SizedBox(
                         width: sizew * .0914,
                       ),
-                      TitleDetails(name: 'Sign up', fontsize: 35),
+                      AuthPageTitle(name: 'Sign up', fontsize: 35),
                     ],
                   ),
                   Padding(
@@ -83,7 +85,7 @@ class SignUpScreen extends StatelessWidget {
                         left: sizew * 0.07,
                         right: sizew * 0.05,
                         top: sizew * 0.05),
-                    child: EmailPassWidget(
+                    child: EmailTextField(
                       icon: Icons.attachment_outlined,
                       text: 'Email ID',
                       color: Colors.grey,

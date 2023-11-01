@@ -2,11 +2,11 @@ import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:vcec/domain/auth_token_manager/auth_token_manager.dart';
+import 'package:vcec/domain/auth_token_manager/auth_token_sevice.dart';
 import 'package:vcec/domain/email/email_service.dart';
-import 'package:vcec/domain/failure/auth_failure.dart';
 
 import 'package:vcec/domain/failure/main_failure.dart';
-import 'package:vcec/domain/user/request_service.dart';
 import 'package:vcec/domain/user/user_service.dart';
 
 part 'email_state.dart';
@@ -16,7 +16,7 @@ part 'email_cubit.freezed.dart';
 class EmailCubit extends Cubit<EmailState> {
   final EmailService emailService;
   final UserService _userService;
-  final RequestService _requestService;
+  final AuthTokenService _requestService;
   EmailCubit(
     this.emailService,
     this._userService,
@@ -34,8 +34,8 @@ class EmailCubit extends Cubit<EmailState> {
           emit(state.copyWith(deviceId: id));
           await _userService.getAccess().then((value) => value.fold((l) {
                 if (l is AuthFailure) {
-                  _requestService
-                      .getRequest()
+                  _requestService.
+                    getAccessToken()
                       .then((value) => value.fold((l) {}, (r) {
                             _userService.getAccess();
                           }));
