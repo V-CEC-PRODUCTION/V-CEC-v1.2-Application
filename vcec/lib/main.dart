@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vcec/application/adduser/adduser_cubit.dart';
@@ -23,6 +22,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:vcec/presentation/auth_screens/login/login_screen.dart';
 import 'package:vcec/presentation/auth_screens/login/splash_screen.dart';
 import 'package:vcec/presentation/auth_screens/sign_up/sign_up_screen.dart';
+import 'package:vcec/presentation/events/events_detailed_screen.dart';
 //import 'package:vcec/presentation/notification/notification_screen.dart';
 import 'firebase_options.dart';
 
@@ -72,13 +72,13 @@ class MyApp extends StatelessWidget {
         BlocProvider<EmailCubit>(
           create: (context) => getIt<EmailCubit>(),
         ),
-         BlocProvider<UserCubit>(
+        BlocProvider<UserCubit>(
           create: (context) => getIt<UserCubit>(),
         ),
-         BlocProvider<AddUserCubit>(
+        BlocProvider<AddUserCubit>(
           create: (context) => getIt<AddUserCubit>(),
         ),
-         BlocProvider<IsloggedInCubit>(
+        BlocProvider<IsloggedInCubit>(
           create: (context) => getIt<IsloggedInCubit>(),
         ),
       ],
@@ -88,7 +88,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           useMaterial3: true,
         ),
-        home: SplashScreen(),
+        home: EventsDetailedScreen(),
       ),
     );
   }

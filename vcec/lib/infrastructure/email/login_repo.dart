@@ -10,7 +10,6 @@ import 'package:vcec/strings/strings.dart';
 
 @LazySingleton(as: LoginService)
 class LoginRepo extends LoginService {
-   
   @override
   Future<Either<MainFailure, bool>> getAccess(
       String email, String password) async {
@@ -21,10 +20,12 @@ class LoginRepo extends LoginService {
       if (response.statusCode == 200 || response.statusCode == 201) {
         final EmailModel accessToken = EmailModel.fromJson(response.toString());
         EmailModel.instance.accessToken = accessToken.accessToken;
-        EmailModel.instance.refreshToken = accessToken.refreshToken;
-         final sharedPreferences = await SharedPreferences.getInstance();
-        await sharedPreferences.setString('access_token', accessToken.accessToken!);
-        await sharedPreferences.setString('refresh_token', accessToken.refreshToken!);
+        EmailModel.instance.refreshToken = accessToken.refreshToken; 
+        final sharedPreferences = await SharedPreferences.getInstance();
+        await sharedPreferences.setString(
+            'access_token', accessToken.accessToken!);
+        await sharedPreferences.setString(
+            'refresh_token', accessToken.refreshToken!);
         print(EmailModel.instance.accessToken.toString());
         print(EmailModel.instance.refreshToken.toString());
         return const Right(true);
@@ -33,6 +34,7 @@ class LoginRepo extends LoginService {
         return const Left(MainFailure.serverFailure());
       }
     } catch (e) {
+      print(e);
       print('Client Error');
       return const Left(MainFailure.clientFailure());
     }
