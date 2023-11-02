@@ -24,9 +24,7 @@ class AuthButtonWidget extends StatelessWidget {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12.0),
             )),
-        onPressed: () {
-          onclick;
-        },
+        onPressed: onclick,
         child: Padding(
           padding: EdgeInsets.symmetric(
               horizontal: MediaQuery.of(context).size.width * 145 / 471.31,
