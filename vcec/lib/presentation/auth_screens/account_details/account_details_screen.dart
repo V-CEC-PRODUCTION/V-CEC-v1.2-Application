@@ -1,8 +1,7 @@
 import 'package:another_flushbar/flushbar_helper.dart';
-import 'package:device_info_plus/device_info_plus.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:vcec/application/adduser/adduser_cubit.dart';
 import 'package:vcec/core/constants.dart';
 import 'package:vcec/domain/user/user_model.dart';
@@ -11,132 +10,138 @@ import 'package:vcec/presentation/auth_screens/account_details/widgets/account_t
 import 'package:vcec/presentation/auth_screens/account_details/widgets/user.dart';
 
 import 'package:vcec/presentation/auth_screens/otp_verification/otp_verification_screen.dart';
-//import 'package:vcec/presentation/auth_screens/otp__verification/otp_verification_screen.dart';
 import 'package:vcec/presentation/auth_screens/widgets/auth_button_widget.dart';
+import 'package:vcec/presentation/auth_screens/widgets/auth_top_title.dart';
 import 'package:vcec/presentation/home/home.dart';
 
-class AccountDetailsScreen extends StatelessWidget {
+class AccountDetailsScreen extends StatefulWidget {
   final String deviceId;
-  AccountDetailsScreen({
+  const AccountDetailsScreen({
     super.key,
     required this.deviceId,
   });
+
+  @override
+  State<AccountDetailsScreen> createState() => _AccountDetailsScreenState();
+}
+
+class _AccountDetailsScreenState extends State<AccountDetailsScreen> {
   TextEditingController controller = TextEditingController();
+
   TextEditingController controller1 = TextEditingController();
+
   TextEditingController controller2 = TextEditingController();
+
+  List<DropdownMenuItem<String>> get branchdropdownItems {
+    List<DropdownMenuItem<String>> menuItems = [
+      const DropdownMenuItem(
+          value: "CSE", child: Text("Computer Science & Engineering")),
+      const DropdownMenuItem(
+          value: "ECE", child: Text("Electronics & Communication ")),
+      const DropdownMenuItem(
+          value: "EEE", child: Text("Electrical And Electronics ")),
+      const DropdownMenuItem(
+          value: "EI", child: Text("Electrical And Instrumentation ")),
+      const DropdownMenuItem(
+          value: "MCA", child: Text("Master of Computer Applications")),
+    ];
+    return menuItems;
+  }
+
   List<DropdownMenuItem<String>> get semesterdropdownItems {
     List<DropdownMenuItem<String>> menuItems = [
-      DropdownMenuItem(child: Text("S1"), value: "S1"),
-      DropdownMenuItem(child: Text("S2"), value: "S2"),
-      DropdownMenuItem(child: Text("S3"), value: "S3"),
-      DropdownMenuItem(child: Text("S4"), value: "S4"),
-      DropdownMenuItem(child: Text("S5"), value: "S5"),
-      DropdownMenuItem(child: Text("S6"), value: "S6"),
-      DropdownMenuItem(child: Text("S7"), value: "S7"),
-      DropdownMenuItem(child: Text("S8"), value: "S8"),
+      const DropdownMenuItem(value: "S1", child: Text("S1")),
+      const DropdownMenuItem(value: "S2", child: Text("S2")),
+      const DropdownMenuItem(value: "S3", child: Text("S3")),
+      const DropdownMenuItem(value: "S4", child: Text("S4")),
+      const DropdownMenuItem(value: "S5", child: Text("S5")),
+      const DropdownMenuItem(value: "S6", child: Text("S6")),
+      const DropdownMenuItem(value: "S7", child: Text("S7")),
+      const DropdownMenuItem(value: "S8", child: Text("S8")),
     ];
     return menuItems;
   }
 
   List<DropdownMenuItem<String>> get batchdropdownItems {
     List<DropdownMenuItem<String>> menuItems = [
-      DropdownMenuItem(child: Text("A"), value: "A"),
-      DropdownMenuItem(child: Text("B"), value: "B"),
-      DropdownMenuItem(child: Text("C"), value: "C"),
-      DropdownMenuItem(child: Text("D"), value: "D"),
-      DropdownMenuItem(child: Text("E"), value: "E"),
-      DropdownMenuItem(child: Text("F"), value: "F"),
-      DropdownMenuItem(child: Text("G"), value: "G"),
+      const DropdownMenuItem(value: "A", child: Text("A")),
+      const DropdownMenuItem(value: "B", child: Text("B")),
+      const DropdownMenuItem(value: "C", child: Text("C")),
+      const DropdownMenuItem(value: "D", child: Text("D")),
+      const DropdownMenuItem(value: "E", child: Text("E")),
+      const DropdownMenuItem(value: "F", child: Text("F")),
+      const DropdownMenuItem(value: "G", child: Text("G")),
     ];
     return menuItems;
   }
 
   List<DropdownMenuItem<String>> get genderdropdownItems {
     List<DropdownMenuItem<String>> menuItems = [
-      DropdownMenuItem(child: Text("Male"), value: "Male"),
-      DropdownMenuItem(child: Text("Female"), value: "Female"),
-      DropdownMenuItem(child: Text("Others"), value: "Others"),
+      const DropdownMenuItem(value: "Male", child: Text("Male")),
+      const DropdownMenuItem(value: "Female", child: Text("Female")),
+      const DropdownMenuItem(value: "Others", child: Text("Others")),
     ];
     return menuItems;
   }
 
+  late AccountDropDownWidget branchDropDownWidget;
+  late AccountDropDownWidget semesterDropDownWidget;
+  late AccountDropDownWidget batchDropDownWidget;
+  late AccountDropDownWidget genderDropDownWidget;
   ValueNotifier<bool> isTermsChecked = ValueNotifier<bool>(false);
-
   @override
-  Widget build(BuildContext context) {
-    AccountDropDownWidget semesterDropDownWidget = AccountDropDownWidget(
+  initState() {
+    branchDropDownWidget = AccountDropDownWidget(
+      title: "* Branch",
+      dropdownItems: branchdropdownItems,
+    );
+
+    semesterDropDownWidget = AccountDropDownWidget(
       title: '* Semester  ',
       dropdownItems: semesterdropdownItems,
     );
 
-    AccountDropDownWidget batchDropDownWidget = AccountDropDownWidget(
+    batchDropDownWidget = AccountDropDownWidget(
       title: '* Batch \t     ',
       dropdownItems: batchdropdownItems,
     );
 
-    AccountDropDownWidget genderDropDownWidget = AccountDropDownWidget(
-      title: "* Gender\t\t\t\t\t\t",
+    genderDropDownWidget = AccountDropDownWidget(
+      title: "* Gender",
       dropdownItems: genderdropdownItems,
     );
+    super.initState();
+  }
 
+  @override
+  Widget build(BuildContext context) {
     final sizeh = MediaQuery.of(context).size.height;
     final sizew = MediaQuery.of(context).size.width;
     return BlocListener<AddUserCubit, AddUserState>(
       listenWhen: (previous, current) => previous.value != current.value,
       listener: (context, state) {
-        Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => HomeScreen(),
-        ));
+        Navigator.of(context).pushAndRemoveUntil(
+            MaterialPageRoute(
+              builder: (context) => HomeScreen(),
+            ),
+            (route) => false);
       },
       child: Scaffold(
         body: SafeArea(
             child: SingleChildScrollView(
           child: Column(
             children: [
-              Stack(children: [
-                Container(
-                  height: MediaQuery.of(context).size.height * 285 / 1019,
-                  decoration: BoxDecoration(
-                      borderRadius:
-                          BorderRadius.only(bottomLeft: Radius.circular(100)),
-                      color: auththeme),
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.only(top: 28, left: 22),
-                      child: IconButton(
-                          style: IconButton.styleFrom(iconSize: 30),
-                          onPressed: () {},
-                          icon: Icon(Icons.arrow_back_ios_outlined)),
-                    ),
-                    kheight20,
-                    Row(
-                      children: [
-                        SizedBox(
-                          width: sizew * 0.2,
-                        ),
-                        Text(
-                          'Account\nDetails',
-                          style: TextStyle(
-                              fontSize: 30,
-                              fontFamily: 'Inter',
-                              fontWeight: FontWeight.w600),
-                        ),
-                      ],
-                    )
-                  ],
-                ),
-              ]),
+              AuthTopTitleWidget(
+                title: 'Account Details',
+              ),
+              kheight15,
               AccountTextFieldWidget(
                 name: 'Full name',
                 controller: controller,
               ),
-              AccountTextFieldWidget(
-                name: 'Branch',
-                controller: controller1,
-              ),
+             
+              kheight10,
+              SizedBox(width: 356.w, height: 70.h, child: branchDropDownWidget),
               Padding(
                   padding: EdgeInsets.only(
                       top: sizeh * .015,
@@ -145,13 +150,8 @@ class AccountDetailsScreen extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      AccountDropDownWidget(
-                        title: '* Semester  ',
-                        dropdownItems: semesterdropdownItems,
-                      ),
-                      AccountDropDownWidget(
-                          title: '* Batch \t     ',
-                          dropdownItems: batchdropdownItems)
+                      semesterDropDownWidget,
+                      batchDropDownWidget,
                     ],
                   )),
               Row(
@@ -160,9 +160,7 @@ class AccountDetailsScreen extends StatelessWidget {
                   SizedBox(
                     width: MediaQuery.of(context).size.width * 63 / 470,
                   ),
-                  AccountDropDownWidget(
-                      title: "* Gender\t\t\t\t\t\t",
-                      dropdownItems: genderdropdownItems),
+                  genderDropDownWidget,
                 ],
               ),
               AccountTextFieldWidget(
@@ -188,66 +186,80 @@ class AccountDetailsScreen extends StatelessWidget {
                       );
                     },
                   ),
-                  Text('Agree to'),
+                  const Text('Agree to'),
                   TextButton(
-                      onPressed: () {},
-                      child: Row(
-                        children: [
-                          Text(
-                            'terms and conditions',
-                            style: TextStyle(),
-                          ),
-                          Icon(Icons.open_in_new)
-                        ],
-                      ))
+                    onPressed: () {},
+                    child: const Row(
+                      children: [
+                        Text(
+                          'terms and conditions',
+                          style: TextStyle(),
+                        ),
+                        Icon(Icons.open_in_new)
+                      ],
+                    ),
+                  ),
                 ],
               ),
-              AuthButtonWidget(
-                bgcolor: auththeme,
-                tcolor: Colors.black,
-                title: 'Submit',
-                onclick: () {
-                  if (isTermsChecked.value == true)
-                  {
-                      print(deviceId);
-                  String selectedSemester =
-                      semesterDropDownWidget.getSelectedValue();
-                  String selectedBatch = batchDropDownWidget.getSelectedValue();
-                  String selectedGender =
-                      genderDropDownWidget.getSelectedValue();
-                  if (UserModel.instance.role == "guest") {
-                    final UserRole user = UserRole(
-                      role: Role.guest,
-                      name: controller.text,
-                      id: deviceId,
-                    );
-
-                    final cubit = context.read<AddUserCubit>();
-                    cubit.accountDetails(user.name, user.branch, user.semester,
-                        user.batch, user.adno, user.gender, user.id);
-                  } else {
-                    final UserRole user = UserRole(
-                        role: Role.student,
-                        name: controller.text,
-                        id: deviceId,
-                        branch: controller1.text,
-                        adno: controller2.text,
-                        semester: selectedSemester,
-                        batch: selectedBatch,
-                        gender: selectedGender);
-
-                    final cubit = context.read<AddUserCubit>();
-                    cubit.accountDetails(user.name, user.branch, user.semester,
-                        user.batch, user.adno, user.gender, user.id);
-                  }
-                  }
-                else{
-                   FlushbarHelper.createError(
-                                message: 'Please agree to the terms and conditions to proceed')
-                            .show(context);
-                }
-                }
-                ,
+              kheight15,
+              SizedBox(
+                width: 413.w,
+                height: 60.w,
+                child: AuthButtonWidget(
+                  bgcolor: auththeme,
+                  tcolor: Colors.black,
+                  title: 'Submit',
+                  borderRadius: 5,
+                  elevation: 8,
+                  onclick: () {
+                    if (isTermsChecked.value == true) {
+                      print(widget.deviceId);
+                      String selectedSemester =
+                          semesterDropDownWidget.getSelectedValue();
+                      String selectedBatch =
+                          batchDropDownWidget.getSelectedValue();
+                      String selectedGender =
+                          genderDropDownWidget.getSelectedValue();
+                      final UserRole user = UserRole(
+                          role: Role.student,
+                          name: controller.text,
+                          id: widget.deviceId,
+                          branch: controller1.text,
+                          adno: controller2.text,
+                          semester: selectedSemester,
+                          batch: selectedBatch,
+                          gender: selectedGender);
+                      if (UserModel.instance.role == "guest") {
+                        final cubit = context.read<AddUserCubit>();
+                        cubit.accountDetails(
+                          user.name,
+                          user.branch,
+                          user.semester,
+                          user.batch,
+                          user.adno,
+                          user.gender,
+                          user.id,
+                        );
+                      } else {
+                        final cubit = context.read<AddUserCubit>();
+                        cubit.accountDetails(
+                          user.name,
+                          user.branch,
+                          user.semester,
+                          user.batch,
+                          user.adno,
+                          user.gender,
+                          user.id,
+                        );
+                      }
+                    } else {
+                      FlushbarHelper.createError(
+                              message:
+                                  'Please agree to the terms and conditions to proceed')
+                          .show(context);
+                    }
+                  },
+                ),
               ),
             ],
           ),

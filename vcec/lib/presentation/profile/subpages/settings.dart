@@ -9,23 +9,25 @@ class SettingsPage extends StatelessWidget {
     final size1 = MediaQuery.of(context).size.width;
     return Scaffold(
         appBar: AppBar(
-            leading: Padding(
-              padding: EdgeInsets.only(left: size1 * 0.05),
-              child: IconButton(
-                  iconSize: size1 * 0.06,
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  icon: const Icon(Icons.arrow_back_ios)),
+          leading: Padding(
+            padding: EdgeInsets.only(left: size1 * 0.05),
+            child: IconButton(
+                iconSize: size1 * 0.06,
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: const Icon(Icons.arrow_back_ios)),
+          ),
+          centerTitle: true,
+          title: Padding(
+            padding: EdgeInsets.only(left: 0),
+            child: Text(
+              'Settings',
+              style: TextStyle(
+                  fontSize: size1 * 0.05, fontWeight: FontWeight.bold),
             ),
-            title: Padding(
-              padding: EdgeInsets.only(left: size1 * 0.24),
-              child: Text(
-                'Settings',
-                style: TextStyle(
-                    fontSize: size1 * 0.05, fontWeight: FontWeight.bold),
-              ),
-            )),
+          ),
+        ),
         body: Padding(
           padding: EdgeInsets.only(top: size1 * 0.09),
           child: Column(

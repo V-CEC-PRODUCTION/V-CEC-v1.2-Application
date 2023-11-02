@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:vcec/core/colors.dart';
 import 'package:vcec/core/constants.dart';
+import 'package:vcec/presentation/events/events_detailed/widgets/event_conductor_logo.dart';
+import 'package:vcec/presentation/events/events_detailed/widgets/events_button.dart';
+import 'package:vcec/presentation/events/events_detailed/widgets/time_date_venue_text.dart';
 
 class EventsDetailedScreen extends StatelessWidget {
   const EventsDetailedScreen({super.key});
@@ -62,11 +65,11 @@ class EventsDetailedScreen extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      _TimeDateVenueTextWidget(title: time),
-                      const _TimeDateVenueTextWidget(title: "|"),
-                      _TimeDateVenueTextWidget(title: date),
-                      const _TimeDateVenueTextWidget(title: "|"),
-                      _TimeDateVenueTextWidget(title: venue)
+                      TimeDateVenueTextWidget(title: time),
+                      const TimeDateVenueTextWidget(title: "|"),
+                      TimeDateVenueTextWidget(title: date),
+                      const TimeDateVenueTextWidget(title: "|"),
+                      TimeDateVenueTextWidget(title: venue)
                     ],
                   ),
                   Padding(
@@ -86,13 +89,13 @@ class EventsDetailedScreen extends StatelessWidget {
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                   kheight10,
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                  const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 10),
                     child: Row(
                       children: [
                         SizedBox(
                           height: 50,
-                          child: const _ConductedLogoWidget(),
+                          child: EventConducterLogoWidget(),
                         )
                       ],
                     ),
@@ -107,7 +110,7 @@ class EventsDetailedScreen extends StatelessWidget {
         ),
       )),
       floatingActionButton: Row(mainAxisSize: MainAxisSize.min, children: [
-        _EventsButtonWidget(
+        EventsButtonWidget(
           child: const Padding(
             padding: EdgeInsets.symmetric(horizontal: 70, vertical: 13),
             child: Text(
@@ -118,7 +121,7 @@ class EventsDetailedScreen extends StatelessWidget {
           onTap: () {},
         ),
         kwidth10,
-        _EventsButtonWidget(
+        EventsButtonWidget(
             onTap: () {},
             child: Padding(
               padding: EdgeInsets.symmetric(vertical: size * .0435),
@@ -128,51 +131,6 @@ class EventsDetailedScreen extends StatelessWidget {
               ),
             ))
       ]),
-    );
-  }
-}
-
-class _ConductedLogoWidget extends StatelessWidget {
-  const _ConductedLogoWidget();
-
-  @override
-  Widget build(BuildContext context) {
-    return const Image(
-        image: NetworkImage(
-            'https://images.unsplash.com/photo-1504600770771-fb03a6961d33?auto=format&fit=crop&q=80&w=1782&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'));
-  }
-}
-
-class _EventsButtonWidget extends StatelessWidget {
-  const _EventsButtonWidget({
-    required this.onTap,
-    required this.child,
-  });
-
-  final VoidCallback onTap;
-  final Widget child;
-  @override
-  Widget build(BuildContext context) {
-    return ElevatedButton(
-        onPressed: onTap,
-        style: ElevatedButton.styleFrom(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-          backgroundColor: const Color.fromARGB(255, 39, 38, 38),
-        ),
-        child: child);
-  }
-}
-
-class _TimeDateVenueTextWidget extends StatelessWidget {
-  const _TimeDateVenueTextWidget({
-    required this.title,
-  });
-  final String title;
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      title,
-      style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
     );
   }
 }

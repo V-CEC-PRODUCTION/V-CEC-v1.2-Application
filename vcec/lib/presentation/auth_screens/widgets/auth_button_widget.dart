@@ -1,48 +1,44 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AuthButtonWidget extends StatelessWidget {
-  final VoidCallback onclick;
+  const AuthButtonWidget(
+      {super.key,
+      required this.title,
+      required this.bgcolor,
+      required this.tcolor,
+      required this.onclick,
+      required this.elevation,
+      required this.borderRadius});
+
   final String title;
   final Color bgcolor;
   final Color tcolor;
-
-  AuthButtonWidget({
-    Key? key,
-    required this.title,
-    required this.bgcolor,
-    required this.tcolor,
-    required this.onclick,
-  }) : super(key: key);
+  final double elevation;
+  final double borderRadius;
+  final VoidCallback onclick;
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      style: ElevatedButton.styleFrom(
-        backgroundColor: bgcolor,
-        shadowColor: Colors.white,
-        elevation: 10,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12.0),
-        ),
-      ),
-      onPressed: () {
-        onclick();
-      },
-      child: Padding(
-        padding: EdgeInsets.symmetric(
-          horizontal: MediaQuery.of(context).size.width * 145 / 471.31,
-          vertical: 8.5,
-        ),
-        child: Text(
-          title,
-          style: TextStyle(
-            fontFamily: 'Inter',
-            fontWeight: FontWeight.bold,
-            fontSize: 20,
-            color: tcolor,
+        style: ElevatedButton.styleFrom(
+            backgroundColor: bgcolor,
+            shadowColor: Colors.white,
+            elevation: elevation,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(borderRadius),
+            )),
+        onPressed: onclick,
+        child: Padding(
+          padding: EdgeInsets.symmetric(vertical: 9),
+          child: Text(
+            title,
+            style: TextStyle(
+                fontFamily: 'Inter',
+                fontWeight: FontWeight.bold,
+                fontSize: 24.w,
+                color: tcolor),
           ),
-        ),
-      ),
-    );
+        ));
   }
 }

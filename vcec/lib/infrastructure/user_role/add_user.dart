@@ -4,7 +4,7 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:vcec/domain/email/email_model.dart';
+import 'package:vcec/domain/auth_token_manager/auth_token_manager.dart';
 import 'package:vcec/domain/failure/main_failure.dart';
 import 'package:vcec/domain/user/add_user_service.dart';
 import 'package:vcec/strings/strings.dart';
@@ -21,7 +21,7 @@ class AddUserRepo implements AddUserService {
       String? gender,
       String deviceid) async {
     try {
-      final accessToken = EmailModel.instance.accessToken;
+      final accessToken = AuthTokenManager.instance.accessToken;
       final Map<String, dynamic> headers = {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $accessToken',

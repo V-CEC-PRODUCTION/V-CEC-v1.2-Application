@@ -5,12 +5,11 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:vcec/domain/auth/google_service1.dart';
 import 'package:vcec/domain/auth/otp_model.dart';
-import 'package:vcec/domain/email/login_google_service.dart';
+import 'package:vcec/domain/auth_token_manager/auth_token_sevice.dart';
 import 'package:vcec/domain/email/login_service.dart';
 import 'package:vcec/domain/email/sign_in_google_service.dart';
-import 'package:vcec/domain/failure/auth_failure.dart';
+
 import 'package:vcec/domain/failure/main_failure.dart';
-import 'package:vcec/domain/user/request_service.dart';
 import 'package:vcec/domain/user/user_service.dart';
 import '../../domain/auth/otp_service.dart';
 part 'google_state.dart';
@@ -23,7 +22,7 @@ class GoogleCubit extends Cubit<GoogleState> {
   final LoginService emailService;
   final SignInGoogleService googleService;
   final UserService _userService;
-  final RequestService _requestService;
+  final AuthTokenService _requestService;
   GoogleCubit(this.authservice, this._otpService, this.emailService,
       this.googleService, this._userService, this._requestService)
       : super(GoogleState.initial());
@@ -45,7 +44,7 @@ class GoogleCubit extends Cubit<GoogleState> {
           await _userService.getAccess().then((value) => value.fold((l) {
                 if (l is AuthFailure) {
                   _requestService
-                      .getRequest()
+                      .getAccessToken()
                       .then((value) => value.fold((l) {}, (r) {
                             _userService.getAccess();
                           }));

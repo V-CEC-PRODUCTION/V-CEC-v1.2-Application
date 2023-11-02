@@ -3,17 +3,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:vcec/application/google/google_cubit.dart';
+import 'package:vcec/core/colors.dart';
 import 'package:vcec/core/constants.dart';
 import 'package:vcec/presentation/auth_screens/otp_verification/verified_screen.dart';
+import 'package:vcec/presentation/auth_screens/otp_verification/widgets/otp_verif_top.dart';
+import 'package:vcec/presentation/auth_screens/widgets/auth_button_widget.dart';
 
 const auththeme = Color(0xFFE4DEE5);
 
 class OtpVerificationScreen extends StatelessWidget {
   final String email;
-  String otp;
+  final String otp;
   String code2 = '';
-  int i = 1;
+  final int i = 1;
   OtpVerificationScreen({
     Key? key,
     required this.email,
@@ -26,57 +30,26 @@ class OtpVerificationScreen extends StatelessWidget {
       body: SafeArea(
           child: SingleChildScrollView(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Stack(children: [
-              Container(
-                height: MediaQuery.of(context).size.height * 245 / 1019,
-                decoration: BoxDecoration(
-                    borderRadius:
-                        BorderRadius.only(bottomLeft: Radius.circular(100)),
-                    color: auththeme),
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  IconButton(
-                      padding: EdgeInsets.only(top: 41, left: 31),
-                      iconSize: 30,
-                      onPressed: () {},
-                      icon: Icon(Icons.arrow_back_ios_outlined)),
-                  kheight20,
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Verification',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            // fontStyle: FontStyle.italic,
-                            fontSize: 30,
-                            fontFamily: 'Inter'),
-                      ),
-                    ],
-                  )
-                ],
-              ),
-            ]),
+            OtpVerificationTopWidget(),
             SizedBox(
-              height: MediaQuery.of(context).size.height * 130 / 1019,
+              height: 140.h,
             ),
-            Text(
+            const Text(
               'Please enter the verification code\nsent to your email address',
               style: TextStyle(fontSize: 17, fontFamily: 'Inter'),
               textAlign: TextAlign.center,
               maxLines: 2,
             ),
             SizedBox(
-              height: MediaQuery.of(context).size.height * 72.5 / 1019,
+              height: 70.h,
             ),
             OtpTextField(
               numberOfFields: 6,
               keyboardType: TextInputType.number,
-              margin: EdgeInsets.all(6.3),
-              borderRadius: BorderRadius.all(Radius.circular(15)),
+              margin: const EdgeInsets.all(6.3),
+              borderRadius: const BorderRadius.all(Radius.circular(15)),
               fieldWidth: MediaQuery.of(context).size.width * 56 / 470.30,
               filled: true,
               fillColor: auththeme,
@@ -90,18 +63,18 @@ class OtpVerificationScreen extends StatelessWidget {
               },
             ),
             SizedBox(
-              height: MediaQuery.of(context).size.height * 145 / 1019,
+              height: 145.h,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text("Didn't recieve an OTP?"),
+                const Text("Didn't recieve an OTP?"),
                 TextButton(
                     onPressed: () async {
                       final otpcubit = context.read<GoogleCubit>();
                       otpcubit.postEmail(email: email);
                     },
-                    child: Text(
+                    child: const Text(
                       'Resend OTP',
                       style: TextStyle(
                           fontWeight: FontWeight.bold, color: Colors.black),
@@ -109,41 +82,25 @@ class OtpVerificationScreen extends StatelessWidget {
               ],
             ),
             kheight10,
-            ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                    foregroundColor: Colors.white,
-                    surfaceTintColor: Colors.white,
-                    disabledBackgroundColor: Colors.white,
-                    disabledForegroundColor: Colors.white,
-                    elevation: 10,
-                    //shadowColor: Colors.transparent,
-                    backgroundColor: auththeme,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12.0),
-                    )),
-                onPressed: () {
-                  if (otp == code2) {
-                    Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => VerifiedScreen(
-                        email: email,
-                      ),
-                    ));
-                  }
-                },
-                child: Padding(
-                  padding: EdgeInsets.symmetric(
-                      horizontal:
-                          MediaQuery.of(context).size.width * 145 / 471.31,
-                      vertical: 8.5),
-                  child: Text(
-                    "Verify",
-                    style: TextStyle(
-                        fontFamily: 'Inter',
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                        color: Colors.black),
-                  ),
-                ))
+            SizedBox(
+              width: 360.w,
+              height: 52.w,
+              child: AuthButtonWidget(
+                  title: 'Verify',
+                  bgcolor: auththeme,
+                  tcolor: kblack,
+                  borderRadius: 8,
+                  elevation: 6,
+                  onclick: () {
+                    if (otp == code2) {
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => VerifiedScreen(
+                          email: email,
+                        ),
+                      ));
+                    }
+                  }),
+            )
           ],
         ),
       )),

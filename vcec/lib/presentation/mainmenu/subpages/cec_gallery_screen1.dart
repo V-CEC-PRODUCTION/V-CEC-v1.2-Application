@@ -73,7 +73,7 @@ class CecGalleryScreen extends StatelessWidget {
                   ),
                   backgroundColor: Colors.black87,
                   centerTitle: true,
-                  actions: const [
+                  actions:  [
                     MessageIcon(),
                     kwidth20,
                   ],

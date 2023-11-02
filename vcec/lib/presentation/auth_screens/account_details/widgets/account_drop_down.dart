@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:vcec/core/colors.dart';
 
 class AccountDropDownWidget extends StatelessWidget {
-  AccountDropDownWidget({Key? key, required this.title, required this.dropdownItems})
+  AccountDropDownWidget(
+      {Key? key, required this.title, required this.dropdownItems})
       : super(key: key);
 
   final String title;
 
-  final ValueNotifier<String?> selectedValueNotifier = ValueNotifier<String?>(null);
+  final ValueNotifier<String?> selectedValueNotifier =
+      ValueNotifier<String?>(null);
 
-  List<DropdownMenuItem<String>> dropdownItems;
+  final List<DropdownMenuItem<String>> dropdownItems;
 
   String getSelectedValue() {
     return selectedValueNotifier.value ?? "";
@@ -20,6 +23,8 @@ class AccountDropDownWidget extends StatelessWidget {
       valueListenable: selectedValueNotifier,
       builder: (context, selectedValue, _) {
         return DropdownButton(
+          style: const TextStyle(
+              fontSize: 16, color: kblack, overflow: TextOverflow.ellipsis),
           items: dropdownItems,
           onChanged: (value) {
             selectedValueNotifier.value = value;
