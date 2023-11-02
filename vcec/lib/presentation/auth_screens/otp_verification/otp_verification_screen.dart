@@ -1,28 +1,29 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:vcec/application/google/google_cubit.dart';
+import 'package:vcec/application/signup/verify_email/verify_email_cubit.dart';
 import 'package:vcec/core/colors.dart';
 import 'package:vcec/core/constants.dart';
-import 'package:vcec/presentation/auth_screens/otp_verification/verified_screen.dart';
-import 'package:vcec/presentation/auth_screens/widgets/auth_title_with_back.dart';
+import 'package:vcec/domain/auth_token_manager/auth_token_manager.dart';
 import 'package:vcec/presentation/auth_screens/widgets/auth_button_widget.dart';
+import 'package:vcec/presentation/auth_screens/widgets/auth_title_with_back.dart';
+import 'package:vcec/presentation/common_widgets/common_snackbar.dart';
 
 const auththeme = Color(0xFFE4DEE5);
 
-class OtpVerificationScreen extends StatelessWidget {
-  final String email;
-  final String otp;
-  String code2 = '';
-  final int i = 1;
+class OtpVerificationScreen extends StatefulWidget {
   OtpVerificationScreen({
     Key? key,
-    required this.email,
-    required this.otp,
   }) : super(key: key);
+
+  @override
+  State<OtpVerificationScreen> createState() => _OtpVerificationScreenState();
+}
+
+class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
+  String code2 = '';
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +60,6 @@ class OtpVerificationScreen extends StatelessWidget {
               borderColor: auththeme,
               enabledBorderColor: auththeme,
               focusedBorderColor: auththeme,
-              //set to true to show as box or false to show as dash
               showFieldAsBox: true,
               onSubmit: (String verificationCode) {
                 code2 = verificationCode;
@@ -73,11 +73,8 @@ class OtpVerificationScreen extends StatelessWidget {
               children: [
                 const Text("Didn't recieve an OTP?"),
                 TextButton(
-                    onPressed: () async {
-                      final otpcubit = context.read<GoogleCubit>();
-                      otpcubit.postEmail(email: email);
-                    },
-                    child: const Text(
+                    onPressed: () async {},
+                    child: Text(
                       'Resend OTP',
                       style: TextStyle(
                           fontWeight: FontWeight.bold, color: Colors.black),
@@ -89,20 +86,33 @@ class OtpVerificationScreen extends StatelessWidget {
               width: 360.w,
               height: 52.w,
               child: AuthButtonWidget(
-                  title: 'Verify',
-                  bgcolor: auththeme,
-                  tcolor: kblack,
-                  borderRadius: 8,
-                  elevation: 6,
-                  onclick: () {
-                    if (otp == code2) {
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => VerifiedScreen(
-                          email: email,
-                        ),
-                      ));
+                title: 'Verify',
+                bgcolor: auththeme,
+                tcolor: kblack,
+                borderRadius: 8,
+                elevation: 6,
+                onclick: () {
+                  final otp = BlocProvider.of<VerifyEmailCubit>(context)
+                      .state
+                      .otpModel!
+                      .otp;
+                  print(otp);
+                  print(" fd $code2");
+                  if (otp == code2) {
+                    final email = AuthTokenManager.instance.email;
+                    final end = email!.substring((email.length) - 13);
+                    if (end == "ceconline.edu") {
+                      AuthTokenManager.instance.setUserRole(UserRole.student);
+                    } else {
+                      AuthTokenManager.instance.setUserRole(UserRole.guest);
                     }
-                  }),
+                    Navigator.of(context).pushNamedAndRemoveUntil(
+                        '/otp_verified', (route) => false);
+                  } else {
+                    displaySnackBar(context: context, text: "invalid otp");
+                  }
+                },
+              ),
             )
           ],
         ),

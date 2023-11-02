@@ -2,23 +2,24 @@ import 'package:another_flushbar/flushbar_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:vcec/application/adduser/adduser_cubit.dart';
+import 'package:vcec/application/signup/create_new_account/create_new_account_cubit.dart';
 import 'package:vcec/core/constants.dart';
-import 'package:vcec/domain/user/user_model.dart';
+import 'package:vcec/domain/auth_token_manager/auth_token_manager.dart';
+import 'package:vcec/domain/authentication/signup/user_details_enum/user_details.dart';
+import 'package:vcec/domain/failure/main_failure.dart';
 import 'package:vcec/presentation/auth_screens/account_details/widgets/account_drop_down.dart';
 import 'package:vcec/presentation/auth_screens/account_details/widgets/account_text_field.dart';
-import 'package:vcec/presentation/auth_screens/account_details/widgets/user.dart';
-
 import 'package:vcec/presentation/auth_screens/otp_verification/otp_verification_screen.dart';
 import 'package:vcec/presentation/auth_screens/widgets/auth_button_widget.dart';
 import 'package:vcec/presentation/auth_screens/widgets/auth_top_title.dart';
-import 'package:vcec/presentation/home/home.dart';
+import 'package:vcec/presentation/common_widgets/common_snackbar.dart';
+import 'package:vcec/presentation/common_widgets/loading_widget.dart';
 
 class AccountDetailsScreen extends StatefulWidget {
-  final String deviceId;
-  const AccountDetailsScreen({
+  final String password;
+  AccountDetailsScreen({
     super.key,
-    required this.deviceId,
+    required this.password,
   });
 
   @override
@@ -26,11 +27,11 @@ class AccountDetailsScreen extends StatefulWidget {
 }
 
 class _AccountDetailsScreenState extends State<AccountDetailsScreen> {
-  TextEditingController controller = TextEditingController();
+  TextEditingController nameController = TextEditingController();
 
-  TextEditingController controller1 = TextEditingController();
+  TextEditingController branchController = TextEditingController();
 
-  TextEditingController controller2 = TextEditingController();
+  TextEditingController adNumController = TextEditingController();
 
   List<DropdownMenuItem<String>> get branchdropdownItems {
     List<DropdownMenuItem<String>> menuItems = [
@@ -117,17 +118,41 @@ class _AccountDetailsScreenState extends State<AccountDetailsScreen> {
   Widget build(BuildContext context) {
     final sizeh = MediaQuery.of(context).size.height;
     final sizew = MediaQuery.of(context).size.width;
-    return BlocListener<AddUserCubit, AddUserState>(
-      listenWhen: (previous, current) => previous.value != current.value,
-      listener: (context, state) {
-        Navigator.of(context).pushAndRemoveUntil(
-            MaterialPageRoute(
-              builder: (context) => HomeScreen(),
-            ),
-            (route) => false);
-      },
-      child: Scaffold(
-        body: SafeArea(
+    return Scaffold(
+      body: BlocConsumer<CreateNewAccountCubit, CreateNewAccountState>(
+          listener: (context, state) {
+        state.isFailureOrSuccess.fold(
+            () {},
+            (either) => either.fold(
+                  (failure) {
+                    if (!state.isLoading) {
+                      if (failure == const MainFailure.serverFailure()) {
+                        displaySnackBar(
+                            context: context, text: "Server is down");
+                      } else if (failure == const MainFailure.authFailure()) {
+                        displaySnackBar(
+                            context: context, text: "Please try again later");
+                      } else if (failure == const MainFailure.clientFailure()) {
+                        displaySnackBar(
+                            context: context, text: "Email already in use");
+                      } else {
+                        displaySnackBar(
+                            context: context, text: "Something went wrong");
+                      }
+                    }
+                  },
+                  (r) {
+                    Navigator.of(context)
+                        .pushNamedAndRemoveUntil('/home', (route) => false);
+                  },
+                ));
+      }, builder: (context, state) {
+        if (state.isLoading) {
+          return const Center(
+            child: loadingWidget,
+          );
+        }
+        return SafeArea(
             child: SingleChildScrollView(
           child: Column(
             children: [
@@ -137,9 +162,8 @@ class _AccountDetailsScreenState extends State<AccountDetailsScreen> {
               kheight15,
               AccountTextFieldWidget(
                 name: 'Full name',
-                controller: controller,
+                controller: nameController,
               ),
-             
               kheight10,
               SizedBox(width: 356.w, height: 70.h, child: branchDropDownWidget),
               Padding(
@@ -165,7 +189,7 @@ class _AccountDetailsScreenState extends State<AccountDetailsScreen> {
               ),
               AccountTextFieldWidget(
                 name: 'Admission Number',
-                controller: controller2,
+                controller: adNumController,
               ),
               SizedBox(
                 height: sizeh * 0.08,
@@ -213,45 +237,40 @@ class _AccountDetailsScreenState extends State<AccountDetailsScreen> {
                   elevation: 8,
                   onclick: () {
                     if (isTermsChecked.value == true) {
-                      print(widget.deviceId);
-                      String selectedSemester =
-                          semesterDropDownWidget.getSelectedValue();
-                      String selectedBatch =
-                          batchDropDownWidget.getSelectedValue();
-                      String selectedGender =
-                          genderDropDownWidget.getSelectedValue();
-                      final UserRole user = UserRole(
-                          role: Role.student,
-                          name: controller.text,
-                          id: widget.deviceId,
-                          branch: controller1.text,
-                          adno: controller2.text,
-                          semester: selectedSemester,
-                          batch: selectedBatch,
-                          gender: selectedGender);
-                      if (UserModel.instance.role == "guest") {
-                        final cubit = context.read<AddUserCubit>();
-                        cubit.accountDetails(
-                          user.name,
-                          user.branch,
-                          user.semester,
-                          user.batch,
-                          user.adno,
-                          user.gender,
-                          user.id,
-                        );
+                      final UserDetailsModel userDetailsModel;
+                      if (AuthTokenManager.instance.userRole ==
+                          UserRole.guest) {
+                        if (nameController.text.length < 3) {
+                          return;
+                        }
+                        userDetailsModel =
+                            UserDetailsModel(fullName: nameController.text);
                       } else {
-                        final cubit = context.read<AddUserCubit>();
-                        cubit.accountDetails(
-                          user.name,
-                          user.branch,
-                          user.semester,
-                          user.batch,
-                          user.adno,
-                          user.gender,
-                          user.id,
+                        final sem = semesterDropDownWidget.getSelectedValue();
+                        final batch = batchDropDownWidget.getSelectedValue();
+                        final gender = genderDropDownWidget.getSelectedValue();
+                        if (nameController.text.length < 3 ||
+                            branchController.text.length < 3 ||
+                            adNumController.text.length < 3 ||
+                            sem.isEmpty ||
+                            batch.isEmpty ||
+                            gender.isEmpty) {
+                          return;
+                        }
+                        userDetailsModel = UserDetailsModel(
+                          fullName: nameController.text,
+                          branch: branchController.text,
+                          semester: sem,
+                          batch: batch,
+                          gender: gender,
+                          adNumber: adNumController.text,
                         );
                       }
+                      BlocProvider.of<CreateNewAccountCubit>(context)
+                          .createNewAccount(
+                              email: AuthTokenManager.instance.email!,
+                              password: widget.password,
+                              userDetailsModel: userDetailsModel);
                     } else {
                       FlushbarHelper.createError(
                               message:
@@ -263,8 +282,8 @@ class _AccountDetailsScreenState extends State<AccountDetailsScreen> {
               ),
             ],
           ),
-        )),
-      ),
+        ));
+      }),
     );
   }
 }

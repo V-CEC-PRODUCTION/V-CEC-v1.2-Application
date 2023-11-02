@@ -7,8 +7,9 @@ import 'package:vcec/presentation/auth_screens/otp_verification/otp_verification
 import 'package:vcec/presentation/auth_screens/widgets/auth_button_widget.dart';
 
 class VerifiedScreen extends StatelessWidget {
-  final String email;
-  const VerifiedScreen({super.key, required this.email});
+  const VerifiedScreen({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +54,7 @@ class VerifiedScreen extends StatelessWidget {
                 onclick: () {
                   Navigator.of(context).push(MaterialPageRoute(
                     builder: (context) => CreatePasswordScreen(
-                      email: email,
+                  
                     ),
                   ));
                 }),

@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:vcec/application/user/user_cubit.dart';
-import 'package:vcec/core/constants.dart';
 
 class LoginWithGoogleWidget extends StatelessWidget {
   const LoginWithGoogleWidget({
