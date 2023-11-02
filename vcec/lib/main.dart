@@ -15,19 +15,14 @@ import 'package:vcec/application/main_menu/highlights/highlights_cubit.dart';
 import 'package:vcec/application/main_menu/timetable/timetable_cubit.dart';
 import 'package:vcec/application/notices/notices_cubit_cubit.dart';
 import 'package:vcec/application/splash_screen/splash_screen_cubit.dart';
-//import 'package:vcec/application/signingoogle/signingoogle_cubit.dart';
 import 'package:vcec/application/user/user_cubit.dart';
 import 'package:vcec/application/verification/verification_cubit.dart';
 import 'package:vcec/core/di/injectable.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:vcec/presentation/auth_screens/account_details/account_details_screen.dart';
 import 'package:vcec/presentation/auth_screens/login/login_screen.dart';
-import 'package:vcec/presentation/auth_screens/otp_verification/otp_verification_screen.dart';
-import 'package:vcec/presentation/auth_screens/otp_verification/verified_screen.dart';
-import 'package:vcec/presentation/splash_screen.dart/splash_screen.dart';
 import 'package:vcec/presentation/auth_screens/sign_up/sign_up_screen.dart';
 import 'package:vcec/presentation/home/home.dart';
-//import 'package:vcec/presentation/notification/notification_screen.dart';
+import 'package:vcec/presentation/splash_screen.dart/splash_screen.dart';
 import 'firebase_options.dart';
 
 late SharedPreferences sharedPreferences;
@@ -97,9 +92,7 @@ class MyApp extends StatelessWidget {
               ),
               initialRoute: '/',
               routes: {
-                '/': (context) => AccountDetailsScreen(
-                      deviceId: '',
-                    ),
+                '/': (context) => SplashScreen(),
                 '/login': (context) => LoginPage(),
                 '/signup': (context) => SignUpScreen(),
                 '/home': (context) => HomeScreen(),

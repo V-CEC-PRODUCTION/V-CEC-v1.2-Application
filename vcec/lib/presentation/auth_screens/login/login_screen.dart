@@ -8,6 +8,7 @@ import 'package:vcec/presentation/auth_screens/login/widgets/forgot_password_but
 import 'package:vcec/presentation/auth_screens/login/widgets/login_image.dart';
 import 'package:vcec/presentation/auth_screens/login/widgets/password_textfield.dart';
 import 'package:vcec/presentation/auth_screens/login/widgets/signup_button.dart';
+import 'package:vcec/presentation/auth_screens/sign_up/sign_up_screen.dart';
 import 'package:vcec/presentation/auth_screens/widgets/auth_button_widget.dart';
 import 'package:vcec/presentation/auth_screens/widgets/auth_page_title.dart';
 import 'package:vcec/presentation/auth_screens/widgets/email_text_field.dart';
@@ -123,7 +124,15 @@ class _LoginPageState extends State<LoginPage> {
                                   },
                                   title: 'Login with Google'),
                               kheight15,
-                              const SignUpButtonWidget(),
+                              SignUpButtonWidget(
+                                  title: 'New to V CEC ?',
+                                  buttonTitle: 'Sign Up',
+                                  onTap: () {
+                                    Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                SignUpScreen()));
+                                  }),
                             ],
                           ),
                         ),

@@ -6,6 +6,7 @@ import 'package:vcec/application/google/google_cubit.dart';
 import 'package:vcec/core/colors.dart';
 import 'package:vcec/core/constants.dart';
 import 'package:vcec/presentation/auth_screens/account_details/account_details_screen.dart';
+import 'package:vcec/presentation/auth_screens/login/widgets/signup_button.dart';
 import 'package:vcec/presentation/auth_screens/otp_verification/otp_verification_screen.dart';
 import 'package:vcec/presentation/auth_screens/sign_up/widget/signup_image.dart';
 import 'package:vcec/presentation/auth_screens/widgets/auth_button_widget.dart';
@@ -89,7 +90,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                   ),
                   SizedBox(
-                    height: 55.h,
+                    height: 45.h,
                   ),
                   SizedBox(
                     width: 420.w,
@@ -119,7 +120,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       },
                     ),
                   ),
-                  kheight30
+                  kheight10,
+                  SignUpButtonWidget(
+                    title: "Already a user?",
+                    buttonTitle: "Login",
+                    onTap: () {
+                      Navigator.of(context)
+                          .pushNamedAndRemoveUntil('/login', (route) => false);
+                    },
+                  )
                 ],
               ),
             )),

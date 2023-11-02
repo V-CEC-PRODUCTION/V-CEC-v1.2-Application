@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vcec/core/colors.dart';
 import 'package:vcec/core/constants.dart';
-
 import 'package:vcec/presentation/common_widgets/message_icon.dart';
 import 'package:vcec/presentation/common_widgets/notification_icon.dart';
 import 'package:vcec/presentation/events/events_widgets/announcments_widget.dart';

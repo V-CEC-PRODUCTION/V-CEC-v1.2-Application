@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vcec/presentation/auth_screens/forgot_password/forgot_password_screen.dart';
 
 class ForgotPasswordWidget extends StatelessWidget {
   const ForgotPasswordWidget({
@@ -10,7 +11,10 @@ class ForgotPasswordWidget extends StatelessWidget {
     return Align(
       alignment: Alignment.centerRight,
       child: TextButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => ForgotPasswordScreen()));
+        },
         child: const Text(
           'Forgot Password?',
           style: TextStyle(color: Colors.black),

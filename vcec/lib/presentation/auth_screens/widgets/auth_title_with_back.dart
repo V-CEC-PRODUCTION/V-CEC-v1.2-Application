@@ -3,10 +3,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:vcec/core/constants.dart';
 import 'package:vcec/presentation/auth_screens/otp_verification/otp_verification_screen.dart';
 
-class OtpVerificationTopWidget extends StatelessWidget {
-  const OtpVerificationTopWidget({
+class AuthTopTitleWithBackWidget extends StatelessWidget {
+   AuthTopTitleWithBackWidget({
     super.key,
+    required this.title, required this.fontSize,
   });
+  final String title;
+  final double fontSize;
 
   @override
   Widget build(BuildContext context) {
@@ -34,9 +37,9 @@ class OtpVerificationTopWidget extends StatelessWidget {
                 width: 100.w,
               ),
               Text(
-                'Verification',
+                title,
                 style: TextStyle(
-                    fontSize: 55.w,
+                    fontSize: fontSize,
                     fontFamily: 'Inter',
                     fontWeight: FontWeight.w600),
               ),

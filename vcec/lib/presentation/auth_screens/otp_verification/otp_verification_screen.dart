@@ -8,7 +8,7 @@ import 'package:vcec/application/google/google_cubit.dart';
 import 'package:vcec/core/colors.dart';
 import 'package:vcec/core/constants.dart';
 import 'package:vcec/presentation/auth_screens/otp_verification/verified_screen.dart';
-import 'package:vcec/presentation/auth_screens/otp_verification/widgets/otp_verif_top.dart';
+import 'package:vcec/presentation/auth_screens/widgets/auth_title_with_back.dart';
 import 'package:vcec/presentation/auth_screens/widgets/auth_button_widget.dart';
 
 const auththeme = Color(0xFFE4DEE5);
@@ -32,7 +32,10 @@ class OtpVerificationScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            OtpVerificationTopWidget(),
+            AuthTopTitleWithBackWidget(
+              title: 'Verification',
+              fontSize: 55.w,
+            ),
             SizedBox(
               height: 140.h,
             ),
