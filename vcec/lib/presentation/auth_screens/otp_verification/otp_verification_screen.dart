@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
@@ -96,8 +95,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                       .state
                       .otpModel!
                       .otp;
-                  print(otp);
-                  print(" fd $code2");
+
                   if (otp == code2) {
                     final email = AuthTokenManager.instance.email;
                     final end = email!.substring((email.length) - 13);

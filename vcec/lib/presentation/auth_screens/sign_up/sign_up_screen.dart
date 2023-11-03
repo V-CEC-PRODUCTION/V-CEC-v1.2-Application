@@ -60,7 +60,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
         body: SafeArea(
             child: SingleChildScrollView(
           child: Column(
-            // crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SignUpImage(),
               SizedBox(
@@ -89,16 +88,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 width: 420.w,
                 height: 52.w,
                 child: AuthButtonWidget(
-                    title: "Verify",
-                    bgcolor: Colors.black87,
-                    tcolor: kwhite,
-                    elevation: 5,
-                    borderRadius: 8,
-                    onclick: () {
-                      // context
-                      //     .read<GoogleCubit>()
-                      //     .postEmail(email: controller.text);
-                    }),
+                  title: "Verify",
+                  bgcolor: Colors.black87,
+                  tcolor: kwhite,
+                  elevation: 5,
+                  borderRadius: 8,
+                  onclick: () {
+                    BlocProvider.of<VerifyEmailCubit>(context)
+                        .verifyEmail(email: emailController.text);
+                  },
+                ),
               ),
               kheight20,
               const OrWidget(),
@@ -107,10 +106,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 padding: EdgeInsets.symmetric(horizontal: 34.w),
                 child: LoginWithGoogleWidget(
                   title: "Sign up with Google",
-                  onClick: () {
-                    // final ocubit = context.read<GoogleCubit>();
-                    // ocubit.googleSignIn();
-                  },
+                  onClick: () {},
                 ),
               ),
               kheight10,

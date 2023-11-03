@@ -89,7 +89,7 @@ class MyApp extends StatelessWidget {
               ),
               initialRoute: '/',
               routes: {
-                '/': (context) => AccountDetailsScreen(password: '  '),
+                '/': (context) => SplashScreen(),
                 '/login': (context) => LoginPage(),
                 '/signup': (context) => SignUpScreen(),
                 '/home': (context) => HomeScreen(),
