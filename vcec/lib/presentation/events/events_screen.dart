@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vcec/core/colors.dart';
 import 'package:vcec/core/constants.dart';
-
 import 'package:vcec/presentation/common_widgets/message_icon.dart';
 import 'package:vcec/presentation/common_widgets/notification_icon.dart';
 import 'package:vcec/presentation/events/events_widgets/announcments_widget.dart';
@@ -12,7 +11,7 @@ import 'package:vcec/presentation/events/events_widgets/latest_news_widget.dart'
 import 'package:vcec/presentation/events/events_widgets/nearby_events_widget.dart';
 
 class EventsScreen extends StatelessWidget {
-  EventsScreen({super.key, this.imgUrl});
+  const EventsScreen({super.key, this.imgUrl});
   final String? imgUrl;
 
   @override
@@ -24,10 +23,10 @@ class EventsScreen extends StatelessWidget {
           padding: const EdgeInsets.only(left: 20),
           child: CircleAvatar(
             radius: 20,
-            child: imgUrl != null ? Image.network(imgUrl!) : Text('A'),
+            child: imgUrl != null ? Image.network(imgUrl!) : const Text('A'),
           ),
         ),
-        title: Text(
+        title: const Text(
           'name',
           style: TextStyle(color: kwhite, fontWeight: FontWeight.bold),
         ),
@@ -36,9 +35,8 @@ class EventsScreen extends StatelessWidget {
             onTap: () {},
             child: Container(
               color: appbarbuttonbackground,
-              child: Padding(
-                padding:
-                    const EdgeInsets.only(left: 6, right: 6, top: 2, bottom: 2),
+              child: const Padding(
+                padding: EdgeInsets.only(left: 6, right: 6, top: 2, bottom: 2),
                 child: NotificationIcon(),
               ),
             ),
@@ -49,8 +47,8 @@ class EventsScreen extends StatelessWidget {
               onTap: () {},
               child: Container(
                 color: appbarbuttonbackground,
-                child: Padding(
-                    padding: const EdgeInsets.only(
+                child: const Padding(
+                    padding: EdgeInsets.only(
                         left: 6, right: 6, top: 2.5, bottom: 1.5),
                     child: MessageIcon()),
               ),
@@ -62,15 +60,15 @@ class EventsScreen extends StatelessWidget {
           child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: const [
-            FindAmazingEventsWidget(),
+          children: [
+            const FindAmazingEventsWidget(),
             kheight10,
-            ForumEventFilterWidget(),
-            NearbyEventsWidget(),
-            EventsForYouWidget(),
-            AnnouncementsEventsWidget(),
+            const ForumEventFilterWidget(),
+            const NearbyEventsWidget(),
+            const EventsForYouWidget(),
+            const AnnouncementsEventsWidget(),
             kheight10,
-            LatestNewsWidget(),
+            const LatestNewsWidget(),
           ],
         ),
       )),

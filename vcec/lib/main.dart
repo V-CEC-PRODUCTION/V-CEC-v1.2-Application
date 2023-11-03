@@ -17,12 +17,13 @@ import 'package:vcec/application/signup/verify_email/verify_email_cubit.dart';
 import 'package:vcec/application/splash_screen/splash_screen_cubit.dart';
 import 'package:vcec/core/di/injectable.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:vcec/presentation/auth_screens/account_details/account_details_screen.dart';
 import 'package:vcec/presentation/auth_screens/login/login_screen.dart';
-import 'package:vcec/presentation/auth_screens/otp_verification/otp_verification_screen.dart';
-import 'package:vcec/presentation/auth_screens/otp_verification/verified_screen.dart';
-import 'package:vcec/presentation/splash_screen.dart/splash_screen.dart';
 import 'package:vcec/presentation/auth_screens/sign_up/sign_up_screen.dart';
 import 'package:vcec/presentation/home/home.dart';
+import 'package:vcec/presentation/splash_screen.dart/splash_screen.dart';
+import 'package:vcec/presentation/auth_screens/otp_verification/otp_verification_screen.dart';
+import 'package:vcec/presentation/auth_screens/otp_verification/verified_screen.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -88,7 +89,7 @@ class MyApp extends StatelessWidget {
               ),
               initialRoute: '/',
               routes: {
-                '/': (context) => const SplashScreen(),
+                '/': (context) => AccountDetailsScreen(password: '  '),
                 '/login': (context) => LoginPage(),
                 '/signup': (context) => SignUpScreen(),
                 '/home': (context) => HomeScreen(),
