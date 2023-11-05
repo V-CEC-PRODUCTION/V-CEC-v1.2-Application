@@ -242,14 +242,14 @@ class _AccountDetailsScreenState extends State<AccountDetailsScreen> {
                       final UserDetailsModel userDetailsModel;
                       if (AuthTokenManager.instance.userRole ==
                           UserRole.guest) {
-                        print('I was here hehe');
+                        
                         if (nameController.text.length < 3) {
                           return;
                         }
                         userDetailsModel =
                             UserDetailsModel(fullName: nameController.text);
                       } else {
-                         print('I was here hehe');
+                         
                         final branch = branchDropDownWidget.getSelectedValue();
                         final sem = semesterDropDownWidget.getSelectedValue();
                         final batch = batchDropDownWidget.getSelectedValue();
