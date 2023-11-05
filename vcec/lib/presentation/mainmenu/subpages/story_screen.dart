@@ -1,10 +1,14 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+
+import 'dart:async';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:story/story_image.dart';
 import 'package:vcec/presentation/mainmenu/models/story_model.dart';
 import 'package:vcec/presentation/mainmenu/widgets/story_data.dart';
+import 'package:vcec/presentation/mainmenu/widgets/story_part.dart';
+import 'package:vcec/presentation/mainmenu/widgets/story_widget.dart';
 
 import 'package:video_player/video_player.dart';
 
@@ -12,9 +16,9 @@ import '../models/user_model.dart';
 
 class StoryScreen extends StatefulWidget {
   final List<Story> stories;
-  final userPageIndex;
+  int userPageIndex;
 
-  const StoryScreen({
+  StoryScreen({
     Key? key,
     required this.stories,
     required this.userPageIndex,
@@ -31,18 +35,21 @@ class _StoryScreenState extends State<StoryScreen>
   late AnimationController _animController;
   VideoPlayerController? _videoController;
   int _currentIndex = 0;
+
   final _pageNotifier = ValueNotifier(0.0);
+  Timer? _timer;
 
   @override
   void initState() {
     super.initState();
+
     _childPageController = PageController();
-    _pageController = PageController();
+    _pageController = PageController(initialPage: widget.userPageIndex);
     _animController = AnimationController(vsync: this);
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       _pageController.addListener(_listener);
     });
-
+    _pageTimer();
     final Story firstStory = widget.stories.first;
     _loadStory(story: firstStory, animateToPage: false);
 
@@ -64,6 +71,37 @@ class _StoryScreenState extends State<StoryScreen>
     });
   }
 
+  void _listener() {
+    _pageNotifier.value = _pageController.page!;
+  }
+
+  void _handlePage(int page) {
+    setState(() {
+      widget.userPageIndex = page;
+      _currentIndex = 0;
+      _animController.reset();
+      _animController.forward();
+      isStoryViewed[page] = true;
+    });
+  }
+
+  void _pageTimer() {
+    _timer =
+        Timer.periodic(widget.stories[_currentIndex].duration, (Timer timer) {
+      if (_currentIndex == widget.stories.length - 1) {
+        widget.userPageIndex++;
+      } else {
+        widget.userPageIndex;
+      }
+
+      _pageController.animateToPage(
+        widget.userPageIndex,
+        duration: Duration(milliseconds: 250),
+        curve: Curves.easeIn,
+      );
+    });
+  }
+
   @override
   void dispose() {
     _pageController.dispose();
@@ -72,21 +110,15 @@ class _StoryScreenState extends State<StoryScreen>
     _animController.dispose();
     _videoController?.dispose();
     _pageNotifier.dispose();
+    _timer?.cancel();
     super.dispose();
-  }
-
-  double pI = 3.141592653589793238;
-
-  double degToRad(double degree) {
-    return degree * pI / 180;
-  }
-
-  void _listener() {
-    _pageNotifier.value = _pageController.page!;
   }
 
   @override
   Widget build(BuildContext context) {
+    final User user = users[widget.userPageIndex];
+
+    final Story story = user.stories[_currentIndex];
     return Scaffold(
         backgroundColor: Colors.black,
         body: ValueListenableBuilder(
@@ -96,17 +128,17 @@ class _StoryScreenState extends State<StoryScreen>
                   controller: _pageController,
                   physics: ClampingScrollPhysics(),
                   itemCount: users.length,
+                  onPageChanged: _handlePage,
                   itemBuilder: ((context, index) {
                     final isLeaving = (index - value) <= 0;
                     final t = (index - value);
                     final rotationY = lerpDouble(0, 90, t);
-                    final opacity = lerpDouble(0, 1, t.abs())!.clamp(0.0, 1.0);
+                    //final opacity = lerpDouble(0, 1, t.abs())!.clamp(0.0, 1.0);
                     final transform = Matrix4.identity();
+
                     transform.setEntry(3, 2, 0.003);
                     transform.rotateY(double.parse('${-degToRad(rotationY!)}'));
 
-                    final User user = users[widget.userPageIndex];
-                    final Story story = user.stories[_currentIndex];
                     return GestureDetector(
                         onTapDown: (details) => _onTapDown(details, story),
                         child: Transform(
@@ -121,7 +153,7 @@ class _StoryScreenState extends State<StoryScreen>
                                 physics: NeverScrollableScrollPhysics(),
                                 itemCount: user.stories.length,
                                 itemBuilder: (context, index) {
-                                  final Story story = widget.stories[index];
+                                  final Story story = user.stories[index];
                                   switch (story.media) {
                                     case MediaType.image:
                                       return StoryImage(
@@ -198,6 +230,9 @@ class _StoryScreenState extends State<StoryScreen>
         if (_currentIndex - 1 >= 0) {
           _currentIndex -= 1;
           _loadStory(story: widget.stories[_currentIndex]);
+        } else {
+          _pageController.animateToPage(widget.userPageIndex - 1,
+              duration: Duration(milliseconds: 250), curve: Curves.easeIn);
         }
       });
     } else if (dx > 2 * screenWidth / 3) {
@@ -208,7 +243,15 @@ class _StoryScreenState extends State<StoryScreen>
         } else {
           // _currentIndex = 0;
           // _loadStory(story: widget.stories[_currentIndex]);
-          Navigator.of(context).pop();
+
+          _pageController.animateToPage(widget.userPageIndex + 1,
+              duration: Duration(milliseconds: 250), curve: Curves.easeIn);
+
+          if (widget.userPageIndex + 1 == users.length) {
+            if (_currentIndex + 1 == widget.stories.length) {
+              Navigator.of(context).pop();
+            }
+          }
         }
       });
     } else {
@@ -227,24 +270,29 @@ class _StoryScreenState extends State<StoryScreen>
   void _loadStory({required Story story, bool animateToPage = true}) {
     _animController.stop();
     _animController.reset();
-    switch (story.media) {
-      case MediaType.image:
-        _animController.duration = story.duration;
-        _animController.forward();
-        break;
-      case MediaType.video:
-        _videoController = null;
-        _videoController?.dispose();
-        _videoController = VideoPlayerController.network(story.url)
-          ..initialize().then((_) {
-            setState(() {});
-            if (_videoController!.value.isInitialized) {
-              _animController.duration = _videoController!.value.duration;
-              _videoController?.play();
-              _animController.forward();
-            }
-          });
-        break;
+    try {
+      switch (story.media) {
+        case MediaType.image:
+          _animController.duration = story.duration;
+          _animController.forward();
+          break;
+        case MediaType.video:
+          _videoController = null;
+          _videoController?.dispose();
+          _videoController =
+              VideoPlayerController.networkUrl(Uri(path: story.url))
+                ..initialize().then((_) {
+                  setState(() {});
+                  if (_videoController!.value.isInitialized) {
+                    _animController.duration = _videoController!.value.duration;
+                    _videoController?.play();
+                    _animController.forward();
+                  }
+                });
+          break;
+      }
+    } catch (e) {
+      print(e);
     }
     if (animateToPage) {
       _childPageController.animateToPage(
@@ -330,11 +378,14 @@ class UserInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: <Widget>[
-        CircleAvatar(
-          radius: 20.0,
-          backgroundColor: Colors.grey[300],
-          backgroundImage: NetworkImage(
-            user.profileImageUrl,
+        Hero(
+          tag: user.name,
+          child: CircleAvatar(
+            radius: 20.0,
+            backgroundColor: Colors.grey[300],
+            backgroundImage: NetworkImage(
+              user.profileImageUrl,
+            ),
           ),
         ),
         const SizedBox(width: 10.0),
@@ -359,4 +410,10 @@ class UserInfo extends StatelessWidget {
       ],
     );
   }
+}
+
+double pI = 3.141592653589793238;
+
+double degToRad(double degree) {
+  return degree * pI / 180;
 }

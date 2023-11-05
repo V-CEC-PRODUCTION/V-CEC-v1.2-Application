@@ -62,7 +62,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           useMaterial3: true,
         ),
-        home: OtpVerificationScreen(email: ''),
+        home: HomeScreen(),
       ),
     );
   }
