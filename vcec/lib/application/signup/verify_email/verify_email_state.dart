@@ -1,17 +1,19 @@
 part of 'verify_email_cubit.dart';
 
 @freezed
-class VerifyEmailState with _$VerifyEmailState {
-  const factory VerifyEmailState({
+class VerifyEmailAndSignUpWithGoogleState with _$VerifyEmailAndSignUpWithGoogleState {
+  const factory VerifyEmailAndSignUpWithGoogleState({
     required bool isLoading,
     required Option<Either<MainFailure, void>> isFailureOrSuccess,
+     required Option<Either<MainFailure, void>> isFailureOrSuccessForGoogle,
     required OtpModel? otpModel,
   }) = _Initial;
-  factory VerifyEmailState.initial() {
+  factory VerifyEmailAndSignUpWithGoogleState.initial() {
     return _Initial(
       isLoading: false,
       isFailureOrSuccess: none(),
       otpModel: null,
+      isFailureOrSuccessForGoogle: none()
     );
   }
 }

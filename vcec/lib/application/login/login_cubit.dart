@@ -5,8 +5,6 @@ import 'package:injectable/injectable.dart';
 import 'package:vcec/domain/auth_token_manager/auth_token_sevice.dart';
 import 'package:vcec/domain/authentication/login/login_service.dart';
 import 'package:vcec/domain/failure/main_failure.dart';
-import 'package:vcec/domain/notices/notice_model/notices_result.dart';
-
 part 'login_state.dart';
 part 'login_cubit.freezed.dart';
 

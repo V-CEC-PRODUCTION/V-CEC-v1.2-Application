@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:vcec/presentation/auth_screens/sign_up/sign_up_screen.dart';
 
 class SignUpButtonWidget extends StatelessWidget {
   const SignUpButtonWidget({

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:injectable/injectable.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vcec/application/departments/rsearch/department_search_cubit.dart';
 import 'package:vcec/application/gallery/gallery_cubit.dart';
 import 'package:vcec/application/gallery/gallery_individual_cubit.dart';
@@ -12,12 +11,10 @@ import 'package:vcec/application/main_menu/highlights/highlights_cubit.dart';
 import 'package:vcec/application/main_menu/timetable/timetable_cubit.dart';
 import 'package:vcec/application/notices/notices_cubit_cubit.dart';
 import 'package:vcec/application/signup/create_new_account/create_new_account_cubit.dart';
-import 'package:vcec/application/signup/signup_with_google/signup_with_google_cubit.dart';
 import 'package:vcec/application/signup/verify_email/verify_email_cubit.dart';
 import 'package:vcec/application/splash_screen/splash_screen_cubit.dart';
 import 'package:vcec/core/di/injectable.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:vcec/presentation/auth_screens/account_details/account_details_screen.dart';
 import 'package:vcec/presentation/auth_screens/login/login_screen.dart';
 import 'package:vcec/presentation/auth_screens/sign_up/sign_up_screen.dart';
 import 'package:vcec/presentation/home/home.dart';
@@ -65,8 +62,8 @@ class MyApp extends StatelessWidget {
         BlocProvider<SplashScreenCubit>(
           create: (context) => getIt<SplashScreenCubit>(),
         ),
-        BlocProvider<VerifyEmailCubit>(
-          create: (context) => getIt<VerifyEmailCubit>(),
+        BlocProvider<VerifyEmailAndSignUpWithGoogleCubit>(
+          create: (context) => getIt<VerifyEmailAndSignUpWithGoogleCubit>(),
         ),
         BlocProvider<CreateNewAccountCubit>(
           create: (context) => getIt<CreateNewAccountCubit>(),
@@ -74,9 +71,7 @@ class MyApp extends StatelessWidget {
         BlocProvider<LoginCubit>(
           create: (context) => getIt<LoginCubit>(),
         ),
-        BlocProvider<SignupWithGoogleCubit>(
-          create: (context) => getIt<SignupWithGoogleCubit>(),
-        ),
+       
       ],
       child: ScreenUtilInit(
           designSize: const Size(480, 1019),

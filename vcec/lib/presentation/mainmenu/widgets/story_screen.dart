@@ -100,7 +100,7 @@ class _StoryScreenState extends State<StoryScreen>
                     final isLeaving = (index - value) <= 0;
                     final t = (index - value);
                     final rotationY = lerpDouble(0, 90, t);
-                    final opacity = lerpDouble(0, 1, t.abs())!.clamp(0.0, 1.0);
+                   // final opacity = lerpDouble(0, 1, t.abs())!.clamp(0.0, 1.0);
                     final transform = Matrix4.identity();
                     transform.setEntry(3, 2, 0.003);
                     transform.rotateY(double.parse('${-degToRad(rotationY!)}'));

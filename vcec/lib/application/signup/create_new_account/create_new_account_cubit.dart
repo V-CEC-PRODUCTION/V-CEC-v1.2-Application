@@ -14,42 +14,45 @@ part 'create_new_account_cubit.freezed.dart';
 class CreateNewAccountCubit extends Cubit<CreateNewAccountState> {
   final SignupService _signupService;
   final AuthTokenService _authTokenService;
-  CreateNewAccountCubit(this._signupService,this._authTokenService)
+  CreateNewAccountCubit(this._signupService, this._authTokenService)
       : super(CreateNewAccountState.initial());
-  createNewAccount({
-    required String email,
-    required String password,
-    required UserDetailsModel userDetailsModel,
-  }) async {
-    emit(state.copyWith(
-      isLoading: true,
-    ));
-    final response = await _signupService.signUp(
-      email: email,
-      password: password,
-    );
-    await response.fold((l) {
+  createNewAccount(
+      {required String email,
+      required String password,
+      required UserDetailsModel userDetailsModel,
+      }) async {
+   
       emit(state.copyWith(
-        isLoading: false,
-        isFailureOrSuccess: some(left(l)),
+        isLoading: true,
       ));
-    }, (r) async {
-      final postUserDetailsResponse = await _signupService.postUserDetails(
-        userDetailsModel: userDetailsModel,
+      final response = await _signupService.signUp(
+        email: email,
+        password: password,
       );
-      postUserDetailsResponse.fold((l) {
+      await response.fold((l) {
         emit(state.copyWith(
           isLoading: false,
           isFailureOrSuccess: some(left(l)),
         ));
-      }, (r) {
-        _authTokenService.deleteToken();
-        _authTokenService.saveToken();
-        emit(state.copyWith(
-          isLoading: false,
-          isFailureOrSuccess: some(right(null)),
-        ));
+      }, (r) async {
+        final postUserDetailsResponse = await _signupService.postUserDetails(
+          userDetailsModel: userDetailsModel,
+        );
+        postUserDetailsResponse.fold((l) {
+          emit(state.copyWith(
+            isLoading: false,
+            isFailureOrSuccess: some(left(l)),
+          ));
+        }, (r) {
+          _authTokenService.deleteToken();
+          _authTokenService.saveToken();
+          emit(state.copyWith(
+            isLoading: false,
+            isFailureOrSuccess: some(right(null)),
+          ));
+        });
       });
-    });
+     
+    }
   }
-}
+

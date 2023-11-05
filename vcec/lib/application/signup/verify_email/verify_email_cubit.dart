@@ -10,9 +10,11 @@ part 'verify_email_state.dart';
 part 'verify_email_cubit.freezed.dart';
 
 @injectable
-class VerifyEmailCubit extends Cubit<VerifyEmailState> {
+class VerifyEmailAndSignUpWithGoogleCubit
+    extends Cubit<VerifyEmailAndSignUpWithGoogleState> {
   final SignupService _signupService;
-  VerifyEmailCubit(this._signupService) : super(VerifyEmailState.initial());
+  VerifyEmailAndSignUpWithGoogleCubit(this._signupService)
+      : super(VerifyEmailAndSignUpWithGoogleState.initial());
   verifyEmail({required String email}) async {
     emit(state.copyWith(
       isLoading: true,
@@ -31,5 +33,35 @@ class VerifyEmailCubit extends Cubit<VerifyEmailState> {
         otpModel: r,
       ));
     });
+  }
+
+  signInWithGoogle() async {
+    emit(state.copyWith(isFailureOrSuccessForGoogle: none(), isLoading: true));
+    final response = await _signupService.signUpWithGoogle();
+    response.fold(
+        (l) => emit(state.copyWith(
+            isFailureOrSuccessForGoogle: none(), isLoading: false)), (r) async {
+      final emailExistResponse =
+          await _signupService.signUpWithGooglePost(email: r.email!);
+      emailExistResponse.fold(
+          (l) => {
+                emit(state.copyWith(
+                    isFailureOrSuccessForGoogle: some(left(l)),
+                    isLoading: false)),
+                    if(l == const MainFailure.incorrectCredential())
+                    {
+                        _signupService.signOut()
+                    }
+              },
+          (r) => {
+                emit(state.copyWith(
+                    isFailureOrSuccessForGoogle: some(right(r)),
+                    isLoading: false))
+              });
+    });
+  }
+
+  signOut() async {
+    await _signupService.signOut();
   }
 }
