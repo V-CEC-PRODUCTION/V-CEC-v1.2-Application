@@ -68,8 +68,8 @@ class MyApp extends StatelessWidget {
         BlocProvider<CreateNewAccountCubit>(
           create: (context) => getIt<CreateNewAccountCubit>(),
         ),
-        BlocProvider<LoginCubit>(
-          create: (context) => getIt<LoginCubit>(),
+        BlocProvider<LoginWithEmailAndGoogleCubit>(
+          create: (context) => getIt<LoginWithEmailAndGoogleCubit>(),
         ),
        
       ],

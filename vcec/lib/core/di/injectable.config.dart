@@ -113,10 +113,12 @@ extension GetItInjectableX on _i1.GetIt {
         () => _i33.GalleryIndividualCubit(gh<_i10.GalleryPressedService>()));
     gh.factory<_i34.HighlightsCubit>(
         () => _i34.HighlightsCubit(gh<_i15.HighlightsService>()));
-    gh.factory<_i35.LoginCubit>(() => _i35.LoginCubit(
-          gh<_i17.LoginService>(),
-          gh<_i3.AuthTokenService>(),
-        ));
+    gh.factory<_i35.LoginWithEmailAndGoogleCubit>(
+        () => _i35.LoginWithEmailAndGoogleCubit(
+              gh<_i17.LoginService>(),
+              gh<_i3.AuthTokenService>(),
+              gh<_i21.SignupService>(),
+            ));
     gh.factory<_i36.NoticesCubit>(
         () => _i36.NoticesCubit(gh<_i19.NoticesService>()));
     gh.factory<_i37.SplashScreenCubit>(() => _i37.SplashScreenCubit(

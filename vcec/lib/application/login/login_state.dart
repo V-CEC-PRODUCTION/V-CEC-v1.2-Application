@@ -1,16 +1,19 @@
 part of 'login_cubit.dart';
 
 @freezed
-class LoginState with _$LoginState {
-  const factory LoginState({
+class LoginWithEmailAndGoogleState with _$LoginWithEmailAndGoogleState {
+  const factory LoginWithEmailAndGoogleState({
     required bool isLoading,
     required Option<Either<MainFailure, void>>
        isFailureOrSuccess,
+        required Option<Either<MainFailure, void>>
+       isFailureOrSuccessForGoogle,
   }) = _Initial;
-  factory LoginState.initial() {
+  factory LoginWithEmailAndGoogleState.initial() {
     return _Initial(
       isLoading: false,
-      isFailureOrSuccess: none()
+      isFailureOrSuccess: none(),
+      isFailureOrSuccessForGoogle: none()
     );
   }
 }

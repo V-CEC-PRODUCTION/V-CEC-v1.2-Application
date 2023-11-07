@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:vcec/core/colors.dart';
 import 'package:vcec/core/constants.dart';
+
 import 'package:vcec/presentation/auth_screens/login/widgets/forgot_password_button.dart';
 import 'package:vcec/presentation/auth_screens/login/widgets/login_image.dart';
 import 'package:vcec/presentation/auth_screens/login/widgets/password_textfield.dart';
@@ -36,18 +38,42 @@ class _LoginPageState extends State<LoginPage> {
     final size1 = MediaQuery.of(context).size.width;
 
     return Scaffold(
-        body: BlocConsumer<LoginCubit, LoginState>(listener: (context, state) {
+        body: BlocConsumer<LoginWithEmailAndGoogleCubit,
+            LoginWithEmailAndGoogleState>(listener: (context, state) {
       state.isFailureOrSuccess.fold(
         () {},
         (either) => either.fold(
           (failure) {
             if (!state.isLoading) {
-              if (failure == MainFailure.serverFailure()) {
+              if (failure ==const MainFailure.serverFailure()) {
                 displaySnackBar(context: context, text: "Server is down");
-              } else if (failure == MainFailure.authFailure()) {
+              } else if (failure ==const MainFailure.authFailure()) {
                 displaySnackBar(
                     context: context, text: "Please check the email address");
-              } else if (failure == MainFailure.incorrectCredential()) {
+              } else if (failure ==const MainFailure.incorrectCredential()) {
+                displaySnackBar(context: context, text: "Incorrect Password");
+              } else {
+                displaySnackBar(context: context, text: "Somthing went wrong");
+              }
+            }
+          },
+          (r) {
+            Navigator.of(context)
+                .pushNamedAndRemoveUntil('/home', (route) => false);
+          },
+        ),
+      );
+       state.isFailureOrSuccessForGoogle.fold(
+        () {},
+        (either) => either.fold(
+          (failure) {
+            if (!state.isLoading) {
+              if (failure ==const MainFailure.serverFailure()) {
+                displaySnackBar(context: context, text: "Server is down");
+              } else if (failure ==const MainFailure.authFailure()) {
+                displaySnackBar(
+                    context: context, text: "Please check the email address");
+              } else if (failure ==const MainFailure.incorrectCredential()) {
                 displaySnackBar(context: context, text: "Incorrect Password");
               } else {
                 displaySnackBar(context: context, text: "Somthing went wrong");
@@ -96,7 +122,7 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         PasswordTextFieldWidget(
                             obtext: obtext, controller1: passwordController),
-                        ForgotPasswordWidget(),
+                      const  ForgotPasswordWidget(),
                         SizedBox(
                             width: size1 * 0.85,
                             height: size1 * 0.11,
@@ -107,7 +133,8 @@ class _LoginPageState extends State<LoginPage> {
                               borderRadius: 4,
                               elevation: 5,
                               onclick: () {
-                                BlocProvider.of<LoginCubit>(context)
+                                BlocProvider.of<LoginWithEmailAndGoogleCubit>(
+                                        context)
                                     .loginWithEmailAndPass(emaiController.text,
                                         passwordController.text);
                               },
@@ -116,14 +143,19 @@ class _LoginPageState extends State<LoginPage> {
                         const OrWidget(),
                         kheight15,
                         LoginWithGoogleWidget(
-                            onClick: () {}, title: 'Login with Google'),
+                            onClick: () {
+                              BlocProvider.of<LoginWithEmailAndGoogleCubit>(
+                                      context)
+                                  .loginWithGoogle();
+                            },
+                            title: 'Login with Google'),
                         kheight15,
                         SignUpButtonWidget(
                             title: 'New to V CEC ?',
                             buttonTitle: 'Sign Up',
                             onTap: () {
                               Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => SignUpScreen()));
+                                  builder: (context) =>const SignUpScreen()));
                             }),
                       ],
                     ),
