@@ -14,7 +14,10 @@ import 'package:vcec/domain/failure/main_failure.dart';
 import 'package:vcec/strings/strings.dart';
 
 @LazySingleton(as: SignupService)
-class SignupRepo extends SignupService {
+class SignupRepo implements SignupService {
+  final GoogleSignIn googleSignIn;
+  final FirebaseAuth firebaseAuth;
+  SignupRepo(this.firebaseAuth, this.googleSignIn);
   @override
   Future<Either<MainFailure, OtpModel>> verifyEmail(
       {required String email}) async {
@@ -72,7 +75,7 @@ class SignupRepo extends SignupService {
         return const Left(MainFailure.otherFailure());
       }
     }
-  } 
+  }
 
   @override
   Future<Either<MainFailure, void>> postUserDetails(
@@ -116,27 +119,69 @@ class SignupRepo extends SignupService {
   }
 
   @override
-  Future<Either<MainFailure, void>> signUpWithGoogle() async {
+  Future<Either<MainFailure, User>> signUpWithGoogle() async {
     try {
-      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-      final GoogleSignInAuthentication? googleAuth =
-          await googleUser?.authentication;
-    } catch (e) {
-      print("BLAA$e");
-    }
+      final googleuser = await googleSignIn.signIn();
 
-    return const Right(null);
+      final googleAuthentification = await googleuser!.authentication;
+      final authcredential = GoogleAuthProvider.credential(
+          idToken: googleAuthentification.idToken,
+          accessToken: googleAuthentification.accessToken);
+      final user = firebaseAuth
+          .signInWithCredential(authcredential)
+          .then((value) => value.user);
+      final email1 = await user.then((value) => value!.email);
+      AuthTokenManager.instance.setEmail(email1!);
+      final googleEmail = AuthTokenManager.instance.email;
+      final end = googleEmail!.substring((googleEmail.length) - 13);
+      if (end == "ceconline.edu") {
+        AuthTokenManager.instance.setUserRole(UserRole.student);
+      } else {
+        AuthTokenManager.instance.setUserRole(UserRole.guest);
+      }
+      return firebaseAuth
+          .signInWithCredential(authcredential)
+          .then((r) => Right(r.user!));
+    } on FirebaseAuthException catch (_) {
+      return left(const MainFailure.serverFailure());
+    }
   }
 
   @override
   Future<Either<MainFailure, void>> signUpWithGooglePost(
-      {required String email}) {
-    throw UnimplementedError();
+      {required String email}) async {
+    try {
+      final Response response = await Dio(BaseOptions(headers: {
+        "Content-Type": "application/json",
+      })).post(
+        "${baseUrl}users/auth/check/email/exist/",
+        data: {"email": email, "login_type": 'google'},
+      );
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        return const Right(null);
+      } else {
+        return const Left(MainFailure.serverFailure());
+      }
+    } catch (e) {
+      if (e is DioException && e.response?.statusCode == 500) {
+        return const Left(MainFailure.serverFailure());
+      } else if (e is DioException && e.response?.statusCode == 409) {
+        return const Left(MainFailure.incorrectCredential());
+      } else if (e is DioException && e.response?.statusCode == 404) {
+        return const Right(null);
+      } else {
+        return const Left(MainFailure.otherFailure());
+      }
+    }
   }
 
   @override
   Future signupEmailCheck({required UserDetailsModel userDetailsModel}) {
-    // TODO: implement signupEmailCheck
     throw UnimplementedError();
+  }
+
+  @override
+  Future<void> signOut() {
+    return Future.wait([googleSignIn.signOut(), firebaseAuth.signOut()]);
   }
 }

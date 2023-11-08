@@ -91,7 +91,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                 borderRadius: 8,
                 elevation: 6,
                 onclick: () {
-                  final otp = BlocProvider.of<VerifyEmailCubit>(context)
+                  final otp = BlocProvider.of<VerifyEmailAndSignUpWithGoogleCubit>(context)
                       .state
                       .otpModel!
                       .otp;

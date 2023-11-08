@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vcec/application/splash_screen/splash_screen_cubit.dart';
-import 'package:vcec/presentation/auth_screens/login/login_screen.dart';
-import 'package:vcec/presentation/home/home.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});

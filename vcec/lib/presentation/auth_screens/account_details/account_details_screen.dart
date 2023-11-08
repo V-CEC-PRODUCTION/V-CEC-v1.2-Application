@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:vcec/application/signup/create_new_account/create_new_account_cubit.dart';
+import 'package:vcec/application/signup/verify_email/verify_email_cubit.dart';
 import 'package:vcec/core/constants.dart';
 import 'package:vcec/domain/auth_token_manager/auth_token_manager.dart';
 import 'package:vcec/domain/authentication/signup/user_details_enum/user_details.dart';
@@ -92,6 +93,7 @@ class _AccountDetailsScreenState extends State<AccountDetailsScreen> {
   ValueNotifier<bool> isTermsChecked = ValueNotifier<bool>(false);
   @override
   initState() {
+    BlocProvider.of<VerifyEmailAndSignUpWithGoogleCubit>(context).signOut();
     branchDropDownWidget = AccountDropDownWidget(
       title: "* Branch",
       dropdownItems: branchdropdownItems,
@@ -240,17 +242,19 @@ class _AccountDetailsScreenState extends State<AccountDetailsScreen> {
                       final UserDetailsModel userDetailsModel;
                       if (AuthTokenManager.instance.userRole ==
                           UserRole.guest) {
+                        
                         if (nameController.text.length < 3) {
                           return;
                         }
                         userDetailsModel =
                             UserDetailsModel(fullName: nameController.text);
                       } else {
+                         
+                        final branch = branchDropDownWidget.getSelectedValue();
                         final sem = semesterDropDownWidget.getSelectedValue();
                         final batch = batchDropDownWidget.getSelectedValue();
                         final gender = genderDropDownWidget.getSelectedValue();
                         if (nameController.text.length < 3 ||
-                            branchController.text.length < 3 ||
                             adNumController.text.length < 3 ||
                             sem.isEmpty ||
                             batch.isEmpty ||
@@ -259,7 +263,7 @@ class _AccountDetailsScreenState extends State<AccountDetailsScreen> {
                         }
                         userDetailsModel = UserDetailsModel(
                           fullName: nameController.text,
-                          branch: branchController.text,
+                          branch: branch,
                           semester: sem,
                           batch: batch,
                           gender: gender,

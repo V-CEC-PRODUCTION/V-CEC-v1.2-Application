@@ -6,6 +6,7 @@ import 'package:vcec/application/signup/verify_email/verify_email_cubit.dart';
 import 'package:vcec/core/colors.dart';
 import 'package:vcec/core/constants.dart';
 import 'package:vcec/domain/failure/main_failure.dart';
+import 'package:vcec/presentation/auth_screens/account_details/account_details_screen.dart';
 import 'package:vcec/presentation/auth_screens/login/widgets/signup_button.dart';
 import 'package:vcec/presentation/auth_screens/sign_up/widget/signup_image.dart';
 import 'package:vcec/presentation/auth_screens/widgets/auth_button_widget.dart';
@@ -29,8 +30,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: BlocConsumer<VerifyEmailCubit, VerifyEmailState>(
-            listener: (context, state) {
+        body: BlocConsumer<VerifyEmailAndSignUpWithGoogleCubit,
+            VerifyEmailAndSignUpWithGoogleState>(listener: (context, state) {
       state.isFailureOrSuccess.fold(
         () {},
         (either) => either.fold(
@@ -38,7 +39,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
             if (!state.isLoading) {
               if (failure == const MainFailure.serverFailure()) {
                 displaySnackBar(context: context, text: "Server is down");
-              } else {
+              } 
+              else {
                 displaySnackBar(context: context, text: "Something went wrong");
               }
             }
@@ -47,6 +49,28 @@ class _SignUpScreenState extends State<SignUpScreen> {
             Navigator.of(context).pushNamed(
               '/otp_verification',
             );
+          },
+        ),
+      );
+      state.isFailureOrSuccessForGoogle.fold(
+        () {},
+        (either) => either.fold(
+          (failure) {
+            if (!state.isLoading) {
+              if (failure == const MainFailure.serverFailure()) {
+                displaySnackBar(context: context, text: "Server is down");
+              } 
+                            else if(failure == const MainFailure.incorrectCredential()){
+                 displaySnackBar(context: context, text: "Account already exists");
+              }else {
+                displaySnackBar(context: context, text: "Something went wrong");
+              }
+            }
+          },
+          (r) {
+            Navigator.of(context).pushReplacement(MaterialPageRoute(
+              builder: (context) => AccountDetailsScreen(password: '',),
+            ));
           },
         ),
       );
@@ -94,7 +118,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   elevation: 5,
                   borderRadius: 8,
                   onclick: () {
-                    BlocProvider.of<VerifyEmailCubit>(context)
+                    BlocProvider.of<VerifyEmailAndSignUpWithGoogleCubit>(
+                            context)
                         .verifyEmail(email: emailController.text);
                   },
                 ),
@@ -106,7 +131,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 padding: EdgeInsets.symmetric(horizontal: 34.w),
                 child: LoginWithGoogleWidget(
                   title: "Sign up with Google",
-                  onClick: () {},
+                  onClick: () {
+                    BlocProvider.of<VerifyEmailAndSignUpWithGoogleCubit>(
+                            context)
+                        .signInWithGoogle();
+                  },
                 ),
               ),
               kheight10,

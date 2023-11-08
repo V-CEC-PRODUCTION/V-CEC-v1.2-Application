@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:vcec/core/colors.dart';
-import 'package:vcec/core/constants.dart';
 import 'package:vcec/presentation/auth_screens/otp_verification/otp_verification_screen.dart';
 import 'package:vcec/presentation/auth_screens/widgets/auth_button_widget.dart';
 import 'package:vcec/presentation/auth_screens/widgets/auth_title_with_back.dart';
