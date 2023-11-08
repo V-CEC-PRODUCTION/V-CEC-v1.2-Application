@@ -53,8 +53,12 @@ class _LoginPageState extends State<LoginPage> {
                     context: context, text: "Please check the email address");
               } else if (failure ==const MainFailure.incorrectCredential()) {
                 displaySnackBar(context: context, text: "Incorrect Password");
+              } else if (failure == const MainFailure.clientFailure()) {
+                displaySnackBar(
+                    context: context,
+                    text: "Something wrong with your network");
               } else {
-                displaySnackBar(context: context, text: "Somthing went wrong");
+                displaySnackBar(context: context, text: "Something Unexpected Happened");
               }
             }
           },
@@ -76,8 +80,12 @@ class _LoginPageState extends State<LoginPage> {
                     context: context, text: "Please check the email address");
               } else if (failure ==const MainFailure.incorrectCredential()) {
                 displaySnackBar(context: context, text: "Incorrect Password");
+              } else if (failure == const MainFailure.clientFailure()) {
+                displaySnackBar(
+                    context: context,
+                    text: "Something wrong with your network");
               } else {
-                displaySnackBar(context: context, text: "Somthing went wrong");
+                displaySnackBar(context: context, text: "Something Unexpected Happened");
               }
             }
           },

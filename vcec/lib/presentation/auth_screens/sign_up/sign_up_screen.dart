@@ -39,9 +39,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
             if (!state.isLoading) {
               if (failure == const MainFailure.serverFailure()) {
                 displaySnackBar(context: context, text: "Server is down");
-              } 
-              else {
-                displaySnackBar(context: context, text: "Something went wrong");
+              } else if (failure == const MainFailure.clientFailure()) {
+                displaySnackBar(
+                    context: context,
+                    text: "Something wrong with your network");
+              } else if (failure == const MainFailure.authFailure()) {
+                displaySnackBar(context: context, text: 'Account already exists');
+              } else {
+                displaySnackBar(
+                    context: context, text: "Something Unexpected Happened");
               }
             }
           },
@@ -59,17 +65,24 @@ class _SignUpScreenState extends State<SignUpScreen> {
             if (!state.isLoading) {
               if (failure == const MainFailure.serverFailure()) {
                 displaySnackBar(context: context, text: "Server is down");
-              } 
-                            else if(failure == const MainFailure.incorrectCredential()){
-                 displaySnackBar(context: context, text: "Account already exists");
-              }else {
-                displaySnackBar(context: context, text: "Something went wrong");
+              } else if (failure == const MainFailure.incorrectCredential()) {
+                displaySnackBar(
+                    context: context, text: "Account already exists");
+              } else if (failure == const MainFailure.clientFailure()) {
+                displaySnackBar(
+                    context: context,
+                    text: "Something wrong with your network");
+              } else {
+                displaySnackBar(
+                    context: context, text: "Something Unexpected Happened");
               }
             }
           },
           (r) {
             Navigator.of(context).pushReplacement(MaterialPageRoute(
-              builder: (context) => AccountDetailsScreen(password: '',),
+              builder: (context) => AccountDetailsScreen(
+                password: '',
+              ),
             ));
           },
         ),

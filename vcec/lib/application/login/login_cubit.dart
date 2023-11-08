@@ -40,7 +40,10 @@ class LoginWithEmailAndGoogleCubit extends Cubit<LoginWithEmailAndGoogleState> {
   loginWithGoogle() async {
     emit(state.copyWith(isFailureOrSuccessForGoogle: none(), isLoading: true));
     final response = await _signupService.signUpWithGoogle();
-    response.fold((l) {}, (r) async {
+    response.fold((l) {
+       emit(state.copyWith(
+            isFailureOrSuccessForGoogle: some(left(l)), isLoading: false));
+    }, (r) async {
       final finalResponse = await _loginService.loginWithGoogle(r.email!);
       finalResponse.fold((l) {
         _signupService.signOut();

@@ -41,6 +41,8 @@ class SignupRepo implements SignupService {
         return const Left(MainFailure.serverFailure());
       } else if (e is SocketException) {
         return const Left(MainFailure.clientFailure());
+      } else if (e is DioException && e.response?.statusCode == 409) {
+        return const Left( MainFailure.authFailure());
       } else {
         return const Left(MainFailure.otherFailure());
       }
@@ -171,6 +173,8 @@ class SignupRepo implements SignupService {
         return const Left(MainFailure.incorrectCredential());
       } else if (e is DioException && e.response?.statusCode == 404) {
         return const Right(null);
+      } else if (e is SocketException) {
+        return const Left(MainFailure.clientFailure());
       } else {
         return const Left(MainFailure.otherFailure());
       }
@@ -204,7 +208,7 @@ class SignupRepo implements SignupService {
         return const Left(MainFailure.serverFailure());
       } else if (e is SocketException) {
         return const Left(MainFailure.clientFailure());
-      }else {
+      } else {
         return const Left(MainFailure.otherFailure());
       }
     }
