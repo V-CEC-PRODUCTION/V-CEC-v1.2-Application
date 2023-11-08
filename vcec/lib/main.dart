@@ -6,6 +6,7 @@ import 'package:vcec/application/departments/rsearch/department_search_cubit.dar
 import 'package:vcec/application/gallery/gallery_cubit.dart';
 import 'package:vcec/application/gallery/gallery_individual_cubit.dart';
 import 'package:vcec/application/login/login_cubit.dart';
+import 'package:vcec/application/logout/log_out_cubit.dart';
 import 'package:vcec/application/main_menu/carousel/carousel_cubit.dart';
 import 'package:vcec/application/main_menu/highlights/highlights_cubit.dart';
 import 'package:vcec/application/main_menu/timetable/timetable_cubit.dart';
@@ -70,6 +71,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider<LoginWithEmailAndGoogleCubit>(
           create: (context) => getIt<LoginWithEmailAndGoogleCubit>(),
+        ),
+        BlocProvider<LogOutCubit>(
+          create: (context) => getIt<LogOutCubit>(),
         ),
        
       ],

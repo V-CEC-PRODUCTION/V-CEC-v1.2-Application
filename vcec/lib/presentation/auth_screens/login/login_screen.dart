@@ -38,6 +38,7 @@ class _LoginPageState extends State<LoginPage> {
     final size1 = MediaQuery.of(context).size.width;
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
         body: BlocConsumer<LoginWithEmailAndGoogleCubit,
             LoginWithEmailAndGoogleState>(listener: (context, state) {
       state.isFailureOrSuccess.fold(

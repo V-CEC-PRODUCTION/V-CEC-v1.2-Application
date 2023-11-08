@@ -144,6 +144,8 @@ class SignupRepo implements SignupService {
           .then((r) => Right(r.user!));
     } on FirebaseAuthException catch (_) {
       return left(const MainFailure.serverFailure());
+    } catch (e) {
+      return left(const MainFailure.otherFailure());
     }
   }
 
@@ -183,5 +185,28 @@ class SignupRepo implements SignupService {
   @override
   Future<void> signOut() {
     return Future.wait([googleSignIn.signOut(), firebaseAuth.signOut()]);
+  }
+
+  @override
+  Future<Either<MainFailure, void>> logOut() async {
+    try {
+      final manager = AuthTokenManager.instance;
+      final response = await Dio(BaseOptions(
+              headers: {"Authorization": "Bearer ${manager.accessToken}"}))
+          .post("${baseUrl}users/auth/logout/api/token/");
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        return const Right(null);
+      } else {
+        return const Left(MainFailure.serverFailure());
+      }
+    } catch (e) {
+      if (e is DioException && e.response?.statusCode == 500) {
+        return const Left(MainFailure.serverFailure());
+      } else if (e is SocketException) {
+        return const Left(MainFailure.clientFailure());
+      }else {
+        return const Left(MainFailure.otherFailure());
+      }
+    }
   }
 }

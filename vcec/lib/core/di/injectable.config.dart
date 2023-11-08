@@ -17,20 +17,21 @@ import 'package:vcec/application/departments/rsearch/department_search_cubit.dar
     as _i31;
 import 'package:vcec/application/gallery/gallery_cubit.dart' as _i32;
 import 'package:vcec/application/gallery/gallery_individual_cubit.dart' as _i33;
-import 'package:vcec/application/login/login_cubit.dart' as _i35;
+import 'package:vcec/application/login/login_cubit.dart' as _i36;
+import 'package:vcec/application/logout/log_out_cubit.dart' as _i35;
 import 'package:vcec/application/main_menu/carousel/carousel_cubit.dart'
     as _i29;
 import 'package:vcec/application/main_menu/highlights/highlights_cubit.dart'
     as _i34;
 import 'package:vcec/application/main_menu/timetable/timetable_cubit.dart'
     as _i27;
-import 'package:vcec/application/notices/notices_cubit_cubit.dart' as _i36;
+import 'package:vcec/application/notices/notices_cubit_cubit.dart' as _i37;
 import 'package:vcec/application/signup/create_new_account/create_new_account_cubit.dart'
     as _i30;
 import 'package:vcec/application/signup/verify_email/verify_email_cubit.dart'
     as _i28;
 import 'package:vcec/application/splash_screen/splash_screen_cubit.dart'
-    as _i37;
+    as _i38;
 import 'package:vcec/domain/auth_token_manager/auth_token_sevice.dart' as _i3;
 import 'package:vcec/domain/authentication/login/login_service.dart' as _i17;
 import 'package:vcec/domain/authentication/signup/signup_service.dart' as _i21;
@@ -50,7 +51,7 @@ import 'package:vcec/infrastructure/authentication/login/login_repo.dart'
 import 'package:vcec/infrastructure/authentication/signup/signup_repo.dart'
     as _i22;
 import 'package:vcec/infrastructure/core/firebase_injectable_module.dart'
-    as _i38;
+    as _i39;
 import 'package:vcec/infrastructure/departments/department_search_repo.dart'
     as _i8;
 import 'package:vcec/infrastructure/gallery/gallery_pressed_repository.dart'
@@ -113,15 +114,19 @@ extension GetItInjectableX on _i1.GetIt {
         () => _i33.GalleryIndividualCubit(gh<_i10.GalleryPressedService>()));
     gh.factory<_i34.HighlightsCubit>(
         () => _i34.HighlightsCubit(gh<_i15.HighlightsService>()));
-    gh.factory<_i35.LoginWithEmailAndGoogleCubit>(
-        () => _i35.LoginWithEmailAndGoogleCubit(
+    gh.factory<_i35.LogOutCubit>(() => _i35.LogOutCubit(
+          gh<_i21.SignupService>(),
+          gh<_i3.AuthTokenService>(),
+        ));
+    gh.factory<_i36.LoginWithEmailAndGoogleCubit>(
+        () => _i36.LoginWithEmailAndGoogleCubit(
               gh<_i17.LoginService>(),
               gh<_i3.AuthTokenService>(),
               gh<_i21.SignupService>(),
             ));
-    gh.factory<_i36.NoticesCubit>(
-        () => _i36.NoticesCubit(gh<_i19.NoticesService>()));
-    gh.factory<_i37.SplashScreenCubit>(() => _i37.SplashScreenCubit(
+    gh.factory<_i37.NoticesCubit>(
+        () => _i37.NoticesCubit(gh<_i19.NoticesService>()));
+    gh.factory<_i38.SplashScreenCubit>(() => _i38.SplashScreenCubit(
           gh<_i23.SplashScreenService>(),
           gh<_i3.AuthTokenService>(),
         ));
@@ -129,4 +134,4 @@ extension GetItInjectableX on _i1.GetIt {
   }
 }
 
-class _$FirebaseInjectableModule extends _i38.FirebaseInjectableModule {}
+class _$FirebaseInjectableModule extends _i39.FirebaseInjectableModule {}
