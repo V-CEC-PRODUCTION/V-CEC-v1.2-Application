@@ -1,74 +1,65 @@
-import 'package:flutter/cupertino.dart';
+import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:vcec/presentation/mainmenu/widgets/story_data.dart';
-import 'package:vcec/presentation/mainmenu/subpages/story_screen.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter/src/widgets/framework.dart';
+import 'package:vcec/core/constants.dart';
+import 'package:vcec/presentation/mainmenu/widgets/story_upload_widget.dart';
 
-import '../models/user_model.dart';
-
-List<bool> isStoryViewed = List.generate(users.length, (index) => false);
+import 'package:vcec/presentation/mainmenu/widgets/story_user_widget.dart';
 
 class StoryWidget extends StatefulWidget {
-  const StoryWidget({
-    Key? key,
-  }) : super(key: key);
+  const StoryWidget({super.key});
 
   @override
-  State<StoryWidget> createState() => _StoryWidgetState();
+  State<StoryWidget> createState() => _StoryPartState();
 }
 
-class _StoryWidgetState extends State<StoryWidget> {
-  ValueNotifier<int> selectedProfileIndex = ValueNotifier(users.length);
-
+class _StoryPartState extends State<StoryWidget> {
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: SizedBox(
-        height: 60,
-        child: ListView.builder(
-          physics: BouncingScrollPhysics(),
-          scrollDirection: Axis.horizontal,
-          itemCount: users.length,
-          itemBuilder: (context, index) {
-            final User user = users[index];
-            return GestureDetector(
-              onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => StoryScreen(
-                    stories: user.stories,
-                    userPageIndex: index,
-                  ),
-                ));
-
-                selectedProfileIndex.value = index;
-                isStoryViewed[index] = true;
-              },
-              child: Hero(
-                tag: user.name,
-                child: ValueListenableBuilder<int>(
-                  valueListenable: selectedProfileIndex,
-                  builder: (context, value, child) {
-                    Color borderColor = index == value || isStoryViewed[index]
-                        ? Colors.transparent
-                        : Colors.pink;
-
-                    return Container(
-                      width: 65,
-                      decoration: BoxDecoration(
-                        border: Border.all(color: borderColor, width: 2),
-                        image: DecorationImage(
-                          image: NetworkImage(user.profileImageUrl),
-                          fit: BoxFit.cover,
-                        ),
-                        shape: BoxShape.circle,
-                      ),
-                    );
-                  },
+    return Row(
+      children: [
+        kwidth10,
+        GestureDetector(
+          onTap: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => StoryUploadWidget()));
+          },
+          child: Stack(
+            children: [
+              Container(
+                width: 60,
+                height: 60,
+                child: Center(child: Text('Image')),
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.pink, width: 2),
+                  shape: BoxShape.circle,
                 ),
               ),
-            );
-          },
+              Positioned(
+                top: 35,
+                bottom: 0,
+                left: 40,
+                right: 3,
+                child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.pink,
+                      shape: BoxShape.circle,
+                    ),
+                    child: Center(
+                      child: Icon(
+                        size: 15,
+                        Icons.add,
+                        color: Colors.white,
+                      ),
+                    )),
+              ),
+            ],
+          ),
         ),
-      ),
+        kwidth10,
+        StoryUserWidget()
+      ],
     );
   }
 }

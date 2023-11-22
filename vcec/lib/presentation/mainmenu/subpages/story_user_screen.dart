@@ -7,18 +7,18 @@ import 'package:flutter/material.dart';
 import 'package:story/story_image.dart';
 import 'package:vcec/presentation/mainmenu/models/story_model.dart';
 import 'package:vcec/presentation/mainmenu/widgets/story_data.dart';
-import 'package:vcec/presentation/mainmenu/widgets/story_part.dart';
 import 'package:vcec/presentation/mainmenu/widgets/story_widget.dart';
+import 'package:vcec/presentation/mainmenu/widgets/story_user_widget.dart';
 
 import 'package:video_player/video_player.dart';
 
 import '../models/user_model.dart';
 
-class StoryScreen extends StatefulWidget {
+class StoryUserScreen extends StatefulWidget {
   final List<Story> stories;
   int userPageIndex;
 
-  StoryScreen({
+  StoryUserScreen({
     Key? key,
     required this.stories,
     required this.userPageIndex,
@@ -28,14 +28,13 @@ class StoryScreen extends StatefulWidget {
   _StoryScreenState createState() => _StoryScreenState();
 }
 
-class _StoryScreenState extends State<StoryScreen>
+class _StoryScreenState extends State<StoryUserScreen>
     with SingleTickerProviderStateMixin {
   late PageController _childPageController;
   late PageController _pageController;
   late AnimationController _animController;
   VideoPlayerController? _videoController;
   int _currentIndex = 0;
-
   final _pageNotifier = ValueNotifier(0.0);
   Timer? _timer;
 
@@ -117,7 +116,6 @@ class _StoryScreenState extends State<StoryScreen>
   @override
   Widget build(BuildContext context) {
     final User user = users[widget.userPageIndex];
-
     final Story story = user.stories[_currentIndex];
     return Scaffold(
         backgroundColor: Colors.black,
@@ -413,7 +411,6 @@ class UserInfo extends StatelessWidget {
 }
 
 double pI = 3.141592653589793238;
-
 double degToRad(double degree) {
   return degree * pI / 180;
 }

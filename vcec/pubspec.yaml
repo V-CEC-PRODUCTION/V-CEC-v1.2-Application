@@ -47,7 +47,7 @@ dependencies:
   flutter_wall_layout: ^2.1.1
   freezed_annotation: ^2.2.0
   get_it: ^7.6.0
-  image: ^4.0.17
+  image: ^3.3.0
   image_picker: ^1.0.4
   injectable: ^2.1.1
   intl: ^0.18.1
@@ -57,6 +57,9 @@ dependencies:
   story: ^1.0.0+1
   url_launcher: null
   video_player: ^2.8.1
+  stories_editor: ^0.2.2
+  share_plus: ^7.2.1
+ 
  
 
 dev_dependencies:
