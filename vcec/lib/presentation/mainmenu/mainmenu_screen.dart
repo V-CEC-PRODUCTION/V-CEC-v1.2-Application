@@ -10,7 +10,7 @@ import 'package:vcec/presentation/mainmenu/widgets/carousel.dart';
 import 'package:vcec/presentation/mainmenu/widgets/cec_gallery.dart';
 //import 'package:vcec/presentation/mainmenu/widgets/highlights.dart';
 import 'package:vcec/presentation/mainmenu/widgets/highlights1.dart';
-import 'package:vcec/presentation/mainmenu/widgets/story_part.dart';
+import 'package:vcec/presentation/mainmenu/widgets/story_widget.dart';
 
 class MainMenuScreen extends StatelessWidget {
   const MainMenuScreen({super.key});
@@ -57,7 +57,7 @@ class MainMenuScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 kheight10,
-                StoryPart(),
+                StoryWidget(),
                 kheight10,
                 CarouselMainManu(),
                 Padding(
