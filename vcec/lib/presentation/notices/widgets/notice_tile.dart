@@ -23,7 +23,7 @@ class NoticeTileWidget extends StatelessWidget {
         _isexpanded.value = value;
         _isexpanded.notifyListeners();
       },
-      tilePadding: EdgeInsets.only(
+      tilePadding: const EdgeInsets.only(
         top: 12,
         bottom: 12,
         left: 14,
@@ -40,7 +40,7 @@ class NoticeTileWidget extends StatelessWidget {
                   return Text(notice.headline!,
                       maxLines: _isexpanded != true ? 2 : 20,
                       overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Color.fromARGB(255, 0, 0, 0),
                         fontSize: 16,
                         fontWeight: FontWeight.w500,
@@ -48,8 +48,8 @@ class NoticeTileWidget extends StatelessWidget {
                 }),
           ),
           Text(notice.dateOfUpload!,
-              style: TextStyle(
-                color: Color.fromARGB(255, 0, 0, 0),
+              style: const TextStyle(
+                color: Color.fromARGB(255, 46, 46, 46),
                 fontSize: 12,
                 fontWeight: FontWeight.w400,
               ))
@@ -62,7 +62,7 @@ class NoticeTileWidget extends StatelessWidget {
             notice.details!,
             maxLines: _isexpanded != true ? 2 : 30,
             overflow: TextOverflow.ellipsis,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 11,
             ),
           );
@@ -70,7 +70,7 @@ class NoticeTileWidget extends StatelessWidget {
       ),
       trailing: Visibility(
         visible: expanpsionNeeded,
-        child: Icon(Icons.keyboard_arrow_down),
+        child: const Icon(Icons.keyboard_arrow_down),
       ),
       textColor: Colors.black,
       iconColor: expanpsionNeeded ? Colors.black : null,

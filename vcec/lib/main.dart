@@ -1,23 +1,34 @@
 import 'package:flutter/material.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:injectable/injectable.dart';
 import 'package:vcec/application/departments/rsearch/department_search_cubit.dart';
 import 'package:vcec/application/gallery/gallery_cubit.dart';
 import 'package:vcec/application/gallery/gallery_individual_cubit.dart';
+import 'package:vcec/application/login/login_cubit.dart';
+import 'package:vcec/application/logout/log_out_cubit.dart';
 import 'package:vcec/application/main_menu/carousel/carousel_cubit.dart';
 import 'package:vcec/application/main_menu/highlights/highlights_cubit.dart';
 import 'package:vcec/application/main_menu/timetable/timetable_cubit.dart';
 import 'package:vcec/application/notices/notices_cubit_cubit.dart';
-import 'package:vcec/application/otp/otp_cubit.dart';
-import 'package:vcec/application/verification/verification_cubit.dart';
+import 'package:vcec/application/signup/create_new_account/create_new_account_cubit.dart';
+import 'package:vcec/application/signup/verify_email/verify_email_cubit.dart';
+import 'package:vcec/application/splash_screen/splash_screen_cubit.dart';
 import 'package:vcec/core/di/injectable.dart';
-import 'package:vcec/presentation/auth_screens/otp_verification/otp_verification_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:vcec/presentation/auth_screens/login/login_screen.dart';
 import 'package:vcec/presentation/auth_screens/sign_up/sign_up_screen.dart';
 import 'package:vcec/presentation/home/home.dart';
+import 'package:vcec/presentation/splash_screen.dart/splash_screen.dart';
+import 'package:vcec/presentation/auth_screens/otp_verification/otp_verification_screen.dart';
+import 'package:vcec/presentation/auth_screens/otp_verification/verified_screen.dart';
+import 'firebase_options.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  await WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   await configureInjection(Environment.prod);
   runApp(const MyApp());
 }
@@ -49,21 +60,43 @@ class MyApp extends StatelessWidget {
         BlocProvider<GalleryIndividualCubit>(
           create: (context) => getIt<GalleryIndividualCubit>(),
         ),
-        BlocProvider<OtpCubit>(
-          create: (context) => getIt<OtpCubit>(),
+        BlocProvider<SplashScreenCubit>(
+          create: (context) => getIt<SplashScreenCubit>(),
         ),
-        BlocProvider<VerificationCubit>(
-          create: (context) => getIt<VerificationCubit>(),
+        BlocProvider<VerifyEmailAndSignUpWithGoogleCubit>(
+          create: (context) => getIt<VerifyEmailAndSignUpWithGoogleCubit>(),
         ),
+        BlocProvider<CreateNewAccountCubit>(
+          create: (context) => getIt<CreateNewAccountCubit>(),
+        ),
+        BlocProvider<LoginWithEmailAndGoogleCubit>(
+          create: (context) => getIt<LoginWithEmailAndGoogleCubit>(),
+        ),
+        BlocProvider<LogOutCubit>(
+          create: (context) => getIt<LogOutCubit>(),
+        ),
+       
       ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'V CEC',
-        theme: ThemeData(
-          useMaterial3: true,
-        ),
-        home: OtpVerificationScreen(email: ''),
-      ),
+      child: ScreenUtilInit(
+          designSize: const Size(480, 1019),
+          builder: (context, _) {
+            return MaterialApp(
+              debugShowCheckedModeBanner: false,
+              title: 'V CEC',
+              theme: ThemeData(
+                useMaterial3: true,
+              ),
+              initialRoute: '/',
+              routes: {
+                '/': (context) => SplashScreen(),
+                '/login': (context) => LoginPage(),
+                '/signup': (context) => SignUpScreen(),
+                '/home': (context) => HomeScreen(),
+                '/otp_verification': (context) => OtpVerificationScreen(),
+                '/otp_verified': (context) => VerifiedScreen(),
+              },
+            );
+          }),
     );
   }
 }

@@ -20,18 +20,27 @@ mixin _$MainFailure {
   TResult when<TResult extends Object?>({
     required TResult Function() clientFailure,
     required TResult Function() serverFailure,
+    required TResult Function() authFailure,
+    required TResult Function() incorrectCredential,
+    required TResult Function() otherFailure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? clientFailure,
     TResult? Function()? serverFailure,
+    TResult? Function()? authFailure,
+    TResult? Function()? incorrectCredential,
+    TResult? Function()? otherFailure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? clientFailure,
     TResult Function()? serverFailure,
+    TResult Function()? authFailure,
+    TResult Function()? incorrectCredential,
+    TResult Function()? otherFailure,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -39,18 +48,27 @@ mixin _$MainFailure {
   TResult map<TResult extends Object?>({
     required TResult Function(_ClientFailure value) clientFailure,
     required TResult Function(_ServerFailure value) serverFailure,
+    required TResult Function(AuthFailure value) authFailure,
+    required TResult Function(IncorrectCredential value) incorrectCredential,
+    required TResult Function(otherFailure value) otherFailure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_ClientFailure value)? clientFailure,
     TResult? Function(_ServerFailure value)? serverFailure,
+    TResult? Function(AuthFailure value)? authFailure,
+    TResult? Function(IncorrectCredential value)? incorrectCredential,
+    TResult? Function(otherFailure value)? otherFailure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_ClientFailure value)? clientFailure,
     TResult Function(_ServerFailure value)? serverFailure,
+    TResult Function(AuthFailure value)? authFailure,
+    TResult Function(IncorrectCredential value)? incorrectCredential,
+    TResult Function(otherFailure value)? otherFailure,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -114,6 +132,9 @@ class _$_ClientFailure implements _ClientFailure {
   TResult when<TResult extends Object?>({
     required TResult Function() clientFailure,
     required TResult Function() serverFailure,
+    required TResult Function() authFailure,
+    required TResult Function() incorrectCredential,
+    required TResult Function() otherFailure,
   }) {
     return clientFailure();
   }
@@ -123,6 +144,9 @@ class _$_ClientFailure implements _ClientFailure {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? clientFailure,
     TResult? Function()? serverFailure,
+    TResult? Function()? authFailure,
+    TResult? Function()? incorrectCredential,
+    TResult? Function()? otherFailure,
   }) {
     return clientFailure?.call();
   }
@@ -132,6 +156,9 @@ class _$_ClientFailure implements _ClientFailure {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? clientFailure,
     TResult Function()? serverFailure,
+    TResult Function()? authFailure,
+    TResult Function()? incorrectCredential,
+    TResult Function()? otherFailure,
     required TResult orElse(),
   }) {
     if (clientFailure != null) {
@@ -145,6 +172,9 @@ class _$_ClientFailure implements _ClientFailure {
   TResult map<TResult extends Object?>({
     required TResult Function(_ClientFailure value) clientFailure,
     required TResult Function(_ServerFailure value) serverFailure,
+    required TResult Function(AuthFailure value) authFailure,
+    required TResult Function(IncorrectCredential value) incorrectCredential,
+    required TResult Function(otherFailure value) otherFailure,
   }) {
     return clientFailure(this);
   }
@@ -154,6 +184,9 @@ class _$_ClientFailure implements _ClientFailure {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_ClientFailure value)? clientFailure,
     TResult? Function(_ServerFailure value)? serverFailure,
+    TResult? Function(AuthFailure value)? authFailure,
+    TResult? Function(IncorrectCredential value)? incorrectCredential,
+    TResult? Function(otherFailure value)? otherFailure,
   }) {
     return clientFailure?.call(this);
   }
@@ -163,6 +196,9 @@ class _$_ClientFailure implements _ClientFailure {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_ClientFailure value)? clientFailure,
     TResult Function(_ServerFailure value)? serverFailure,
+    TResult Function(AuthFailure value)? authFailure,
+    TResult Function(IncorrectCredential value)? incorrectCredential,
+    TResult Function(otherFailure value)? otherFailure,
     required TResult orElse(),
   }) {
     if (clientFailure != null) {
@@ -216,6 +252,9 @@ class _$_ServerFailure implements _ServerFailure {
   TResult when<TResult extends Object?>({
     required TResult Function() clientFailure,
     required TResult Function() serverFailure,
+    required TResult Function() authFailure,
+    required TResult Function() incorrectCredential,
+    required TResult Function() otherFailure,
   }) {
     return serverFailure();
   }
@@ -225,6 +264,9 @@ class _$_ServerFailure implements _ServerFailure {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? clientFailure,
     TResult? Function()? serverFailure,
+    TResult? Function()? authFailure,
+    TResult? Function()? incorrectCredential,
+    TResult? Function()? otherFailure,
   }) {
     return serverFailure?.call();
   }
@@ -234,6 +276,9 @@ class _$_ServerFailure implements _ServerFailure {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? clientFailure,
     TResult Function()? serverFailure,
+    TResult Function()? authFailure,
+    TResult Function()? incorrectCredential,
+    TResult Function()? otherFailure,
     required TResult orElse(),
   }) {
     if (serverFailure != null) {
@@ -247,6 +292,9 @@ class _$_ServerFailure implements _ServerFailure {
   TResult map<TResult extends Object?>({
     required TResult Function(_ClientFailure value) clientFailure,
     required TResult Function(_ServerFailure value) serverFailure,
+    required TResult Function(AuthFailure value) authFailure,
+    required TResult Function(IncorrectCredential value) incorrectCredential,
+    required TResult Function(otherFailure value) otherFailure,
   }) {
     return serverFailure(this);
   }
@@ -256,6 +304,9 @@ class _$_ServerFailure implements _ServerFailure {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_ClientFailure value)? clientFailure,
     TResult? Function(_ServerFailure value)? serverFailure,
+    TResult? Function(AuthFailure value)? authFailure,
+    TResult? Function(IncorrectCredential value)? incorrectCredential,
+    TResult? Function(otherFailure value)? otherFailure,
   }) {
     return serverFailure?.call(this);
   }
@@ -265,6 +316,9 @@ class _$_ServerFailure implements _ServerFailure {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_ClientFailure value)? clientFailure,
     TResult Function(_ServerFailure value)? serverFailure,
+    TResult Function(AuthFailure value)? authFailure,
+    TResult Function(IncorrectCredential value)? incorrectCredential,
+    TResult Function(otherFailure value)? otherFailure,
     required TResult orElse(),
   }) {
     if (serverFailure != null) {
@@ -276,4 +330,364 @@ class _$_ServerFailure implements _ServerFailure {
 
 abstract class _ServerFailure implements MainFailure {
   const factory _ServerFailure() = _$_ServerFailure;
+}
+
+/// @nodoc
+abstract class _$$AuthFailureCopyWith<$Res> {
+  factory _$$AuthFailureCopyWith(
+          _$AuthFailure value, $Res Function(_$AuthFailure) then) =
+      __$$AuthFailureCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$AuthFailureCopyWithImpl<$Res>
+    extends _$MainFailureCopyWithImpl<$Res, _$AuthFailure>
+    implements _$$AuthFailureCopyWith<$Res> {
+  __$$AuthFailureCopyWithImpl(
+      _$AuthFailure _value, $Res Function(_$AuthFailure) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$AuthFailure implements AuthFailure {
+  const _$AuthFailure();
+
+  @override
+  String toString() {
+    return 'MainFailure.authFailure()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$AuthFailure);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() clientFailure,
+    required TResult Function() serverFailure,
+    required TResult Function() authFailure,
+    required TResult Function() incorrectCredential,
+    required TResult Function() otherFailure,
+  }) {
+    return authFailure();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? clientFailure,
+    TResult? Function()? serverFailure,
+    TResult? Function()? authFailure,
+    TResult? Function()? incorrectCredential,
+    TResult? Function()? otherFailure,
+  }) {
+    return authFailure?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? clientFailure,
+    TResult Function()? serverFailure,
+    TResult Function()? authFailure,
+    TResult Function()? incorrectCredential,
+    TResult Function()? otherFailure,
+    required TResult orElse(),
+  }) {
+    if (authFailure != null) {
+      return authFailure();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_ClientFailure value) clientFailure,
+    required TResult Function(_ServerFailure value) serverFailure,
+    required TResult Function(AuthFailure value) authFailure,
+    required TResult Function(IncorrectCredential value) incorrectCredential,
+    required TResult Function(otherFailure value) otherFailure,
+  }) {
+    return authFailure(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_ClientFailure value)? clientFailure,
+    TResult? Function(_ServerFailure value)? serverFailure,
+    TResult? Function(AuthFailure value)? authFailure,
+    TResult? Function(IncorrectCredential value)? incorrectCredential,
+    TResult? Function(otherFailure value)? otherFailure,
+  }) {
+    return authFailure?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_ClientFailure value)? clientFailure,
+    TResult Function(_ServerFailure value)? serverFailure,
+    TResult Function(AuthFailure value)? authFailure,
+    TResult Function(IncorrectCredential value)? incorrectCredential,
+    TResult Function(otherFailure value)? otherFailure,
+    required TResult orElse(),
+  }) {
+    if (authFailure != null) {
+      return authFailure(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class AuthFailure implements MainFailure {
+  const factory AuthFailure() = _$AuthFailure;
+}
+
+/// @nodoc
+abstract class _$$IncorrectCredentialCopyWith<$Res> {
+  factory _$$IncorrectCredentialCopyWith(_$IncorrectCredential value,
+          $Res Function(_$IncorrectCredential) then) =
+      __$$IncorrectCredentialCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$IncorrectCredentialCopyWithImpl<$Res>
+    extends _$MainFailureCopyWithImpl<$Res, _$IncorrectCredential>
+    implements _$$IncorrectCredentialCopyWith<$Res> {
+  __$$IncorrectCredentialCopyWithImpl(
+      _$IncorrectCredential _value, $Res Function(_$IncorrectCredential) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$IncorrectCredential implements IncorrectCredential {
+  const _$IncorrectCredential();
+
+  @override
+  String toString() {
+    return 'MainFailure.incorrectCredential()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$IncorrectCredential);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() clientFailure,
+    required TResult Function() serverFailure,
+    required TResult Function() authFailure,
+    required TResult Function() incorrectCredential,
+    required TResult Function() otherFailure,
+  }) {
+    return incorrectCredential();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? clientFailure,
+    TResult? Function()? serverFailure,
+    TResult? Function()? authFailure,
+    TResult? Function()? incorrectCredential,
+    TResult? Function()? otherFailure,
+  }) {
+    return incorrectCredential?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? clientFailure,
+    TResult Function()? serverFailure,
+    TResult Function()? authFailure,
+    TResult Function()? incorrectCredential,
+    TResult Function()? otherFailure,
+    required TResult orElse(),
+  }) {
+    if (incorrectCredential != null) {
+      return incorrectCredential();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_ClientFailure value) clientFailure,
+    required TResult Function(_ServerFailure value) serverFailure,
+    required TResult Function(AuthFailure value) authFailure,
+    required TResult Function(IncorrectCredential value) incorrectCredential,
+    required TResult Function(otherFailure value) otherFailure,
+  }) {
+    return incorrectCredential(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_ClientFailure value)? clientFailure,
+    TResult? Function(_ServerFailure value)? serverFailure,
+    TResult? Function(AuthFailure value)? authFailure,
+    TResult? Function(IncorrectCredential value)? incorrectCredential,
+    TResult? Function(otherFailure value)? otherFailure,
+  }) {
+    return incorrectCredential?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_ClientFailure value)? clientFailure,
+    TResult Function(_ServerFailure value)? serverFailure,
+    TResult Function(AuthFailure value)? authFailure,
+    TResult Function(IncorrectCredential value)? incorrectCredential,
+    TResult Function(otherFailure value)? otherFailure,
+    required TResult orElse(),
+  }) {
+    if (incorrectCredential != null) {
+      return incorrectCredential(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class IncorrectCredential implements MainFailure {
+  const factory IncorrectCredential() = _$IncorrectCredential;
+}
+
+/// @nodoc
+abstract class _$$otherFailureCopyWith<$Res> {
+  factory _$$otherFailureCopyWith(
+          _$otherFailure value, $Res Function(_$otherFailure) then) =
+      __$$otherFailureCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$otherFailureCopyWithImpl<$Res>
+    extends _$MainFailureCopyWithImpl<$Res, _$otherFailure>
+    implements _$$otherFailureCopyWith<$Res> {
+  __$$otherFailureCopyWithImpl(
+      _$otherFailure _value, $Res Function(_$otherFailure) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$otherFailure implements otherFailure {
+  const _$otherFailure();
+
+  @override
+  String toString() {
+    return 'MainFailure.otherFailure()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$otherFailure);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() clientFailure,
+    required TResult Function() serverFailure,
+    required TResult Function() authFailure,
+    required TResult Function() incorrectCredential,
+    required TResult Function() otherFailure,
+  }) {
+    return otherFailure();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? clientFailure,
+    TResult? Function()? serverFailure,
+    TResult? Function()? authFailure,
+    TResult? Function()? incorrectCredential,
+    TResult? Function()? otherFailure,
+  }) {
+    return otherFailure?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? clientFailure,
+    TResult Function()? serverFailure,
+    TResult Function()? authFailure,
+    TResult Function()? incorrectCredential,
+    TResult Function()? otherFailure,
+    required TResult orElse(),
+  }) {
+    if (otherFailure != null) {
+      return otherFailure();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_ClientFailure value) clientFailure,
+    required TResult Function(_ServerFailure value) serverFailure,
+    required TResult Function(AuthFailure value) authFailure,
+    required TResult Function(IncorrectCredential value) incorrectCredential,
+    required TResult Function(otherFailure value) otherFailure,
+  }) {
+    return otherFailure(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_ClientFailure value)? clientFailure,
+    TResult? Function(_ServerFailure value)? serverFailure,
+    TResult? Function(AuthFailure value)? authFailure,
+    TResult? Function(IncorrectCredential value)? incorrectCredential,
+    TResult? Function(otherFailure value)? otherFailure,
+  }) {
+    return otherFailure?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_ClientFailure value)? clientFailure,
+    TResult Function(_ServerFailure value)? serverFailure,
+    TResult Function(AuthFailure value)? authFailure,
+    TResult Function(IncorrectCredential value)? incorrectCredential,
+    TResult Function(otherFailure value)? otherFailure,
+    required TResult orElse(),
+  }) {
+    if (otherFailure != null) {
+      return otherFailure(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class otherFailure implements MainFailure {
+  const factory otherFailure() = _$otherFailure;
 }

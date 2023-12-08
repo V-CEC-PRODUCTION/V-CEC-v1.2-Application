@@ -73,13 +73,13 @@ class CecGalleryScreen extends StatelessWidget {
                   ),
                   backgroundColor: Colors.black87,
                   centerTitle: true,
-                  actions: const [
+                  actions:  [
                     MessageIcon(),
                     kwidth20,
                   ],
                 ),
-                body: const Column(
-                  children: [
+                body: Column(
+                  children: const [
                     Padding(
                       padding: EdgeInsets.only(right: 150),
                       child: SizedBox(
@@ -99,7 +99,7 @@ class CecGalleryScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    const Expanded(
+                    Expanded(
                       child: TabBarView(
                         children: [
                           GalleryTab(),

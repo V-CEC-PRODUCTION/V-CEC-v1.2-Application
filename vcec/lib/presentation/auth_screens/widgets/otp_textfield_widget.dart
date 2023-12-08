@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
@@ -13,14 +11,14 @@ class OtpTextfieldWidget extends StatelessWidget {
     return OtpTextField(
       numberOfFields: 6,
       keyboardType: TextInputType.number,
-      margin: EdgeInsets.all(6.3),
-      borderRadius: BorderRadius.all(Radius.circular(15)),
+      margin: const EdgeInsets.all(6.3),
+      borderRadius: const BorderRadius.all(Radius.circular(15)),
       fieldWidth: MediaQuery.of(context).size.width * 56 / 470.30,
       filled: true,
-      fillColor: theme,
-      borderColor: theme,
-      enabledBorderColor: theme,
-      focusedBorderColor: theme,
+      fillColor: auththeme,
+      borderColor: auththeme,
+      enabledBorderColor: auththeme,
+      focusedBorderColor: auththeme,
       //set to true to show as box or false to show as dash
       showFieldAsBox: true,
       //runs when a code is typed in

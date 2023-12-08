@@ -20,7 +20,7 @@ class ForumScreen extends StatelessWidget {
           child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: const [
+          children:  [
             UpcomingEventsWidget(),
             kheight10,
             AnnouncementsEventsWidget(),

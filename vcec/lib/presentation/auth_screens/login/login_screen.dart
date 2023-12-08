@@ -1,297 +1,178 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import 'package:vcec/core/colors.dart';
+import 'package:vcec/core/constants.dart';
+
+import 'package:vcec/presentation/auth_screens/login/widgets/forgot_password_button.dart';
+import 'package:vcec/presentation/auth_screens/login/widgets/login_image.dart';
+import 'package:vcec/presentation/auth_screens/login/widgets/password_textfield.dart';
+import 'package:vcec/presentation/auth_screens/login/widgets/signup_button.dart';
 import 'package:vcec/presentation/auth_screens/sign_up/sign_up_screen.dart';
+import 'package:vcec/presentation/auth_screens/widgets/auth_button_widget.dart';
+import 'package:vcec/presentation/auth_screens/widgets/auth_page_title.dart';
+import 'package:vcec/presentation/auth_screens/widgets/email_text_field.dart';
+import 'package:vcec/presentation/auth_screens/widgets/login_with_google.dart';
+import 'package:vcec/presentation/auth_screens/widgets/or_widget.dart';
+import 'package:vcec/application/login/login_cubit.dart';
+import 'package:vcec/domain/failure/main_failure.dart';
+import 'package:vcec/presentation/common_widgets/common_snackbar.dart';
+import 'package:vcec/presentation/common_widgets/loading_widget.dart';
 
-class EmailPassWidget extends StatelessWidget {
-  final IconData icon;
-  final String text;
-  final Color color;
-  final TextEditingController? controller;
-  const EmailPassWidget({
-    super.key,
-    required this.icon,
-    required this.text,
-    required this.color,  this.controller,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Icon(
-          icon,
-          color: color,
-        ),
-        const SizedBox(
-          width: 10,
-        ),
-        Expanded(
-          child: TextFormField(
-            decoration: InputDecoration(labelText: text),
-            controller: controller ,
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class TitleDetails extends StatelessWidget {
-  final String name;
-  final double fontsize;
-  const TitleDetails({
-    super.key,
-    required this.name,
-    required this.fontsize,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      name,
-      style: TextStyle(fontSize: fontsize, fontWeight: FontWeight.bold),
-    );
-  }
-}
-
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  final TextEditingController emaiController = TextEditingController();
+
+  final TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     ValueNotifier<bool> obtext = ValueNotifier<bool>(false);
     final size1 = MediaQuery.of(context).size.width;
-    void passwordVisibility() {
-      obtext.value = !obtext.value;
-    }
 
-    return SafeArea(
-      child: Scaffold(
-        resizeToAvoidBottomInset: false,
-        backgroundColor: Colors.black,
-        body: SizedBox(
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+        body: BlocConsumer<LoginWithEmailAndGoogleCubit,
+            LoginWithEmailAndGoogleState>(listener: (context, state) {
+      state.isFailureOrSuccess.fold(
+        () {},
+        (either) => either.fold(
+          (failure) {
+            if (!state.isLoading) {
+              if (failure ==const MainFailure.serverFailure()) {
+                displaySnackBar(context: context, text: "Server is down");
+              } else if (failure ==const MainFailure.authFailure()) {
+                displaySnackBar(
+                    context: context, text: "Please check the email address");
+              } else if (failure ==const MainFailure.incorrectCredential()) {
+                displaySnackBar(context: context, text: "Incorrect Password");
+              } else if (failure == const MainFailure.clientFailure()) {
+                displaySnackBar(
+                    context: context,
+                    text: "Something wrong with your network");
+              } else {
+                displaySnackBar(context: context, text: "Something Unexpected Happened");
+              }
+            }
+          },
+          (r) {
+            Navigator.of(context)
+                .pushNamedAndRemoveUntil('/home', (route) => false);
+          },
+        ),
+      );
+       state.isFailureOrSuccessForGoogle.fold(
+        () {},
+        (either) => either.fold(
+          (failure) {
+            if (!state.isLoading) {
+              if (failure ==const MainFailure.serverFailure()) {
+                displaySnackBar(context: context, text: "Server is down");
+              } else if (failure ==const MainFailure.authFailure()) {
+                displaySnackBar(
+                    context: context, text: "Please check the email address");
+              } else if (failure ==const MainFailure.incorrectCredential()) {
+                displaySnackBar(context: context, text: "Incorrect Password");
+              } else if (failure == const MainFailure.clientFailure()) {
+                displaySnackBar(
+                    context: context,
+                    text: "Something wrong with your network");
+              } else {
+                displaySnackBar(context: context, text: "Something Unexpected Happened");
+              }
+            }
+          },
+          (r) {
+            Navigator.of(context)
+                .pushNamedAndRemoveUntil('/home', (route) => false);
+          },
+        ),
+      );
+    }, builder: (context, state) {
+      if (state.isLoading) {
+        return const Center(
+          child: loadingWidget,
+        );
+      }
+      return SafeArea(
+        child: SizedBox(
           height: double.infinity,
-          width: double.infinity,
-          child: Stack(
-            alignment: Alignment.bottomCenter,
-            children: [
-              Column(
-                children: [
-                  Container(
-                    decoration: const BoxDecoration(
-                      image: DecorationImage(
-                          image: AssetImage('assets/img/login_image.jpg'),
-                          fit: BoxFit.fitHeight),
-                    ),
-                    height: size1 * 0.8,
-                    width: size1 * 4,
+          child: Stack(alignment: Alignment.bottomCenter, children: [
+            const LoginImageWidget(),
+            Container(
+                height: 672.w,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(size1 * 0.32),
                   ),
-                ],
-              ),
-              Positioned(
-                child: Container(
-                  height: size1 * 1.4,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(size1 * 0.32),
-                    ),
-                  ),
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.only(
-                            top: size1 * 0.25, right: size1 * 0.58),
-                        child: const TitleDetails(name: 'Login', fontsize: 40),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(
-                            left: size1 * 0.07,
-                            right: size1 * 0.05,
-                            top: size1 * 0.03),
-                        child: const EmailPassWidget(
+                ),
+                child: Padding(
+                  padding:
+                      EdgeInsets.only(top: 110.h, left: 33.6.w, right: 33.5.w),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const AuthPageTitle(name: 'Login', fontsize: 40),
+                        EmailTextField(
                           icon: Icons.attachment_outlined,
                           text: 'Email ID',
                           color: Colors.grey,
+                          controller: emaiController,
                         ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(
-                            left: size1 * 0.07, right: size1 * 0.05),
-                        child: Row(
-                          children: [
-                            const Icon(
-                              Icons.lock,
-                              color: Colors.grey,
-                            ),
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            Expanded(
-                              child: ValueListenableBuilder<bool>(
-                                  valueListenable: obtext,
-                                  builder: (context, value, child) {
-                                    return TextFormField(
-                                      obscureText: !value,
-                                      decoration: InputDecoration(
-                                        labelText: 'Password',
-                                        suffixIcon: IconButton(
-                                          onPressed: () {
-                                            passwordVisibility();
-                                          },
-                                          icon: Icon(value
-                                              ? Icons.visibility
-                                              : Icons.visibility_off),
-                                        ),
-                                      ),
-                                    );
-                                  }),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(left: size1 * 0.58),
-                        child: TextButton(
-                          onPressed: () {},
-                          child: const Text(
-                            'Forgot Password?',
-                            style: TextStyle(color: Colors.black),
-                          ),
-                        ),
-                      ),
-                      Container(
-                        width: size1 * 0.85,
-                        height: size1 * 0.11,
-                        decoration: BoxDecoration(boxShadow: [
-                          BoxShadow(
-                              color: Colors.grey.withOpacity(0.4),
-                              spreadRadius: 4,
-                              blurRadius: 5,
-                              offset: const Offset(0, 3))
-                        ]),
-                        child: ElevatedButton(
-                          onPressed: () {},
-                          style: ButtonStyle(
-                              backgroundColor:
-                                  const MaterialStatePropertyAll(Colors.black),
-                              shape: MaterialStateProperty.all<
-                                      RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(
-                                          size1 * 0.02)))),
-                          child: Text(
-                            'Login',
-                            style: TextStyle(
-                                fontSize: size1 * 0.045, color: Colors.white),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(top: size1 * 0.04),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Container(
-                              width: size1 * 0.32,
-                              height: 1,
-                              color: Colors.grey,
-                            ),
-                            const Text(
-                              'OR',
-                              style: TextStyle(
-                                color: Color.fromARGB(255, 133, 131, 131),
-                              ),
-                            ),
-                            Container(
-                              width: size1 * 0.32,
-                              height: 1,
-                              color: Colors.grey,
-                            ),
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(top: size1 * 0.04),
-                        child: Container(
-                          width: size1 * 0.85,
-                          height: size1 * 0.11,
-                          decoration: BoxDecoration(boxShadow: [
-                            BoxShadow(
-                                color: Colors.grey.withOpacity(0.4),
-                                spreadRadius: 4,
-                                blurRadius: 5,
-                                offset: const Offset(0, 3))
-                          ]),
-                          child: ElevatedButton(
-                            onPressed: () {},
-                            style: ButtonStyle(
-                                backgroundColor: const MaterialStatePropertyAll(
-                                    Color.fromARGB(255, 221, 218, 218)),
-                                shape: MaterialStateProperty.all<
-                                        RoundedRectangleBorder>(
-                                    RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(
-                                            size1 * 0.02)))),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Container(
-                                  decoration: const BoxDecoration(
-                                    image: DecorationImage(
-                                      image: NetworkImage(
-                                        'https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/1200px-Google_%22G%22_Logo.svg.png',
-                                      ),
-                                    ),
-                                  ),
-                                  width: size1 * 0.06,
-                                  height: size1 * 0.06,
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.only(right: size1 * 0.07),
-                                  child: Text(
-                                    'Login with Google',
-                                    style: TextStyle(
-                                        fontSize: size1 * 0.045,
-                                        color: Colors.black),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(
-                            left: size1 * 0.3, top: size1 * 0.04),
-                        child: Row(
-                          children: [
-                            const Text(
-                              'New to V CEC ?',
-                              style: TextStyle(
-                                  color: Colors.grey,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            TextButton(
-                                onPressed: () {
-                                  Navigator.of(context).push(MaterialPageRoute(
-                                      builder: (context) => SignUpScreen()));
-                                },
-                                child: const Text(
-                                  'Sign Up',
-                                  style: TextStyle(color: Colors.black),
-                                ))
-                          ],
-                        ),
-                      )
-                    ],
+                        PasswordTextFieldWidget(
+                            obtext: obtext, controller1: passwordController),
+                      const  ForgotPasswordWidget(),
+                        SizedBox(
+                            width: size1 * 0.85,
+                            height: size1 * 0.11,
+                            child: AuthButtonWidget(
+                              title: "Login",
+                              bgcolor: const Color.fromRGBO(46, 49, 54, 1),
+                              tcolor: kwhite,
+                              borderRadius: 4,
+                              elevation: 5,
+                              onclick: () {
+                                BlocProvider.of<LoginWithEmailAndGoogleCubit>(
+                                        context)
+                                    .loginWithEmailAndPass(emaiController.text,
+                                        passwordController.text);
+                              },
+                            )),
+                        kheight20,
+                        const OrWidget(),
+                        kheight15,
+                        LoginWithGoogleWidget(
+                            onClick: () {
+                              BlocProvider.of<LoginWithEmailAndGoogleCubit>(
+                                      context)
+                                  .loginWithGoogle();
+                            },
+                            title: 'Login with Google'),
+                        kheight15,
+                        SignUpButtonWidget(
+                            title: 'New to V CEC ?',
+                            buttonTitle: 'Sign Up',
+                            onTap: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) =>const SignUpScreen()));
+                            }),
+                      ],
+                    ),
                   ),
-                ),
-              )
-            ],
-          ),
+                ))
+          ]),
         ),
-      ),
-    );
+      );
+    }));
   }
 }

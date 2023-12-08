@@ -1,24 +1,50 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-const kwidth5 = SizedBox(
-  width: 5,
+//width
+
+final kwidth5 = SizedBox(
+  width: 5.w,
 );
-const kwidth10 = SizedBox(
-  width: 10,
+final kwidth10 = SizedBox(
+  width: 10.w,
 );
-const kwidth20 = SizedBox(
-  width: 20,
+final kwidth15 = SizedBox(
+  width: 15.w,
 );
-const kheight5 = SizedBox(
-  height: 5,
+final kwidth20 = SizedBox(
+  width: 20.w,
 );
-const kheight10 = SizedBox(
-  height: 10,
+final kwidth25 = SizedBox(
+  width: 25.w,
 );
-const kheight15 = SizedBox(
-  height: 15,
+final kwidth30 = SizedBox(
+  width: 30.w,
 );
 
-const kheight20 = SizedBox(
-  height: 20,
+//height
+
+final kheight5 = SizedBox(
+  height: 5.h,
 );
+final kheight10 = SizedBox(
+  height: 10.h,
+);
+final kheight15 = SizedBox(
+  height: 15.h,
+);
+
+final kheight20 = SizedBox(
+  height: 20.h,
+);
+final kheight25 = SizedBox(
+  height: 25.h,
+);
+final kheight30 = SizedBox(
+  height: 30.h,
+);
+
+const access =
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NTUsImV4cCI6MTY5NjE5NjUzMiwiaWF0IjoxNjk2MTg5MzMyfQ.oC8wOQL5yZr-UWYsTLfSeS4pVHPsrI_NLtc-g9esp8g';
+const refresh =
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NTUsImV4cCI6NDM0OTk5NjUzMzIsImlhdCI6MTY5NjE4OTMzMn0.3K-8eiwTgnAJpEPAN2sITr8cHcmIXS_4nW4nYZxCfCM';

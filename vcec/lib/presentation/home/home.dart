@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:vcec/core/colors.dart';
 import 'package:vcec/presentation/departments/departments_screen.dart';
@@ -19,9 +18,9 @@ class HomeScreen extends StatelessWidget {
             return IndexedStack(
               index: newIndex,
               children: [
-                MainMenuScreen(),
-                EventsScreen(),
-                NoticesScreen(),
+                const MainMenuScreen(),
+                const EventsScreen(),
+                const NoticesScreen(),
                 DepartmentsScreen(),
                 ForumScreen(name: 'Riya'),
               ],
@@ -37,7 +36,7 @@ class HomeScreen extends StatelessWidget {
               selectedItemColor: kblack,
               unselectedItemColor: kBlackBlurr,
               showSelectedLabels: false, showUnselectedLabels: false,
-              items: [
+              items: const [
                 BottomNavigationBarItem(
                     icon: Icon(
                       Icons.home_outlined,
