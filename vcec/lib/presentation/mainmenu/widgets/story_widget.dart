@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:vcec/core/constants.dart';
 import 'package:vcec/presentation/mainmenu/widgets/story_upload_widget.dart';
 
@@ -20,8 +19,8 @@ class _StoryPartState extends State<StoryWidget> {
         kwidth10,
         GestureDetector(
           onTap: () {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => StoryUploadWidget()));
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => StoryUploadWidget()));
           },
           child: Stack(
             children: [

@@ -16,6 +16,7 @@ import 'package:vcec/application/signup/verify_email/verify_email_cubit.dart';
 import 'package:vcec/application/splash_screen/splash_screen_cubit.dart';
 import 'package:vcec/core/di/injectable.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:vcec/infrastructure/notification/notification_handle.dart';
 import 'package:vcec/presentation/auth_screens/login/login_screen.dart';
 import 'package:vcec/presentation/auth_screens/sign_up/sign_up_screen.dart';
 import 'package:vcec/presentation/home/home.dart';
@@ -25,10 +26,11 @@ import 'package:vcec/presentation/auth_screens/otp_verification/verified_screen.
 import 'firebase_options.dart';
 
 void main() async {
-  await WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  await NotificationHandle().initiateAndListenNotification();
   await configureInjection(Environment.prod);
   runApp(const MyApp());
 }
@@ -75,7 +77,6 @@ class MyApp extends StatelessWidget {
         BlocProvider<LogOutCubit>(
           create: (context) => getIt<LogOutCubit>(),
         ),
-       
       ],
       child: ScreenUtilInit(
           designSize: const Size(480, 1019),
