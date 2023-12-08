@@ -9,10 +9,12 @@ class AuthTokenManager {
   String? _email;
   GoogleSignInAccount? _googleuser;
   UserRole? _userRole;
+  LoginType? _loginType;
   String? get email => _email;
   String? get accessToken => _accessToken;
   String? get refreshToken => _refreshToken;
   UserRole? get userRole => _userRole;
+  LoginType? get logintype => _loginType;
   GoogleSignInAccount? get googleuser => _googleuser;
   setTokens({required String accessToken, required String refreshToken}) {
     _accessToken = accessToken;
@@ -31,6 +33,10 @@ class AuthTokenManager {
     _userRole = userRole;
   }
 
+  setLoginType(LoginType loginType) {
+    _loginType = logintype;
+  }
+
   setEmail(String email) {
     _email = email;
   }
@@ -43,3 +49,5 @@ class AuthTokenManager {
 }
 
 enum UserRole { student, guest }
+
+enum LoginType { email, google }

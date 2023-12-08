@@ -12,6 +12,8 @@ abstract class SignupService {
   Future<Either<MainFailure, void>> signUpWithGooglePost({
     required String email,
   });
+  Future<Either<MainFailure, void>> signUpWithGoogleFromAccounts(
+      {required String email});
   Future signupEmailCheck({required UserDetailsModel userDetailsModel});
   Future<Either<MainFailure, void>> postUserDetails(
       {required UserDetailsModel userDetailsModel});

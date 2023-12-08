@@ -32,6 +32,7 @@ class LoginRepo extends LoginService {
         return const Left(MainFailure.serverFailure());
       }
     } catch (e) {
+      print(e.toString());
       if (e is DioException && e.response?.statusCode == 500) {
         return const Left(MainFailure.serverFailure());
       } else if (e is SocketException) {
@@ -47,14 +48,16 @@ class LoginRepo extends LoginService {
   }
 
   @override
-  Future<Either<MainFailure, void>> loginWithGoogle(String email) async{
+  Future<Either<MainFailure, void>> loginWithGoogle(String email) async {
     print(email);
     try {
       final Response response = await Dio(BaseOptions(headers: {
         "Content-Type": "application/json",
       })).post(
         "${baseUrl}users/auth/login/api/token/google/",
-        data: {"email": email,},
+        data: {
+          "email": email,
+        },
       );
       if (response.statusCode == 200 || response.statusCode == 201) {
         final tokenModel = TokenModel.fromJson(response.data);
@@ -66,6 +69,7 @@ class LoginRepo extends LoginService {
         return const Left(MainFailure.serverFailure());
       }
     } catch (e) {
+      print(e.toString());
       if (e is DioException && e.response?.statusCode == 500) {
         return const Left(MainFailure.serverFailure());
       } else if (e is SocketException) {

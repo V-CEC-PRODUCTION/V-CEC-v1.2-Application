@@ -57,6 +57,7 @@ class VerifyEmailAndSignUpWithGoogleCubit
                 emit(state.copyWith(
                     isFailureOrSuccessForGoogle: some(right(r)),
                     isLoading: false))
+                  
               });
     });
   }

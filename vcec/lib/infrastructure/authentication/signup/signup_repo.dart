@@ -31,6 +31,7 @@ class SignupRepo implements SignupService {
       if (response.statusCode == 200 || response.statusCode == 201) {
         final OtpModel otpModel = OtpModel.fromJson(response.data);
         AuthTokenManager.instance.setEmail(email);
+        AuthTokenManager.instance.setLoginType(LoginType.email);
         return Right(otpModel);
       } else {
         return const Left(MainFailure.serverFailure());
@@ -42,7 +43,7 @@ class SignupRepo implements SignupService {
       } else if (e is SocketException) {
         return const Left(MainFailure.clientFailure());
       } else if (e is DioException && e.response?.statusCode == 409) {
-        return const Left( MainFailure.authFailure());
+        return const Left(MainFailure.authFailure());
       } else {
         return const Left(MainFailure.otherFailure());
       }
@@ -69,6 +70,7 @@ class SignupRepo implements SignupService {
         return const Left(MainFailure.serverFailure());
       }
     } catch (e) {
+      print(e);
       if (e is DioException && e.response?.statusCode == 500) {
         return const Left(MainFailure.serverFailure());
       } else if (e is SocketException) {
@@ -108,6 +110,7 @@ class SignupRepo implements SignupService {
         return const Left(MainFailure.serverFailure());
       }
     } catch (e) {
+      print(e.toString());
       if (e is DioException && e.response?.statusCode == 500) {
         return const Left(MainFailure.serverFailure());
       } else if (e is SocketException) {
@@ -141,6 +144,7 @@ class SignupRepo implements SignupService {
       } else {
         AuthTokenManager.instance.setUserRole(UserRole.guest);
       }
+
       return firebaseAuth
           .signInWithCredential(authcredential)
           .then((r) => Right(r.user!));
@@ -162,6 +166,7 @@ class SignupRepo implements SignupService {
         data: {"email": email, "login_type": 'google'},
       );
       if (response.statusCode == 200 || response.statusCode == 201) {
+        AuthTokenManager.instance.setLoginType(LoginType.google);
         return const Right(null);
       } else {
         return const Left(MainFailure.serverFailure());
@@ -170,6 +175,7 @@ class SignupRepo implements SignupService {
       if (e is DioException && e.response?.statusCode == 500) {
         return const Left(MainFailure.serverFailure());
       } else if (e is DioException && e.response?.statusCode == 409) {
+        AuthTokenManager.instance.setLoginType(LoginType.google);
         return const Left(MainFailure.incorrectCredential());
       } else if (e is DioException && e.response?.statusCode == 404) {
         return const Right(null);
@@ -204,6 +210,41 @@ class SignupRepo implements SignupService {
         return const Left(MainFailure.serverFailure());
       }
     } catch (e) {
+      print(e.toString());
+      if (e is DioException && e.response?.statusCode == 500) {
+        return const Left(MainFailure.serverFailure());
+      } else if (e is SocketException) {
+        return const Left(MainFailure.clientFailure());
+      } else {
+        return const Left(MainFailure.otherFailure());
+      }
+    }
+  }
+
+  @override
+  Future<Either<MainFailure, void>> signUpWithGoogleFromAccounts({
+    required String email,
+  }) async {
+    try {
+      final Response response = await Dio(BaseOptions(headers: {
+        "Content-Type": "application/json",
+      })).post(
+        "${baseUrl}users/auth/sign-up/google/",
+        data: {
+          "email": email,
+        },
+      );
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        final tokenModel = TokenModel.fromJson(response.data);
+        AuthTokenManager.instance.setTokens(
+            accessToken: tokenModel.accessToken!,
+            refreshToken: tokenModel.refreshToken!);
+        return const Right(null);
+      } else {
+        return const Left(MainFailure.serverFailure());
+      }
+    } catch (e) {
+      print(e);
       if (e is DioException && e.response?.statusCode == 500) {
         return const Left(MainFailure.serverFailure());
       } else if (e is SocketException) {

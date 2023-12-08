@@ -13,7 +13,6 @@ class NotificationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final sizew = MediaQuery.of(context).size.width;
     return Scaffold(
       body: SafeArea(
           child: SingleChildScrollView(
