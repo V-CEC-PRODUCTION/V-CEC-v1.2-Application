@@ -4,9 +4,10 @@ import 'package:vcec/core/constants.dart';
 import 'package:vcec/presentation/auth_screens/otp_verification/otp_verification_screen.dart';
 
 class AuthTopTitleWithBackWidget extends StatelessWidget {
-   AuthTopTitleWithBackWidget({
+  AuthTopTitleWithBackWidget({
     super.key,
-    required this.title, required this.fontSize,
+    required this.title,
+    required this.fontSize,
   });
   final String title;
   final double fontSize;

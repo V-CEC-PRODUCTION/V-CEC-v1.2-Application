@@ -4,7 +4,8 @@ class SignUpButtonWidget extends StatelessWidget {
   const SignUpButtonWidget({
     super.key,
     required this.title,
-    required this.buttonTitle, required this.onTap,
+    required this.buttonTitle,
+    required this.onTap,
   });
   final String title;
   final String buttonTitle;

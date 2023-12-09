@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vcec/core/colors.dart';
 import 'package:vcec/core/constants.dart';
-import 'package:vcec/presentation/common_widgets/message_icon.dart';
 import 'package:vcec/presentation/common_widgets/notification_icon.dart';
 import 'package:vcec/presentation/events/events_widgets/announcments_widget.dart';
 import 'package:vcec/presentation/events/events_widgets/eventsforyou_widget.dart';
@@ -41,19 +40,6 @@ class EventsScreen extends StatelessWidget {
               ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: GestureDetector(
-              onTap: () {},
-              child: Container(
-                color: appbarbuttonbackground,
-                child: const Padding(
-                    padding: EdgeInsets.only(
-                        left: 6, right: 6, top: 2.5, bottom: 1.5),
-                    child: MessageIcon()),
-              ),
-            ),
-          )
         ],
       ),
       body: SafeArea(

@@ -68,11 +68,12 @@ class _$GalleryIndividualStateCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_GalleryIndividualStateCopyWith<$Res>
+abstract class _$$GalleryIndividualStateImplCopyWith<$Res>
     implements $GalleryIndividualStateCopyWith<$Res> {
-  factory _$$_GalleryIndividualStateCopyWith(_$_GalleryIndividualState value,
-          $Res Function(_$_GalleryIndividualState) then) =
-      __$$_GalleryIndividualStateCopyWithImpl<$Res>;
+  factory _$$GalleryIndividualStateImplCopyWith(
+          _$GalleryIndividualStateImpl value,
+          $Res Function(_$GalleryIndividualStateImpl) then) =
+      __$$GalleryIndividualStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -81,12 +82,13 @@ abstract class _$$_GalleryIndividualStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_GalleryIndividualStateCopyWithImpl<$Res>
+class __$$GalleryIndividualStateImplCopyWithImpl<$Res>
     extends _$GalleryIndividualStateCopyWithImpl<$Res,
-        _$_GalleryIndividualState>
-    implements _$$_GalleryIndividualStateCopyWith<$Res> {
-  __$$_GalleryIndividualStateCopyWithImpl(_$_GalleryIndividualState _value,
-      $Res Function(_$_GalleryIndividualState) _then)
+        _$GalleryIndividualStateImpl>
+    implements _$$GalleryIndividualStateImplCopyWith<$Res> {
+  __$$GalleryIndividualStateImplCopyWithImpl(
+      _$GalleryIndividualStateImpl _value,
+      $Res Function(_$GalleryIndividualStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -95,7 +97,7 @@ class __$$_GalleryIndividualStateCopyWithImpl<$Res>
     Object? galleryIndividual = freezed,
     Object? failureOrSuccess = null,
   }) {
-    return _then(_$_GalleryIndividualState(
+    return _then(_$GalleryIndividualStateImpl(
       galleryIndividual: freezed == galleryIndividual
           ? _value.galleryIndividual
           : galleryIndividual // ignore: cast_nullable_to_non_nullable
@@ -110,8 +112,8 @@ class __$$_GalleryIndividualStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_GalleryIndividualState implements _GalleryIndividualState {
-  const _$_GalleryIndividualState(
+class _$GalleryIndividualStateImpl implements _GalleryIndividualState {
+  const _$GalleryIndividualStateImpl(
       {required this.galleryIndividual, required this.failureOrSuccess});
 
   @override
@@ -128,7 +130,7 @@ class _$_GalleryIndividualState implements _GalleryIndividualState {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_GalleryIndividualState &&
+            other is _$GalleryIndividualStateImpl &&
             (identical(other.galleryIndividual, galleryIndividual) ||
                 other.galleryIndividual == galleryIndividual) &&
             (identical(other.failureOrSuccess, failureOrSuccess) ||
@@ -142,16 +144,16 @@ class _$_GalleryIndividualState implements _GalleryIndividualState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_GalleryIndividualStateCopyWith<_$_GalleryIndividualState> get copyWith =>
-      __$$_GalleryIndividualStateCopyWithImpl<_$_GalleryIndividualState>(
-          this, _$identity);
+  _$$GalleryIndividualStateImplCopyWith<_$GalleryIndividualStateImpl>
+      get copyWith => __$$GalleryIndividualStateImplCopyWithImpl<
+          _$GalleryIndividualStateImpl>(this, _$identity);
 }
 
 abstract class _GalleryIndividualState implements GalleryIndividualState {
   const factory _GalleryIndividualState(
       {required final GalleryPressedModel? galleryIndividual,
       required final Option<Either<MainFailure, GalleryPressedModel>>
-          failureOrSuccess}) = _$_GalleryIndividualState;
+          failureOrSuccess}) = _$GalleryIndividualStateImpl;
 
   @override
   GalleryPressedModel? get galleryIndividual;
@@ -159,6 +161,6 @@ abstract class _GalleryIndividualState implements GalleryIndividualState {
   Option<Either<MainFailure, GalleryPressedModel>> get failureOrSuccess;
   @override
   @JsonKey(ignore: true)
-  _$$_GalleryIndividualStateCopyWith<_$_GalleryIndividualState> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$GalleryIndividualStateImplCopyWith<_$GalleryIndividualStateImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

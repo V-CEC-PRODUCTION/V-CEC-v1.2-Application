@@ -22,17 +22,7 @@ class LoginWithGoogleWidget extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          Container(
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                image: NetworkImage(
-                  'https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/1200px-Google_%22G%22_Logo.svg.png',
-                ),
-              ),
-            ),
-            width: 25.w,
-            height: 25.w,
-          ),
+         
           Padding(
             padding: EdgeInsets.only(right: 25.w),
             child: Text(

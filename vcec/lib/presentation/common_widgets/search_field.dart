@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vcec/application/departments/rsearch/department_search_cubit.dart';
 import 'package:vcec/presentation/common_widgets/appbar_with_search.dart';
@@ -45,7 +44,8 @@ class SearchField extends StatelessWidget {
         },
         decoration: InputDecoration(
           hintText: hintText,
-          contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+          contentPadding:
+              const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
             borderSide: const BorderSide(

@@ -6,6 +6,7 @@ import 'package:vcec/domain/auth_token_manager/auth_token_manager.dart';
 import 'package:vcec/domain/auth_token_manager/auth_token_sevice.dart';
 import 'package:vcec/domain/failure/main_failure.dart';
 import 'package:vcec/strings/strings.dart';
+
 @LazySingleton(as: AuthTokenService)
 class AuthTokenRepo extends AuthTokenService {
   @override

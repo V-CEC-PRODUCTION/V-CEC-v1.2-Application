@@ -20,8 +20,8 @@ class _StoryPartState extends State<StoryWidget> {
         kwidth10,
         GestureDetector(
           onTap: () {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => StoryUploadWidget()));
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => StoryUploadWidget()));
           },
           child: Stack(
             children: [

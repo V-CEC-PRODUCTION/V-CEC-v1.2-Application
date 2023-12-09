@@ -32,7 +32,7 @@ class LoginRepo extends LoginService {
         return const Left(MainFailure.serverFailure());
       }
     } catch (e) {
-      print(e.toString());
+      print(e.toString() + "eeeee");
       if (e is DioException && e.response?.statusCode == 500) {
         return const Left(MainFailure.serverFailure());
       } else if (e is SocketException) {

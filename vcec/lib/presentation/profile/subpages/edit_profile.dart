@@ -180,8 +180,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 }
 
 class _TextFieldWithTitle extends StatelessWidget {
-  const _TextFieldWithTitle(
-      {required this.title, required this.controller});
+  const _TextFieldWithTitle({required this.title, required this.controller});
   final String title;
   final TextEditingController controller;
   @override

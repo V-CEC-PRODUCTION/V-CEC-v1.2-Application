@@ -53,9 +53,7 @@ class VerifiedScreen extends StatelessWidget {
                 borderRadius: 8,
                 onclick: () {
                   Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => CreatePasswordScreen(
-                  
-                    ),
+                    builder: (context) => CreatePasswordScreen(),
                   ));
                 }),
           ),

@@ -67,11 +67,11 @@ class _$CarouselStateCopyWithImpl<$Res, $Val extends CarouselState>
 }
 
 /// @nodoc
-abstract class _$$_CarouselStateCopyWith<$Res>
+abstract class _$$CarouselStateImplCopyWith<$Res>
     implements $CarouselStateCopyWith<$Res> {
-  factory _$$_CarouselStateCopyWith(
-          _$_CarouselState value, $Res Function(_$_CarouselState) then) =
-      __$$_CarouselStateCopyWithImpl<$Res>;
+  factory _$$CarouselStateImplCopyWith(
+          _$CarouselStateImpl value, $Res Function(_$CarouselStateImpl) then) =
+      __$$CarouselStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -81,11 +81,11 @@ abstract class _$$_CarouselStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_CarouselStateCopyWithImpl<$Res>
-    extends _$CarouselStateCopyWithImpl<$Res, _$_CarouselState>
-    implements _$$_CarouselStateCopyWith<$Res> {
-  __$$_CarouselStateCopyWithImpl(
-      _$_CarouselState _value, $Res Function(_$_CarouselState) _then)
+class __$$CarouselStateImplCopyWithImpl<$Res>
+    extends _$CarouselStateCopyWithImpl<$Res, _$CarouselStateImpl>
+    implements _$$CarouselStateImplCopyWith<$Res> {
+  __$$CarouselStateImplCopyWithImpl(
+      _$CarouselStateImpl _value, $Res Function(_$CarouselStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -94,7 +94,7 @@ class __$$_CarouselStateCopyWithImpl<$Res>
     Object? carouselImages = freezed,
     Object? carouselFailureOrSuccess = null,
   }) {
-    return _then(_$_CarouselState(
+    return _then(_$CarouselStateImpl(
       carouselImages: freezed == carouselImages
           ? _value._carouselImages
           : carouselImages // ignore: cast_nullable_to_non_nullable
@@ -109,8 +109,8 @@ class __$$_CarouselStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_CarouselState implements _CarouselState {
-  const _$_CarouselState(
+class _$CarouselStateImpl implements _CarouselState {
+  const _$CarouselStateImpl(
       {required final List<CarouselImage>? carouselImages,
       required this.carouselFailureOrSuccess})
       : _carouselImages = carouselImages;
@@ -138,7 +138,7 @@ class _$_CarouselState implements _CarouselState {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_CarouselState &&
+            other is _$CarouselStateImpl &&
             const DeepCollectionEquality()
                 .equals(other._carouselImages, _carouselImages) &&
             (identical(
@@ -155,15 +155,15 @@ class _$_CarouselState implements _CarouselState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_CarouselStateCopyWith<_$_CarouselState> get copyWith =>
-      __$$_CarouselStateCopyWithImpl<_$_CarouselState>(this, _$identity);
+  _$$CarouselStateImplCopyWith<_$CarouselStateImpl> get copyWith =>
+      __$$CarouselStateImplCopyWithImpl<_$CarouselStateImpl>(this, _$identity);
 }
 
 abstract class _CarouselState implements CarouselState {
   const factory _CarouselState(
       {required final List<CarouselImage>? carouselImages,
       required final Option<Either<MainFailure, List<CarouselImage>>>
-          carouselFailureOrSuccess}) = _$_CarouselState;
+          carouselFailureOrSuccess}) = _$CarouselStateImpl;
 
   @override
   List<CarouselImage>? get carouselImages;
@@ -171,6 +171,6 @@ abstract class _CarouselState implements CarouselState {
   Option<Either<MainFailure, List<CarouselImage>>> get carouselFailureOrSuccess;
   @override
   @JsonKey(ignore: true)
-  _$$_CarouselStateCopyWith<_$_CarouselState> get copyWith =>
+  _$$CarouselStateImplCopyWith<_$CarouselStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

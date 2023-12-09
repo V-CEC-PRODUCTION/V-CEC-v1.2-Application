@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'package:vcec/core/constants.dart';
 import 'package:vcec/presentation/common_widgets/avatar.dart';
-import 'package:vcec/presentation/common_widgets/message_icon.dart';
 import 'package:vcec/presentation/common_widgets/notification_icon.dart';
 import 'package:vcec/presentation/common_widgets/search_field.dart';
 
@@ -56,7 +55,6 @@ class AppbarWithSearch extends PreferredSize {
                       Spacer(),
                       NotificationIcon(),
                       kwidth10,
-                      MessageIcon(),
                       kwidth20,
                     ],
                   ),

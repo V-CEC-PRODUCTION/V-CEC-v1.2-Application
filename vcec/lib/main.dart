@@ -11,6 +11,7 @@ import 'package:vcec/application/main_menu/carousel/carousel_cubit.dart';
 import 'package:vcec/application/main_menu/highlights/highlights_cubit.dart';
 import 'package:vcec/application/main_menu/timetable/timetable_cubit.dart';
 import 'package:vcec/application/notices/notices_cubit_cubit.dart';
+import 'package:vcec/application/profile/profile_cubit.dart';
 import 'package:vcec/application/signup/create_new_account/create_new_account_cubit.dart';
 import 'package:vcec/application/signup/verify_email/verify_email_cubit.dart';
 import 'package:vcec/application/splash_screen/splash_screen_cubit.dart';
@@ -75,7 +76,9 @@ class MyApp extends StatelessWidget {
         BlocProvider<LogOutCubit>(
           create: (context) => getIt<LogOutCubit>(),
         ),
-       
+          BlocProvider<ProfileCubit>(
+          create: (context) => getIt<ProfileCubit>(),
+        ),
       ],
       child: ScreenUtilInit(
           designSize: const Size(480, 1019),
@@ -86,14 +89,14 @@ class MyApp extends StatelessWidget {
               theme: ThemeData(
                 useMaterial3: true,
               ),
-              initialRoute: '/',
+              initialRoute: '/home',
               routes: {
-                '/': (context) => SplashScreen(),
-                '/login': (context) => LoginPage(),
-                '/signup': (context) => SignUpScreen(),
+                 '/': (context) => const SplashScreen(),
+                 '/login': (context) => const LoginPage(),
+                 '/signup': (context) => const SignUpScreen(),
                 '/home': (context) => HomeScreen(),
-                '/otp_verification': (context) => OtpVerificationScreen(),
-                '/otp_verified': (context) => VerifiedScreen(),
+                 '/otp_verification': (context) => OtpVerificationScreen(),
+                 '/otp_verified': (context) => const VerifiedScreen(),
               },
             );
           }),

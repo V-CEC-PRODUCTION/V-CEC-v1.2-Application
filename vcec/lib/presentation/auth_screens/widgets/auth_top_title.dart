@@ -3,8 +3,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:vcec/presentation/auth_screens/otp_verification/otp_verification_screen.dart';
 
 class AuthTopTitleWidget extends StatelessWidget {
-   AuthTopTitleWidget({
-    super.key, required this.title,
+  AuthTopTitleWidget({
+    super.key,
+    required this.title,
   });
   final String title;
   @override

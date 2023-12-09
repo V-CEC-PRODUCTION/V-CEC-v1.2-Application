@@ -20,36 +20,34 @@ class LogOutCubit extends Cubit<LogOutState> {
     emit(state.copyWith(isLoading: true, isFailureOrSuccess: none()));
     final validationResponse = await _authTokenService.validateToken();
     validationResponse.fold((l) async {
-      if(l is AuthFailure)
-      {
-         final refreshTokenResponse = await _authTokenService.getAccessToken();
-      refreshTokenResponse.fold((l) {}, (r) async{
-         final response = await _signupService.logOut();
-    response.fold(
-        (l) => {
-              emit(state.copyWith(
-                  isLoading: false, isFailureOrSuccess: some(left(l))))
-            },
-        (r) => {
-              _authTokenService.deleteToken(),
-              emit(state.copyWith(
-                  isLoading: false, isFailureOrSuccess: some(right(r))))
-            });
-      });
+      if (l is AuthFailure) {
+        final refreshTokenResponse = await _authTokenService.getAccessToken();
+        refreshTokenResponse.fold((l) {}, (r) async {
+          final response = await _signupService.logOut();
+          response.fold(
+              (l) => {
+                    emit(state.copyWith(
+                        isLoading: false, isFailureOrSuccess: some(left(l))))
+                  },
+              (r) => {
+                    _authTokenService.deleteToken(),
+                    emit(state.copyWith(
+                        isLoading: false, isFailureOrSuccess: some(right(r))))
+                  });
+        });
       }
-     
-    }, (r) async{
-       final response = await _signupService.logOut();
-    response.fold(
-        (l) => {
-              emit(state.copyWith(
-                  isLoading: false, isFailureOrSuccess: some(left(l))))
-            },
-        (r) => {
-              _authTokenService.deleteToken(),
-              emit(state.copyWith(
-                  isLoading: false, isFailureOrSuccess: some(right(r))))
-            });
+    }, (r) async {
+      final response = await _signupService.logOut();
+      response.fold(
+          (l) => {
+                emit(state.copyWith(
+                    isLoading: false, isFailureOrSuccess: some(left(l))))
+              },
+          (r) => {
+                _authTokenService.deleteToken(),
+                emit(state.copyWith(
+                    isLoading: false, isFailureOrSuccess: some(right(r))))
+              });
     });
   }
 }

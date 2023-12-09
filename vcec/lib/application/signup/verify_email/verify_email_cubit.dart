@@ -48,16 +48,13 @@ class VerifyEmailAndSignUpWithGoogleCubit
                 emit(state.copyWith(
                     isFailureOrSuccessForGoogle: some(left(l)),
                     isLoading: false)),
-                    if(l == const MainFailure.incorrectCredential())
-                    {
-                        _signupService.signOut()
-                    }
+                if (l == const MainFailure.incorrectCredential())
+                  {_signupService.signOut()}
               },
           (r) => {
                 emit(state.copyWith(
                     isFailureOrSuccessForGoogle: some(right(r)),
                     isLoading: false))
-                  
               });
     });
   }

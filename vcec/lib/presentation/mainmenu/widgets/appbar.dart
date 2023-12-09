@@ -127,7 +127,6 @@ class _MainmenuAppbarState extends State<MainmenuAppbar> {
                             ),
                           ),
                           NotificationIcon(),
-                          MessageIcon()
                         ],
                       ),
                     ),

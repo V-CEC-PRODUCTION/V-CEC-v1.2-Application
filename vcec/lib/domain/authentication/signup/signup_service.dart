@@ -18,5 +18,5 @@ abstract class SignupService {
   Future<Either<MainFailure, void>> postUserDetails(
       {required UserDetailsModel userDetailsModel});
   Future<void> signOut();
-  Future<Either<MainFailure,void>> logOut();
+  Future<Either<MainFailure, void>> logOut();
 }

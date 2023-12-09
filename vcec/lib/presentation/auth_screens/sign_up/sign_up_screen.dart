@@ -44,7 +44,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     context: context,
                     text: "Something wrong with your network");
               } else if (failure == const MainFailure.authFailure()) {
-                displaySnackBar(context: context, text: 'Account already exists');
+                displaySnackBar(
+                    context: context, text: 'Account already exists');
               } else {
                 displaySnackBar(
                     context: context, text: "Something Unexpected Happened");

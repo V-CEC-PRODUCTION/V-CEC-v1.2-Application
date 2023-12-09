@@ -66,11 +66,11 @@ class _$TimetableStateCopyWithImpl<$Res, $Val extends TimetableState>
 }
 
 /// @nodoc
-abstract class _$$_InitialCopyWith<$Res>
+abstract class _$$InitialImplCopyWith<$Res>
     implements $TimetableStateCopyWith<$Res> {
-  factory _$$_InitialCopyWith(
-          _$_Initial value, $Res Function(_$_Initial) then) =
-      __$$_InitialCopyWithImpl<$Res>;
+  factory _$$InitialImplCopyWith(
+          _$InitialImpl value, $Res Function(_$InitialImpl) then) =
+      __$$InitialImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -79,10 +79,11 @@ abstract class _$$_InitialCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_InitialCopyWithImpl<$Res>
-    extends _$TimetableStateCopyWithImpl<$Res, _$_Initial>
-    implements _$$_InitialCopyWith<$Res> {
-  __$$_InitialCopyWithImpl(_$_Initial _value, $Res Function(_$_Initial) _then)
+class __$$InitialImplCopyWithImpl<$Res>
+    extends _$TimetableStateCopyWithImpl<$Res, _$InitialImpl>
+    implements _$$InitialImplCopyWith<$Res> {
+  __$$InitialImplCopyWithImpl(
+      _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -91,7 +92,7 @@ class __$$_InitialCopyWithImpl<$Res>
     Object? timetable = freezed,
     Object? timetableFailureOrSuccess = null,
   }) {
-    return _then(_$_Initial(
+    return _then(_$InitialImpl(
       timetable: freezed == timetable
           ? _value.timetable
           : timetable // ignore: cast_nullable_to_non_nullable
@@ -106,8 +107,8 @@ class __$$_InitialCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Initial implements _Initial {
-  const _$_Initial(
+class _$InitialImpl implements _Initial {
+  const _$InitialImpl(
       {required this.timetable, required this.timetableFailureOrSuccess});
 
   @override
@@ -124,7 +125,7 @@ class _$_Initial implements _Initial {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Initial &&
+            other is _$InitialImpl &&
             (identical(other.timetable, timetable) ||
                 other.timetable == timetable) &&
             (identical(other.timetableFailureOrSuccess,
@@ -139,15 +140,15 @@ class _$_Initial implements _Initial {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_InitialCopyWith<_$_Initial> get copyWith =>
-      __$$_InitialCopyWithImpl<_$_Initial>(this, _$identity);
+  _$$InitialImplCopyWith<_$InitialImpl> get copyWith =>
+      __$$InitialImplCopyWithImpl<_$InitialImpl>(this, _$identity);
 }
 
 abstract class _Initial implements TimetableState {
   const factory _Initial(
       {required final TimetableModel? timetable,
       required final Option<Either<MainFailure, TimetableModel>>
-          timetableFailureOrSuccess}) = _$_Initial;
+          timetableFailureOrSuccess}) = _$InitialImpl;
 
   @override
   TimetableModel? get timetable;
@@ -155,6 +156,6 @@ abstract class _Initial implements TimetableState {
   Option<Either<MainFailure, TimetableModel>> get timetableFailureOrSuccess;
   @override
   @JsonKey(ignore: true)
-  _$$_InitialCopyWith<_$_Initial> get copyWith =>
+  _$$InitialImplCopyWith<_$InitialImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
