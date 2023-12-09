@@ -3,12 +3,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_wall_layout/flutter_wall_layout.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:vcec/application/gallery/gallery_cubit.dart';
+import 'package:vcec/core/constants.dart';
 import 'package:vcec/domain/failure/main_failure.dart';
+import 'package:vcec/presentation/common_widgets/sub_heading.dart';
+import 'package:vcec/presentation/mainmenu/subpages/cec_gallery_screen1.dart';
 import 'package:vcec/presentation/mainmenu/widgets/gallery_tile.dart';
 
 class CecGallery extends StatelessWidget {
-  const CecGallery({super.key});
-
+  CecGallery({super.key});
+  int galleryLength = 1;
   @override
   Widget build(BuildContext context) {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
@@ -40,8 +43,12 @@ class CecGallery extends StatelessWidget {
             ),
           );
         });
-        return state.galleryfiles == null
-            ? Shimmer.fromColors(
+        if (state.galleryfiles == null) {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SubHeading(text: 'CEC Gallery'),
+              Shimmer.fromColors(
                 baseColor: Color.fromARGB(255, 0, 0, 0),
                 highlightColor: Color.fromARGB(255, 207, 207, 207),
                 child: Container(
@@ -53,11 +60,26 @@ class CecGallery extends StatelessWidget {
                     borderRadius: BorderRadius.circular(20),
                   ),
                 ),
-              )
-            : WallLayout(
-                stones: List.generate(6, (index) {
+              ),
+            ],
+          );
+        } else {
+          galleryLength = state.galleryfiles!.length;
+          if (galleryLength > 6) {
+            galleryLength = 6;
+          }
+          if (galleryLength == 0) {
+            return SizedBox();
+          }
+          return Column(
+            children: [
+              _HeadingPortion(),
+              WallLayout(
+                stones: List.generate(galleryLength, (index) {
+                  print(state.galleryfiles![index]);
                   final galleryImages = state.galleryfiles![index % 5];
                   return buildGalleryItem(
+                      context: context,
                       id: index,
                       tag: galleryImages.tag!,
                       imageUrl: galleryImages.mediaUrl!,
@@ -66,8 +88,37 @@ class CecGallery extends StatelessWidget {
                 layersCount: 5,
                 scrollDirection: Axis.vertical,
                 reverse: false,
-              );
+              ),
+            ],
+          );
+        }
       },
+    );
+  }
+}
+
+class _HeadingPortion extends StatelessWidget {
+  const _HeadingPortion({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        kwidth20,
+        SubHeading(text: 'CEC Gallery'),
+        Spacer(),
+        GestureDetector(
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => CecGalleryScreen(),
+                ));
+          },
+          child: Text('view all'),
+        ),
+        kwidth20,
+      ],
     );
   }
 }

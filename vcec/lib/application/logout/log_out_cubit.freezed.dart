@@ -65,11 +65,11 @@ class _$LogOutStateCopyWithImpl<$Res, $Val extends LogOutState>
 }
 
 /// @nodoc
-abstract class _$$_LogOutStateCopyWith<$Res>
+abstract class _$$LogOutStateImplCopyWith<$Res>
     implements $LogOutStateCopyWith<$Res> {
-  factory _$$_LogOutStateCopyWith(
-          _$_LogOutState value, $Res Function(_$_LogOutState) then) =
-      __$$_LogOutStateCopyWithImpl<$Res>;
+  factory _$$LogOutStateImplCopyWith(
+          _$LogOutStateImpl value, $Res Function(_$LogOutStateImpl) then) =
+      __$$LogOutStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -77,11 +77,11 @@ abstract class _$$_LogOutStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_LogOutStateCopyWithImpl<$Res>
-    extends _$LogOutStateCopyWithImpl<$Res, _$_LogOutState>
-    implements _$$_LogOutStateCopyWith<$Res> {
-  __$$_LogOutStateCopyWithImpl(
-      _$_LogOutState _value, $Res Function(_$_LogOutState) _then)
+class __$$LogOutStateImplCopyWithImpl<$Res>
+    extends _$LogOutStateCopyWithImpl<$Res, _$LogOutStateImpl>
+    implements _$$LogOutStateImplCopyWith<$Res> {
+  __$$LogOutStateImplCopyWithImpl(
+      _$LogOutStateImpl _value, $Res Function(_$LogOutStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -90,7 +90,7 @@ class __$$_LogOutStateCopyWithImpl<$Res>
     Object? isLoading = null,
     Object? isFailureOrSuccess = null,
   }) {
-    return _then(_$_LogOutState(
+    return _then(_$LogOutStateImpl(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -105,8 +105,8 @@ class __$$_LogOutStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_LogOutState implements _LogOutState {
-  const _$_LogOutState(
+class _$LogOutStateImpl implements _LogOutState {
+  const _$LogOutStateImpl(
       {required this.isLoading, required this.isFailureOrSuccess});
 
   @override
@@ -123,7 +123,7 @@ class _$_LogOutState implements _LogOutState {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_LogOutState &&
+            other is _$LogOutStateImpl &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.isFailureOrSuccess, isFailureOrSuccess) ||
@@ -136,15 +136,15 @@ class _$_LogOutState implements _LogOutState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_LogOutStateCopyWith<_$_LogOutState> get copyWith =>
-      __$$_LogOutStateCopyWithImpl<_$_LogOutState>(this, _$identity);
+  _$$LogOutStateImplCopyWith<_$LogOutStateImpl> get copyWith =>
+      __$$LogOutStateImplCopyWithImpl<_$LogOutStateImpl>(this, _$identity);
 }
 
 abstract class _LogOutState implements LogOutState {
   const factory _LogOutState(
       {required final bool isLoading,
       required final Option<Either<MainFailure, void>>
-          isFailureOrSuccess}) = _$_LogOutState;
+          isFailureOrSuccess}) = _$LogOutStateImpl;
 
   @override
   bool get isLoading;
@@ -152,6 +152,6 @@ abstract class _LogOutState implements LogOutState {
   Option<Either<MainFailure, void>> get isFailureOrSuccess;
   @override
   @JsonKey(ignore: true)
-  _$$_LogOutStateCopyWith<_$_LogOutState> get copyWith =>
+  _$$LogOutStateImplCopyWith<_$LogOutStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

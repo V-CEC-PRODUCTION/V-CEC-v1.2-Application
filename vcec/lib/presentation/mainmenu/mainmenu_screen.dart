@@ -60,10 +60,7 @@ class MainMenuScreen extends StatelessWidget {
                 StoryWidget(),
                 kheight10,
                 CarouselMainManu(),
-                Padding(
-                  padding: const EdgeInsets.only(left: 20, top: 10),
-                  child: SubHeading(text: 'Highlights'),
-                ),
+
                 kheight10,
                 Highlights(),
                 kheight10,
@@ -72,24 +69,7 @@ class MainMenuScreen extends StatelessWidget {
                 //     child: SubHeading(text: 'CEC Today'),
                 //   ),
                 //   CecToday(),
-                Row(
-                  children: [
-                    kwidth20,
-                    SubHeading(text: 'CEC Gallery'),
-                    Spacer(),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => CecGalleryScreen(),
-                            ));
-                      },
-                      child: Text('view all'),
-                    ),
-                    kwidth20,
-                  ],
-                ),
+                
                 CecGallery(),
               ],
             ),

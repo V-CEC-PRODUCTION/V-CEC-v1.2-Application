@@ -37,7 +37,6 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       final id = await FirebaseMessaging.instance.getToken();
-      print(id);
     });
     ValueNotifier<bool> obtext = ValueNotifier<bool>(false);
     final size1 = MediaQuery.of(context).size.width;

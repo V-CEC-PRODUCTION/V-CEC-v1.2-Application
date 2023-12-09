@@ -1,10 +1,10 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:injectable/injectable.dart';
 import 'package:vcec/application/departments/rsearch/department_search_cubit.dart';
 import 'package:vcec/application/gallery/gallery_cubit.dart';
-import 'package:vcec/application/gallery/gallery_individual_cubit.dart';
 import 'package:vcec/application/login/login_cubit.dart';
 import 'package:vcec/application/logout/log_out_cubit.dart';
 import 'package:vcec/application/main_menu/carousel/carousel_cubit.dart';
@@ -30,9 +30,14 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   await NotificationHandle().initiateAndListenNotification();
   await configureInjection(Environment.prod);
   runApp(const MyApp());
+}
+
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  await Firebase.initializeApp();
 }
 
 class MyApp extends StatelessWidget {
@@ -58,9 +63,6 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider<GalleryCubit>(
           create: (context) => getIt<GalleryCubit>(),
-        ),
-        BlocProvider<GalleryIndividualCubit>(
-          create: (context) => getIt<GalleryIndividualCubit>(),
         ),
         BlocProvider<SplashScreenCubit>(
           create: (context) => getIt<SplashScreenCubit>(),
@@ -96,6 +98,7 @@ class MyApp extends StatelessWidget {
                 '/otp_verification': (context) => OtpVerificationScreen(),
                 '/otp_verified': (context) => VerifiedScreen(),
               },
+              navigatorKey: navigatorKey,
             );
           }),
     );

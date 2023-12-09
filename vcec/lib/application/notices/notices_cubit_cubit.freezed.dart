@@ -67,11 +67,11 @@ class _$NoticesStateCopyWithImpl<$Res, $Val extends NoticesState>
 }
 
 /// @nodoc
-abstract class _$$_InitialCopyWith<$Res>
+abstract class _$$InitialImplCopyWith<$Res>
     implements $NoticesStateCopyWith<$Res> {
-  factory _$$_InitialCopyWith(
-          _$_Initial value, $Res Function(_$_Initial) then) =
-      __$$_InitialCopyWithImpl<$Res>;
+  factory _$$InitialImplCopyWith(
+          _$InitialImpl value, $Res Function(_$InitialImpl) then) =
+      __$$InitialImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -80,10 +80,11 @@ abstract class _$$_InitialCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_InitialCopyWithImpl<$Res>
-    extends _$NoticesStateCopyWithImpl<$Res, _$_Initial>
-    implements _$$_InitialCopyWith<$Res> {
-  __$$_InitialCopyWithImpl(_$_Initial _value, $Res Function(_$_Initial) _then)
+class __$$InitialImplCopyWithImpl<$Res>
+    extends _$NoticesStateCopyWithImpl<$Res, _$InitialImpl>
+    implements _$$InitialImplCopyWith<$Res> {
+  __$$InitialImplCopyWithImpl(
+      _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -92,7 +93,7 @@ class __$$_InitialCopyWithImpl<$Res>
     Object? cecfailureOrSuccess = null,
     Object? ktufailureOrSuccess = null,
   }) {
-    return _then(_$_Initial(
+    return _then(_$InitialImpl(
       cecfailureOrSuccess: null == cecfailureOrSuccess
           ? _value.cecfailureOrSuccess
           : cecfailureOrSuccess // ignore: cast_nullable_to_non_nullable
@@ -107,8 +108,8 @@ class __$$_InitialCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Initial implements _Initial {
-  const _$_Initial(
+class _$InitialImpl implements _Initial {
+  const _$InitialImpl(
       {required this.cecfailureOrSuccess, required this.ktufailureOrSuccess});
 
   @override
@@ -125,7 +126,7 @@ class _$_Initial implements _Initial {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Initial &&
+            other is _$InitialImpl &&
             (identical(other.cecfailureOrSuccess, cecfailureOrSuccess) ||
                 other.cecfailureOrSuccess == cecfailureOrSuccess) &&
             (identical(other.ktufailureOrSuccess, ktufailureOrSuccess) ||
@@ -139,8 +140,8 @@ class _$_Initial implements _Initial {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_InitialCopyWith<_$_Initial> get copyWith =>
-      __$$_InitialCopyWithImpl<_$_Initial>(this, _$identity);
+  _$$InitialImplCopyWith<_$InitialImpl> get copyWith =>
+      __$$InitialImplCopyWithImpl<_$InitialImpl>(this, _$identity);
 }
 
 abstract class _Initial implements NoticesState {
@@ -148,7 +149,7 @@ abstract class _Initial implements NoticesState {
       {required final Option<Either<MainFailure, List<NoticesResult>>>
           cecfailureOrSuccess,
       required final Option<Either<MainFailure, List<NoticesResult>>>
-          ktufailureOrSuccess}) = _$_Initial;
+          ktufailureOrSuccess}) = _$InitialImpl;
 
   @override
   Option<Either<MainFailure, List<NoticesResult>>> get cecfailureOrSuccess;
@@ -156,6 +157,6 @@ abstract class _Initial implements NoticesState {
   Option<Either<MainFailure, List<NoticesResult>>> get ktufailureOrSuccess;
   @override
   @JsonKey(ignore: true)
-  _$$_InitialCopyWith<_$_Initial> get copyWith =>
+  _$$InitialImplCopyWith<_$InitialImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

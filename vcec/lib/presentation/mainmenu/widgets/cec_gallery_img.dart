@@ -23,6 +23,7 @@ class GalleryTabImg extends StatelessWidget {
         stones: List.generate(
           filteredGalleryFiles.length,
           (index) => buildGalleryItem(
+              context: context,
               id: index,
               tag: filteredGalleryFiles[index].tag!,
               imageUrl: filteredGalleryFiles[index].mediaUrl!,

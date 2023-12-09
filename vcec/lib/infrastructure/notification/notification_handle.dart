@@ -2,11 +2,12 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:vcec/presentation/home/home.dart';
+
+GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 class NotificationHandle {
-  GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
   initiateAndListenNotification() async {
-    FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
     FirebaseMessaging messaging = FirebaseMessaging.instance;
     NotificationSettings settings = await messaging.requestPermission(
       alert: true,
@@ -40,9 +41,10 @@ class NotificationHandle {
       onDidReceiveNotificationResponse: (NotificationResponse response) async {
         String payload = response.payload ?? "";
         if (payload.isNotEmpty) {
+          await Future.delayed(Duration(milliseconds: 400));
           NotificationHandle().handleNotificationNavigation(
             navigatorKey.currentContext!,
-            type: payload,
+            payload: payload,
           );
         }
       },
@@ -50,8 +52,10 @@ class NotificationHandle {
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       RemoteNotification? notification = message.notification;
       AndroidNotification? android = message.notification!.android;
-
       if (notification != null && android != null) {
+        final type = message.data["type"] ?? "home";
+        final eventId = message.data["event_id"] ?? "&";
+        final payload = "$type,$eventId";
         flutterLocalNotificationsPlugin.show(
           notification.hashCode,
           notification.title,
@@ -65,23 +69,26 @@ class NotificationHandle {
               color: Colors.white,
             ),
           ),
-          payload: message.data["type"] ?? "home",
+          payload: payload,
         );
       }
     });
   }
 
-  Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-    await Firebase.initializeApp();
-  }
-
-  handleNotificationNavigation(context, {required String type}) async {
+  handleNotificationNavigation(context, {required String payload}) async {
+    final payloadTokenized = payload.split(",");
+    final String type = payloadTokenized[0];
+    String? eventId;
+    if (payloadTokenized[1] != "&") {
+      eventId = payloadTokenized[1];
+    }
     if (type == 'home') {
-      print("mamaaa");
-      Navigator.pushNamed(
-        context,
-        '/home',
-      );
+      print(eventId);
+      // Navigator.push(
+      //     context,
+      //     MaterialPageRoute(
+      //       builder: (context) => HomeScreen(),
+      //     ));
     } else if (type == 'examresult') {
       Navigator.pushNamed(
         context,
@@ -112,11 +119,6 @@ class NotificationHandle {
         context,
         '/profile',
       );
-    } else {
-      Navigator.pushNamed(
-        context,
-        '/home',
-      );
-    }
+    } else {}
   }
 }
