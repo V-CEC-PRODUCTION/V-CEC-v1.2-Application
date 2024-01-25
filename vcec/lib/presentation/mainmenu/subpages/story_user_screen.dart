@@ -277,7 +277,7 @@ class _StoryScreenState extends State<StoryUserScreen>
           _videoController = null;
           _videoController?.dispose();
           _videoController =
-              VideoPlayerController.networkUrl(Uri(path: story.url))
+              VideoPlayerController.networkUrl(Uri.parse(story.url))
                 ..initialize().then((_) {
                   setState(() {});
                   if (_videoController!.value.isInitialized) {

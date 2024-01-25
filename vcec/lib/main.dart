@@ -91,7 +91,7 @@ class MyApp extends StatelessWidget {
               ),
               initialRoute: '/',
               routes: {
-                '/': (context) => SplashScreen(),
+                '/': (context) => HomeScreen(),
                 '/login': (context) => LoginPage(),
                 '/signup': (context) => SignUpScreen(),
                 '/home': (context) => HomeScreen(),

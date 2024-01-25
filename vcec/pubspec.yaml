@@ -55,29 +55,33 @@ dependencies:
   flutter_swipe_detector: ^2.0.0
   flutter_wall_layout: ^2.1.1
   freezed_annotation: ^2.2.0
+  
   get_it: ^7.6.0
   google_sign_in: ^6.1.5
   http: null
   image: ^3.3.0
   image_picker: ^1.0.4
   injectable: ^2.1.1
-  intl: ^0.18.1
-  octo_image: ^1.0.2
+  intl: ^0.19.0
+  octo_image: ^2.0.0
   pin_input_text_field: ^4.5.1
   pinput: null
   progressive_image: ^2.0.1
   share_plus: null
   shared_preferences: null
-  shimmer: ^2.0.0
-  stories_editor: 0.2.2
-  story: ^1.0.0+1
+  shimmer: ^3.0.0
+
+  stories_editor: ^0.2.2
+
+  story: ^1.1.0
   url_launcher: null
-  video_player: ^2.8.1
+  video_player: ^2.8.2
 
 dev_dependencies:
+  fvm: ^2.4.1
   build_runner: ^2.3.3
   flutter_launcher_icons: ^0.11.0
-  flutter_lints: ^2.0.0
+  flutter_lints: ^3.0.1
   flutter_test:
     sdk: flutter
   freezed: ^2.3.3
