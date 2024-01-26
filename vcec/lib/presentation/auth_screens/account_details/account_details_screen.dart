@@ -242,14 +242,12 @@ class _AccountDetailsScreenState extends State<AccountDetailsScreen> {
                       final UserDetailsModel userDetailsModel;
                       if (AuthTokenManager.instance.userRole ==
                           UserRole.guest) {
-                        
                         if (nameController.text.length < 3) {
                           return;
                         }
                         userDetailsModel =
                             UserDetailsModel(fullName: nameController.text);
                       } else {
-                         
                         final branch = branchDropDownWidget.getSelectedValue();
                         final sem = semesterDropDownWidget.getSelectedValue();
                         final batch = batchDropDownWidget.getSelectedValue();
@@ -270,6 +268,7 @@ class _AccountDetailsScreenState extends State<AccountDetailsScreen> {
                           adNumber: adNumController.text,
                         );
                       }
+
                       BlocProvider.of<CreateNewAccountCubit>(context)
                           .createNewAccount(
                               email: AuthTokenManager.instance.email!,

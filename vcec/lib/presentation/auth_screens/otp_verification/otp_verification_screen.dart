@@ -91,12 +91,15 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                 borderRadius: 8,
                 elevation: 6,
                 onclick: () {
-                  final otp = BlocProvider.of<VerifyEmailAndSignUpWithGoogleCubit>(context)
-                      .state
-                      .otpModel!
-                      .otp;
+                  final otp =
+                      BlocProvider.of<VerifyEmailAndSignUpWithGoogleCubit>(
+                              context)
+                          .state
+                          .otpModel!
+                          .otp;
 
                   if (otp == code2) {
+                    
                     final email = AuthTokenManager.instance.email;
                     final end = email!.substring((email.length) - 13);
                     if (end == "ceconline.edu") {
