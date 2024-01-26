@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:injectable/injectable.dart';
+import 'package:vcec/application/cubit/events_cubit.dart';
 import 'package:vcec/application/departments/rsearch/department_search_cubit.dart';
 import 'package:vcec/application/gallery/gallery_cubit.dart';
 import 'package:vcec/application/login/login_cubit.dart';
@@ -79,6 +80,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider<LogOutCubit>(
           create: (context) => getIt<LogOutCubit>(),
+        ),
+        BlocProvider<EventsCubit>(
+          create: (context) => getIt<EventsCubit>(),
         ),
       ],
       child: ScreenUtilInit(

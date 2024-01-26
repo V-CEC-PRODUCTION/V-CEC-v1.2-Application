@@ -6,18 +6,19 @@ class GalleryFile {
   String? thumbnailUrl;
   String? tag;
   DateTime? uploadTime;
-
+  String? videoUrl;
   GalleryFile({
     this.id,
     this.mediaUrl,
     this.thumbnailUrl,
     this.tag,
     this.uploadTime,
+    this.videoUrl,
   });
 
   @override
   String toString() {
-    return 'GalleryFile(id: $id, mediaUrl: $mediaUrl, thumbnailUrl: $thumbnailUrl, tag: $tag, uploadTime: $uploadTime)';
+    return 'GalleryFile(id: $id, mediaUrl: $mediaUrl, thumbnailUrl: $thumbnailUrl, tag: $tag, uploadTime: $uploadTime, videoUrl: $videoUrl)';
   }
 
   factory GalleryFile.fromMap(Map<String, dynamic> data) => GalleryFile(
@@ -25,6 +26,7 @@ class GalleryFile {
         mediaUrl: data['media_url'] as String?,
         thumbnailUrl: data['thumbnail_url'] as String?,
         tag: data['tag'] as String?,
+        videoUrl: data['video_url'],
         uploadTime: data['upload_time'] == null
             ? null
             : DateTime.parse(data['upload_time'] as String),
