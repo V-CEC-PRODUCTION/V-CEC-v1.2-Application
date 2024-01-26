@@ -21,7 +21,6 @@ import 'package:vcec/presentation/auth_screens/login/login_screen.dart';
 import 'package:vcec/presentation/auth_screens/sign_up/sign_up_screen.dart';
 import 'package:vcec/presentation/home/home.dart';
 import 'package:vcec/presentation/mainmenu/widgets/story_video_text_editor_widget.dart';
-import 'package:vcec/presentation/mainmenu/subpages/textinsta.dart';
 import 'package:vcec/presentation/splash_screen.dart/splash_screen.dart';
 import 'package:vcec/presentation/auth_screens/otp_verification/otp_verification_screen.dart';
 import 'package:vcec/presentation/auth_screens/otp_verification/verified_screen.dart';

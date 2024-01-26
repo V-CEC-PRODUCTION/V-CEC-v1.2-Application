@@ -62,39 +62,21 @@ class _StoryVideoUploadWidgetState extends State<StoryVideoUploadWidget> {
                 }
               }),
             ),
+            StoryVideoTextEditor(),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  IconButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      icon: const Icon(
-                        Icons.close,
-                        size: 30,
-                        color: Colors.white,
-                      ),
-                      style: IconButton.styleFrom(
-                          backgroundColor: Colors.black.withOpacity(0.5))),
-                  IconButton(
-                    onPressed: () {
-                      StoryVideoTextEditor();
-                    },
-                    icon: Icon(
-                      CupertinoIcons.textformat,
-                      size: 30,
-                      color: Colors.white,
-                    ),
-                    style: IconButton.styleFrom(
-                      backgroundColor: Colors.black.withOpacity(0.5),
-                    ),
+              child: IconButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: const Icon(
+                    Icons.close,
+                    size: 30,
+                    color: Colors.white,
                   ),
-                ],
-              ),
+                  style: IconButton.styleFrom(
+                      backgroundColor: Colors.black.withOpacity(0.5))),
             ),
-            StoryVideoTextEditor()
           ]),
         ));
   }
