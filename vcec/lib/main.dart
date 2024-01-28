@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:injectable/injectable.dart';
+import 'package:vcec/application/cubit/events_cubit.dart';
 import 'package:vcec/application/departments/rsearch/department_search_cubit.dart';
 import 'package:vcec/application/edit_profile/edit_profile_cubit.dart';
 import 'package:vcec/application/gallery/gallery_cubit.dart';
@@ -22,6 +23,7 @@ import 'package:vcec/infrastructure/notification/notification_handle.dart';
 import 'package:vcec/presentation/auth_screens/login/login_screen.dart';
 import 'package:vcec/presentation/auth_screens/sign_up/sign_up_screen.dart';
 import 'package:vcec/presentation/home/home.dart';
+import 'package:vcec/presentation/mainmenu/widgets/story_video_text_editor_widget.dart';
 import 'package:vcec/presentation/splash_screen.dart/splash_screen.dart';
 import 'package:vcec/presentation/auth_screens/otp_verification/otp_verification_screen.dart';
 import 'package:vcec/presentation/auth_screens/otp_verification/verified_screen.dart';
@@ -81,11 +83,16 @@ class MyApp extends StatelessWidget {
         BlocProvider<LogOutCubit>(
           create: (context) => getIt<LogOutCubit>(),
         ),
+<<<<<<< HEAD
         BlocProvider<ProfileCubit>(
           create: (context) => getIt<ProfileCubit>(),
         ),
         BlocProvider<EditProfileCubit>(
           create: (context) => getIt<EditProfileCubit>(),
+=======
+        BlocProvider<EventsCubit>(
+          create: (context) => getIt<EventsCubit>(),
+>>>>>>> 121ac8db30611e539b18a7b9c2acbeae063f0293
         ),
       ],
       child: ScreenUtilInit(
@@ -99,9 +106,15 @@ class MyApp extends StatelessWidget {
               ),
               initialRoute: '/home',
               routes: {
+<<<<<<< HEAD
                 '/': (context) => const SplashScreen(),
                 '/login': (context) => const LoginPage(),
                 '/signup': (context) => const SignUpScreen(),
+=======
+                '/': (context) => HomeScreen(),
+                '/login': (context) => LoginPage(),
+                '/signup': (context) => SignUpScreen(),
+>>>>>>> 121ac8db30611e539b18a7b9c2acbeae063f0293
                 '/home': (context) => HomeScreen(),
                 '/otp_verification': (context) => OtpVerificationScreen(),
                 '/otp_verified': (context) => const VerifiedScreen(),

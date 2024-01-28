@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:vcec/core/constants.dart';
-import 'package:vcec/presentation/mainmenu/widgets/story_upload_widget.dart';
+import 'package:vcec/presentation/mainmenu/widgets/story_image_upload_widget.dart';
 
 import 'package:vcec/presentation/mainmenu/widgets/story_user_widget.dart';
+import 'package:vcec/presentation/mainmenu/widgets/story_video_upload_widget.dart';
 
 class StoryWidget extends StatefulWidget {
   const StoryWidget({super.key});
@@ -19,8 +21,75 @@ class _StoryPartState extends State<StoryWidget> {
         kwidth10,
         GestureDetector(
           onTap: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => StoryUploadWidget()));
+            showModalBottomSheet(
+                context: context,
+                builder: ((context) {
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      height: 150,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          IconButton(
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            StoryImageUploadWidget()));
+                              },
+                              icon: Container(
+                                width: 60,
+                                height: 60,
+                                child: Icon(
+                                  Icons.image_sharp,
+                                  color: Colors.black,
+                                ),
+                                decoration: BoxDecoration(
+                                  border:
+                                      Border.all(color: Colors.pink, width: 2),
+                                  shape: BoxShape.circle,
+                                ),
+                              )),
+                          IconButton(
+                              onPressed: () async {
+                                XFile? media = await ImagePicker()
+                                    .pickVideo(source: ImageSource.gallery);
+
+                                if (media != null) {
+                                  final path = media.path;
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              StoryVideoUploadWidget(
+                                                path: path,
+                                              )));
+
+                                  setState(() {
+                                    media = null;
+                                  });
+                                }
+                              },
+                              icon: Container(
+                                width: 60,
+                                height: 60,
+                                child: Icon(
+                                  Icons.slow_motion_video_outlined,
+                                  color: Colors.black,
+                                ),
+                                decoration: BoxDecoration(
+                                  border:
+                                      Border.all(color: Colors.pink, width: 2),
+                                  shape: BoxShape.circle,
+                                ),
+                              ))
+                        ],
+                      ),
+                    ),
+                  );
+                }));
           },
           child: Stack(
             children: [

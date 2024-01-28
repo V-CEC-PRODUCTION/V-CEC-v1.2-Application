@@ -268,6 +268,7 @@ class _AccountDetailsScreenState extends State<AccountDetailsScreen> {
                           adNumber: adNumController.text,
                         );
                       }
+
                       BlocProvider.of<CreateNewAccountCubit>(context)
                           .createNewAccount(
                               email: AuthTokenManager.instance.email!,
