@@ -18,11 +18,11 @@ class AuthTokenManager {
   GoogleSignInAccount? get googleuser => _googleuser;
   setTokens({required String accessToken, required String refreshToken}) {
     _accessToken = accessToken;
-    _refreshToken = refreshToken;
+    _refreshToken = accessToken;
   }
 
   setAccessToken(String accessToken) {
-    _accessToken = accessToken;
+    _accessToken = null;
   }
 
   setUserAccount(GoogleSignInAccount googleuser) {

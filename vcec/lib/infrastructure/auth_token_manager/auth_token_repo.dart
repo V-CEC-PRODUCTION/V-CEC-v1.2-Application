@@ -21,6 +21,7 @@ class AuthTokenRepo extends AuthTokenService {
   @override
   Future<Either<MainFailure, void>> getAccessToken() async {
     try {
+      print('object');
       final refreshToken = AuthTokenManager.instance.refreshToken;
       final Map<String, dynamic> headers = {
         'Content-Type': 'application/json',
@@ -33,6 +34,7 @@ class AuthTokenRepo extends AuthTokenService {
         AuthTokenManager.instance.setAccessToken(
           accessToken,
         );
+        print(accessToken);
         await deleteToken();
         await saveToken();
         return const Right(null);
@@ -61,6 +63,7 @@ class AuthTokenRepo extends AuthTokenService {
   @override
   Future<Either<MainFailure, bool>> validateToken() async {
     try {
+      print('validated');
       final accesToken = AuthTokenManager.instance.accessToken;
       print(accesToken);
       final Map<String, dynamic> headers = {
@@ -70,6 +73,7 @@ class AuthTokenRepo extends AuthTokenService {
       final response = await Dio(BaseOptions(headers: headers))
           .post('${baseUrl}users/auth/validate/access/token/');
       print(response);
+      print(accesToken);
       if (response.statusCode == 200 || response.statusCode == 201) {
         return const Right(true);
       } else {

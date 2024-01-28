@@ -71,16 +71,11 @@ dependencies:
   share_plus: null
   shared_preferences: null
   shimmer: ^3.0.0
-<<<<<<< HEAD
-  stories_editor: 0.2.2
-  story: ^1.0.0+1
-=======
 
   stories_editor: ^0.2.2
 
   story: ^1.1.0
   text_editor: ^0.7.0
->>>>>>> 121ac8db30611e539b18a7b9c2acbeae063f0293
   url_launcher: null
   video_player: ^2.8.2
 

@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-abstract class EventsService {}
-=======
 import 'package:dartz/dartz.dart';
 import 'package:vcec/domain/events/model/event_types.dart';
 import 'package:vcec/domain/events/model/events_model.dart';
@@ -10,4 +7,3 @@ abstract class EventsService {
   Future<Either<MainFailure, List<EventModel>>> getEvents(
       {required EventType eventType});
 }
->>>>>>> 121ac8db30611e539b18a7b9c2acbeae063f0293
