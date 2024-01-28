@@ -83,8 +83,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 index: newIndex,
                 children: [
                   const MainMenuScreen(),
-                  const EventsScreen(),
-                  const NoticesScreen(),
+                   EventsScreen(),
+                   NoticesScreen(),
                   DepartmentsScreen(),
                 ],
               );

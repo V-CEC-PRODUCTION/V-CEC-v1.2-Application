@@ -1,22 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:progressive_image/progressive_image.dart';
+import 'package:shimmer/shimmer.dart';
 
 import 'package:vcec/core/constants.dart';
+import 'package:vcec/domain/auth_token_manager/auth_token_manager.dart';
 import 'package:vcec/presentation/common_widgets/avatar.dart';
 import 'package:vcec/presentation/common_widgets/notification_icon.dart';
 import 'package:vcec/presentation/common_widgets/search_field.dart';
+import 'package:vcec/presentation/mainmenu/widgets/appbar.dart';
+import 'package:vcec/strings/strings.dart';
 
 enum Department { cs, ec, eee, gs, as, lib }
+
+final date = DateFormat('dd-MM-yyyy').format(DateTime.now());
 
 class AppbarWithSearch extends PreferredSize {
   final String hintText;
   final ValueNotifier isSearchNotifier;
   final Department? department;
-  AppbarWithSearch({
+  AppbarWithSearch( {
     super.key,
     required this.isSearchNotifier,
     required this.hintText,
     this.department,
-  }) : super(
+  }) :
+   super(
           preferredSize: const Size(double.infinity, 150),
           child: SizedBox.expand(
             child: Stack(
@@ -28,14 +37,24 @@ class AppbarWithSearch extends PreferredSize {
                   child: Row(
                     children: [
                       kwidth20,
-                      Avatar(),
+                      AuthTokenManager.instance.imageUrl == null
+                          ? Shimmer.fromColors(
+                              baseColor: Color(0xFFC0C0C0),
+                              highlightColor: Color(0xFFE8E8E8),
+                              child: CircleAvatar(
+                                radius: 23,
+                                backgroundColor:
+                                    Color.fromARGB(255, 113, 124, 124),
+                              ))
+                          : _Banner(
+                              imageUrl: AuthTokenManager.instance.imageUrl!, thumbnailUrl:AuthTokenManager.instance.thumbnailUrl!),
                       kwidth20,
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            '12-3-2023',
+                            date,
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 13,
@@ -43,7 +62,7 @@ class AppbarWithSearch extends PreferredSize {
                             ),
                           ),
                           Text(
-                            'Riya',
+                            AuthTokenManager.instance.name == null ? '...' : AuthTokenManager.instance.name!,
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 16,
@@ -71,4 +90,29 @@ class AppbarWithSearch extends PreferredSize {
             ),
           ),
         );
+}
+
+class _Banner extends StatelessWidget {
+  const _Banner({required this.imageUrl, required this.thumbnailUrl});
+  final String imageUrl;
+  final String thumbnailUrl;
+  @override
+  Widget build(BuildContext context) {
+    String url = '$baseUrl$imageUrl'.replaceAll('auth//api/', 'auth/api/');
+    String turl = '$baseUrl$thumbnailUrl'.replaceAll('auth//api/', 'auth/api/');
+    print(url);
+    return CircleAvatar(
+      radius: 23,
+      child: ClipOval(
+        child: ProgressiveImage(
+            blur: 1,
+            fit: BoxFit.cover,
+            placeholder: null,
+            thumbnail: NetworkImage(turl),
+            image: NetworkImage(url),
+            width: double.infinity,
+            height: double.infinity),
+      ),
+    );
+  }
 }

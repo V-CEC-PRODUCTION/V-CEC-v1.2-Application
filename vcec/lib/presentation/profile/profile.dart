@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:progressive_image/progressive_image.dart';
 import 'package:shimmer/shimmer.dart';
-import 'package:vcec/application/edit_profile/edit_profile_cubit.dart';
 import 'package:vcec/application/logout/log_out_cubit.dart';
 import 'package:vcec/application/profile/profile_cubit.dart';
 import 'package:vcec/domain/failure/main_failure.dart';
@@ -29,14 +28,6 @@ class ProfileScreen extends StatelessWidget {
         a.fold((l) {
           BlocProvider.of<ProfileCubit>(context).getProfileDetails();
         }, (r) => null);
-      });
-      final editProfileState = BlocProvider.of<EditProfileCubit>(context).state;
-      editProfileState.failureOrSuccesss.fold(() {
-        BlocProvider.of<ProfileCubit>(context).getProfileDetails();
-      }, (a) {
-        a.fold((l) {
-          BlocProvider.of<ProfileCubit>(context).getProfileDetails();
-        }, (r) => BlocProvider.of<ProfileCubit>(context).getProfileDetails());
       });
       profileState.hasEdited
           ? BlocProvider.of<ProfileCubit>(context).getProfileDetails()
@@ -139,16 +130,16 @@ class ProfileScreen extends StatelessWidget {
                           children: [
                             state.profileModel!.imageUrl == null
                                 ? Shimmer.fromColors(
-                                    baseColor: Color.fromARGB(255, 0, 0, 0),
+                                    baseColor:const Color.fromARGB(255, 0, 0, 0),
                                     highlightColor:
-                                        Color.fromARGB(255, 207, 207, 207),
+                                       const Color.fromARGB(255, 207, 207, 207),
                                     child: Container(
                                       height: size1 * 0.28,
                                       width: size1 * 0.28,
-                                      decoration: BoxDecoration(
+                                      decoration:const BoxDecoration(
                                         shape: BoxShape.circle,
                                         color:
-                                            const Color.fromARGB(34, 0, 0, 0),
+                                             Color.fromARGB(34, 0, 0, 0),
                                       ),
                                     ),
                                   )

@@ -18,6 +18,8 @@ class DepartmentSearchRepo implements DepartmentSearchService {
   Future<Either<MainFailure, List<Staff>>> searchDepartments(
       String query, Department? deptType) async {
     String dept;
+    int pageCount=8;
+    int pageNum=1;
     switch (deptType) {
       case Department.as:
         dept = 'BSL';
@@ -41,8 +43,8 @@ class DepartmentSearchRepo implements DepartmentSearchService {
         dept = 'FAC';
     }
     try {
-      final respose = await Dio(BaseOptions(contentType: 'application/json'))
-          .get('${baseUrl}staff/info/directory/search/$dept?search=$query');
+      final respose = await Dio(BaseOptions(contentType: 'application/json')).get(
+          '${baseUrl}staff/info/directory/search/$dept?search=$query&page=$pageNum&count=$pageCount');
 
       if (respose.statusCode == 200 || respose.statusCode == 201) {
         final dept = DepartmentModel.fromJson(respose.toString());

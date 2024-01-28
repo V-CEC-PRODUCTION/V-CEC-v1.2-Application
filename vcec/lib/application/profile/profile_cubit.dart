@@ -29,6 +29,7 @@ class ProfileCubit extends Cubit<ProfileState> {
   }
 
   edited() {
+    print('hi');
     emit(state.copyWith(hasEdited: true));
   }
 }

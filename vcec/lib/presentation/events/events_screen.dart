@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:progressive_image/progressive_image.dart';
+import 'package:shimmer/shimmer.dart';
+import 'package:vcec/application/profile/profile_cubit.dart';
 import 'package:vcec/core/colors.dart';
 import 'package:vcec/core/constants.dart';
+import 'package:vcec/domain/auth_token_manager/auth_token_manager.dart';
 import 'package:vcec/presentation/common_widgets/notification_icon.dart';
 import 'package:vcec/presentation/events/events_widgets/announcments_widget.dart';
 import 'package:vcec/presentation/events/events_widgets/eventsforyou_widget.dart';
@@ -8,10 +13,17 @@ import 'package:vcec/presentation/events/events_widgets/find_amazing_events_widg
 import 'package:vcec/presentation/events/events_widgets/forum_event_filter_widget.dart';
 import 'package:vcec/presentation/events/events_widgets/latest_news_widget.dart';
 import 'package:vcec/presentation/events/events_widgets/upcoming_events.dart';
+import 'package:vcec/strings/strings.dart';
 
 class EventsScreen extends StatelessWidget {
-  const EventsScreen({super.key, this.imgUrl});
+   EventsScreen({
+    super.key,
+    this.imgUrl,
+  });
   final String? imgUrl;
+  final String? imageUrl = AuthTokenManager.instance.imageUrl;
+    final String? thumbnailUrl = AuthTokenManager.instance.thumbnailUrl;
+    final String? name = AuthTokenManager.instance.name;
 
   @override
   Widget build(BuildContext context) {
@@ -22,11 +34,21 @@ class EventsScreen extends StatelessWidget {
           padding: const EdgeInsets.only(left: 20),
           child: CircleAvatar(
             radius: 20,
-            child: imgUrl != null ? Image.network(imgUrl!) : const Text('A'),
+            child: (thumbnailUrl) == null
+                ? Shimmer.fromColors(
+                    baseColor: Color(0xFFC0C0C0),
+                    highlightColor: Color(0xFFE8E8E8),
+                    child: CircleAvatar(
+                      radius: 20,
+                      backgroundColor: Color.fromARGB(255, 113, 124, 124),
+                    ))
+                : _Banner(
+                    imageUrl: imageUrl!,
+                    thumbnailUrl:thumbnailUrl!),
           ),
         ),
-        title: const Text(
-          'name',
+        title: Text(
+          name ?? '...',
           style: TextStyle(color: kwhite, fontWeight: FontWeight.bold),
         ),
         actions: [
@@ -58,6 +80,31 @@ class EventsScreen extends StatelessWidget {
           ],
         ),
       )),
+    );
+  }
+}
+
+class _Banner extends StatelessWidget {
+  const _Banner({required this.imageUrl, required this.thumbnailUrl});
+  final String imageUrl;
+  final String thumbnailUrl;
+  @override
+  Widget build(BuildContext context) {
+    String url = '$baseUrl$imageUrl'.replaceAll('auth//api/', 'auth/api/');
+    String turl = '$baseUrl$thumbnailUrl'.replaceAll('auth//api/', 'auth/api/');
+    print(url);
+    return CircleAvatar(
+      radius: 20,
+      child: ClipOval(
+        child: ProgressiveImage(
+            blur: 1,
+            fit: BoxFit.cover,
+            placeholder: null,
+            thumbnail: NetworkImage(turl),
+            image: NetworkImage(url),
+            width: double.infinity,
+            height: double.infinity),
+      ),
     );
   }
 }

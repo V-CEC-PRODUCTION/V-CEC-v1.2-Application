@@ -7,6 +7,9 @@ class AuthTokenManager {
   String? _accessToken;
   String? _refreshToken;
   String? _email;
+  String? _name;
+  String? _imageUrl;
+  String? _thumbnailUrl;
   GoogleSignInAccount? _googleuser;
   UserRole? _userRole;
   LoginType? _loginType;
@@ -16,9 +19,17 @@ class AuthTokenManager {
   UserRole? get userRole => _userRole;
   LoginType? get logintype => _loginType;
   GoogleSignInAccount? get googleuser => _googleuser;
+  String? get name => _name;
+  String? get imageUrl => _imageUrl;
+  String? get thumbnailUrl => _thumbnailUrl;
   setTokens({required String accessToken, required String refreshToken}) {
     _accessToken = accessToken;
     _refreshToken = accessToken;
+  }
+setDetails({required String name, required String imageUrl, required String thumbnailUrl}) {
+    _name = name;
+    _imageUrl = imageUrl;
+    _thumbnailUrl = thumbnailUrl;
   }
 
   setAccessToken(String accessToken) {

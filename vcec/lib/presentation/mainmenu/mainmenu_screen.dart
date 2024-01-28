@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vcec/application/main_menu/timetable/timetable_cubit.dart';
+import 'package:vcec/application/profile/profile_cubit.dart';
 import 'package:vcec/core/constants.dart';
 import 'package:vcec/presentation/common_widgets/sub_heading.dart';
 import 'package:vcec/presentation/mainmenu/subpages/cec_gallery_screen1.dart';
@@ -19,6 +20,7 @@ class MainMenuScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       BlocProvider.of<TimetableCubit>(context).getTimetable();
+      BlocProvider.of<ProfileCubit>(context).getProfileDetails();
     });
     return Scaffold(
       body: SafeArea(
@@ -30,14 +32,16 @@ class MainMenuScreen extends StatelessWidget {
                 return state.timetableFailureOrSuccess.fold(
                   () {
                     return MainmenuAppbar(
-                        currentPeriod: '...', duration: 'Loading...', );
+                      currentPeriod: '...',
+                      duration: 'Loading...',
+                    );
                   },
                   (either) {
                     return either.fold(
                       (failure) {
                         return MainmenuAppbar(
                           currentPeriod: 'Error',
-                          duration: '00-00', 
+                          duration: '00-00',
                         );
                       },
                       (success) {
@@ -45,7 +49,8 @@ class MainMenuScreen extends StatelessWidget {
                           currentPeriod:
                               success.result![0].currentcode ?? '...',
                           duration: success.result![0].currenttime ?? '..',
-                          timeTable: success.result![0], imageUrl: success.imageThumbnailUrl!,
+                          timeTable: success.result![0],
+                          imageUrl: success.imageThumbnailUrl!,
                           thumbnailUrl: success.thumbnailUrl!,
                         );
                       },
