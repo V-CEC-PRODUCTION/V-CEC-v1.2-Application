@@ -1,22 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
+import 'package:progressive_image/progressive_image.dart';
+import 'package:shimmer/shimmer.dart';
+import 'package:vcec/application/profile/profile_cubit.dart';
 import 'package:vcec/core/colors.dart';
 import 'package:vcec/core/constants.dart';
-import 'package:vcec/domain/mainmenu/timetable/timetable_model/time_table.dart';
+import 'package:vcec/domain/failure/main_failure.dart';
+import 'package:vcec/domain/mainmenu/timetable/time_table/result.dart';
 import 'package:vcec/presentation/common_widgets/avatar.dart';
 import 'package:vcec/presentation/common_widgets/message_icon.dart';
 import 'package:vcec/presentation/common_widgets/notification_icon.dart';
 import 'dart:developer';
 
 import 'package:vcec/presentation/profile/profile.dart';
+import 'package:vcec/strings/strings.dart';
 
 class MainmenuAppbar extends StatefulWidget {
-  MainmenuAppbar(
+  const MainmenuAppbar(
       {super.key,
       this.timeTable,
       required this.currentPeriod,
-      required this.duration});
+      required this.duration,
+      this.imageUrl, this.thumbnailUrl});
 
-  final List<TimeTable>? timeTable;
+  final TimeTable? timeTable;
+  final String? imageUrl;
+  final String? thumbnailUrl;
   final String currentPeriod;
   final String duration;
   @override
@@ -41,6 +51,8 @@ class _MainmenuAppbarState extends State<MainmenuAppbar> {
   @override
   Widget build(BuildContext context) {
     final time = DateTime.now();
+    String formattedDate =
+        DateFormat('dd EEE').format(DateTime.now()).toUpperCase();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       initial = false;
     });
@@ -65,6 +77,7 @@ class _MainmenuAppbarState extends State<MainmenuAppbar> {
             }),
         builder: (context, value, child) {
           return SliverAppBar(
+            automaticallyImplyLeading: false,
             backgroundColor: Colors.transparent,
             elevation: 0,
             titleSpacing: 0,
@@ -90,15 +103,23 @@ class _MainmenuAppbarState extends State<MainmenuAppbar> {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const ProfileScreen()));
-                            },
-                            child: Avatar(),
-                          ),
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const ProfileScreen()));
+                              },
+                              child: widget.imageUrl == null
+                                  ? Shimmer.fromColors(
+                                      baseColor: Color(0xFFC0C0C0),
+                                      highlightColor: Color(0xFFE8E8E8),
+                                      child: CircleAvatar(
+                                        radius: 23,
+                                        backgroundColor:
+                                            Color.fromARGB(255, 113, 124, 124),
+                                      ))
+                                  :_Banner(imageUrl: widget.imageUrl!, thumbnailUrl: widget.thumbnailUrl!)),
                           GestureDetector(
                             onTap: () {
                               widget.timeTable == null
@@ -159,7 +180,7 @@ class _MainmenuAppbarState extends State<MainmenuAppbar> {
                                                       fontWeight:
                                                           FontWeight.w600)),
                                           Spacer(),
-                                          Text('25 MON',
+                                          Text(formattedDate,
                                               style: TextStyle(
                                                   color: kblack,
                                                   fontSize: 17,
@@ -171,22 +192,50 @@ class _MainmenuAppbarState extends State<MainmenuAppbar> {
                                     Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
-                                      children: List.generate(
-                                          widget.timeTable!.length,
-                                          (index) => _TimeTableWidget(
-                                                text: widget
-                                                    .timeTable![index].time!,
-                                              )),
+                                      children: [
+                                        _TimeTableWidget(
+                                          text: widget.timeTable!.firsttime!,
+                                        ),
+                                        _TimeTableWidget(
+                                          text: widget.timeTable!.secondtime!,
+                                        ),
+                                        _TimeTableWidget(
+                                          text: widget.timeTable!.thirdtime!,
+                                        ),
+                                        _TimeTableWidget(
+                                          text: widget.timeTable!.fourthtime!,
+                                        ),
+                                        _TimeTableWidget(
+                                          text: widget.timeTable!.fifthtime!,
+                                        ),
+                                        _TimeTableWidget(
+                                          text: widget.timeTable!.sixthtime!,
+                                        ),
+                                      ],
                                     ),
                                     Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
-                                      children: List.generate(
-                                          6,
-                                          (index) => _TimeTableWidget(
-                                                text: widget
-                                                    .timeTable![index].period!,
-                                              )),
+                                      children: [
+                                        _TimeTableWidget(
+                                          text: widget.timeTable!.firstcode!,
+                                        ),
+                                        _TimeTableWidget(
+                                          text: widget.timeTable!.secondcode!,
+                                        ),
+                                        _TimeTableWidget(
+                                          text: widget.timeTable!.thirdcode!,
+                                        ),
+                                        _TimeTableWidget(
+                                          text: widget.timeTable!.fourthcode!,
+                                        ),
+                                        _TimeTableWidget(
+                                          text: widget.timeTable!.fifthcode!,
+                                        ),
+                                        _TimeTableWidget(
+                                          text: widget.timeTable!.sixthcode!,
+                                        ),
+                                      ],
                                     ),
                                   ],
                                 ),
@@ -270,6 +319,30 @@ class _VerticalDivider extends StatelessWidget {
       width: 1,
       height: 30,
       color: const Color.fromARGB(255, 198, 198, 198),
+    );
+  }
+}
+
+class _Banner extends StatelessWidget {
+  const _Banner({required this.imageUrl, required this.thumbnailUrl});
+  final String imageUrl;
+  final String thumbnailUrl;
+  @override
+  Widget build(BuildContext context) {
+    String url = '$baseUrl$imageUrl'.replaceAll('auth//api/', 'auth/api/');
+    String turl = '$baseUrl$thumbnailUrl'.replaceAll('auth//api/', 'auth/api/');
+    return CircleAvatar(
+      radius: 23,
+      child: ClipOval(
+        child: ProgressiveImage(
+            blur: 1,
+            fit: BoxFit.cover,
+            placeholder: null,
+            thumbnail: NetworkImage(turl),
+            image: NetworkImage(url),
+            width: double.infinity,
+            height: double.infinity),
+      ),
     );
   }
 }

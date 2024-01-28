@@ -20,6 +20,7 @@ mixin _$ProfileState {
   Option<Either<MainFailure, ProfileModel>> get failureOrSuccess =>
       throw _privateConstructorUsedError;
   ProfileModel? get profileModel => throw _privateConstructorUsedError;
+  bool get hasEdited => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ProfileStateCopyWith<ProfileState> get copyWith =>
@@ -35,7 +36,8 @@ abstract class $ProfileStateCopyWith<$Res> {
   $Res call(
       {bool isLoading,
       Option<Either<MainFailure, ProfileModel>> failureOrSuccess,
-      ProfileModel? profileModel});
+      ProfileModel? profileModel,
+      bool hasEdited});
 }
 
 /// @nodoc
@@ -54,6 +56,7 @@ class _$ProfileStateCopyWithImpl<$Res, $Val extends ProfileState>
     Object? isLoading = null,
     Object? failureOrSuccess = null,
     Object? profileModel = freezed,
+    Object? hasEdited = null,
   }) {
     return _then(_value.copyWith(
       isLoading: null == isLoading
@@ -68,6 +71,10 @@ class _$ProfileStateCopyWithImpl<$Res, $Val extends ProfileState>
           ? _value.profileModel
           : profileModel // ignore: cast_nullable_to_non_nullable
               as ProfileModel?,
+      hasEdited: null == hasEdited
+          ? _value.hasEdited
+          : hasEdited // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -83,7 +90,8 @@ abstract class _$$InitialImplCopyWith<$Res>
   $Res call(
       {bool isLoading,
       Option<Either<MainFailure, ProfileModel>> failureOrSuccess,
-      ProfileModel? profileModel});
+      ProfileModel? profileModel,
+      bool hasEdited});
 }
 
 /// @nodoc
@@ -100,6 +108,7 @@ class __$$InitialImplCopyWithImpl<$Res>
     Object? isLoading = null,
     Object? failureOrSuccess = null,
     Object? profileModel = freezed,
+    Object? hasEdited = null,
   }) {
     return _then(_$InitialImpl(
       isLoading: null == isLoading
@@ -114,6 +123,10 @@ class __$$InitialImplCopyWithImpl<$Res>
           ? _value.profileModel
           : profileModel // ignore: cast_nullable_to_non_nullable
               as ProfileModel?,
+      hasEdited: null == hasEdited
+          ? _value.hasEdited
+          : hasEdited // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -124,7 +137,8 @@ class _$InitialImpl implements _Initial {
   const _$InitialImpl(
       {required this.isLoading,
       required this.failureOrSuccess,
-      required this.profileModel});
+      required this.profileModel,
+      required this.hasEdited});
 
   @override
   final bool isLoading;
@@ -132,14 +146,16 @@ class _$InitialImpl implements _Initial {
   final Option<Either<MainFailure, ProfileModel>> failureOrSuccess;
   @override
   final ProfileModel? profileModel;
+  @override
+  final bool hasEdited;
 
   @override
   String toString() {
-    return 'ProfileState(isLoading: $isLoading, failureOrSuccess: $failureOrSuccess, profileModel: $profileModel)';
+    return 'ProfileState(isLoading: $isLoading, failureOrSuccess: $failureOrSuccess, profileModel: $profileModel, hasEdited: $hasEdited)';
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$InitialImpl &&
@@ -148,12 +164,14 @@ class _$InitialImpl implements _Initial {
             (identical(other.failureOrSuccess, failureOrSuccess) ||
                 other.failureOrSuccess == failureOrSuccess) &&
             (identical(other.profileModel, profileModel) ||
-                other.profileModel == profileModel));
+                other.profileModel == profileModel) &&
+            (identical(other.hasEdited, hasEdited) ||
+                other.hasEdited == hasEdited));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, isLoading, failureOrSuccess, profileModel);
+  int get hashCode => Object.hash(
+      runtimeType, isLoading, failureOrSuccess, profileModel, hasEdited);
 
   @JsonKey(ignore: true)
   @override
@@ -166,7 +184,8 @@ abstract class _Initial implements ProfileState {
   const factory _Initial(
       {required final bool isLoading,
       required final Option<Either<MainFailure, ProfileModel>> failureOrSuccess,
-      required final ProfileModel? profileModel}) = _$InitialImpl;
+      required final ProfileModel? profileModel,
+      required final bool hasEdited}) = _$InitialImpl;
 
   @override
   bool get isLoading;
@@ -174,6 +193,8 @@ abstract class _Initial implements ProfileState {
   Option<Either<MainFailure, ProfileModel>> get failureOrSuccess;
   @override
   ProfileModel? get profileModel;
+  @override
+  bool get hasEdited;
   @override
   @JsonKey(ignore: true)
   _$$InitialImplCopyWith<_$InitialImpl> get copyWith =>

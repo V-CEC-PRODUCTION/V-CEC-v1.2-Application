@@ -15,10 +15,10 @@ class _StoryPageState extends State<StoryUploadWidget> {
     return StoriesEditor(
       giphyKey: '3tKgbOFuFHMlzPYqJi6jH5cev6N9KFsQ',
       onDone: (uri) {
-        // uri is the local path of final render Uint8List
-        // here your code
-        print(uri);
-        Share.shareFiles([uri]);
+        // // uri is the local path of final render Uint8List
+        // // here your code
+        // print(uri);
+        // Share.shareFiles([uri]);
       },
       middleBottomWidget: SizedBox(),
     );

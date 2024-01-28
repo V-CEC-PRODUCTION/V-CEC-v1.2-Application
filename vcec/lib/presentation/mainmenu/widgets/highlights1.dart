@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:vcec/application/main_menu/highlights/highlights_cubit.dart';
+import 'package:vcec/core/constants.dart';
 import 'package:vcec/domain/failure/main_failure.dart';
 import 'package:vcec/presentation/common_widgets/events_card_widget.dart';
+import 'package:vcec/presentation/common_widgets/sub_heading.dart';
 import 'package:vcec/strings/strings.dart';
 
 class Highlights extends StatelessWidget {
@@ -46,35 +48,55 @@ class Highlights extends StatelessWidget {
         );
       });
       return state.highlights == null
-          ? Shimmer.fromColors(
-              baseColor: Color.fromARGB(255, 0, 0, 0),
-              highlightColor: Color.fromARGB(255, 207, 207, 207),
-              child: Container(
-                margin: const EdgeInsets.symmetric(horizontal: 10),
-                height: ((size.width * 0.65) - 12) / 16 * 9,
-                width: size.width,
-                decoration: BoxDecoration(
-                  color: const Color.fromARGB(34, 0, 0, 0),
-                  borderRadius: BorderRadius.circular(20),
+          ? Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 20, top: 10),
+                  child: SubHeading(text: 'Highlights'),
                 ),
-              ),
-            )
-          : SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                children: List.generate(
-                  state.highlights!.result!.length,
-                  (index) => EventsCardWidget(
-                    imgUrl:
-                        baseUrl + state.highlights!.result![index].imageUrl!,
-                    title: state.highlights!.result![index].content!,
-                    thumpnailUrl: baseUrl +
-                        state.highlights!.result![index].thumbnailUrl!,
-                    date: state.highlights!.result![index].uploadTime!,
-                    tag: state.highlights!.result![index].tag,
+                Shimmer.fromColors(
+                  baseColor: Color.fromARGB(255, 0, 0, 0),
+                  highlightColor: Color.fromARGB(255, 207, 207, 207),
+                  child: Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 10),
+                    height: ((size.width * 0.65) - 12) / 16 * 9,
+                    width: size.width,
+                    decoration: BoxDecoration(
+                      color: const Color.fromARGB(34, 0, 0, 0),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
                   ),
                 ),
-              ),
+              ],
+            )
+          : Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                state.highlights!.result!.length != 0
+                    ? Padding(
+                        padding: const EdgeInsets.only(left: 20, top: 10),
+                        child: SubHeading(text: 'Highlights'),
+                      )
+                    : SizedBox(),
+                kheight15,
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: List.generate(
+                      state.highlights!.result!.length,
+                      (index) => EventsCardWidget(
+                        imgUrl: baseUrl +
+                            state.highlights!.result![index].imageUrl!,
+                        title: state.highlights!.result![index].content!,
+                        thumpnailUrl: baseUrl +
+                            state.highlights!.result![index].thumbnailUrl!,
+                        date: state.highlights!.result![index].uploadTime!,
+                        tag: state.highlights!.result![index].tag,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             );
     });
   }

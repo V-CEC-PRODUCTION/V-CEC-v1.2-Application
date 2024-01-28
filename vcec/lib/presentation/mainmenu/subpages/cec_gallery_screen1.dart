@@ -6,7 +6,7 @@ import 'package:vcec/core/constants.dart';
 import 'package:vcec/domain/failure/main_failure.dart';
 import 'package:vcec/presentation/common_widgets/avatar.dart';
 import 'package:vcec/presentation/common_widgets/message_icon.dart';
-import 'package:vcec/presentation/mainmenu/widgets/cec_gallery1.dart';
+import 'package:vcec/presentation/mainmenu/widgets/gallery_tab.dart';
 import 'package:vcec/presentation/mainmenu/widgets/cec_gallery_img.dart';
 import 'package:vcec/presentation/mainmenu/widgets/cec_gallery_vid.dart';
 
@@ -63,7 +63,7 @@ class CecGalleryScreen extends StatelessWidget {
                 appBar: AppBar(
                   toolbarHeight: 75,
                   leadingWidth: 66,
-                  leading: const Padding(
+                  leading: Padding(
                     padding: EdgeInsets.only(left: 10),
                     child: Avatar(),
                   ),

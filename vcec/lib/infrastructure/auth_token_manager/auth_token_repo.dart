@@ -62,12 +62,14 @@ class AuthTokenRepo extends AuthTokenService {
   Future<Either<MainFailure, bool>> validateToken() async {
     try {
       final accesToken = AuthTokenManager.instance.accessToken;
+      print(accesToken);
       final Map<String, dynamic> headers = {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $accesToken',
       };
       final response = await Dio(BaseOptions(headers: headers))
           .post('${baseUrl}users/auth/validate/access/token/');
+      print(response);
       if (response.statusCode == 200 || response.statusCode == 201) {
         return const Right(true);
       } else {

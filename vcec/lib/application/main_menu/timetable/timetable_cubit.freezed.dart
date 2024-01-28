@@ -16,8 +16,8 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$TimetableState {
-  TimetableModel? get timetable => throw _privateConstructorUsedError;
-  Option<Either<MainFailure, TimetableModel>> get timetableFailureOrSuccess =>
+  TimeTableModel? get timetable => throw _privateConstructorUsedError;
+  Option<Either<MainFailure, TimeTableModel>> get timetableFailureOrSuccess =>
       throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -32,8 +32,8 @@ abstract class $TimetableStateCopyWith<$Res> {
       _$TimetableStateCopyWithImpl<$Res, TimetableState>;
   @useResult
   $Res call(
-      {TimetableModel? timetable,
-      Option<Either<MainFailure, TimetableModel>> timetableFailureOrSuccess});
+      {TimeTableModel? timetable,
+      Option<Either<MainFailure, TimeTableModel>> timetableFailureOrSuccess});
 }
 
 /// @nodoc
@@ -56,11 +56,11 @@ class _$TimetableStateCopyWithImpl<$Res, $Val extends TimetableState>
       timetable: freezed == timetable
           ? _value.timetable
           : timetable // ignore: cast_nullable_to_non_nullable
-              as TimetableModel?,
+              as TimeTableModel?,
       timetableFailureOrSuccess: null == timetableFailureOrSuccess
           ? _value.timetableFailureOrSuccess
           : timetableFailureOrSuccess // ignore: cast_nullable_to_non_nullable
-              as Option<Either<MainFailure, TimetableModel>>,
+              as Option<Either<MainFailure, TimeTableModel>>,
     ) as $Val);
   }
 }
@@ -74,8 +74,8 @@ abstract class _$$InitialImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {TimetableModel? timetable,
-      Option<Either<MainFailure, TimetableModel>> timetableFailureOrSuccess});
+      {TimeTableModel? timetable,
+      Option<Either<MainFailure, TimeTableModel>> timetableFailureOrSuccess});
 }
 
 /// @nodoc
@@ -96,11 +96,11 @@ class __$$InitialImplCopyWithImpl<$Res>
       timetable: freezed == timetable
           ? _value.timetable
           : timetable // ignore: cast_nullable_to_non_nullable
-              as TimetableModel?,
+              as TimeTableModel?,
       timetableFailureOrSuccess: null == timetableFailureOrSuccess
           ? _value.timetableFailureOrSuccess
           : timetableFailureOrSuccess // ignore: cast_nullable_to_non_nullable
-              as Option<Either<MainFailure, TimetableModel>>,
+              as Option<Either<MainFailure, TimeTableModel>>,
     ));
   }
 }
@@ -112,9 +112,9 @@ class _$InitialImpl implements _Initial {
       {required this.timetable, required this.timetableFailureOrSuccess});
 
   @override
-  final TimetableModel? timetable;
+  final TimeTableModel? timetable;
   @override
-  final Option<Either<MainFailure, TimetableModel>> timetableFailureOrSuccess;
+  final Option<Either<MainFailure, TimeTableModel>> timetableFailureOrSuccess;
 
   @override
   String toString() {
@@ -122,7 +122,7 @@ class _$InitialImpl implements _Initial {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$InitialImpl &&
@@ -146,14 +146,14 @@ class _$InitialImpl implements _Initial {
 
 abstract class _Initial implements TimetableState {
   const factory _Initial(
-      {required final TimetableModel? timetable,
-      required final Option<Either<MainFailure, TimetableModel>>
+      {required final TimeTableModel? timetable,
+      required final Option<Either<MainFailure, TimeTableModel>>
           timetableFailureOrSuccess}) = _$InitialImpl;
 
   @override
-  TimetableModel? get timetable;
+  TimeTableModel? get timetable;
   @override
-  Option<Either<MainFailure, TimetableModel>> get timetableFailureOrSuccess;
+  Option<Either<MainFailure, TimeTableModel>> get timetableFailureOrSuccess;
   @override
   @JsonKey(ignore: true)
   _$$InitialImplCopyWith<_$InitialImpl> get copyWith =>

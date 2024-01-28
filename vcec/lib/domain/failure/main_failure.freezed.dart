@@ -119,7 +119,7 @@ class _$ClientFailureImpl implements _ClientFailure {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType && other is _$ClientFailureImpl);
   }
@@ -239,7 +239,7 @@ class _$ServerFailureImpl implements _ServerFailure {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType && other is _$ServerFailureImpl);
   }
@@ -359,7 +359,7 @@ class _$AuthFailureImpl implements AuthFailure {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType && other is _$AuthFailureImpl);
   }
@@ -479,7 +479,7 @@ class _$IncorrectCredentialImpl implements IncorrectCredential {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$IncorrectCredentialImpl);
@@ -600,7 +600,7 @@ class _$otherFailureImpl implements otherFailure {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType && other is _$otherFailureImpl);
   }

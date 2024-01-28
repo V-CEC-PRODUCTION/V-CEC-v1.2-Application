@@ -1,4 +1,4 @@
-const String baseUrl = "https://d4ca-103-161-144-150.ngrok-free.app/";
+const String baseUrl = "https://9395-103-165-167-106.ngrok-free.app/";
 
 //buildrunner terminal command with watcher
 //flutter packages pub run build_runner watch --delete-conflicting-outputs

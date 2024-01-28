@@ -17,8 +17,18 @@ class ProfileCubit extends Cubit<ProfileState> {
   getProfileDetails() async {
     emit(state.copyWith(isLoading: true, failureOrSuccess: none()));
 
-    await _profileService.getProfileDetails().then((either) =>
-     either.fold((l) => emit(state.copyWith(isLoading: false, failureOrSuccess: some(left(l)), profileModel: null)) , (r) => 
-     emit(state.copyWith(isLoading: false, failureOrSuccess: some(right(r)), profileModel: r))));
+    await _profileService.getProfileDetails().then((either) => either.fold(
+        (l) => emit(state.copyWith(
+            isLoading: false,
+            failureOrSuccess: some(left(l)),
+            profileModel: null)),
+        (r) => emit(state.copyWith(
+            isLoading: false,
+            failureOrSuccess: some(right(r)),
+            profileModel: r))));
+  }
+
+  edited() {
+    emit(state.copyWith(hasEdited: true));
   }
 }

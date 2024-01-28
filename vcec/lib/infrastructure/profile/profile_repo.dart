@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
@@ -14,15 +15,15 @@ class ProfileRepo extends ProfileService {
   @override
   Future<Either<MainFailure, ProfileModel>> getProfileDetails() async {
     try {
-     
       print('1');
       final accessToken = AuthTokenManager.instance.accessToken;
-       final Map<String, dynamic> headers = {
+      final Map<String, dynamic> headers = {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $accessToken',
       };
-      final response = await Dio(BaseOptions(headers: headers))
-          .get('${baseUrl}users/auth/get/user/details/',);
+      final response = await Dio(BaseOptions(headers: headers)).get(
+        '${baseUrl}users/auth/get/user/details/',
+      );
       if (response.statusCode == 200 || response.statusCode == 201) {
         final ProfileModel profileData =
             ProfileModel.fromJson(response.toString());
@@ -33,9 +34,16 @@ class ProfileRepo extends ProfileService {
         return const Left(MainFailure.serverFailure());
       }
     } catch (e) {
-      print(e.toString());
-      log('Client Errorrrr');
-      return const Left(MainFailure.clientFailure());
+      print(e);
+      if (e is DioException && e.response?.statusCode == 500) {
+        return const Left(MainFailure.serverFailure());
+      } else if (e is SocketException) {
+        return const Left(MainFailure.clientFailure());
+      } else if (e is DioException && e.response?.statusCode == 401) {
+        return const Left(MainFailure.authFailure());
+      } else {
+        return const Left(MainFailure.otherFailure());
+      }
     }
   }
 }
