@@ -35,13 +35,12 @@ class DepartmentSearchScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final state = BlocProvider.of<DepartmentSearchCubit>(context).state;
-    print(state.hasNext);
     if (state.hasNext) {
-      print(state.hasNext);
       setupScrollController(context);
     }
     return BlocBuilder<DepartmentSearchCubit, DepartmentSearchState>(
       builder: (context, state) {
+         print(state.hasNext);
         return state.failureOrSuccess.fold(
             () => state.isFirstFetch
                 ? const Center(

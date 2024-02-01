@@ -20,11 +20,22 @@ class DepartmentSearchCubit extends Cubit<DepartmentSearchState> {
   int pageNum = 1;
   int pageNum1 = 1;
   void searchDepartments(String query, Department? deptType) async {
-    emit(state.copyWith(
-      failureOrSuccess: none(),
-      isFirstFetch: pageNum == 1,
-      isLoading: true,
-    ));
+    if (state.department != deptType) {
+      pageNum = 1;
+      emit(state.copyWith(
+        staffs: [],
+        failureOrSuccess: none(),
+        isFirstFetch: pageNum == 1,
+        isLoading: true,
+        department: deptType!,
+      ));
+    } else {
+      emit(state.copyWith(
+        failureOrSuccess: none(),
+        isFirstFetch: pageNum == 1,
+        isLoading: true,
+      ));
+    }
     final result =
         await _searchService.searchDepartments(query, deptType, pageNum);
     result.fold(
@@ -48,12 +59,20 @@ class DepartmentSearchCubit extends Cubit<DepartmentSearchState> {
 
   void searchDepartmentsWithSearchBar(
       String query, Department? deptType) async {
-    emit(state.copyWith(
-      staffs: [],
-      failureOrSuccess: none(),
-      isFirstFetch: pageNum1 == 1,
-      isLoading: true,
-    ));
+    if (state.department != deptType) {
+      emit(state.copyWith(
+        staffs: [],
+        failureOrSuccess: none(),
+        isFirstFetch: pageNum1 == 1,
+        isLoading: true,
+      ));
+    } else {
+      emit(state.copyWith(
+        failureOrSuccess: none(),
+        isFirstFetch: pageNum1 == 1,
+        isLoading: true,
+      ));
+    }
     final result =
         await _searchService.searchDepartments(query, deptType, pageNum1);
     result.fold(

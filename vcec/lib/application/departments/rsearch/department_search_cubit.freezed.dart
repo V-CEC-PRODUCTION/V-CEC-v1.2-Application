@@ -22,6 +22,7 @@ mixin _$DepartmentSearchState {
   bool get isFirstFetch => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
   bool get hasNext => throw _privateConstructorUsedError;
+  Department get department => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $DepartmentSearchStateCopyWith<DepartmentSearchState> get copyWith =>
@@ -39,7 +40,8 @@ abstract class $DepartmentSearchStateCopyWith<$Res> {
       Option<Either<MainFailure, List<Staff>>> failureOrSuccess,
       bool isFirstFetch,
       bool isLoading,
-      bool hasNext});
+      bool hasNext,
+      Department department});
 }
 
 /// @nodoc
@@ -61,6 +63,7 @@ class _$DepartmentSearchStateCopyWithImpl<$Res,
     Object? isFirstFetch = null,
     Object? isLoading = null,
     Object? hasNext = null,
+    Object? department = null,
   }) {
     return _then(_value.copyWith(
       staffs: null == staffs
@@ -83,6 +86,10 @@ class _$DepartmentSearchStateCopyWithImpl<$Res,
           ? _value.hasNext
           : hasNext // ignore: cast_nullable_to_non_nullable
               as bool,
+      department: null == department
+          ? _value.department
+          : department // ignore: cast_nullable_to_non_nullable
+              as Department,
     ) as $Val);
   }
 }
@@ -100,7 +107,8 @@ abstract class _$$InitialImplCopyWith<$Res>
       Option<Either<MainFailure, List<Staff>>> failureOrSuccess,
       bool isFirstFetch,
       bool isLoading,
-      bool hasNext});
+      bool hasNext,
+      Department department});
 }
 
 /// @nodoc
@@ -119,6 +127,7 @@ class __$$InitialImplCopyWithImpl<$Res>
     Object? isFirstFetch = null,
     Object? isLoading = null,
     Object? hasNext = null,
+    Object? department = null,
   }) {
     return _then(_$InitialImpl(
       staffs: null == staffs
@@ -141,6 +150,10 @@ class __$$InitialImplCopyWithImpl<$Res>
           ? _value.hasNext
           : hasNext // ignore: cast_nullable_to_non_nullable
               as bool,
+      department: null == department
+          ? _value.department
+          : department // ignore: cast_nullable_to_non_nullable
+              as Department,
     ));
   }
 }
@@ -153,7 +166,8 @@ class _$InitialImpl implements _Initial {
       required this.failureOrSuccess,
       required this.isFirstFetch,
       required this.isLoading,
-      required this.hasNext})
+      required this.hasNext,
+      required this.department})
       : _staffs = staffs;
 
   final List<Staff> _staffs;
@@ -172,10 +186,12 @@ class _$InitialImpl implements _Initial {
   final bool isLoading;
   @override
   final bool hasNext;
+  @override
+  final Department department;
 
   @override
   String toString() {
-    return 'DepartmentSearchState(staffs: $staffs, failureOrSuccess: $failureOrSuccess, isFirstFetch: $isFirstFetch, isLoading: $isLoading, hasNext: $hasNext)';
+    return 'DepartmentSearchState(staffs: $staffs, failureOrSuccess: $failureOrSuccess, isFirstFetch: $isFirstFetch, isLoading: $isLoading, hasNext: $hasNext, department: $department)';
   }
 
   @override
@@ -190,7 +206,9 @@ class _$InitialImpl implements _Initial {
                 other.isFirstFetch == isFirstFetch) &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
-            (identical(other.hasNext, hasNext) || other.hasNext == hasNext));
+            (identical(other.hasNext, hasNext) || other.hasNext == hasNext) &&
+            (identical(other.department, department) ||
+                other.department == department));
   }
 
   @override
@@ -200,7 +218,8 @@ class _$InitialImpl implements _Initial {
       failureOrSuccess,
       isFirstFetch,
       isLoading,
-      hasNext);
+      hasNext,
+      department);
 
   @JsonKey(ignore: true)
   @override
@@ -215,7 +234,8 @@ abstract class _Initial implements DepartmentSearchState {
       required final Option<Either<MainFailure, List<Staff>>> failureOrSuccess,
       required final bool isFirstFetch,
       required final bool isLoading,
-      required final bool hasNext}) = _$InitialImpl;
+      required final bool hasNext,
+      required final Department department}) = _$InitialImpl;
 
   @override
   List<Staff> get staffs;
@@ -227,6 +247,8 @@ abstract class _Initial implements DepartmentSearchState {
   bool get isLoading;
   @override
   bool get hasNext;
+  @override
+  Department get department;
   @override
   @JsonKey(ignore: true)
   _$$InitialImplCopyWith<_$InitialImpl> get copyWith =>

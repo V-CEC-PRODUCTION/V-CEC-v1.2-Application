@@ -8,12 +8,13 @@ class DepartmentSearchState with _$DepartmentSearchState {
     required bool isFirstFetch,
     required bool isLoading,
     required bool hasNext,
+    required Department department,
   }) = _Initial;
   factory DepartmentSearchState.initial() {
     return _Initial(
         staffs: [],
         failureOrSuccess: none(),
         isFirstFetch: false,
-        isLoading: false,hasNext:true);
+        isLoading: false,hasNext:true,department: Department.fac);
   }
 }
