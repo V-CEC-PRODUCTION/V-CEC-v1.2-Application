@@ -99,7 +99,6 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                           .otp;
 
                   if (otp == code2) {
-                    
                     final email = AuthTokenManager.instance.email;
                     final end = email!.substring((email.length) - 13);
                     if (end == "ceconline.edu") {

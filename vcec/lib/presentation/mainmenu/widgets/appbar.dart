@@ -22,7 +22,8 @@ class MainmenuAppbar extends StatefulWidget {
       this.timeTable,
       required this.currentPeriod,
       required this.duration,
-      this.imageUrl, this.thumbnailUrl});
+      this.imageUrl,
+      this.thumbnailUrl});
 
   final TimeTable? timeTable;
   final String? imageUrl;
@@ -119,7 +120,9 @@ class _MainmenuAppbarState extends State<MainmenuAppbar> {
                                         backgroundColor:
                                             Color.fromARGB(255, 113, 124, 124),
                                       ))
-                                  :_Banner(imageUrl: widget.imageUrl!, thumbnailUrl: widget.thumbnailUrl!)),
+                                  : _Banner(
+                                      imageUrl: widget.imageUrl!,
+                                      thumbnailUrl: widget.thumbnailUrl!)),
                           GestureDetector(
                             onTap: () {
                               widget.timeTable == null

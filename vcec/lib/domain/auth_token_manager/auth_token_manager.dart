@@ -26,7 +26,11 @@ class AuthTokenManager {
     _accessToken = accessToken;
     _refreshToken = accessToken;
   }
-setDetails({required String name, required String imageUrl, required String thumbnailUrl}) {
+
+  setDetails(
+      {required String name,
+      required String imageUrl,
+      required String thumbnailUrl}) {
     _name = name;
     _imageUrl = imageUrl;
     _thumbnailUrl = thumbnailUrl;

@@ -68,7 +68,7 @@ dependencies:
   pin_input_text_field: ^4.5.1
   pinput: null
   progressive_image: ^2.0.1
-  share_plus: null
+  share_plus: 
   shared_preferences: null
   shimmer: ^3.0.0
 

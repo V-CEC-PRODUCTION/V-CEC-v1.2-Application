@@ -5,13 +5,13 @@ import 'package:shimmer/shimmer.dart';
 
 import 'package:vcec/core/constants.dart';
 import 'package:vcec/domain/auth_token_manager/auth_token_manager.dart';
-import 'package:vcec/presentation/common_widgets/avatar.dart';
+
 import 'package:vcec/presentation/common_widgets/notification_icon.dart';
 import 'package:vcec/presentation/common_widgets/search_field.dart';
-import 'package:vcec/presentation/mainmenu/widgets/appbar.dart';
+
 import 'package:vcec/strings/strings.dart';
 
-enum Department { cs, ec, eee, gs, as, lib }
+enum Department { cs, ec, eee, gs, as, lib, fac }
 
 final date = DateFormat('dd-MM-yyyy').format(DateTime.now());
 
@@ -19,13 +19,12 @@ class AppbarWithSearch extends PreferredSize {
   final String hintText;
   final ValueNotifier isSearchNotifier;
   final Department? department;
-  AppbarWithSearch( {
+  AppbarWithSearch({
     super.key,
     required this.isSearchNotifier,
     required this.hintText,
     this.department,
-  }) :
-   super(
+  }) : super(
           preferredSize: const Size(double.infinity, 150),
           child: SizedBox.expand(
             child: Stack(
@@ -47,7 +46,9 @@ class AppbarWithSearch extends PreferredSize {
                                     Color.fromARGB(255, 113, 124, 124),
                               ))
                           : _Banner(
-                              imageUrl: AuthTokenManager.instance.imageUrl!, thumbnailUrl:AuthTokenManager.instance.thumbnailUrl!),
+                              imageUrl: AuthTokenManager.instance.imageUrl!,
+                              thumbnailUrl:
+                                  AuthTokenManager.instance.thumbnailUrl!),
                       kwidth20,
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -62,7 +63,9 @@ class AppbarWithSearch extends PreferredSize {
                             ),
                           ),
                           Text(
-                            AuthTokenManager.instance.name == null ? '...' : AuthTokenManager.instance.name!,
+                            AuthTokenManager.instance.name == null
+                                ? '...'
+                                : AuthTokenManager.instance.name!,
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 16,

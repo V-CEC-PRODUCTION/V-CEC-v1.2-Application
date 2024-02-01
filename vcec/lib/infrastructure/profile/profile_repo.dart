@@ -28,7 +28,10 @@ class ProfileRepo extends ProfileService {
         final ProfileModel profileData =
             ProfileModel.fromJson(response.toString());
         print('object');
-        AuthTokenManager.instance.setDetails(imageUrl: profileData.imageUrl!,name: profileData.name!,thumbnailUrl: profileData.thumbnailUrl!);
+        AuthTokenManager.instance.setDetails(
+            imageUrl: profileData.imageUrl!,
+            name: profileData.name!,
+            thumbnailUrl: profileData.thumbnailUrl!);
         return Right(profileData);
       } else {
         log('Server Error');

@@ -10,12 +10,12 @@ import 'package:vcec/presentation/notices/widgets/notices_tabbar.dart';
 import 'package:vcec/strings/strings.dart';
 
 class NoticesScreen extends StatelessWidget {
-   NoticesScreen({super.key });
+  NoticesScreen({super.key});
 
   final String? name = AuthTokenManager.instance.name;
   final String? imgUrl = AuthTokenManager.instance.imageUrl;
   final String? thumbnailUrl = AuthTokenManager.instance.thumbnailUrl;
-  final date =   DateFormat('dd-MM-yyyy').format(DateTime.now());
+  final date = DateFormat('dd-MM-yyyy').format(DateTime.now());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,16 +27,15 @@ class NoticesScreen extends StatelessWidget {
           leading: Padding(
             padding: const EdgeInsets.only(left: 20, top: 15),
             child: CircleAvatar(
-              child: imgUrl == null ? Shimmer.fromColors(
-                                      baseColor: Color(0xFFC0C0C0),
-                                      highlightColor: Color(0xFFE8E8E8),
-                                      child: CircleAvatar(
-                                        radius: 23,
-                                        backgroundColor:
-                                            Color.fromARGB(255, 113, 124, 124),
-                                      ))
-                                  :
-                     _Banner(imageUrl: imgUrl!, thumbnailUrl: thumbnailUrl!),
+              child: imgUrl == null
+                  ? Shimmer.fromColors(
+                      baseColor: Color(0xFFC0C0C0),
+                      highlightColor: Color(0xFFE8E8E8),
+                      child: CircleAvatar(
+                        radius: 23,
+                        backgroundColor: Color.fromARGB(255, 113, 124, 124),
+                      ))
+                  : _Banner(imageUrl: imgUrl!, thumbnailUrl: thumbnailUrl!),
             ),
           ),
           title: Padding(
@@ -101,6 +100,7 @@ class NoticesScreen extends StatelessWidget {
     );
   }
 }
+
 class _Banner extends StatelessWidget {
   const _Banner({required this.imageUrl, required this.thumbnailUrl});
   final String imageUrl;

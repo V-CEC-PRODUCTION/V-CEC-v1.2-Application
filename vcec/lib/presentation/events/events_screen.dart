@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:progressive_image/progressive_image.dart';
 import 'package:shimmer/shimmer.dart';
-import 'package:vcec/application/profile/profile_cubit.dart';
+
 import 'package:vcec/core/colors.dart';
 import 'package:vcec/core/constants.dart';
 import 'package:vcec/domain/auth_token_manager/auth_token_manager.dart';
@@ -16,14 +16,14 @@ import 'package:vcec/presentation/events/events_widgets/upcoming_events.dart';
 import 'package:vcec/strings/strings.dart';
 
 class EventsScreen extends StatelessWidget {
-   EventsScreen({
+  EventsScreen({
     super.key,
     this.imgUrl,
   });
   final String? imgUrl;
   final String? imageUrl = AuthTokenManager.instance.imageUrl;
-    final String? thumbnailUrl = AuthTokenManager.instance.thumbnailUrl;
-    final String? name = AuthTokenManager.instance.name;
+  final String? thumbnailUrl = AuthTokenManager.instance.thumbnailUrl;
+  final String? name = AuthTokenManager.instance.name;
 
   @override
   Widget build(BuildContext context) {
@@ -42,9 +42,7 @@ class EventsScreen extends StatelessWidget {
                       radius: 20,
                       backgroundColor: Color.fromARGB(255, 113, 124, 124),
                     ))
-                : _Banner(
-                    imageUrl: imageUrl!,
-                    thumbnailUrl:thumbnailUrl!),
+                : _Banner(imageUrl: imageUrl!, thumbnailUrl: thumbnailUrl!),
           ),
         ),
         title: Text(

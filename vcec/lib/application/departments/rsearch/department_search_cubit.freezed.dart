@@ -19,6 +19,9 @@ mixin _$DepartmentSearchState {
   List<Staff> get staffs => throw _privateConstructorUsedError;
   Option<Either<MainFailure, List<Staff>>> get failureOrSuccess =>
       throw _privateConstructorUsedError;
+  bool get isFirstFetch => throw _privateConstructorUsedError;
+  bool get isLoading => throw _privateConstructorUsedError;
+  bool get hasNext => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $DepartmentSearchStateCopyWith<DepartmentSearchState> get copyWith =>
@@ -33,7 +36,10 @@ abstract class $DepartmentSearchStateCopyWith<$Res> {
   @useResult
   $Res call(
       {List<Staff> staffs,
-      Option<Either<MainFailure, List<Staff>>> failureOrSuccess});
+      Option<Either<MainFailure, List<Staff>>> failureOrSuccess,
+      bool isFirstFetch,
+      bool isLoading,
+      bool hasNext});
 }
 
 /// @nodoc
@@ -52,6 +58,9 @@ class _$DepartmentSearchStateCopyWithImpl<$Res,
   $Res call({
     Object? staffs = null,
     Object? failureOrSuccess = null,
+    Object? isFirstFetch = null,
+    Object? isLoading = null,
+    Object? hasNext = null,
   }) {
     return _then(_value.copyWith(
       staffs: null == staffs
@@ -62,6 +71,18 @@ class _$DepartmentSearchStateCopyWithImpl<$Res,
           ? _value.failureOrSuccess
           : failureOrSuccess // ignore: cast_nullable_to_non_nullable
               as Option<Either<MainFailure, List<Staff>>>,
+      isFirstFetch: null == isFirstFetch
+          ? _value.isFirstFetch
+          : isFirstFetch // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      hasNext: null == hasNext
+          ? _value.hasNext
+          : hasNext // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -76,7 +97,10 @@ abstract class _$$InitialImplCopyWith<$Res>
   @useResult
   $Res call(
       {List<Staff> staffs,
-      Option<Either<MainFailure, List<Staff>>> failureOrSuccess});
+      Option<Either<MainFailure, List<Staff>>> failureOrSuccess,
+      bool isFirstFetch,
+      bool isLoading,
+      bool hasNext});
 }
 
 /// @nodoc
@@ -92,6 +116,9 @@ class __$$InitialImplCopyWithImpl<$Res>
   $Res call({
     Object? staffs = null,
     Object? failureOrSuccess = null,
+    Object? isFirstFetch = null,
+    Object? isLoading = null,
+    Object? hasNext = null,
   }) {
     return _then(_$InitialImpl(
       staffs: null == staffs
@@ -102,6 +129,18 @@ class __$$InitialImplCopyWithImpl<$Res>
           ? _value.failureOrSuccess
           : failureOrSuccess // ignore: cast_nullable_to_non_nullable
               as Option<Either<MainFailure, List<Staff>>>,
+      isFirstFetch: null == isFirstFetch
+          ? _value.isFirstFetch
+          : isFirstFetch // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      hasNext: null == hasNext
+          ? _value.hasNext
+          : hasNext // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -110,7 +149,11 @@ class __$$InitialImplCopyWithImpl<$Res>
 
 class _$InitialImpl implements _Initial {
   const _$InitialImpl(
-      {required final List<Staff> staffs, required this.failureOrSuccess})
+      {required final List<Staff> staffs,
+      required this.failureOrSuccess,
+      required this.isFirstFetch,
+      required this.isLoading,
+      required this.hasNext})
       : _staffs = staffs;
 
   final List<Staff> _staffs;
@@ -123,10 +166,16 @@ class _$InitialImpl implements _Initial {
 
   @override
   final Option<Either<MainFailure, List<Staff>>> failureOrSuccess;
+  @override
+  final bool isFirstFetch;
+  @override
+  final bool isLoading;
+  @override
+  final bool hasNext;
 
   @override
   String toString() {
-    return 'DepartmentSearchState(staffs: $staffs, failureOrSuccess: $failureOrSuccess)';
+    return 'DepartmentSearchState(staffs: $staffs, failureOrSuccess: $failureOrSuccess, isFirstFetch: $isFirstFetch, isLoading: $isLoading, hasNext: $hasNext)';
   }
 
   @override
@@ -136,12 +185,22 @@ class _$InitialImpl implements _Initial {
             other is _$InitialImpl &&
             const DeepCollectionEquality().equals(other._staffs, _staffs) &&
             (identical(other.failureOrSuccess, failureOrSuccess) ||
-                other.failureOrSuccess == failureOrSuccess));
+                other.failureOrSuccess == failureOrSuccess) &&
+            (identical(other.isFirstFetch, isFirstFetch) ||
+                other.isFirstFetch == isFirstFetch) &&
+            (identical(other.isLoading, isLoading) ||
+                other.isLoading == isLoading) &&
+            (identical(other.hasNext, hasNext) || other.hasNext == hasNext));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType,
-      const DeepCollectionEquality().hash(_staffs), failureOrSuccess);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_staffs),
+      failureOrSuccess,
+      isFirstFetch,
+      isLoading,
+      hasNext);
 
   @JsonKey(ignore: true)
   @override
@@ -153,13 +212,21 @@ class _$InitialImpl implements _Initial {
 abstract class _Initial implements DepartmentSearchState {
   const factory _Initial(
       {required final List<Staff> staffs,
-      required final Option<Either<MainFailure, List<Staff>>>
-          failureOrSuccess}) = _$InitialImpl;
+      required final Option<Either<MainFailure, List<Staff>>> failureOrSuccess,
+      required final bool isFirstFetch,
+      required final bool isLoading,
+      required final bool hasNext}) = _$InitialImpl;
 
   @override
   List<Staff> get staffs;
   @override
   Option<Either<MainFailure, List<Staff>>> get failureOrSuccess;
+  @override
+  bool get isFirstFetch;
+  @override
+  bool get isLoading;
+  @override
+  bool get hasNext;
   @override
   @JsonKey(ignore: true)
   _$$InitialImplCopyWith<_$InitialImpl> get copyWith =>

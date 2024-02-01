@@ -3,8 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vcec/application/main_menu/timetable/timetable_cubit.dart';
 import 'package:vcec/application/profile/profile_cubit.dart';
 import 'package:vcec/core/constants.dart';
-import 'package:vcec/presentation/common_widgets/sub_heading.dart';
-import 'package:vcec/presentation/mainmenu/subpages/cec_gallery_screen1.dart';
 //import 'package:vcec/presentation/mainmenu/subpages/cec_gallery_screen.dart';
 import 'package:vcec/presentation/mainmenu/widgets/appbar.dart';
 import 'package:vcec/presentation/mainmenu/widgets/carousel.dart';

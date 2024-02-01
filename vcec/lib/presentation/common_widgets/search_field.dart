@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vcec/application/departments/rsearch/department_search_cubit.dart';
 import 'package:vcec/presentation/common_widgets/appbar_with_search.dart';
+import 'package:vcec/presentation/departments/widgets/staff_tile.dart';
 
 class SearchField extends StatelessWidget {
   const SearchField(
@@ -32,13 +33,16 @@ class SearchField extends StatelessWidget {
       ),
       child: TextField(
         onChanged: (value) {
-          BlocProvider.of<DepartmentSearchCubit>(context)
-              .searchDepartments(value, deptType);
+          BlocProvider.of<DepartmentSearchCubit>(context).searchDepartmentsWithSearchBar(
+            value,
+            deptType,
+          );
           if (value.isNotEmpty) {
-            isSearchNotifier.value = true;
+            isSearchNotifier.value = SearchData(searchText: value, isNotEmpty: true);
+
             isSearchNotifier.notifyListeners();
           } else {
-            isSearchNotifier.value = false;
+            isSearchNotifier.value = SearchData(searchText: '', isNotEmpty: false);
             isSearchNotifier.notifyListeners();
           }
         },

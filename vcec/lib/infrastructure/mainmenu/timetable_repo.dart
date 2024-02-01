@@ -26,7 +26,6 @@ class TimeTableRespository implements TimeTableService {
       if (response.statusCode == 200 || response.statusCode == 201) {
         final TimeTableModel timetable =
             TimeTableModel.fromJson(response.toString());
-        print(timetable);
         return Right(timetable);
       } else {
         return const Left(MainFailure.serverFailure());

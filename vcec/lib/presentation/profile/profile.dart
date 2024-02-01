@@ -130,16 +130,16 @@ class ProfileScreen extends StatelessWidget {
                           children: [
                             state.profileModel!.imageUrl == null
                                 ? Shimmer.fromColors(
-                                    baseColor:const Color.fromARGB(255, 0, 0, 0),
-                                    highlightColor:
-                                       const Color.fromARGB(255, 207, 207, 207),
+                                    baseColor:
+                                        const Color.fromARGB(255, 0, 0, 0),
+                                    highlightColor: const Color.fromARGB(
+                                        255, 207, 207, 207),
                                     child: Container(
                                       height: size1 * 0.28,
                                       width: size1 * 0.28,
-                                      decoration:const BoxDecoration(
+                                      decoration: const BoxDecoration(
                                         shape: BoxShape.circle,
-                                        color:
-                                             Color.fromARGB(34, 0, 0, 0),
+                                        color: Color.fromARGB(34, 0, 0, 0),
                                       ),
                                     ),
                                   )

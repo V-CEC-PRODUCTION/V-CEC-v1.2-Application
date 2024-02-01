@@ -86,7 +86,7 @@ class MyApp extends StatelessWidget {
           create: (context) => getIt<ProfileCubit>(),
         ),
         BlocProvider<EditProfileCubit>(
-          create: (context) => getIt<EditProfileCubit>()),
+            create: (context) => getIt<EditProfileCubit>()),
         BlocProvider<EventsCubit>(
           create: (context) => getIt<EventsCubit>(),
         ),
