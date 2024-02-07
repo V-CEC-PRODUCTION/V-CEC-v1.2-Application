@@ -6,7 +6,8 @@ import 'package:vcec/presentation/departments/widgets/staff_tile.dart';
 
 class DepartmentsScreen extends StatelessWidget {
   DepartmentsScreen({super.key});
-  final ValueNotifier<SearchData> isSearchingNotifier = ValueNotifier<SearchData>(SearchData(searchText: '', isNotEmpty: false));
+  final ValueNotifier<SearchData> isSearchingNotifier =
+      ValueNotifier<SearchData>(SearchData(searchText: '', isNotEmpty: false));
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,7 +25,9 @@ class DepartmentsScreen extends StatelessWidget {
                     return Expanded(
                       child: value.isNotEmpty
                           ? DepartmentSearchScreen(
-                              deptType: Department.fac,value: value.isNotEmpty, query: value.searchText,
+                              deptType: Department.fac,
+                              value: value.isNotEmpty,
+                              query: value.searchText,
                             )
                           : DepartmentsIdleScreen(),
                     );

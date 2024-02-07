@@ -40,7 +40,7 @@ class DepartmentSearchScreen extends StatelessWidget {
     }
     return BlocBuilder<DepartmentSearchCubit, DepartmentSearchState>(
       builder: (context, state) {
-         print(state.hasNext);
+        print(state.hasNext);
         return state.failureOrSuccess.fold(
             () => state.isFirstFetch
                 ? const Center(
@@ -82,7 +82,7 @@ class DepartmentSearchScreen extends StatelessWidget {
                         return StaffTile(staff: staffs[index]);
                       } else {
                         Timer(const Duration(milliseconds: 30), () {
-                           if (scrollController.hasClients) {
+                          if (scrollController.hasClients) {
                             scrollController.jumpTo(
                                 scrollController.position.maxScrollExtent);
                           }

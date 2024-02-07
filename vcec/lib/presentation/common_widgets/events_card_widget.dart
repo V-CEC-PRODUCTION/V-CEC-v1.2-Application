@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:progressive_image/progressive_image.dart';
 import 'package:vcec/core/constants.dart';
+import 'package:vcec/strings/strings.dart';
 
 class EventsCardWidget extends StatelessWidget {
   const EventsCardWidget({
@@ -47,9 +48,9 @@ class EventsCardWidget extends StatelessWidget {
             height: ((size.width * 0.65) - 12) / 16 * 9,
             child: ProgressiveImage(
                 blur: 1,
-                placeholder: NetworkImage(thumpnailUrl),
-                thumbnail: NetworkImage(thumpnailUrl),
-                image: NetworkImage(imgUrl),
+                placeholder: NetworkImage('$baseUrl$thumpnailUrl'),
+                thumbnail: NetworkImage('$baseUrl$thumpnailUrl'),
+                image: NetworkImage('$baseUrl$imgUrl'),
                 width: double.infinity,
                 height: double.infinity),
           ),
@@ -71,54 +72,106 @@ class EventsCardWidget extends StatelessWidget {
               ),
             ],
           ),
-          if (tag != null)
-            Row(
-              children: [
-                Text(
-                  tag!,
-                  style: TextStyle(
-                    fontWeight: FontWeight.w500,
-                    fontSize: 12,
-                  ),
-                ),
-                kwidth10,
+          //   if (tag != null)
+          Column(
+            children: [
+              //  Text(
+              //    tag!,
+              //    style: TextStyle(
+              //      fontWeight: FontWeight.w500,
+              //       fontSize: 12,
+              //     ),
+              //   ),
+              kwidth10,
 
-                // Event Subtitle
-                subtitle != null
-                    ? Text(
-                        subtitle!,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                          height: 1.2,
-                          fontSize: 13,
-                        ),
-                      )
-                    : SizedBox(),
-                if (date != null)
-                  Text(
-                    formatDate(date!),
-                    style: TextStyle(
-                      fontWeight: FontWeight.w500,
-                      fontSize: 10,
+              // Event Subtitle
+              Row(
+                children: [
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        subtitle != null
+                            ? Text(
+                                subtitle!,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                  height: 1.2,
+                                  fontSize: 13,
+                                ),
+                              )
+                            : SizedBox(),
+                        if (date != null)
+                          Text(
+                            date!,
+                            style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              fontSize: 10,
+                            ),
+                          ),
+                      ],
                     ),
                   ),
-              ],
-            )
+                  Expanded(
+                    child: Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        Positioned(
+                          left: size.width*0.01,
+                          child: Container(
+                            width: size.width * 0.07,
+                            height: size.width * 0.07,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Colors.black,
+                            ),
+                          ),
+                        ),
+                        Positioned(
+                          left:size.width*0.065,
+                          child: Container(
+                            width: size.width * 0.07,
+                            height: size.width * 0.07,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Colors.blue,
+                            ),
+                          ),
+                        ),
+                        Positioned(
+                          right: size.width*0.055,
+                          child: Container(
+                            width: size.width * 0.07,
+                            height: size.width * 0.07,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Colors.green,
+                            ),
+                          ),
+                        ),
+                        Positioned(
+                       //   left: size.width*0.09,
+                          child: Container(
+                            width: size.width * 0.07,
+                            height: size.width * 0.07,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Colors.black,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              )
+            ],
+          )
 
           // Event Date
         ],
       ),
     );
-  }
-
-  String formatDate(String inputDate) {
-    final inputFormat = DateFormat('yyyy-MM-dd');
-    final outputFormat = DateFormat('dd MMMM yyyy');
-
-    final date = inputFormat.parse(inputDate);
-    final formattedDate = outputFormat.format(date);
-
-    return formattedDate;
   }
 }

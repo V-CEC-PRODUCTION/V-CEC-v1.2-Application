@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:injectable/injectable.dart';
-import 'package:vcec/application/cubit/events_cubit.dart';
+import 'package:vcec/application/announcements/announcements_cubit.dart';
 import 'package:vcec/application/departments/rsearch/department_search_cubit.dart';
 import 'package:vcec/application/edit_profile/edit_profile_cubit.dart';
+import 'package:vcec/application/events/events_cubit.dart';
+import 'package:vcec/application/forums/forums_cubit.dart';
 import 'package:vcec/application/gallery/gallery_cubit.dart';
 import 'package:vcec/application/login/login_cubit.dart';
 import 'package:vcec/application/logout/log_out_cubit.dart';
@@ -89,6 +91,12 @@ class MyApp extends StatelessWidget {
             create: (context) => getIt<EditProfileCubit>()),
         BlocProvider<EventsCubit>(
           create: (context) => getIt<EventsCubit>(),
+        ),
+        BlocProvider<ForumsCubit>(
+          create: (context) => getIt<ForumsCubit>(),
+        ),
+         BlocProvider<AnnouncementCubit>(
+          create: (context) => getIt<AnnouncementCubit>(),
         ),
       ],
       child: ScreenUtilInit(

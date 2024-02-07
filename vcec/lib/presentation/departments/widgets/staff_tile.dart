@@ -168,10 +168,9 @@ class StaffTile extends StatelessWidget {
   }
 }
 
-class SearchData
-{
-   String searchText;
+class SearchData {
+  String searchText;
   bool isNotEmpty;
 
-  SearchData({required this.searchText ,required this.isNotEmpty});
+  SearchData({required this.searchText, required this.isNotEmpty});
 }

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
-import 'package:vcec/application/cubit/events_cubit.dart';
+import 'package:vcec/application/events/events_cubit.dart';
 
 import 'package:vcec/core/colors.dart';
 import 'package:vcec/domain/events/model/event_types.dart';
@@ -13,7 +13,7 @@ import 'package:vcec/presentation/common_widgets/sub_heading.dart';
 import 'package:vcec/presentation/events/constant.dart';
 
 class UpcomingEvents extends StatelessWidget {
-  UpcomingEvents({
+  const UpcomingEvents({
     super.key,
   });
 
@@ -29,14 +29,20 @@ class UpcomingEvents extends StatelessWidget {
           () {},
           (either) => either.fold(
             (failure) {
-              if (failure == MainFailure.clientFailure()) {
-                displaySnackBar(context: context, text: "Somthing went wrong");
-              } else {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text('Server Error'),
-                  ),
-                );
+              if (!state.isLoading) {
+                if (failure == const MainFailure.serverFailure()) {
+                  displaySnackBar(context: context, text: "Server is down");
+                } else if (failure == const MainFailure.clientFailure()) {
+                  displaySnackBar(
+                      context: context,
+                      text: "Something wrong with your network");
+                } else if (failure == const MainFailure.authFailure()) {
+                  displaySnackBar(
+                      context: context, text: 'Access token timed out');
+                } else {
+                  displaySnackBar(
+                      context: context, text: "Something Unexpected Happened");
+                }
               }
             },
             (upcomingEvents) {},
@@ -44,10 +50,10 @@ class UpcomingEvents extends StatelessWidget {
         );
       },
       builder: (context, state) {
-        if (state.isLoading || state.isFailureOrSuccess.isNone()) {
+        return state.isFailureOrSuccess.fold(() {
           return Shimmer.fromColors(
-            baseColor: Color.fromARGB(255, 0, 0, 0),
-            highlightColor: Color.fromARGB(255, 207, 207, 207),
+            baseColor: const Color.fromARGB(255, 0, 0, 0),
+            highlightColor: const Color.fromARGB(255, 207, 207, 207),
             child: Container(
               margin: const EdgeInsets.symmetric(horizontal: 10),
               height: 288.h,
@@ -58,66 +64,56 @@ class UpcomingEvents extends StatelessWidget {
               ),
             ),
           );
-        }
-
-        if (state.isFailureOrSuccess.isSome()) {
-          state.isFailureOrSuccess.fold(
-            () {},
-            (either) => either.fold(
-              (failure) {},
-              (success) {
-                final events = state.events[EventType.Upcoming.name];
-
-                return Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 15),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          SubHeading(text: 'Upcoming Events'),
-                          TextButton(
-                            onPressed: () {},
-                            child: Text(
-                              'View All',
-                              style: TextStyle(
-                                color: kBlackBlurr,
+        },
+            (either) => either.fold((l) {
+                  return Container(
+                    height: 288.h,
+                    width: 470.w,
+                    decoration: BoxDecoration(
+                      color: const Color.fromARGB(33, 255, 7, 7),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                  );
+                }, (events) {
+                  return Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 15),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const SubHeading(text: 'Upcoming Events'),
+                            TextButton(
+                              onPressed: () {},
+                              child: const Text(
+                                'View All',
+                                style: TextStyle(
+                                  color: kBlackBlurr,
+                                ),
                               ),
-                            ),
-                          )
-                        ],
+                            )
+                          ],
+                        ),
                       ),
-                    ),
-                    SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Row(
-                        children: List.generate(
-                            events!.length,
-                            (index) => EventsCardWidget(
-                                  thumpnailUrl:
-                                      events[index].thumbnailPosterImageUrl,
-                                  imgUrl: events[index].posterImageUrl,
-                                  title: events[index].title,
-                                  subtitle: events[index].content,
-                                  date: commondate,
-                                  time: commontime,
-                                )),
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          children: List.generate(
+                              events.length,
+                              (index) => EventsCardWidget(
+                                    thumpnailUrl:
+                                        events[index].thumbnailPosterImageUrl,
+                                    imgUrl: events[index].posterImageUrl,
+                                    title: events[index].title,
+                                    subtitle: events[index].content,
+                                    date: events[index].eventDate,
+                                    time: commontime,
+                                  )),
+                        ),
                       ),
-                    ),
-                  ],
-                );
-              },
-            ),
-          );
-        }
-        return Container(
-          height: 288.h,
-          width: 470.w,
-          decoration: BoxDecoration(
-            color: Color.fromARGB(33, 255, 7, 7),
-            borderRadius: BorderRadius.circular(20),
-          ),
-        );
+                    ],
+                  );
+                }));
       },
     );
   }

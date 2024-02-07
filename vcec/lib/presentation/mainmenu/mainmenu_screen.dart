@@ -26,10 +26,9 @@ class MainMenuScreen extends StatelessWidget {
           headerSliverBuilder: (context, innerBoxIsScrolled) => [
             BlocBuilder<TimetableCubit, TimetableState>(
               builder: (context, state) {
-                print(state);
                 return state.timetableFailureOrSuccess.fold(
                   () {
-                    return MainmenuAppbar(
+                    return const MainmenuAppbar(
                       currentPeriod: '...',
                       duration: 'Loading...',
                     );
@@ -37,7 +36,7 @@ class MainMenuScreen extends StatelessWidget {
                   (either) {
                     return either.fold(
                       (failure) {
-                        return MainmenuAppbar(
+                        return const MainmenuAppbar(
                           currentPeriod: 'Error',
                           duration: '00-00',
                         );
@@ -63,12 +62,12 @@ class MainMenuScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 kheight10,
-                StoryWidget(),
+                const StoryWidget(),
                 kheight10,
-                CarouselMainManu(),
+                const CarouselMainManu(),
 
                 kheight10,
-                Highlights(),
+                const Highlights(),
                 kheight10,
                 //  Padding(
                 //     padding: const EdgeInsets.only(left: 20, top: 10),

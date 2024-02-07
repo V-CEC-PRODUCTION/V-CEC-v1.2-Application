@@ -33,16 +33,19 @@ class SearchField extends StatelessWidget {
       ),
       child: TextField(
         onChanged: (value) {
-          BlocProvider.of<DepartmentSearchCubit>(context).searchDepartmentsWithSearchBar(
+          BlocProvider.of<DepartmentSearchCubit>(context)
+              .searchDepartmentsWithSearchBar(
             value,
             deptType,
           );
           if (value.isNotEmpty) {
-            isSearchNotifier.value = SearchData(searchText: value, isNotEmpty: true);
+            isSearchNotifier.value =
+                SearchData(searchText: value, isNotEmpty: true);
 
             isSearchNotifier.notifyListeners();
           } else {
-            isSearchNotifier.value = SearchData(searchText: '', isNotEmpty: false);
+            isSearchNotifier.value =
+                SearchData(searchText: '', isNotEmpty: false);
             isSearchNotifier.notifyListeners();
           }
         },

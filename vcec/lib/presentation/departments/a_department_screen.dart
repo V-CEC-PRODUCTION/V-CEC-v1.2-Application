@@ -11,7 +11,8 @@ class ADepartmentScreen extends StatelessWidget {
       {super.key, required this.deptType, required this.department});
   final Department deptType;
   final String department;
-  final ValueNotifier<SearchData> isSearchingNotifier = ValueNotifier<SearchData>(SearchData(searchText: '', isNotEmpty: false));
+  final ValueNotifier<SearchData> isSearchingNotifier =
+      ValueNotifier<SearchData>(SearchData(searchText: '', isNotEmpty: false));
   @override
   Widget build(BuildContext context) {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
@@ -30,7 +31,9 @@ class ADepartmentScreen extends StatelessWidget {
               SubHeading(text: department.toUpperCase()),
               Expanded(
                 child: DepartmentSearchScreen(
-                  deptType: deptType,value: isSearchingNotifier.value.isNotEmpty, query: isSearchingNotifier.value.searchText,
+                  deptType: deptType,
+                  value: isSearchingNotifier.value.isNotEmpty,
+                  query: isSearchingNotifier.value.searchText,
                 ),
               ),
             ],

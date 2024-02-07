@@ -15,6 +15,8 @@ class DepartmentSearchState with _$DepartmentSearchState {
         staffs: [],
         failureOrSuccess: none(),
         isFirstFetch: false,
-        isLoading: false,hasNext:true,department: Department.fac);
+        isLoading: false,
+        hasNext: true,
+        department: Department.fac);
   }
 }
