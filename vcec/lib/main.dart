@@ -1,10 +1,11 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:injectable/injectable.dart';
+import 'package:vcec/application/cubit/events_cubit.dart';
 import 'package:vcec/application/departments/rsearch/department_search_cubit.dart';
 import 'package:vcec/application/gallery/gallery_cubit.dart';
-import 'package:vcec/application/gallery/gallery_individual_cubit.dart';
 import 'package:vcec/application/login/login_cubit.dart';
 import 'package:vcec/application/logout/log_out_cubit.dart';
 import 'package:vcec/application/main_menu/carousel/carousel_cubit.dart';
@@ -16,21 +17,29 @@ import 'package:vcec/application/signup/verify_email/verify_email_cubit.dart';
 import 'package:vcec/application/splash_screen/splash_screen_cubit.dart';
 import 'package:vcec/core/di/injectable.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:vcec/infrastructure/notification/notification_handle.dart';
 import 'package:vcec/presentation/auth_screens/login/login_screen.dart';
 import 'package:vcec/presentation/auth_screens/sign_up/sign_up_screen.dart';
 import 'package:vcec/presentation/home/home.dart';
+import 'package:vcec/presentation/mainmenu/widgets/story_video_text_editor_widget.dart';
 import 'package:vcec/presentation/splash_screen.dart/splash_screen.dart';
 import 'package:vcec/presentation/auth_screens/otp_verification/otp_verification_screen.dart';
 import 'package:vcec/presentation/auth_screens/otp_verification/verified_screen.dart';
 import 'firebase_options.dart';
 
 void main() async {
-  await WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  await NotificationHandle().initiateAndListenNotification();
   await configureInjection(Environment.prod);
   runApp(const MyApp());
+}
+
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  await Firebase.initializeApp();
 }
 
 class MyApp extends StatelessWidget {
@@ -57,9 +66,6 @@ class MyApp extends StatelessWidget {
         BlocProvider<GalleryCubit>(
           create: (context) => getIt<GalleryCubit>(),
         ),
-        BlocProvider<GalleryIndividualCubit>(
-          create: (context) => getIt<GalleryIndividualCubit>(),
-        ),
         BlocProvider<SplashScreenCubit>(
           create: (context) => getIt<SplashScreenCubit>(),
         ),
@@ -75,7 +81,9 @@ class MyApp extends StatelessWidget {
         BlocProvider<LogOutCubit>(
           create: (context) => getIt<LogOutCubit>(),
         ),
-       
+        BlocProvider<EventsCubit>(
+          create: (context) => getIt<EventsCubit>(),
+        ),
       ],
       child: ScreenUtilInit(
           designSize: const Size(480, 1019),
@@ -88,13 +96,14 @@ class MyApp extends StatelessWidget {
               ),
               initialRoute: '/',
               routes: {
-                '/': (context) => SplashScreen(),
+                '/': (context) => HomeScreen(),
                 '/login': (context) => LoginPage(),
                 '/signup': (context) => SignUpScreen(),
                 '/home': (context) => HomeScreen(),
                 '/otp_verification': (context) => OtpVerificationScreen(),
                 '/otp_verified': (context) => VerifiedScreen(),
               },
+              navigatorKey: navigatorKey,
             );
           }),
     );

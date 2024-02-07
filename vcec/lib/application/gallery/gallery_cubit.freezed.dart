@@ -66,11 +66,11 @@ class _$GalleryStateCopyWithImpl<$Res, $Val extends GalleryState>
 }
 
 /// @nodoc
-abstract class _$$_GalleryStateCopyWith<$Res>
+abstract class _$$GalleryStateImplCopyWith<$Res>
     implements $GalleryStateCopyWith<$Res> {
-  factory _$$_GalleryStateCopyWith(
-          _$_GalleryState value, $Res Function(_$_GalleryState) then) =
-      __$$_GalleryStateCopyWithImpl<$Res>;
+  factory _$$GalleryStateImplCopyWith(
+          _$GalleryStateImpl value, $Res Function(_$GalleryStateImpl) then) =
+      __$$GalleryStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -79,11 +79,11 @@ abstract class _$$_GalleryStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_GalleryStateCopyWithImpl<$Res>
-    extends _$GalleryStateCopyWithImpl<$Res, _$_GalleryState>
-    implements _$$_GalleryStateCopyWith<$Res> {
-  __$$_GalleryStateCopyWithImpl(
-      _$_GalleryState _value, $Res Function(_$_GalleryState) _then)
+class __$$GalleryStateImplCopyWithImpl<$Res>
+    extends _$GalleryStateCopyWithImpl<$Res, _$GalleryStateImpl>
+    implements _$$GalleryStateImplCopyWith<$Res> {
+  __$$GalleryStateImplCopyWithImpl(
+      _$GalleryStateImpl _value, $Res Function(_$GalleryStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -92,7 +92,7 @@ class __$$_GalleryStateCopyWithImpl<$Res>
     Object? galleryfiles = freezed,
     Object? failureOrSuccess = null,
   }) {
-    return _then(_$_GalleryState(
+    return _then(_$GalleryStateImpl(
       galleryfiles: freezed == galleryfiles
           ? _value._galleryfiles
           : galleryfiles // ignore: cast_nullable_to_non_nullable
@@ -107,8 +107,8 @@ class __$$_GalleryStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_GalleryState implements _GalleryState {
-  const _$_GalleryState(
+class _$GalleryStateImpl implements _GalleryState {
+  const _$GalleryStateImpl(
       {required final List<GalleryFile>? galleryfiles,
       required this.failureOrSuccess})
       : _galleryfiles = galleryfiles;
@@ -135,7 +135,7 @@ class _$_GalleryState implements _GalleryState {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_GalleryState &&
+            other is _$GalleryStateImpl &&
             const DeepCollectionEquality()
                 .equals(other._galleryfiles, _galleryfiles) &&
             (identical(other.failureOrSuccess, failureOrSuccess) ||
@@ -149,15 +149,15 @@ class _$_GalleryState implements _GalleryState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_GalleryStateCopyWith<_$_GalleryState> get copyWith =>
-      __$$_GalleryStateCopyWithImpl<_$_GalleryState>(this, _$identity);
+  _$$GalleryStateImplCopyWith<_$GalleryStateImpl> get copyWith =>
+      __$$GalleryStateImplCopyWithImpl<_$GalleryStateImpl>(this, _$identity);
 }
 
 abstract class _GalleryState implements GalleryState {
   const factory _GalleryState(
       {required final List<GalleryFile>? galleryfiles,
       required final Option<Either<MainFailure, List<GalleryFile>>>
-          failureOrSuccess}) = _$_GalleryState;
+          failureOrSuccess}) = _$GalleryStateImpl;
 
   @override
   List<GalleryFile>? get galleryfiles;
@@ -165,6 +165,6 @@ abstract class _GalleryState implements GalleryState {
   Option<Either<MainFailure, List<GalleryFile>>> get failureOrSuccess;
   @override
   @JsonKey(ignore: true)
-  _$$_GalleryStateCopyWith<_$_GalleryState> get copyWith =>
+  _$$GalleryStateImplCopyWith<_$GalleryStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

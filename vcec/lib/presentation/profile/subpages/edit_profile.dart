@@ -6,7 +6,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:vcec/core/constants.dart';
 
 class EditProfileScreen extends StatefulWidget {
-  EditProfileScreen({super.key});
+  const EditProfileScreen({super.key});
 
   @override
   State<EditProfileScreen> createState() => _EditProfileScreenState();
@@ -102,7 +102,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 40,
               ),
               Stack(
@@ -112,7 +112,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     valueListenable: profilepicNotifier,
                     builder: (context, value, child) {
                       return profilepicNotifier.value == null
-                          ? CircleAvatar(
+                          ? const CircleAvatar(
                               radius: 75,
                               backgroundColor: Colors.grey,
                             )
@@ -125,7 +125,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   ),
                   GestureDetector(
                     onTap: pickImage,
-                    child: CircleAvatar(
+                    child: const CircleAvatar(
                       radius: 23,
                       backgroundColor: Color.fromARGB(255, 71, 71, 71),
                       child: Center(
@@ -168,7 +168,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 title: "Reg No",
                 controller: _regController,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 60,
               ),
             ],
@@ -181,7 +181,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
 class _TextFieldWithTitle extends StatelessWidget {
   const _TextFieldWithTitle(
-      {super.key, required this.title, required this.controller});
+      {required this.title, required this.controller});
   final String title;
   final TextEditingController controller;
   @override
@@ -196,11 +196,11 @@ class _TextFieldWithTitle extends StatelessWidget {
         ),
         TextField(
             controller: controller,
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               border: UnderlineInputBorder(),
             ),
             style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
-        SizedBox(
+        const SizedBox(
           height: 25,
         )
       ],

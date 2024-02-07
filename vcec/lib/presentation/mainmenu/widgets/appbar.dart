@@ -65,6 +65,7 @@ class _MainmenuAppbarState extends State<MainmenuAppbar> {
             }),
         builder: (context, value, child) {
           return SliverAppBar(
+            automaticallyImplyLeading: false,
             backgroundColor: Colors.transparent,
             elevation: 0,
             titleSpacing: 0,

@@ -4,19 +4,18 @@
 // InjectableConfigGenerator
 // **************************************************************************
 
-// ignore_for_file: unnecessary_lambdas
-// ignore_for_file: lines_longer_than_80_chars
+// ignore_for_file: type=lint
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:firebase_auth/firebase_auth.dart' as _i9;
+import 'package:firebase_auth/firebase_auth.dart' as _i11;
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:google_sign_in/google_sign_in.dart' as _i14;
 import 'package:injectable/injectable.dart' as _i2;
+import 'package:vcec/application/cubit/events_cubit.dart' as _i32;
 import 'package:vcec/application/departments/rsearch/department_search_cubit.dart'
     as _i31;
-import 'package:vcec/application/gallery/gallery_cubit.dart' as _i32;
-import 'package:vcec/application/gallery/gallery_individual_cubit.dart' as _i33;
+import 'package:vcec/application/gallery/gallery_cubit.dart' as _i33;
 import 'package:vcec/application/login/login_cubit.dart' as _i36;
 import 'package:vcec/application/logout/log_out_cubit.dart' as _i35;
 import 'package:vcec/application/main_menu/carousel/carousel_cubit.dart'
@@ -36,7 +35,7 @@ import 'package:vcec/domain/auth_token_manager/auth_token_sevice.dart' as _i3;
 import 'package:vcec/domain/authentication/login/login_service.dart' as _i17;
 import 'package:vcec/domain/authentication/signup/signup_service.dart' as _i21;
 import 'package:vcec/domain/departments/search/search_service.dart' as _i7;
-import 'package:vcec/domain/gallery/gallery_pressed_service.dart' as _i10;
+import 'package:vcec/domain/events/events_service.dart' as _i9;
 import 'package:vcec/domain/gallery/gallery_service.dart' as _i12;
 import 'package:vcec/domain/mainmenu/carousel/carousel_service.dart' as _i5;
 import 'package:vcec/domain/mainmenu/highlights/highlights_service.dart'
@@ -54,8 +53,7 @@ import 'package:vcec/infrastructure/core/firebase_injectable_module.dart'
     as _i39;
 import 'package:vcec/infrastructure/departments/department_search_repo.dart'
     as _i8;
-import 'package:vcec/infrastructure/gallery/gallery_pressed_repository.dart'
-    as _i11;
+import 'package:vcec/infrastructure/events/events_repository.dart' as _i10;
 import 'package:vcec/infrastructure/gallery/gallery_repository.dart' as _i13;
 import 'package:vcec/infrastructure/mainmenu/carousel_repo.dart' as _i6;
 import 'package:vcec/infrastructure/mainmenu/highlights_repo.dart' as _i16;
@@ -80,10 +78,9 @@ extension GetItInjectableX on _i1.GetIt {
     gh.lazySingleton<_i5.CarouselService>(() => _i6.CarouselRepository());
     gh.lazySingleton<_i7.DepartmentSearchService>(
         () => _i8.DepartmentSearchRepo());
-    gh.lazySingleton<_i9.FirebaseAuth>(
+    gh.lazySingleton<_i9.EventsService>(() => _i10.EventsRepository());
+    gh.lazySingleton<_i11.FirebaseAuth>(
         () => firebaseInjectableModule.firebaseAuth);
-    gh.lazySingleton<_i10.GalleryPressedService>(
-        () => _i11.GalleryRepository());
     gh.lazySingleton<_i12.GalleryService>(() => _i13.GalleryRepository());
     gh.lazySingleton<_i14.GoogleSignIn>(
         () => firebaseInjectableModule.signInWithGoogle);
@@ -91,7 +88,7 @@ extension GetItInjectableX on _i1.GetIt {
     gh.lazySingleton<_i17.LoginService>(() => _i18.LoginRepo());
     gh.lazySingleton<_i19.NoticesService>(() => _i20.NoticesRepo());
     gh.lazySingleton<_i21.SignupService>(() => _i22.SignupRepo(
-          gh<_i9.FirebaseAuth>(),
+          gh<_i11.FirebaseAuth>(),
           gh<_i14.GoogleSignIn>(),
         ));
     gh.lazySingleton<_i23.SplashScreenService>(() => _i24.SplashScreenRepo());
@@ -108,10 +105,10 @@ extension GetItInjectableX on _i1.GetIt {
         ));
     gh.factory<_i31.DepartmentSearchCubit>(
         () => _i31.DepartmentSearchCubit(gh<_i7.DepartmentSearchService>()));
-    gh.factory<_i32.GalleryCubit>(
-        () => _i32.GalleryCubit(gh<_i12.GalleryService>()));
-    gh.factory<_i33.GalleryIndividualCubit>(
-        () => _i33.GalleryIndividualCubit(gh<_i10.GalleryPressedService>()));
+    gh.factory<_i32.EventsCubit>(
+        () => _i32.EventsCubit(gh<_i9.EventsService>()));
+    gh.factory<_i33.GalleryCubit>(
+        () => _i33.GalleryCubit(gh<_i12.GalleryService>()));
     gh.factory<_i34.HighlightsCubit>(
         () => _i34.HighlightsCubit(gh<_i15.HighlightsService>()));
     gh.factory<_i35.LogOutCubit>(() => _i35.LogOutCubit(

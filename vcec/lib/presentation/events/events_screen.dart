@@ -8,7 +8,7 @@ import 'package:vcec/presentation/events/events_widgets/eventsforyou_widget.dart
 import 'package:vcec/presentation/events/events_widgets/find_amazing_events_widget.dart';
 import 'package:vcec/presentation/events/events_widgets/forum_event_filter_widget.dart';
 import 'package:vcec/presentation/events/events_widgets/latest_news_widget.dart';
-import 'package:vcec/presentation/events/events_widgets/nearby_events_widget.dart';
+import 'package:vcec/presentation/events/events_widgets/upcoming_events.dart';
 
 class EventsScreen extends StatelessWidget {
   const EventsScreen({super.key, this.imgUrl});
@@ -64,7 +64,7 @@ class EventsScreen extends StatelessWidget {
             const FindAmazingEventsWidget(),
             kheight10,
             const ForumEventFilterWidget(),
-            const NearbyEventsWidget(),
+            UpcomingEvents(),
             const EventsForYouWidget(),
             const AnnouncementsEventsWidget(),
             kheight10,

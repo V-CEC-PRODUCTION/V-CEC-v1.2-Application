@@ -10,7 +10,7 @@ import 'package:vcec/presentation/mainmenu/widgets/carousel.dart';
 import 'package:vcec/presentation/mainmenu/widgets/cec_gallery.dart';
 //import 'package:vcec/presentation/mainmenu/widgets/highlights.dart';
 import 'package:vcec/presentation/mainmenu/widgets/highlights1.dart';
-import 'package:vcec/presentation/mainmenu/widgets/story_part.dart';
+import 'package:vcec/presentation/mainmenu/widgets/story_widget.dart';
 
 class MainMenuScreen extends StatelessWidget {
   const MainMenuScreen({super.key});
@@ -57,13 +57,10 @@ class MainMenuScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 kheight10,
-                StoryPart(),
+                StoryWidget(),
                 kheight10,
                 CarouselMainManu(),
-                Padding(
-                  padding: const EdgeInsets.only(left: 20, top: 10),
-                  child: SubHeading(text: 'Highlights'),
-                ),
+
                 kheight10,
                 Highlights(),
                 kheight10,
@@ -72,24 +69,7 @@ class MainMenuScreen extends StatelessWidget {
                 //     child: SubHeading(text: 'CEC Today'),
                 //   ),
                 //   CecToday(),
-                Row(
-                  children: [
-                    kwidth20,
-                    SubHeading(text: 'CEC Gallery'),
-                    Spacer(),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => CecGalleryScreen(),
-                            ));
-                      },
-                      child: Text('view all'),
-                    ),
-                    kwidth20,
-                  ],
-                ),
+                
                 CecGallery(),
               ],
             ),

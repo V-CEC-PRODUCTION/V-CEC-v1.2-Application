@@ -34,7 +34,7 @@ class AuthTokenManager {
   }
 
   setLoginType(LoginType loginType) {
-    _loginType = logintype;
+    _loginType = loginType;
   }
 
   setEmail(String email) {
