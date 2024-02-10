@@ -8,10 +8,8 @@ import 'package:vcec/core/constants.dart';
 import 'package:vcec/domain/auth_token_manager/auth_token_manager.dart';
 import 'package:vcec/presentation/common_widgets/notification_icon.dart';
 import 'package:vcec/presentation/events/events_widgets/announcments_widget.dart';
-import 'package:vcec/presentation/events/events_widgets/eventsforyou_widget.dart';
 import 'package:vcec/presentation/events/events_widgets/find_amazing_events_widget.dart';
 import 'package:vcec/presentation/events/events_widgets/forum_event_filter_widget.dart';
-import 'package:vcec/presentation/events/events_widgets/latest_news_widget.dart';
 import 'package:vcec/presentation/events/events_widgets/upcoming_events.dart';
 import 'package:vcec/strings/strings.dart';
 

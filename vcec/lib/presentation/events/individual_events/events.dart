@@ -132,7 +132,7 @@ class IndEventsPage extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    height: size1 * 0.13,
+                    height: size1 * 0.17,
                   ),
                 ],
               ),
@@ -177,25 +177,99 @@ class IndEventsPage extends StatelessWidget {
                           side: BorderSide(color: Colors.black, width: 0.095)),
                       onPressed: () {},
                       child: SizedBox(
-                        child: Column(
-                          children: [
-                            const Icon(
-                              Icons.thumb_up,
-                              color: Colors.black,
-                              size: 25,
-                            ),
-                            Expanded(
-                              child: TextButton(
-                                onPressed: () {},
-                                child: const Text(
-                                  '100',
-                                  style: TextStyle(
-                                      fontSize: 9, fontWeight: FontWeight.bold),
+                        child: Builder(builder: (context) {
+                          return Column(
+                            children: [
+                              const Icon(
+                                Icons.thumb_up,
+                                color: Colors.black,
+                                size: 25,
+                              ),
+                              Expanded(
+                                child: TextButton(
+                                  onPressed: () {
+                                    showBottomSheet(
+                                      backgroundColor:
+                                          const Color.fromARGB(255, 21, 19, 19),
+                                      context: context,
+                                      builder: (context) {
+                                        return SizedBox(
+                                          height: 370,
+                                          width: double.infinity,
+                                          child: Column(
+                                            children: [
+                                              const SizedBox(
+                                                height: 10,
+                                              ),
+                                              Container(
+                                                  width: 40,
+                                                  height: 5,
+                                                  decoration: BoxDecoration(
+                                                    color: Colors.grey,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5),
+                                                  )),const SizedBox(
+                                                height: 40,
+                                              ),
+                                              Expanded(
+                                                child: Padding(
+                                                  padding: const EdgeInsets.all(8.0),
+                                                  child: ListView.separated(
+                                                    separatorBuilder:
+                                                        (context, index) {
+                                                      return Container(
+                                                        color: Colors.grey,
+                                                        height: 1,
+                                                      );
+                                                    },
+                                                    itemCount: 10,
+                                                    itemBuilder:
+                                                        (context, index) {
+                                                      return Padding(
+                                                        padding: const EdgeInsets.all(8.0),
+                                                        child: Row(
+                                                          children: [
+                                                            Container(
+                                                              width: 50,
+                                                              height: 50,
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                shape:
+                                                                    BoxShape.circle,
+                                                                color:
+                                                                    Colors.yellow,
+                                                              ),
+                                                            ),const SizedBox(
+                                                              width: 50,
+                                                            ),
+                                                            Text('name',style: TextStyle(
+                                                              color: Colors.white
+                                                            ),)
+                                                          ],
+                                                        ),
+                                                      );
+                                                    },
+                                                  ),
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                        );
+                                      },
+                                    );
+                                  },
+                                  child: const Text(
+                                    '100',
+                                    style: TextStyle(
+                                        fontSize: 9,
+                                        fontWeight: FontWeight.bold),
+                                  ),
                                 ),
                               ),
-                            ),
-                          ],
-                        ),
+                            ],
+                          );
+                        }),
                       ),
                     ),
                   )

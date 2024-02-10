@@ -17,7 +17,6 @@ class UpdateProfileImgRepo extends UpdateProfileImgService {
   Future<Either<MainFailure, bool>> putProfileImg(
       {required File imageFile}) async {
     try {
-      print('i was here');
       final accessToken = AuthTokenManager.instance.accessToken;
       var request = http.MultipartRequest(
           'PUT', Uri.parse('${baseUrl}users/auth/update/photo/'));
