@@ -44,8 +44,6 @@ class _MainmenuAppbarState extends State<MainmenuAppbar> {
   @override
   void initState() {
     log(widget.timeTable.toString());
-
-    // TODO: implement initState
     super.initState();
   }
 

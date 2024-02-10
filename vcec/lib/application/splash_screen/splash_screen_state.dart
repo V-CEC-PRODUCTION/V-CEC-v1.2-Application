@@ -5,5 +5,5 @@ class SplashScreenState with _$SplashScreenState {
   const factory SplashScreenState({required String page, required String msg}) =
       _SplashScreenState;
   factory SplashScreenState.initial() =>
-      const SplashScreenState(page: 'login', msg: '');
+      const SplashScreenState(page: '/login', msg: '');
 }
