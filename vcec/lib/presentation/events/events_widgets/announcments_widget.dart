@@ -6,6 +6,7 @@ import 'package:vcec/application/announcements/announcements_cubit.dart';
 import 'package:vcec/core/colors.dart';
 import 'package:vcec/presentation/common_widgets/events_card_widget.dart';
 import 'package:vcec/presentation/common_widgets/sub_heading.dart';
+import 'package:vcec/presentation/events/individual_events/announcements.dart';
 
 class AnnouncementsEventsWidget extends StatelessWidget {
   const AnnouncementsEventsWidget({super.key});
@@ -63,15 +64,22 @@ class AnnouncementsEventsWidget extends StatelessWidget {
                       child: Row(
                         children: List.generate(
                             announcements.length,
-                            (index) => EventsCardWidget(
-                                  thumpnailUrl: announcements[index].thumbnailPosterImageUrl!,
-                                  imgUrl: announcements[index].posterImageUrl!,
-                                  title:
-                                      announcements[index].title!,
-                                  subtitle:
-                                     announcements[index].content! ,
-                                    
-                                )),
+                            (index) => GestureDetector(
+                              child: EventsCardWidget(
+                                    thumpnailUrl: announcements[index]
+                                        .thumbnailPosterImageUrl!,
+                                    imgUrl: announcements[index].posterImageUrl!,
+                                    title: announcements[index].title!,
+                                    subtitle: announcements[index].content!,
+                                  ),
+                                  onTap: () {
+                                        Navigator.of(context)
+                                          .push(MaterialPageRoute(
+                                        builder: (context) =>
+                                            IndAnnouncementsPage(id: announcements[index].id!),
+                                      ));
+                                  },
+                            )),
                       ),
                     );
                   }));

@@ -11,6 +11,7 @@ import 'package:vcec/presentation/common_widgets/common_snackbar.dart';
 import 'package:vcec/presentation/common_widgets/events_card_widget.dart';
 import 'package:vcec/presentation/common_widgets/sub_heading.dart';
 import 'package:vcec/presentation/events/constant.dart';
+import 'package:vcec/presentation/events/individual_events/events.dart';
 
 class UpcomingEvents extends StatelessWidget {
   const UpcomingEvents({
@@ -100,14 +101,23 @@ class UpcomingEvents extends StatelessWidget {
                         child: Row(
                           children: List.generate(
                               events.length,
-                              (index) => EventsCardWidget(
-                                    thumpnailUrl:
-                                        events[index].thumbnailPosterImageUrl,
-                                    imgUrl: events[index].posterImageUrl,
-                                    title: events[index].title,
-                                    subtitle: events[index].content,
-                                    date: events[index].eventDate,
-                                    time: commontime,
+                              (index) => GestureDetector(
+                                    child: EventsCardWidget(
+                                      thumpnailUrl:
+                                          events[index].thumbnailPosterImageUrl,
+                                      imgUrl: events[index].posterImageUrl,
+                                      title: events[index].title,
+                                      subtitle: events[index].content,
+                                      date: events[index].eventDate,
+                                      time: commontime,
+                                    ),
+                                    onTap: () {
+                                      Navigator.of(context)
+                                          .push(MaterialPageRoute(
+                                        builder: (context) =>
+                                            IndEventsPage(id: events[index].id),
+                                      ));
+                                    },
                                   )),
                         ),
                       ),

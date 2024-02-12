@@ -9,6 +9,8 @@ import 'package:vcec/application/edit_profile/edit_profile_cubit.dart';
 import 'package:vcec/application/events/events_cubit.dart';
 import 'package:vcec/application/forums/forums_cubit.dart';
 import 'package:vcec/application/gallery/gallery_cubit.dart';
+import 'package:vcec/application/indannouncements/indannouncements_cubit.dart';
+import 'package:vcec/application/indeventscubit/indeventscubit_cubit.dart';
 import 'package:vcec/application/login/login_cubit.dart';
 import 'package:vcec/application/logout/log_out_cubit.dart';
 import 'package:vcec/application/main_menu/carousel/carousel_cubit.dart';
@@ -95,8 +97,14 @@ class MyApp extends StatelessWidget {
         BlocProvider<ForumsCubit>(
           create: (context) => getIt<ForumsCubit>(),
         ),
-         BlocProvider<AnnouncementCubit>(
+        BlocProvider<AnnouncementCubit>(
           create: (context) => getIt<AnnouncementCubit>(),
+        ),
+        BlocProvider<IndEventsCubit>(
+          create: (context) => getIt<IndEventsCubit>(),
+        ),
+         BlocProvider<IndAnnouncementsCubit>(
+          create: (context) => getIt<IndAnnouncementsCubit>(),
         ),
       ],
       child: ScreenUtilInit(

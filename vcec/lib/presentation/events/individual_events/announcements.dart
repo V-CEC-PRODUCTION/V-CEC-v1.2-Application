@@ -1,22 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:vcec/application/indeventscubit/indeventscubit_cubit.dart';
+import 'package:vcec/application/indannouncements/indannouncements_cubit.dart';
 import 'package:vcec/domain/failure/main_failure.dart';
 import 'package:vcec/presentation/common_widgets/common_snackbar.dart';
 import 'package:vcec/presentation/common_widgets/loading_widget.dart';
 import 'package:vcec/strings/strings.dart';
 
-class IndEventsPage extends StatelessWidget {
-  const IndEventsPage({super.key, required this.id});
+class IndAnnouncementsPage extends StatelessWidget {
+  const IndAnnouncementsPage({super.key, required this.id});
   final int id;
 
   @override
   Widget build(BuildContext context) {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      BlocProvider.of<IndEventsCubit>(context).getIndEvents(id: id);
+      BlocProvider.of<IndAnnouncementsCubit>(context)
+          .getIndAnnouncements(id: id);
     });
     final size1 = MediaQuery.of(context).size.width;
-    return BlocConsumer<IndEventsCubit, IndEventsState>(
+    return BlocConsumer<IndAnnouncementsCubit, IndAnnouncementsState>(
       listener: (context, state) {
         state.isFailureOrSuccess.fold(
           () {},
@@ -49,7 +50,7 @@ class IndEventsPage extends StatelessWidget {
           );
         }
 
-        return state.indEvents == null
+        return state.indAnnouncements == null
             ? const Center(child: Text('Error...'))
             : Scaffold(
                 appBar: AppBar(
@@ -61,7 +62,7 @@ class IndEventsPage extends StatelessWidget {
                       icon: const Icon(Icons.arrow_back_ios)),
                   centerTitle: true,
                   title: Text(
-                    state.indEvents!.eveentResult!.title!,
+                    state.indAnnouncements!.announcementResult!.title!,
                     style: TextStyle(
                         fontSize: size1 * 0.05, fontWeight: FontWeight.bold),
                   ),
@@ -81,49 +82,13 @@ class IndEventsPage extends StatelessWidget {
                                 color: Colors.yellow,
                                 image: DecorationImage(
                                   image: NetworkImage(
-                                      '$baseUrl${state.indEvents!.eveentResult!.posterImageUrl!}'),
+                                      '$baseUrl${state.indAnnouncements!.announcementResult!.posterImageUrl!}'),
                                   fit: BoxFit.fill,
                                 ),
                               ),
                             ),
                             const SizedBox(
                               height: 20,
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(left: size1 * 0.10),
-                              child: const Row(
-                                children: [
-                                  Text(
-                                    '8:00 AM',
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.bold),
-                                  ),
-                                  SizedBox(
-                                    width: 28,
-                                  ),
-                                  Text('|',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold)),
-                                  SizedBox(
-                                    width: 28,
-                                  ),
-                                  Text('28 July',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold)),
-                                  SizedBox(
-                                    width: 28,
-                                  ),
-                                  Text('|',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold)),
-                                  SizedBox(
-                                    width: 28,
-                                  ),
-                                  Text('AC Auditorium',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold))
-                                ],
-                              ),
                             ),
                             const SizedBox(
                               height: 10,
@@ -132,7 +97,7 @@ class IndEventsPage extends StatelessWidget {
                               padding: EdgeInsets.only(
                                   left: size1 * 0.10, right: size1 * 0.09),
                               child: Text(
-                                state.indEvents!.eveentResult!.content!,
+                                state.indAnnouncements!.announcementResult!.content!,
                                 style: TextStyle(
                                   fontWeight: FontWeight.w400,
                                   fontSize: 15.3,
@@ -337,7 +302,8 @@ class IndEventsPage extends StatelessWidget {
                                               );
                                             },
                                             child: Text(
-                                              state.indEvents!.totalLikes!
+                                              state
+                                                  .indAnnouncements!.totalLikes!
                                                   .toString(),
                                               style: TextStyle(
                                                   fontSize: 9,

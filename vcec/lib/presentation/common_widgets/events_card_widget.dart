@@ -118,7 +118,7 @@ class EventsCardWidget extends StatelessWidget {
                       alignment: Alignment.center,
                       children: [
                         Positioned(
-                          left: size.width*0.01,
+                          left: size.width * 0.01,
                           child: Container(
                             width: size.width * 0.07,
                             height: size.width * 0.07,
@@ -129,7 +129,7 @@ class EventsCardWidget extends StatelessWidget {
                           ),
                         ),
                         Positioned(
-                          left:size.width*0.065,
+                          left: size.width * 0.065,
                           child: Container(
                             width: size.width * 0.07,
                             height: size.width * 0.07,
@@ -140,7 +140,7 @@ class EventsCardWidget extends StatelessWidget {
                           ),
                         ),
                         Positioned(
-                          right: size.width*0.055,
+                          right: size.width * 0.055,
                           child: Container(
                             width: size.width * 0.07,
                             height: size.width * 0.07,
@@ -151,7 +151,7 @@ class EventsCardWidget extends StatelessWidget {
                           ),
                         ),
                         Positioned(
-                       //   left: size.width*0.09,
+                          //   left: size.width*0.09,
                           child: Container(
                             width: size.width * 0.07,
                             height: size.width * 0.07,

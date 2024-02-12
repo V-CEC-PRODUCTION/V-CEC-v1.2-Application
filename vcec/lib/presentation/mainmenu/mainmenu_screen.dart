@@ -43,13 +43,15 @@ class MainMenuScreen extends StatelessWidget {
                     },
                     (success) {
                       print('timetable');
-                     print(success.result![0]);
+                      print(success.result![0]);
                       return MainmenuAppbar(
                         currentPeriod: success.result![0].currentcode ?? '...',
                         duration: success.result![0].currenttime ?? '..',
                         timeTable: success.result![0],
-                        imageUrl: success.imageThumbnailUrl!,
-                        thumbnailUrl: success.thumbnailUrl!,
+                        imageUrl: success.imageThumbnailUrl ??
+                            "https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTAxL3JtNjA5LXNvbGlkaWNvbi13LTAwMi1wLnBuZw.png",
+                        thumbnailUrl: success.thumbnailUrl ??
+                            "https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTAxL3JtNjA5LXNvbGlkaWNvbi13LTAwMi1wLnBuZw.png",
                       );
                     },
                   );
