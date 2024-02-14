@@ -61,7 +61,7 @@ class IndEventsPage extends StatelessWidget {
                       icon: const Icon(Icons.arrow_back_ios)),
                   centerTitle: true,
                   title: Text(
-                    state.indEvents!.eveentResult!.title!,
+                    state.indEvents!.eventResult!.title!,
                     style: TextStyle(
                         fontSize: size1 * 0.05, fontWeight: FontWeight.bold),
                   ),
@@ -81,7 +81,7 @@ class IndEventsPage extends StatelessWidget {
                                 color: Colors.yellow,
                                 image: DecorationImage(
                                   image: NetworkImage(
-                                      '$baseUrl${state.indEvents!.eveentResult!.posterImageUrl!}'),
+                                      '$baseUrl${state.indEvents!.eventResult!.posterImageUrl!}'),
                                   fit: BoxFit.fill,
                                 ),
                               ),
@@ -132,7 +132,7 @@ class IndEventsPage extends StatelessWidget {
                               padding: EdgeInsets.only(
                                   left: size1 * 0.10, right: size1 * 0.09),
                               child: Text(
-                                state.indEvents!.eveentResult!.content!,
+                                state.indEvents!.eventResult!.content!,
                                 style: TextStyle(
                                   fontWeight: FontWeight.w400,
                                   fontSize: 15.3,
@@ -167,18 +167,20 @@ class IndEventsPage extends StatelessWidget {
                                           child: Container(
                                             height: size1 * 0.1,
                                             width: size1 * 0.1,
-                                            decoration: const BoxDecoration(
+                                            decoration: BoxDecoration(
                                               shape: BoxShape.circle,
                                               color: Colors.yellow,
                                               image: DecorationImage(
-                                                image: NetworkImage(''),
+                                                image: NetworkImage(
+                                                    '$baseUrl${state.indEvents!.conductedBy![index].imageUrl}'),
                                                 fit: BoxFit.fill,
                                               ),
                                             ),
                                           ),
                                         );
                                       },
-                                      itemCount: 5,
+                                      itemCount:
+                                          state.indEvents!.conductedBy!.length,
                                     ),
                                   ),
                                 ],

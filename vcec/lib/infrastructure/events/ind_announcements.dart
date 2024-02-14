@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
+import 'package:vcec/domain/auth_token_manager/auth_token_manager.dart';
 import 'package:vcec/domain/events/announcements/ind_announcements_model/ind_announcements_model.dart';
 import 'package:vcec/domain/events/announcements/ind_announcements_service.dart';
 import 'package:vcec/domain/failure/main_failure.dart';
@@ -12,10 +13,17 @@ class AnnouncementsRepository extends IndAnnouncementsService {
   Future<Either<MainFailure, IndAnnouncementsModel>> getIndAnnouncements(
       {required int id}) async {
     try {
-      final response = await Dio(BaseOptions(contentType: 'application/json'))
+      final accessToken = AuthTokenManager.instance.accessToken;
+      print(accessToken);
+      final Map<String, dynamic> headers = {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $accessToken',
+      };
+      final response = await Dio(BaseOptions(headers: headers))
           .get('${baseUrl}forum/announcements/get-announcement/$id/');
       if (response.statusCode == 200 || response.statusCode == 201) {
-        final announcements0 = IndAnnouncementsModel.fromJson(response.toString());
+        final announcements0 =
+            IndAnnouncementsModel.fromJson(response.toString());
         final announcements = announcements0;
         return Right(announcements);
       } else {
@@ -32,6 +40,4 @@ class AnnouncementsRepository extends IndAnnouncementsService {
       }
     }
   }
-
- 
 }

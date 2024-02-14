@@ -3,5 +3,6 @@ import 'package:vcec/domain/events/announcements/ind_announcements_model/ind_ann
 import 'package:vcec/domain/failure/main_failure.dart';
 
 abstract class IndAnnouncementsService {
-  Future<Either<MainFailure, IndAnnouncementsModel>> getIndAnnouncements({required int id});
+  Future<Either<MainFailure, IndAnnouncementsModel>> getIndAnnouncements(
+      {required int id});
 }

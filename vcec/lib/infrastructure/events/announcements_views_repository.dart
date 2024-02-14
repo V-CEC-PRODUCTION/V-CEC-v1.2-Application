@@ -1,30 +1,29 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
-import 'package:vcec/domain/events/events_service.dart';
-import 'package:vcec/domain/events/model/events_models/event_types.dart';
-import 'package:vcec/domain/events/model/events_models/events_model.dart';
+import 'package:vcec/domain/auth_token_manager/auth_token_manager.dart';
+import 'package:vcec/domain/events/announcements/announcements_views_service.dart';
 import 'package:vcec/domain/failure/main_failure.dart';
 import 'package:vcec/strings/strings.dart';
 
-@LazySingleton(as: EventsService)
-class EventsRepository extends EventsService {
+@LazySingleton(as: AnnouncementsViewsService)
+class AnnouncementsViewsRepository extends AnnouncementsViewsService {
   @override
-  Future<Either<MainFailure, List<EventModel>>> getEvents(
-      {required EventType eventType}) async {
+  Future<Either<MainFailure, bool>> postView({required int id}) async {
     try {
-      final response = await Dio(BaseOptions(contentType: 'application/json')).get(
-          '${baseUrl}forum/events/get-event/?status=${eventType.name}&forum=all');
+        final accessToken = AuthTokenManager.instance.accessToken;
+      final Map<String, dynamic> headers = {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $accessToken',
+      };
+      final response = await Dio(BaseOptions(headers: headers)).post(
+          '${baseUrl}forum/announcements/set/views/user/?announcement_id=$id');
       if (response.statusCode == 200 || response.statusCode == 201) {
-        final events0 = WholeEventsModel.fromJson(response.data);
-        final events = events0.events;
-        // print(events);
-        return Right(events);
+        return const Right(true);
       } else {
         return const Left(MainFailure.serverFailure());
       }
     } catch (e) {
-      print(e);
       if (e is DioException && e.response?.statusCode == 401) {
         return const Left(AuthFailure());
       } else if (e is DioException && e.response?.statusCode == 500 ||

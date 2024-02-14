@@ -103,7 +103,7 @@ class MyApp extends StatelessWidget {
         BlocProvider<IndEventsCubit>(
           create: (context) => getIt<IndEventsCubit>(),
         ),
-         BlocProvider<IndAnnouncementsCubit>(
+        BlocProvider<IndAnnouncementsCubit>(
           create: (context) => getIt<IndAnnouncementsCubit>(),
         ),
       ],

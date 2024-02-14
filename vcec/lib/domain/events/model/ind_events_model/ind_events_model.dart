@@ -1,30 +1,44 @@
 import 'dart:convert';
 
-import 'eveent_result.dart';
+import 'conducted_by.dart';
+import 'event_result.dart';
 
 class IndEventsModel {
-  EveentResult? eveentResult;
+  EventResult? eventResult;
   int? totalLikes;
+  List<ConductedBy>? conductedBy;
+  bool? isLiked;
 
-  IndEventsModel({this.eveentResult, this.totalLikes});
+  IndEventsModel({
+    this.eventResult,
+    this.totalLikes,
+    this.conductedBy,
+    this.isLiked,
+  });
 
   @override
   String toString() {
-    return 'IndEventsModel(eveentResult: $eveentResult, totalLikes: $totalLikes)';
+    return 'IndEventsModel(eventResult: $eventResult, totalLikes: $totalLikes, conductedBy: $conductedBy, isLiked: $isLiked)';
   }
 
   factory IndEventsModel.fromMap(Map<String, dynamic> data) {
     return IndEventsModel(
-      eveentResult: data['eveent_result'] == null
+      eventResult: data['event_result'] == null
           ? null
-          : EveentResult.fromMap(data['eveent_result'] as Map<String, dynamic>),
+          : EventResult.fromMap(data['event_result'] as Map<String, dynamic>),
       totalLikes: data['total_likes'] as int?,
+      conductedBy: (data['conducted_by'] as List<dynamic>?)
+          ?.map((e) => ConductedBy.fromMap(e as Map<String, dynamic>))
+          .toList(),
+      isLiked: data['is_liked'] as bool?,
     );
   }
 
   Map<String, dynamic> toMap() => {
-        'eveent_result': eveentResult?.toMap(),
+        'event_result': eventResult?.toMap(),
         'total_likes': totalLikes,
+        'conducted_by': conductedBy?.map((e) => e.toMap()).toList(),
+        'is_liked': isLiked,
       };
 
   /// `dart:convert`
@@ -40,12 +54,16 @@ class IndEventsModel {
   String toJson() => json.encode(toMap());
 
   IndEventsModel copyWith({
-    EveentResult? eveentResult,
+    EventResult? eventResult,
     int? totalLikes,
+    List<ConductedBy>? conductedBy,
+    bool? isLiked,
   }) {
     return IndEventsModel(
-      eveentResult: eveentResult ?? this.eveentResult,
+      eventResult: eventResult ?? this.eventResult,
       totalLikes: totalLikes ?? this.totalLikes,
+      conductedBy: conductedBy ?? this.conductedBy,
+      isLiked: isLiked ?? this.isLiked,
     );
   }
 }

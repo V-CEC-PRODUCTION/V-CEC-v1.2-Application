@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-class EveentResult {
+class EventResult {
   int? id;
   String? title;
   String? content;
@@ -14,7 +14,7 @@ class EveentResult {
   String? hashtags;
   String? eventDate;
 
-  EveentResult({
+  EventResult({
     this.id,
     this.title,
     this.content,
@@ -31,10 +31,10 @@ class EveentResult {
 
   @override
   String toString() {
-    return 'EveentResult(id: $id, title: $title, content: $content, registerButtonLink: $registerButtonLink, posterImageUrl: $posterImageUrl, thumbnailPosterImageUrl: $thumbnailPosterImageUrl, whatsappLink: $whatsappLink, status: $status, publishDate: $publishDate, publishedBy: $publishedBy, hashtags: $hashtags, eventDate: $eventDate)';
+    return 'EventResult(id: $id, title: $title, content: $content, registerButtonLink: $registerButtonLink, posterImageUrl: $posterImageUrl, thumbnailPosterImageUrl: $thumbnailPosterImageUrl, whatsappLink: $whatsappLink, status: $status, publishDate: $publishDate, publishedBy: $publishedBy, hashtags: $hashtags, eventDate: $eventDate)';
   }
 
-  factory EveentResult.fromMap(Map<String, dynamic> data) => EveentResult(
+  factory EventResult.fromMap(Map<String, dynamic> data) => EventResult(
         id: data['id'] as int?,
         title: data['title'] as String?,
         content: data['content'] as String?,
@@ -68,17 +68,17 @@ class EveentResult {
 
   /// `dart:convert`
   ///
-  /// Parses the string and returns the resulting Json object as [EveentResult].
-  factory EveentResult.fromJson(String data) {
-    return EveentResult.fromMap(json.decode(data) as Map<String, dynamic>);
+  /// Parses the string and returns the resulting Json object as [EventResult].
+  factory EventResult.fromJson(String data) {
+    return EventResult.fromMap(json.decode(data) as Map<String, dynamic>);
   }
 
   /// `dart:convert`
   ///
-  /// Converts [EveentResult] to a JSON string.
+  /// Converts [EventResult] to a JSON string.
   String toJson() => json.encode(toMap());
 
-  EveentResult copyWith({
+  EventResult copyWith({
     int? id,
     String? title,
     String? content,
@@ -92,7 +92,7 @@ class EveentResult {
     String? hashtags,
     String? eventDate,
   }) {
-    return EveentResult(
+    return EventResult(
       id: id ?? this.id,
       title: title ?? this.title,
       content: content ?? this.content,

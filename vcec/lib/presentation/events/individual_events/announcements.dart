@@ -97,7 +97,8 @@ class IndAnnouncementsPage extends StatelessWidget {
                               padding: EdgeInsets.only(
                                   left: size1 * 0.10, right: size1 * 0.09),
                               child: Text(
-                                state.indAnnouncements!.announcementResult!.content!,
+                                state.indAnnouncements!.announcementResult!
+                                    .content!,
                                 style: TextStyle(
                                   fontWeight: FontWeight.w400,
                                   fontSize: 15.3,
@@ -132,18 +133,18 @@ class IndAnnouncementsPage extends StatelessWidget {
                                           child: Container(
                                             height: size1 * 0.1,
                                             width: size1 * 0.1,
-                                            decoration: const BoxDecoration(
+                                            decoration:  BoxDecoration(
                                               shape: BoxShape.circle,
                                               color: Colors.yellow,
                                               image: DecorationImage(
-                                                image: NetworkImage(''),
+                                                image: NetworkImage('$baseUrl${state.indAnnouncements!.conductedBy![index].imageUrl}'),
                                                 fit: BoxFit.fill,
                                               ),
                                             ),
                                           ),
                                         );
                                       },
-                                      itemCount: 5,
+                                      itemCount: state.indAnnouncements!.conductedBy!.length,
                                     ),
                                   ),
                                 ],

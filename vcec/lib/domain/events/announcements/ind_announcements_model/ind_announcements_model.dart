@@ -1,16 +1,24 @@
 import 'dart:convert';
 
 import 'announcement_result.dart';
+import 'conducted_by.dart';
 
 class IndAnnouncementsModel {
   AnnouncementResult? announcementResult;
   int? totalLikes;
+  List<ConductedBy>? conductedBy;
+  bool? isLiked;
 
-  IndAnnouncementsModel({this.announcementResult, this.totalLikes});
+  IndAnnouncementsModel({
+    this.announcementResult,
+    this.totalLikes,
+    this.conductedBy,
+    this.isLiked,
+  });
 
   @override
   String toString() {
-    return 'IndAnnouncementsModel(announcementResult: $announcementResult, totalLikes: $totalLikes)';
+    return 'IndAnnouncementsModel(announcementResult: $announcementResult, totalLikes: $totalLikes, conductedBy: $conductedBy, isLiked: $isLiked)';
   }
 
   factory IndAnnouncementsModel.fromMap(Map<String, dynamic> data) {
@@ -20,12 +28,18 @@ class IndAnnouncementsModel {
           : AnnouncementResult.fromMap(
               data['announcement_result'] as Map<String, dynamic>),
       totalLikes: data['total_likes'] as int?,
+      conductedBy: (data['conducted_by'] as List<dynamic>?)
+          ?.map((e) => ConductedBy.fromMap(e as Map<String, dynamic>))
+          .toList(),
+      isLiked: data['is_liked'] as bool?,
     );
   }
 
   Map<String, dynamic> toMap() => {
         'announcement_result': announcementResult?.toMap(),
         'total_likes': totalLikes,
+        'conducted_by': conductedBy?.map((e) => e.toMap()).toList(),
+        'is_liked': isLiked,
       };
 
   /// `dart:convert`
@@ -44,10 +58,14 @@ class IndAnnouncementsModel {
   IndAnnouncementsModel copyWith({
     AnnouncementResult? announcementResult,
     int? totalLikes,
+    List<ConductedBy>? conductedBy,
+    bool? isLiked,
   }) {
     return IndAnnouncementsModel(
       announcementResult: announcementResult ?? this.announcementResult,
       totalLikes: totalLikes ?? this.totalLikes,
+      conductedBy: conductedBy ?? this.conductedBy,
+      isLiked: isLiked ?? this.isLiked,
     );
   }
 }

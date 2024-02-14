@@ -65,21 +65,23 @@ class AnnouncementsEventsWidget extends StatelessWidget {
                         children: List.generate(
                             announcements.length,
                             (index) => GestureDetector(
-                              child: EventsCardWidget(
+                                  child: EventsCardWidget(
                                     thumpnailUrl: announcements[index]
                                         .thumbnailPosterImageUrl!,
-                                    imgUrl: announcements[index].posterImageUrl!,
+                                    imgUrl:
+                                        announcements[index].posterImageUrl!,
                                     title: announcements[index].title!,
                                     subtitle: announcements[index].content!,
                                   ),
                                   onTap: () {
-                                        Navigator.of(context)
-                                          .push(MaterialPageRoute(
-                                        builder: (context) =>
-                                            IndAnnouncementsPage(id: announcements[index].id!),
-                                      ));
+                                    Navigator.of(context)
+                                        .push(MaterialPageRoute(
+                                      builder: (context) =>
+                                          IndAnnouncementsPage(
+                                              id: announcements[index].id!),
+                                    ));
                                   },
-                            )),
+                                )),
                       ),
                     );
                   }));
