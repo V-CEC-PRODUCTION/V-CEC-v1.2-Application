@@ -21,6 +21,8 @@ mixin _$IndAnnouncementsState {
   bool get isLoading => throw _privateConstructorUsedError;
   Option<Either<MainFailure, IndAnnouncementsModel>> get isFailureOrSuccess =>
       throw _privateConstructorUsedError;
+  Option<Either<MainFailure, bool>> get isFailureOrSuccessForLike =>
+      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $IndAnnouncementsStateCopyWith<IndAnnouncementsState> get copyWith =>
@@ -36,7 +38,8 @@ abstract class $IndAnnouncementsStateCopyWith<$Res> {
   $Res call(
       {IndAnnouncementsModel? indAnnouncements,
       bool isLoading,
-      Option<Either<MainFailure, IndAnnouncementsModel>> isFailureOrSuccess});
+      Option<Either<MainFailure, IndAnnouncementsModel>> isFailureOrSuccess,
+      Option<Either<MainFailure, bool>> isFailureOrSuccessForLike});
 }
 
 /// @nodoc
@@ -56,6 +59,7 @@ class _$IndAnnouncementsStateCopyWithImpl<$Res,
     Object? indAnnouncements = freezed,
     Object? isLoading = null,
     Object? isFailureOrSuccess = null,
+    Object? isFailureOrSuccessForLike = null,
   }) {
     return _then(_value.copyWith(
       indAnnouncements: freezed == indAnnouncements
@@ -70,6 +74,10 @@ class _$IndAnnouncementsStateCopyWithImpl<$Res,
           ? _value.isFailureOrSuccess
           : isFailureOrSuccess // ignore: cast_nullable_to_non_nullable
               as Option<Either<MainFailure, IndAnnouncementsModel>>,
+      isFailureOrSuccessForLike: null == isFailureOrSuccessForLike
+          ? _value.isFailureOrSuccessForLike
+          : isFailureOrSuccessForLike // ignore: cast_nullable_to_non_nullable
+              as Option<Either<MainFailure, bool>>,
     ) as $Val);
   }
 }
@@ -85,7 +93,8 @@ abstract class _$$IndEventsStateImplCopyWith<$Res>
   $Res call(
       {IndAnnouncementsModel? indAnnouncements,
       bool isLoading,
-      Option<Either<MainFailure, IndAnnouncementsModel>> isFailureOrSuccess});
+      Option<Either<MainFailure, IndAnnouncementsModel>> isFailureOrSuccess,
+      Option<Either<MainFailure, bool>> isFailureOrSuccessForLike});
 }
 
 /// @nodoc
@@ -102,6 +111,7 @@ class __$$IndEventsStateImplCopyWithImpl<$Res>
     Object? indAnnouncements = freezed,
     Object? isLoading = null,
     Object? isFailureOrSuccess = null,
+    Object? isFailureOrSuccessForLike = null,
   }) {
     return _then(_$IndEventsStateImpl(
       indAnnouncements: freezed == indAnnouncements
@@ -116,6 +126,10 @@ class __$$IndEventsStateImplCopyWithImpl<$Res>
           ? _value.isFailureOrSuccess
           : isFailureOrSuccess // ignore: cast_nullable_to_non_nullable
               as Option<Either<MainFailure, IndAnnouncementsModel>>,
+      isFailureOrSuccessForLike: null == isFailureOrSuccessForLike
+          ? _value.isFailureOrSuccessForLike
+          : isFailureOrSuccessForLike // ignore: cast_nullable_to_non_nullable
+              as Option<Either<MainFailure, bool>>,
     ));
   }
 }
@@ -126,7 +140,8 @@ class _$IndEventsStateImpl implements _IndEventsState {
   const _$IndEventsStateImpl(
       {required this.indAnnouncements,
       required this.isLoading,
-      required this.isFailureOrSuccess});
+      required this.isFailureOrSuccess,
+      required this.isFailureOrSuccessForLike});
 
   @override
   final IndAnnouncementsModel? indAnnouncements;
@@ -134,10 +149,12 @@ class _$IndEventsStateImpl implements _IndEventsState {
   final bool isLoading;
   @override
   final Option<Either<MainFailure, IndAnnouncementsModel>> isFailureOrSuccess;
+  @override
+  final Option<Either<MainFailure, bool>> isFailureOrSuccessForLike;
 
   @override
   String toString() {
-    return 'IndAnnouncementsState(indAnnouncements: $indAnnouncements, isLoading: $isLoading, isFailureOrSuccess: $isFailureOrSuccess)';
+    return 'IndAnnouncementsState(indAnnouncements: $indAnnouncements, isLoading: $isLoading, isFailureOrSuccess: $isFailureOrSuccess, isFailureOrSuccessForLike: $isFailureOrSuccessForLike)';
   }
 
   @override
@@ -150,12 +167,15 @@ class _$IndEventsStateImpl implements _IndEventsState {
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.isFailureOrSuccess, isFailureOrSuccess) ||
-                other.isFailureOrSuccess == isFailureOrSuccess));
+                other.isFailureOrSuccess == isFailureOrSuccess) &&
+            (identical(other.isFailureOrSuccessForLike,
+                    isFailureOrSuccessForLike) ||
+                other.isFailureOrSuccessForLike == isFailureOrSuccessForLike));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, indAnnouncements, isLoading, isFailureOrSuccess);
+  int get hashCode => Object.hash(runtimeType, indAnnouncements, isLoading,
+      isFailureOrSuccess, isFailureOrSuccessForLike);
 
   @JsonKey(ignore: true)
   @override
@@ -170,7 +190,9 @@ abstract class _IndEventsState implements IndAnnouncementsState {
       {required final IndAnnouncementsModel? indAnnouncements,
       required final bool isLoading,
       required final Option<Either<MainFailure, IndAnnouncementsModel>>
-          isFailureOrSuccess}) = _$IndEventsStateImpl;
+          isFailureOrSuccess,
+      required final Option<Either<MainFailure, bool>>
+          isFailureOrSuccessForLike}) = _$IndEventsStateImpl;
 
   @override
   IndAnnouncementsModel? get indAnnouncements;
@@ -178,6 +200,8 @@ abstract class _IndEventsState implements IndAnnouncementsState {
   bool get isLoading;
   @override
   Option<Either<MainFailure, IndAnnouncementsModel>> get isFailureOrSuccess;
+  @override
+  Option<Either<MainFailure, bool>> get isFailureOrSuccessForLike;
   @override
   @JsonKey(ignore: true)
   _$$IndEventsStateImplCopyWith<_$IndEventsStateImpl> get copyWith =>

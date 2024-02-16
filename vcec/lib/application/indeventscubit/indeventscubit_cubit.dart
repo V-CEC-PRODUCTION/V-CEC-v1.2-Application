@@ -3,6 +3,7 @@ import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:vcec/domain/events/model/events_views_service.dart';
+import 'package:vcec/domain/events/model/evnts_like_service.dart';
 import 'package:vcec/domain/events/model/ind_events_model/ind_events_model.dart';
 import 'package:vcec/domain/events/model/ind_events_service.dart';
 import 'package:vcec/domain/failure/main_failure.dart';
@@ -11,10 +12,11 @@ part 'indeventscubit_state.dart';
 
 @injectable
 class IndEventsCubit extends Cubit<IndEventsState> {
-  IndEventsCubit(this._indEventsService, this._viewsService)
+  IndEventsCubit(this._indEventsService, this._viewsService, this._likesService)
       : super(IndEventsState.initial());
   final IndEventsService _indEventsService;
   final ViewsService _viewsService;
+  final LikesService _likesService;
 
   void getIndEvents({required int id}) async {
     final result1 = await _viewsService.postView(id: id);
@@ -42,5 +44,19 @@ class IndEventsCubit extends Cubit<IndEventsState> {
     });
     });
    
+  }
+
+  void postLike({required int id, required String val}) async {
+    final result = await _likesService.postLike(id: id, val: val);
+    result.fold(
+      (l) => emit(state.copyWith(
+            isFailureOrSuccess: some(left(l)),
+          )),
+      (r) {
+        emit(state.copyWith(
+          isFailureOrSuccessForLike: some(right(r)),
+        ));
+      },
+    );
   }
 }

@@ -7,8 +7,9 @@ import 'package:vcec/presentation/common_widgets/loading_widget.dart';
 import 'package:vcec/strings/strings.dart';
 
 class IndEventsPage extends StatelessWidget {
-  const IndEventsPage({super.key, required this.id});
+  IndEventsPage({super.key, required this.id});
   final int id;
+  final ValueNotifier<bool> _isLiked = ValueNotifier<bool>(false);
 
   @override
   Widget build(BuildContext context) {
@@ -38,11 +39,14 @@ class IndEventsPage extends StatelessWidget {
                 }
               }
             },
-            (r) {},
+            (r) {
+                 _isLiked.value = state.indEvents!.isLiked!;
+            },
           ),
         );
       },
       builder: (context, state) {
+        
         if (state.isLoading) {
           return const Center(
             child: loadingWidget,
@@ -227,130 +231,160 @@ class IndEventsPage extends StatelessWidget {
                             ),
                             SizedBox(
                               height: size1 * 0.13,
-                              child: FloatingActionButton(
-                                backgroundColor: Colors.white,
-                                shape: const RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.zero,
-                                    side: BorderSide(
-                                        color: Colors.black, width: 0.095)),
-                                onPressed: () {},
-                                child: SizedBox(
-                                  child: Builder(builder: (context) {
-                                    return Column(
-                                      children: [
-                                        const Icon(
-                                          Icons.thumb_up,
-                                          color: Colors.black,
-                                          size: 25,
-                                        ),
-                                        Expanded(
-                                          child: TextButton(
-                                            onPressed: () {
-                                              showBottomSheet(
-                                                backgroundColor:
-                                                    const Color.fromARGB(
-                                                        255, 21, 19, 19),
-                                                context: context,
-                                                builder: (context) {
-                                                  return SizedBox(
-                                                    height: 370,
-                                                    width: double.infinity,
-                                                    child: Column(
-                                                      children: [
-                                                        const SizedBox(
-                                                          height: 10,
-                                                        ),
-                                                        Container(
-                                                            width: 40,
-                                                            height: 5,
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              color:
-                                                                  Colors.grey,
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          5),
-                                                            )),
-                                                        const SizedBox(
-                                                          height: 40,
-                                                        ),
-                                                        Expanded(
-                                                          child: Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                    .all(8.0),
-                                                            child: ListView
-                                                                .separated(
-                                                              separatorBuilder:
-                                                                  (context,
-                                                                      index) {
-                                                                return Container(
-                                                                  color: Colors
-                                                                      .grey,
-                                                                  height: 1,
-                                                                );
-                                                              },
-                                                              itemCount: 10,
-                                                              itemBuilder:
-                                                                  (context,
-                                                                      index) {
-                                                                return Padding(
+                              child: ValueListenableBuilder<bool>(
+                                valueListenable: _isLiked,
+                                builder: (context, isLiked, child) {
+                                  return FloatingActionButton(
+                                    backgroundColor: Colors.white,
+                                    shape: const RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.zero,
+                                        side: BorderSide(
+                                            color: Colors.black, width: 0.095)),
+                                    onPressed: () {
+                                      _isLiked.value = !_isLiked.value;
+                                      BlocProvider.of<IndEventsCubit>(context)
+                                          .postLike(
+                                              id: id,
+                                              val: _isLiked.value
+                                                  ? 'True'
+                                                  : 'False');
+                                    },
+                                    child: SizedBox(
+                                      child: Builder(builder: (context) {
+                                        return Builder(builder: (context) {
+                                          return Column(
+                                            children: [
+                                              isLiked
+                                                  ? const Icon(
+                                                      Icons.favorite_outline,
+                                                      color: Colors.red,
+                                                      size: 25,
+                                                    )
+                                                  : const Icon(
+                                                      Icons.thumb_up,
+                                                      color: Colors.black,
+                                                      size: 25,
+                                                    ),
+                                              Expanded(
+                                                child: TextButton(
+                                                  onPressed: () {
+                                                    showBottomSheet(
+                                                      backgroundColor:
+                                                          const Color.fromARGB(
+                                                              255, 21, 19, 19),
+                                                      context: context,
+                                                      builder: (context) {
+                                                        return SizedBox(
+                                                          height: 370,
+                                                          width:
+                                                              double.infinity,
+                                                          child: Column(
+                                                            children: [
+                                                              const SizedBox(
+                                                                height: 10,
+                                                              ),
+                                                              Container(
+                                                                  width: 40,
+                                                                  height: 5,
+                                                                  decoration:
+                                                                      BoxDecoration(
+                                                                    color: Colors
+                                                                        .grey,
+                                                                    borderRadius:
+                                                                        BorderRadius
+                                                                            .circular(5),
+                                                                  )),
+                                                              const SizedBox(
+                                                                height: 40,
+                                                              ),
+                                                              Expanded(
+                                                                child: Padding(
                                                                   padding:
                                                                       const EdgeInsets
                                                                           .all(
                                                                           8.0),
-                                                                  child: Row(
-                                                                    children: [
-                                                                      Container(
-                                                                        width:
-                                                                            50,
+                                                                  child: ListView
+                                                                      .separated(
+                                                                    separatorBuilder:
+                                                                        (context,
+                                                                            index) {
+                                                                      return Container(
+                                                                        color: Colors
+                                                                            .grey,
                                                                         height:
-                                                                            50,
-                                                                        decoration:
-                                                                            BoxDecoration(
-                                                                          shape:
-                                                                              BoxShape.circle,
-                                                                          color:
-                                                                              Colors.yellow,
+                                                                            1,
+                                                                      );
+                                                                    },
+                                                                    itemCount:
+                                                                        10,
+                                                                    itemBuilder:
+                                                                        (context,
+                                                                            index) {
+                                                                      return Padding(
+                                                                        padding: const EdgeInsets
+                                                                            .all(
+                                                                            8.0),
+                                                                        child:
+                                                                            Row(
+                                                                          children: [
+                                                                            Container(
+                                                                              width: 50,
+                                                                              height: 50,
+                                                                              decoration: BoxDecoration(
+                                                                                shape: BoxShape.circle,
+                                                                                color: Colors.yellow,
+                                                                              ),
+                                                                            ),
+                                                                            const SizedBox(
+                                                                              width: 50,
+                                                                            ),
+                                                                            Text(
+                                                                              'name',
+                                                                              style: TextStyle(color: Colors.white),
+                                                                            )
+                                                                          ],
                                                                         ),
-                                                                      ),
-                                                                      const SizedBox(
-                                                                        width:
-                                                                            50,
-                                                                      ),
-                                                                      Text(
-                                                                        'name',
-                                                                        style: TextStyle(
-                                                                            color:
-                                                                                Colors.white),
-                                                                      )
-                                                                    ],
+                                                                      );
+                                                                    },
                                                                   ),
-                                                                );
-                                                              },
-                                                            ),
+                                                                ),
+                                                              )
+                                                            ],
                                                           ),
-                                                        )
-                                                      ],
-                                                    ),
-                                                  );
-                                                },
-                                              );
-                                            },
-                                            child: Text(
-                                              state.indEvents!.totalLikes!
-                                                  .toString(),
-                                              style: TextStyle(
-                                                  fontSize: 9,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    );
-                                  }),
-                                ),
+                                                        );
+                                                      },
+                                                    );
+                                                  },
+                                                  child: 
+                                                   state.indEvents!.isLiked! == false
+                                                   ?
+                                                  Text(
+                                                    isLiked?
+                                                    (state.indEvents!.totalLikes! + 1)
+                                                        .toString()  : state.indEvents!.totalLikes!.toString(),
+                                                    style: TextStyle(
+                                                        fontSize: 9,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ) :
+                                                   Text(
+                                                    !isLiked?
+                                                    (state.indEvents!.totalLikes! - 1)
+                                                        .toString()  : state.indEvents!.totalLikes!.toString(),
+                                                    style: TextStyle(
+                                                        fontSize: 9,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ) ,
+                                                ),
+                                              ),
+                                            ],
+                                          );
+                                        });
+                                      }),
+                                    ),
+                                  );
+                                },
                               ),
                             )
                           ],

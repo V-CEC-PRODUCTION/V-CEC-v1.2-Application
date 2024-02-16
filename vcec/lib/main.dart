@@ -7,6 +7,7 @@ import 'package:vcec/application/announcements/announcements_cubit.dart';
 import 'package:vcec/application/departments/rsearch/department_search_cubit.dart';
 import 'package:vcec/application/edit_profile/edit_profile_cubit.dart';
 import 'package:vcec/application/events/events_cubit.dart';
+import 'package:vcec/application/forgotpassword/forgotpassword_cubit.dart';
 import 'package:vcec/application/forums/forums_cubit.dart';
 import 'package:vcec/application/gallery/gallery_cubit.dart';
 import 'package:vcec/application/indannouncements/indannouncements_cubit.dart';
@@ -105,6 +106,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider<IndAnnouncementsCubit>(
           create: (context) => getIt<IndAnnouncementsCubit>(),
+        ),
+          BlocProvider<ForgotpasswordCubit>(
+          create: (context) => getIt<ForgotpasswordCubit>(),
         ),
       ],
       child: ScreenUtilInit(
