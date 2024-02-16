@@ -12,7 +12,8 @@ part 'indannouncements_state.dart';
 
 @injectable
 class IndAnnouncementsCubit extends Cubit<IndAnnouncementsState> {
-  IndAnnouncementsCubit(this._indAnnouncementsService, this._viewsService, this._likesService)
+  IndAnnouncementsCubit(
+      this._indAnnouncementsService, this._viewsService, this._likesService)
       : super(IndAnnouncementsState.initial());
   final IndAnnouncementsService _indAnnouncementsService;
   final AnnouncementsLikesService _likesService;
@@ -48,8 +49,8 @@ class IndAnnouncementsCubit extends Cubit<IndAnnouncementsState> {
     final result = await _likesService.postLike(id: id, val: val);
     result.fold(
       (l) => emit(state.copyWith(
-            isFailureOrSuccess: some(left(l)),
-          )),
+        isFailureOrSuccess: some(left(l)),
+      )),
       (r) {
         emit(state.copyWith(
           isFailureOrSuccessForLike: some(right(r)),

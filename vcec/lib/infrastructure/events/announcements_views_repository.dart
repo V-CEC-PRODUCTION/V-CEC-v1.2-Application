@@ -11,7 +11,7 @@ class AnnouncementsViewsRepository extends AnnouncementsViewsService {
   @override
   Future<Either<MainFailure, bool>> postView({required int id}) async {
     try {
-        final accessToken = AuthTokenManager.instance.accessToken;
+      final accessToken = AuthTokenManager.instance.accessToken;
       final Map<String, dynamic> headers = {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $accessToken',

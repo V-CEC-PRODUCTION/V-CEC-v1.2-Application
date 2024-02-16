@@ -9,9 +9,10 @@ import 'package:vcec/strings/strings.dart';
 @LazySingleton(as: LikesService)
 class LikesRepository extends LikesService {
   @override
-  Future<Either<MainFailure, bool>> postLike({required int id, required String val}) async {
+  Future<Either<MainFailure, bool>> postLike(
+      {required int id, required String val}) async {
     try {
-        final accessToken = AuthTokenManager.instance.accessToken;
+      final accessToken = AuthTokenManager.instance.accessToken;
       final Map<String, dynamic> headers = {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $accessToken',

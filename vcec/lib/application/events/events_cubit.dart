@@ -3,8 +3,8 @@ import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:vcec/domain/events/events_service.dart';
-import 'package:vcec/domain/events/model/events_models/event_types.dart';
-import 'package:vcec/domain/events/model/events_models/events_model.dart';
+import 'package:vcec/domain/events/model/event_model/event.dart';
+import 'package:vcec/domain/events/model/event_model/event_types.dart';
 import 'package:vcec/domain/failure/main_failure.dart';
 
 part 'events_state.dart';

@@ -68,10 +68,11 @@ class AnnouncementsEventsWidget extends StatelessWidget {
                                   child: EventsCardWidget(
                                     thumpnailUrl: announcements[index]
                                         .thumbnailPosterImageUrl!,
-                                    imgUrl:
+                                    pimgUrl:
                                         announcements[index].posterImageUrl!,
                                     title: announcements[index].title!,
                                     subtitle: announcements[index].content!,
+                                    tag: '',
                                   ),
                                   onTap: () {
                                     Navigator.of(context)

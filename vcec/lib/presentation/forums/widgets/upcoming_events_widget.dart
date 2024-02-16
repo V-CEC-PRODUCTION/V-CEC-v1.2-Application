@@ -32,7 +32,7 @@ class UpcomingEventsWidget extends StatelessWidget {
               5,
               (index) => EventsCardWidget(
                     thumpnailUrl: image[0],
-                    imgUrl: image[0],
+                    pimgUrl: image[0],
                     title:
                         'In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content.',
                     subtitle:

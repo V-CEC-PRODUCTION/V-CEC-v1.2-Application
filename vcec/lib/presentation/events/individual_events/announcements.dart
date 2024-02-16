@@ -7,7 +7,7 @@ import 'package:vcec/presentation/common_widgets/loading_widget.dart';
 import 'package:vcec/strings/strings.dart';
 
 class IndAnnouncementsPage extends StatelessWidget {
-   IndAnnouncementsPage({super.key, required this.id});
+  IndAnnouncementsPage({super.key, required this.id});
   final int id;
   final ValueNotifier<bool> _isLiked = ValueNotifier<bool>(false);
   @override
@@ -135,18 +135,20 @@ class IndAnnouncementsPage extends StatelessWidget {
                                           child: Container(
                                             height: size1 * 0.1,
                                             width: size1 * 0.1,
-                                            decoration:  BoxDecoration(
+                                            decoration: BoxDecoration(
                                               shape: BoxShape.circle,
                                               color: Colors.yellow,
                                               image: DecorationImage(
-                                                image: NetworkImage('$baseUrl${state.indAnnouncements!.conductedBy![index].imageUrl}'),
+                                                image: NetworkImage(
+                                                    '$baseUrl${state.indAnnouncements!.conductedBy![index].imageUrl}'),
                                                 fit: BoxFit.fill,
                                               ),
                                             ),
                                           ),
                                         );
                                       },
-                                      itemCount: state.indAnnouncements!.conductedBy!.length,
+                                      itemCount: state.indAnnouncements!
+                                          .conductedBy!.length,
                                     ),
                                   ),
                                 ],
@@ -193,7 +195,7 @@ class IndAnnouncementsPage extends StatelessWidget {
                             ),
                             SizedBox(
                               height: size1 * 0.13,
-                              child:ValueListenableBuilder<bool>(
+                              child: ValueListenableBuilder<bool>(
                                 valueListenable: _isLiked,
                                 builder: (context, isLiked, child) {
                                   return FloatingActionButton(
@@ -204,7 +206,8 @@ class IndAnnouncementsPage extends StatelessWidget {
                                             color: Colors.black, width: 0.095)),
                                     onPressed: () {
                                       _isLiked.value = !_isLiked.value;
-                                      BlocProvider.of<IndAnnouncementsCubit>(context)
+                                      BlocProvider.of<IndAnnouncementsCubit>(
+                                              context)
                                           .postLike(
                                               id: id,
                                               val: _isLiked.value
@@ -223,9 +226,11 @@ class IndAnnouncementsPage extends StatelessWidget {
                                                       size: 25,
                                                     )
                                                   : const Icon(
-                                                      Icons.thumb_up_alt_outlined,
+                                                      Icons
+                                                          .thumb_up_alt_outlined,
                                                       color: Colors.black,
                                                       size: 25,
+                                                      
                                                     ),
                                               Expanded(
                                                 child: TextButton(
@@ -317,26 +322,41 @@ class IndAnnouncementsPage extends StatelessWidget {
                                                       },
                                                     );
                                                   },
-                                                  child:  state.indAnnouncements!.isLiked! == false
-                                                   ?
-                                                  Text(
-                                                    isLiked?
-                                                    (state.indAnnouncements!.totalLikes! + 1)
-                                                        .toString()  : state.indAnnouncements!.totalLikes!.toString(),
-                                                    style: TextStyle(
-                                                        fontSize: 9,
-                                                        fontWeight:
-                                                            FontWeight.bold),
-                                                  ) :
-                                                   Text(
-                                                    !isLiked?
-                                                    (state.indAnnouncements!.totalLikes! - 1)
-                                                        .toString()  : state.indAnnouncements!.totalLikes!.toString(),
-                                                    style: TextStyle(
-                                                        fontSize: 9,
-                                                        fontWeight:
-                                                            FontWeight.bold),
-                                                  ),
+                                                  child: state.indAnnouncements!
+                                                              .isLiked! ==
+                                                          false
+                                                      ? Text(
+                                                          isLiked
+                                                              ? (state.indAnnouncements!
+                                                                          .totalLikes! +
+                                                                      1)
+                                                                  .toString()
+                                                              : state
+                                                                  .indAnnouncements!
+                                                                  .totalLikes!
+                                                                  .toString(),
+                                                          style: TextStyle(
+                                                              fontSize: 9,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold),
+                                                        )
+                                                      : Text(
+                                                          !isLiked
+                                                              ? (state.indAnnouncements!
+                                                                          .totalLikes! -
+                                                                      1)
+                                                                  .toString()
+                                                              : state
+                                                                  .indAnnouncements!
+                                                                  .totalLikes!
+                                                                  .toString(),
+                                                          style: TextStyle(
+                                                              fontSize: 9,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold),
+                                                        ),
                                                 ),
                                               ),
                                             ],

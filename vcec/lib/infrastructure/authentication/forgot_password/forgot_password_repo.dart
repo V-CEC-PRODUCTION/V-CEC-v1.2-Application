@@ -9,16 +9,17 @@ import 'package:vcec/strings/strings.dart';
 @LazySingleton(as: ForgotPasswordService)
 class ForgotPasswordRepository extends ForgotPasswordService {
   @override
-  Future<Either<MainFailure, bool>> postPassword({required String email}) async {
+  Future<Either<MainFailure, bool>> postPassword(
+      {required String email}) async {
     try {
-        final accessToken = AuthTokenManager.instance.accessToken;
+      final accessToken = AuthTokenManager.instance.accessToken;
       final Map<String, dynamic> headers = {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $accessToken',
-        
       };
       final response = await Dio(BaseOptions(headers: headers)).post(
-          '${baseUrl}users/auth/forgot/password/',data: {"email": email});
+          '${baseUrl}users/auth/forgot/password/',
+          data: {"email": email});
       if (response.statusCode == 200 || response.statusCode == 201) {
         return const Right(true);
       } else {

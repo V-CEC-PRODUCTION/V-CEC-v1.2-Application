@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shimmer/shimmer.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:vcec/application/indeventscubit/indeventscubit_cubit.dart';
 import 'package:vcec/domain/failure/main_failure.dart';
 import 'package:vcec/presentation/common_widgets/common_snackbar.dart';
 import 'package:vcec/presentation/common_widgets/loading_widget.dart';
+import 'package:vcec/presentation/events/individual_events/verified.dart';
 import 'package:vcec/strings/strings.dart';
 
 class IndEventsPage extends StatelessWidget {
@@ -40,13 +43,65 @@ class IndEventsPage extends StatelessWidget {
               }
             },
             (r) {
-                 _isLiked.value = state.indEvents!.isLiked!;
+              _isLiked.value = state.indEvents!.isLiked!;
             },
           ),
         );
+        state.isFailureOrSuccessForRegister.fold(
+            () => {},
+            (either) => either.fold(
+                  (failure) {
+                    if (!state.isLoading) {
+                      if (failure == const MainFailure.serverFailure()) {
+                        displaySnackBar(
+                            context: context, text: "Server is down");
+                      } else if (failure == const MainFailure.clientFailure()) {
+                        displaySnackBar(
+                            context: context,
+                            text: "Something wrong with your network");
+                      } else if (failure == const MainFailure.authFailure()) {
+                        displaySnackBar(
+                            context: context, text: 'Access token timed out');
+                      } else {
+                        displaySnackBar(
+                            context: context,
+                            text: "Something Unexpected Happened");
+                      }
+                    }
+                  },
+                  (r) {
+                    Navigator.of(context)
+                        .pushReplacement(MaterialPageRoute(builder: (context) {
+                      return const VerifiedScreen();
+                    }));
+                  },
+                ));
+        state.isFailureOrSuccessForImgLikes.fold(
+            () => {},
+            (either) => either.fold(
+                  (failure) {
+                    if (!state.isLoading) {
+                      if (failure == const MainFailure.serverFailure()) {
+                        displaySnackBar(
+                            context: context, text: "Server is down");
+                      } else if (failure == const MainFailure.clientFailure()) {
+                        displaySnackBar(
+                            context: context,
+                            text: "Something wrong with your network");
+                      } else if (failure == const MainFailure.authFailure()) {
+                        displaySnackBar(
+                            context: context, text: 'Access token timed out');
+                      } else {
+                        displaySnackBar(
+                            context: context,
+                            text: "Something Unexpected Happened");
+                      }
+                    }
+                  },
+                  (r) {},
+                ));
       },
       builder: (context, state) {
-        
         if (state.isLoading) {
           return const Center(
             child: loadingWidget,
@@ -92,42 +147,6 @@ class IndEventsPage extends StatelessWidget {
                             ),
                             const SizedBox(
                               height: 20,
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(left: size1 * 0.10),
-                              child: const Row(
-                                children: [
-                                  Text(
-                                    '8:00 AM',
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.bold),
-                                  ),
-                                  SizedBox(
-                                    width: 28,
-                                  ),
-                                  Text('|',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold)),
-                                  SizedBox(
-                                    width: 28,
-                                  ),
-                                  Text('28 July',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold)),
-                                  SizedBox(
-                                    width: 28,
-                                  ),
-                                  Text('|',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold)),
-                                  SizedBox(
-                                    width: 28,
-                                  ),
-                                  Text('AC Auditorium',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold))
-                                ],
-                              ),
                             ),
                             const SizedBox(
                               height: 10,
@@ -210,21 +229,51 @@ class IndEventsPage extends StatelessWidget {
                             SizedBox(
                               width: size1 * 0.6,
                               height: size1 * 0.13,
-                              child: ElevatedButton(
-                                onPressed: () {},
-                                style: ElevatedButton.styleFrom(
-                                    elevation: 4,
-                                    backgroundColor:
-                                        const Color.fromARGB(255, 55, 51, 51),
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(5))),
-                                child: const Text(
-                                  'Register',
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 17),
-                                ),
-                              ),
+                              child: state.indEvents!.registerButton!
+                                  ? ElevatedButton(
+                                      onPressed: () {
+                                        if (state
+                                            .indEvents!.alreadyRegistered!) {
+                                          displaySnackBar(
+                                              context: context,
+                                              text: 'Already Registered');
+                                        } else {
+                                          if (state.indEvents!.eventResult!
+                                                  .registerButtonLink! ==
+                                              'vcec_form') {
+                                            BlocProvider.of<IndEventsCubit>(
+                                                    context)
+                                                .postRegister(id: id);
+                                          } else {
+                                            print(state.indEvents!.eventResult!
+                                                .registerButtonLink!);
+                                            launchURL(
+                                                state.indEvents!.eventResult!
+                                                    .registerButtonLink!
+                                                    .trim(),
+                                                context);
+                                          }
+                                        }
+                                      },
+                                      style: ElevatedButton.styleFrom(
+                                          elevation: 4,
+                                          backgroundColor: !state
+                                                  .indEvents!.alreadyRegistered!
+                                              ? const Color.fromARGB(
+                                                  255, 55, 51, 51)
+                                              : Colors.green,
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(5))),
+                                      child: Text(
+                                        state.indEvents!.alreadyRegistered!
+                                            ? 'Registered'
+                                            : 'Register',
+                                        style: TextStyle(
+                                            color: Colors.white, fontSize: 17),
+                                      ),
+                                    )
+                                  : const SizedBox(),
                             ),
                             SizedBox(
                               width: size1 * 0.07,
@@ -254,10 +303,11 @@ class IndEventsPage extends StatelessWidget {
                                         return Builder(builder: (context) {
                                           return Column(
                                             children: [
-                                              isLiked
+                                              !isLiked
                                                   ? const Icon(
-                                                      Icons.favorite_outline,
-                                                      color: Colors.red,
+                                                      Icons
+                                                          .thumb_up_alt_outlined,
+                                                      color: Colors.black,
                                                       size: 25,
                                                     )
                                                   : const Icon(
@@ -268,6 +318,10 @@ class IndEventsPage extends StatelessWidget {
                                               Expanded(
                                                 child: TextButton(
                                                   onPressed: () {
+                                                    BlocProvider.of<
+                                                                IndEventsCubit>(
+                                                            context)
+                                                        .getLikes(id: id);
                                                     showBottomSheet(
                                                       backgroundColor:
                                                           const Color.fromARGB(
@@ -303,50 +357,135 @@ class IndEventsPage extends StatelessWidget {
                                                                       const EdgeInsets
                                                                           .all(
                                                                           8.0),
-                                                                  child: ListView
-                                                                      .separated(
-                                                                    separatorBuilder:
-                                                                        (context,
-                                                                            index) {
-                                                                      return Container(
-                                                                        color: Colors
-                                                                            .grey,
-                                                                        height:
-                                                                            1,
-                                                                      );
-                                                                    },
-                                                                    itemCount:
-                                                                        10,
-                                                                    itemBuilder:
-                                                                        (context,
-                                                                            index) {
-                                                                      return Padding(
-                                                                        padding: const EdgeInsets
-                                                                            .all(
-                                                                            8.0),
-                                                                        child:
-                                                                            Row(
-                                                                          children: [
-                                                                            Container(
-                                                                              width: 50,
-                                                                              height: 50,
-                                                                              decoration: BoxDecoration(
-                                                                                shape: BoxShape.circle,
-                                                                                color: Colors.yellow,
-                                                                              ),
-                                                                            ),
-                                                                            const SizedBox(
-                                                                              width: 50,
-                                                                            ),
-                                                                            Text(
-                                                                              'name',
-                                                                              style: TextStyle(color: Colors.white),
-                                                                            )
-                                                                          ],
-                                                                        ),
-                                                                      );
-                                                                    },
-                                                                  ),
+                                                                  child: state
+                                                                      .isFailureOrSuccessForImgLikes
+                                                                      .fold(() {
+                                                                    return ListView
+                                                                            .separated(
+                                                                            separatorBuilder:
+                                                                                (context, index) {
+                                                                              return Container(
+                                                                                color: Colors.grey,
+                                                                                height: 1,
+                                                                              );
+                                                                            },
+                                                                            itemCount:
+                                                                                10,
+                                                                            itemBuilder:
+                                                                                (context, index) {
+                                                                              return Padding(
+                                                                                padding: const EdgeInsets.all(8.0),
+                                                                                child: Row(
+                                                                                  children: [
+                                                                                    Shimmer.fromColors(
+                                                                                      baseColor: const Color.fromARGB(255, 0, 0, 0),
+                                                                                      highlightColor: const Color.fromARGB(255, 207, 207, 207),
+                                                                                      child: Container(
+                                                                                        height: 50,
+                                                                                        width: 50,
+                                                                                        decoration: const BoxDecoration(color: Color.fromARGB(34, 0, 0, 0), shape: BoxShape.circle),
+                                                                                      ),
+                                                                                    ),
+                                                                                    const SizedBox(
+                                                                                      width: 50,
+                                                                                    ),
+                                                                                    Shimmer.fromColors(
+                                                                                      baseColor: const Color.fromARGB(255, 0, 0, 0),
+                                                                                      highlightColor: const Color.fromARGB(255, 207, 207, 207),
+                                                                                      child: Container(
+                                                                                        width: 50,
+                                                                                        decoration: const BoxDecoration(
+                                                                                          color: Color.fromARGB(34, 0, 0, 0),
+                                                                                        ),
+                                                                                      ),
+                                                                                    ),
+                                                                                  ],
+                                                                                ),
+                                                                              );
+                                                                            },
+                                                                          );
+                                                                  },
+                                                                          (a) =>
+                                                                              a.fold((l) {
+                                                                                return ListView.separated(
+                                                                                  separatorBuilder: (context, index) {
+                                                                                    return Container(
+                                                                                      color: Colors.grey,
+                                                                                      height: 1,
+                                                                                    );
+                                                                                  },
+                                                                                  itemCount: 10,
+                                                                                  itemBuilder: (context, index) {
+                                                                                    return Padding(
+                                                                                      padding: const EdgeInsets.all(8.0),
+                                                                                      child: Row(
+                                                                                        children: [
+                                                                                          Shimmer.fromColors(
+                                                                                            baseColor: const Color.fromARGB(255, 0, 0, 0),
+                                                                                            highlightColor: const Color.fromARGB(255, 207, 207, 207),
+                                                                                            child: Container(
+                                                                                              height: 50,
+                                                                                              width: 50,
+                                                                                              decoration: const BoxDecoration(color: Color.fromARGB(34, 0, 0, 0), shape: BoxShape.circle),
+                                                                                            ),
+                                                                                          ),
+                                                                                          const SizedBox(
+                                                                                            width: 50,
+                                                                                          ),
+                                                                                          Shimmer.fromColors(
+                                                                                            baseColor: const Color.fromARGB(255, 0, 0, 0),
+                                                                                            highlightColor: const Color.fromARGB(255, 207, 207, 207),
+                                                                                            child: Container(
+                                                                                              width: 50,
+                                                                                              decoration: const BoxDecoration(
+                                                                                                color: Color.fromARGB(34, 0, 0, 0),
+                                                                                              ),
+                                                                                            ),
+                                                                                          ),
+                                                                                        ],
+                                                                                      ),
+                                                                                    );
+                                                                                  },
+                                                                                );
+                                                                              }, (r) {
+                                                                                return ListView.separated(
+                                                                                  separatorBuilder: (context, index) {
+                                                                                    return Container(
+                                                                                      color: Colors.grey,
+                                                                                      height: 1,
+                                                                                    );
+                                                                                  },
+                                                                                  itemCount: state.likes.length,
+                                                                                  itemBuilder: (context, index) {
+                                                                                    return Padding(
+                                                                                      padding: const EdgeInsets.all(8.0),
+                                                                                      child: Row(
+                                                                                        children: [
+                                                                                          Container(
+                                                                                            width: 50,
+                                                                                            height: 50,
+                                                                                            decoration: BoxDecoration(
+                                                                                              shape: BoxShape.circle,
+                                                                                              color: Colors.yellow,
+                                                                                              image: DecorationImage(
+                                                                                                image: state.likes[index].imageUrl != null ? NetworkImage('$baseUrl${state.likes[index].imageUrl}') : const NetworkImage('https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTAxL3JtNjA5LXNvbGlkaWNvbi13LTAwMi1wLnBuZw.png'),
+                                                                                                fit: BoxFit.fill,
+                                                                                              ),
+                                                                                            ),
+                                                                                          ),
+                                                                                          const SizedBox(
+                                                                                            width: 50,
+                                                                                          ),
+                                                                                          Text(
+                                                                                            state.likes[index].name!,
+                                                                                            style: const TextStyle(color: Colors.white),
+                                                                                          )
+                                                                                        ],
+                                                                                      ),
+                                                                                    );
+                                                                                  },
+                                                                                );
+                                                                              })),
                                                                 ),
                                                               )
                                                             ],
@@ -355,27 +494,39 @@ class IndEventsPage extends StatelessWidget {
                                                       },
                                                     );
                                                   },
-                                                  child: 
-                                                   state.indEvents!.isLiked! == false
-                                                   ?
-                                                  Text(
-                                                    isLiked?
-                                                    (state.indEvents!.totalLikes! + 1)
-                                                        .toString()  : state.indEvents!.totalLikes!.toString(),
-                                                    style: TextStyle(
-                                                        fontSize: 9,
-                                                        fontWeight:
-                                                            FontWeight.bold),
-                                                  ) :
-                                                   Text(
-                                                    !isLiked?
-                                                    (state.indEvents!.totalLikes! - 1)
-                                                        .toString()  : state.indEvents!.totalLikes!.toString(),
-                                                    style: TextStyle(
-                                                        fontSize: 9,
-                                                        fontWeight:
-                                                            FontWeight.bold),
-                                                  ) ,
+                                                  child: state.indEvents!
+                                                              .isLiked! ==
+                                                          false
+                                                      ? Text(
+                                                          isLiked
+                                                              ? (state.indEvents!
+                                                                          .totalLikes! +
+                                                                      1)
+                                                                  .toString()
+                                                              : state.indEvents!
+                                                                  .totalLikes!
+                                                                  .toString(),
+                                                          style: TextStyle(
+                                                              fontSize: 9,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold),
+                                                        )
+                                                      : Text(
+                                                          !isLiked
+                                                              ? (state.indEvents!
+                                                                          .totalLikes! -
+                                                                      1)
+                                                                  .toString()
+                                                              : state.indEvents!
+                                                                  .totalLikes!
+                                                                  .toString(),
+                                                          style: TextStyle(
+                                                              fontSize: 9,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold),
+                                                        ),
                                                 ),
                                               ),
                                             ],
@@ -396,5 +547,14 @@ class IndEventsPage extends StatelessWidget {
               );
       },
     );
+  }
+
+  Future<void> launchURL(String url, BuildContext context) async {
+    final uri = Uri.parse(url);
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri);
+    } else {
+      displaySnackBar(context: context, text: 'Could not launch url');
+    }
   }
 }

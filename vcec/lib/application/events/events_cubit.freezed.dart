@@ -16,10 +16,9 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$EventsState {
-  Map<String, List<EventModel>> get events =>
-      throw _privateConstructorUsedError;
+  Map<String, List<Event>> get events => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
-  Option<Either<MainFailure, List<EventModel>>> get isFailureOrSuccess =>
+  Option<Either<MainFailure, List<Event>>> get isFailureOrSuccess =>
       throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -34,9 +33,9 @@ abstract class $EventsStateCopyWith<$Res> {
       _$EventsStateCopyWithImpl<$Res, EventsState>;
   @useResult
   $Res call(
-      {Map<String, List<EventModel>> events,
+      {Map<String, List<Event>> events,
       bool isLoading,
-      Option<Either<MainFailure, List<EventModel>>> isFailureOrSuccess});
+      Option<Either<MainFailure, List<Event>>> isFailureOrSuccess});
 }
 
 /// @nodoc
@@ -60,7 +59,7 @@ class _$EventsStateCopyWithImpl<$Res, $Val extends EventsState>
       events: null == events
           ? _value.events
           : events // ignore: cast_nullable_to_non_nullable
-              as Map<String, List<EventModel>>,
+              as Map<String, List<Event>>,
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -68,7 +67,7 @@ class _$EventsStateCopyWithImpl<$Res, $Val extends EventsState>
       isFailureOrSuccess: null == isFailureOrSuccess
           ? _value.isFailureOrSuccess
           : isFailureOrSuccess // ignore: cast_nullable_to_non_nullable
-              as Option<Either<MainFailure, List<EventModel>>>,
+              as Option<Either<MainFailure, List<Event>>>,
     ) as $Val);
   }
 }
@@ -82,9 +81,9 @@ abstract class _$$EventsStateImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {Map<String, List<EventModel>> events,
+      {Map<String, List<Event>> events,
       bool isLoading,
-      Option<Either<MainFailure, List<EventModel>>> isFailureOrSuccess});
+      Option<Either<MainFailure, List<Event>>> isFailureOrSuccess});
 }
 
 /// @nodoc
@@ -106,7 +105,7 @@ class __$$EventsStateImplCopyWithImpl<$Res>
       events: null == events
           ? _value._events
           : events // ignore: cast_nullable_to_non_nullable
-              as Map<String, List<EventModel>>,
+              as Map<String, List<Event>>,
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -114,7 +113,7 @@ class __$$EventsStateImplCopyWithImpl<$Res>
       isFailureOrSuccess: null == isFailureOrSuccess
           ? _value.isFailureOrSuccess
           : isFailureOrSuccess // ignore: cast_nullable_to_non_nullable
-              as Option<Either<MainFailure, List<EventModel>>>,
+              as Option<Either<MainFailure, List<Event>>>,
     ));
   }
 }
@@ -123,14 +122,14 @@ class __$$EventsStateImplCopyWithImpl<$Res>
 
 class _$EventsStateImpl implements _EventsState {
   const _$EventsStateImpl(
-      {required final Map<String, List<EventModel>> events,
+      {required final Map<String, List<Event>> events,
       required this.isLoading,
       required this.isFailureOrSuccess})
       : _events = events;
 
-  final Map<String, List<EventModel>> _events;
+  final Map<String, List<Event>> _events;
   @override
-  Map<String, List<EventModel>> get events {
+  Map<String, List<Event>> get events {
     if (_events is EqualUnmodifiableMapView) return _events;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableMapView(_events);
@@ -139,7 +138,7 @@ class _$EventsStateImpl implements _EventsState {
   @override
   final bool isLoading;
   @override
-  final Option<Either<MainFailure, List<EventModel>>> isFailureOrSuccess;
+  final Option<Either<MainFailure, List<Event>>> isFailureOrSuccess;
 
   @override
   String toString() {
@@ -174,17 +173,17 @@ class _$EventsStateImpl implements _EventsState {
 
 abstract class _EventsState implements EventsState {
   const factory _EventsState(
-      {required final Map<String, List<EventModel>> events,
+      {required final Map<String, List<Event>> events,
       required final bool isLoading,
-      required final Option<Either<MainFailure, List<EventModel>>>
+      required final Option<Either<MainFailure, List<Event>>>
           isFailureOrSuccess}) = _$EventsStateImpl;
 
   @override
-  Map<String, List<EventModel>> get events;
+  Map<String, List<Event>> get events;
   @override
   bool get isLoading;
   @override
-  Option<Either<MainFailure, List<EventModel>>> get isFailureOrSuccess;
+  Option<Either<MainFailure, List<Event>>> get isFailureOrSuccess;
   @override
   @JsonKey(ignore: true)
   _$$EventsStateImplCopyWith<_$EventsStateImpl> get copyWith =>

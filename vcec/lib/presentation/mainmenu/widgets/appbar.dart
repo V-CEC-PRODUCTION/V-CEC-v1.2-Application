@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:progressive_image/progressive_image.dart';
 import 'package:shimmer/shimmer.dart';
-import 'package:vcec/application/profile/profile_cubit.dart';
 import 'package:vcec/core/colors.dart';
 import 'package:vcec/core/constants.dart';
-import 'package:vcec/domain/failure/main_failure.dart';
 import 'package:vcec/domain/mainmenu/timetable/time_table/result.dart';
 import 'package:vcec/presentation/common_widgets/avatar.dart';
-import 'package:vcec/presentation/common_widgets/message_icon.dart';
 import 'package:vcec/presentation/common_widgets/notification_icon.dart';
 import 'dart:developer';
 

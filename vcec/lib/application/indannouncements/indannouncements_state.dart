@@ -7,12 +7,11 @@ class IndAnnouncementsState with _$IndAnnouncementsState {
     required bool isLoading,
     required Option<Either<MainFailure, IndAnnouncementsModel>>
         isFailureOrSuccess,
-     required Option<Either<MainFailure, bool>> isFailureOrSuccessForLike,
+    required Option<Either<MainFailure, bool>> isFailureOrSuccessForLike,
   }) = _IndEventsState;
   factory IndAnnouncementsState.initial() => IndAnnouncementsState(
-        indAnnouncements: null,
-        isLoading: false,
-        isFailureOrSuccess: none(),
-        isFailureOrSuccessForLike: none()
-      );
+      indAnnouncements: null,
+      isLoading: false,
+      isFailureOrSuccess: none(),
+      isFailureOrSuccessForLike: none());
 }

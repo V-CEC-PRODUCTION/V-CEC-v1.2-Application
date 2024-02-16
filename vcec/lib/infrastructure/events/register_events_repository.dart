@@ -2,14 +2,14 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:vcec/domain/auth_token_manager/auth_token_manager.dart';
-import 'package:vcec/domain/events/model/events_views_service.dart';
+import 'package:vcec/domain/events/model/evenets_register_service.dart';
 import 'package:vcec/domain/failure/main_failure.dart';
 import 'package:vcec/strings/strings.dart';
 
-@LazySingleton(as: ViewsService)
-class ViewsRepository extends ViewsService {
+@LazySingleton(as: RegisterService)
+class RegisterRepository extends RegisterService {
   @override
-  Future<Either<MainFailure, bool>> postView({required int id}) async {
+  Future<Either<MainFailure, bool>> postRegister({required int id}) async {
     try {
       final accessToken = AuthTokenManager.instance.accessToken;
       final Map<String, dynamic> headers = {
@@ -17,7 +17,7 @@ class ViewsRepository extends ViewsService {
         'Authorization': 'Bearer $accessToken',
       };
       final response = await Dio(BaseOptions(headers: headers))
-          .post('${baseUrl}forum/events/set/views/user/?event_id=$id');
+          .post('${baseUrl}forum/events/student/register/?event_id=$id');
       if (response.statusCode == 200 || response.statusCode == 201) {
         return const Right(true);
       } else {

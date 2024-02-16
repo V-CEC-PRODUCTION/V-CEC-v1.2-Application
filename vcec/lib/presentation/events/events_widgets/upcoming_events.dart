@@ -5,7 +5,7 @@ import 'package:shimmer/shimmer.dart';
 import 'package:vcec/application/events/events_cubit.dart';
 
 import 'package:vcec/core/colors.dart';
-import 'package:vcec/domain/events/model/events_models/event_types.dart';
+import 'package:vcec/domain/events/model/event_model/event_types.dart';
 import 'package:vcec/domain/failure/main_failure.dart';
 import 'package:vcec/presentation/common_widgets/common_snackbar.dart';
 import 'package:vcec/presentation/common_widgets/events_card_widget.dart';
@@ -100,22 +100,27 @@ class UpcomingEvents extends StatelessWidget {
                         scrollDirection: Axis.horizontal,
                         child: Row(
                           children: List.generate(
-                              events.length,
+                              events.length ,
                               (index) => GestureDetector(
                                     child: EventsCardWidget(
-                                      thumpnailUrl:
-                                          events[index].thumbnailPosterImageUrl,
-                                      imgUrl: events[index].posterImageUrl,
-                                      title: events[index].title,
+                                      thumpnailUrl: events[index]
+                                          .thumbnailPosterImageUrl!,
+                                      pimgUrl: events[index].posterImageUrl!,
+                                      imgUrl: events[index].likedBy,
+                                      totalLikes: events[index].totalLikes,
+                                      title: events[index].title!,
                                       subtitle: events[index].content,
                                       date: events[index].eventDate,
                                       time: commontime,
+                                      tag: '',
+                                      totalRegistrations:
+                                          events[index].totalRegistrations,
                                     ),
                                     onTap: () {
                                       Navigator.of(context)
                                           .push(MaterialPageRoute(
-                                        builder: (context) =>
-                                            IndEventsPage(id: events[index].id),
+                                        builder: (context) => IndEventsPage(
+                                            id: events[index].id!),
                                       ));
                                     },
                                   )),

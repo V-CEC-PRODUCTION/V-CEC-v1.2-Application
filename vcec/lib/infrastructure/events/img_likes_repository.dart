@@ -1,25 +1,26 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
-import 'package:vcec/domain/auth_token_manager/auth_token_manager.dart';
-import 'package:vcec/domain/events/model/events_views_service.dart';
+import 'package:vcec/domain/events/model/likes_model/img_likes_service.dart';
+import 'package:vcec/domain/events/model/likes_model/likes_model/event_like.dart';
+import 'package:vcec/domain/events/model/likes_model/likes_model/likes_model.dart';
 import 'package:vcec/domain/failure/main_failure.dart';
 import 'package:vcec/strings/strings.dart';
 
-@LazySingleton(as: ViewsService)
-class ViewsRepository extends ViewsService {
+@LazySingleton(as: ImgLikesService)
+class ImgLikesRepository extends ImgLikesService {
   @override
-  Future<Either<MainFailure, bool>> postView({required int id}) async {
+  Future<Either<MainFailure, List<EventLike>>> getLikes({required int id}) async {
     try {
-      final accessToken = AuthTokenManager.instance.accessToken;
-      final Map<String, dynamic> headers = {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer $accessToken',
-      };
-      final response = await Dio(BaseOptions(headers: headers))
-          .post('${baseUrl}forum/events/set/views/user/?event_id=$id');
+
+      final response = await Dio(BaseOptions(contentType: 'application/json'))
+          .get('${baseUrl}forum/events/get/likes/event/ind/?event_id=33');
       if (response.statusCode == 200 || response.statusCode == 201) {
-        return const Right(true);
+  
+        final likes0 = LikesModel.fromJson(response.toString());
+        final likes = likes0.eventLikes;
+        print(likes);
+        return Right(likes!);
       } else {
         return const Left(MainFailure.serverFailure());
       }

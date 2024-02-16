@@ -22,6 +22,11 @@ mixin _$IndEventsState {
       throw _privateConstructorUsedError;
   Option<Either<MainFailure, bool>> get isFailureOrSuccessForLike =>
       throw _privateConstructorUsedError;
+  Option<Either<MainFailure, bool>> get isFailureOrSuccessForRegister =>
+      throw _privateConstructorUsedError;
+  Option<Either<MainFailure, List<EventLike>>>
+      get isFailureOrSuccessForImgLikes => throw _privateConstructorUsedError;
+  List<EventLike> get likes => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $IndEventsStateCopyWith<IndEventsState> get copyWith =>
@@ -38,7 +43,11 @@ abstract class $IndEventsStateCopyWith<$Res> {
       {IndEventsModel? indEvents,
       bool isLoading,
       Option<Either<MainFailure, IndEventsModel>> isFailureOrSuccess,
-      Option<Either<MainFailure, bool>> isFailureOrSuccessForLike});
+      Option<Either<MainFailure, bool>> isFailureOrSuccessForLike,
+      Option<Either<MainFailure, bool>> isFailureOrSuccessForRegister,
+      Option<Either<MainFailure, List<EventLike>>>
+          isFailureOrSuccessForImgLikes,
+      List<EventLike> likes});
 }
 
 /// @nodoc
@@ -58,6 +67,9 @@ class _$IndEventsStateCopyWithImpl<$Res, $Val extends IndEventsState>
     Object? isLoading = null,
     Object? isFailureOrSuccess = null,
     Object? isFailureOrSuccessForLike = null,
+    Object? isFailureOrSuccessForRegister = null,
+    Object? isFailureOrSuccessForImgLikes = null,
+    Object? likes = null,
   }) {
     return _then(_value.copyWith(
       indEvents: freezed == indEvents
@@ -76,6 +88,18 @@ class _$IndEventsStateCopyWithImpl<$Res, $Val extends IndEventsState>
           ? _value.isFailureOrSuccessForLike
           : isFailureOrSuccessForLike // ignore: cast_nullable_to_non_nullable
               as Option<Either<MainFailure, bool>>,
+      isFailureOrSuccessForRegister: null == isFailureOrSuccessForRegister
+          ? _value.isFailureOrSuccessForRegister
+          : isFailureOrSuccessForRegister // ignore: cast_nullable_to_non_nullable
+              as Option<Either<MainFailure, bool>>,
+      isFailureOrSuccessForImgLikes: null == isFailureOrSuccessForImgLikes
+          ? _value.isFailureOrSuccessForImgLikes
+          : isFailureOrSuccessForImgLikes // ignore: cast_nullable_to_non_nullable
+              as Option<Either<MainFailure, List<EventLike>>>,
+      likes: null == likes
+          ? _value.likes
+          : likes // ignore: cast_nullable_to_non_nullable
+              as List<EventLike>,
     ) as $Val);
   }
 }
@@ -92,7 +116,11 @@ abstract class _$$IndEventsStateImplCopyWith<$Res>
       {IndEventsModel? indEvents,
       bool isLoading,
       Option<Either<MainFailure, IndEventsModel>> isFailureOrSuccess,
-      Option<Either<MainFailure, bool>> isFailureOrSuccessForLike});
+      Option<Either<MainFailure, bool>> isFailureOrSuccessForLike,
+      Option<Either<MainFailure, bool>> isFailureOrSuccessForRegister,
+      Option<Either<MainFailure, List<EventLike>>>
+          isFailureOrSuccessForImgLikes,
+      List<EventLike> likes});
 }
 
 /// @nodoc
@@ -110,6 +138,9 @@ class __$$IndEventsStateImplCopyWithImpl<$Res>
     Object? isLoading = null,
     Object? isFailureOrSuccess = null,
     Object? isFailureOrSuccessForLike = null,
+    Object? isFailureOrSuccessForRegister = null,
+    Object? isFailureOrSuccessForImgLikes = null,
+    Object? likes = null,
   }) {
     return _then(_$IndEventsStateImpl(
       indEvents: freezed == indEvents
@@ -128,6 +159,18 @@ class __$$IndEventsStateImplCopyWithImpl<$Res>
           ? _value.isFailureOrSuccessForLike
           : isFailureOrSuccessForLike // ignore: cast_nullable_to_non_nullable
               as Option<Either<MainFailure, bool>>,
+      isFailureOrSuccessForRegister: null == isFailureOrSuccessForRegister
+          ? _value.isFailureOrSuccessForRegister
+          : isFailureOrSuccessForRegister // ignore: cast_nullable_to_non_nullable
+              as Option<Either<MainFailure, bool>>,
+      isFailureOrSuccessForImgLikes: null == isFailureOrSuccessForImgLikes
+          ? _value.isFailureOrSuccessForImgLikes
+          : isFailureOrSuccessForImgLikes // ignore: cast_nullable_to_non_nullable
+              as Option<Either<MainFailure, List<EventLike>>>,
+      likes: null == likes
+          ? _value._likes
+          : likes // ignore: cast_nullable_to_non_nullable
+              as List<EventLike>,
     ));
   }
 }
@@ -139,7 +182,11 @@ class _$IndEventsStateImpl implements _IndEventsState {
       {required this.indEvents,
       required this.isLoading,
       required this.isFailureOrSuccess,
-      required this.isFailureOrSuccessForLike});
+      required this.isFailureOrSuccessForLike,
+      required this.isFailureOrSuccessForRegister,
+      required this.isFailureOrSuccessForImgLikes,
+      required final List<EventLike> likes})
+      : _likes = likes;
 
   @override
   final IndEventsModel? indEvents;
@@ -149,10 +196,22 @@ class _$IndEventsStateImpl implements _IndEventsState {
   final Option<Either<MainFailure, IndEventsModel>> isFailureOrSuccess;
   @override
   final Option<Either<MainFailure, bool>> isFailureOrSuccessForLike;
+  @override
+  final Option<Either<MainFailure, bool>> isFailureOrSuccessForRegister;
+  @override
+  final Option<Either<MainFailure, List<EventLike>>>
+      isFailureOrSuccessForImgLikes;
+  final List<EventLike> _likes;
+  @override
+  List<EventLike> get likes {
+    if (_likes is EqualUnmodifiableListView) return _likes;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_likes);
+  }
 
   @override
   String toString() {
-    return 'IndEventsState(indEvents: $indEvents, isLoading: $isLoading, isFailureOrSuccess: $isFailureOrSuccess, isFailureOrSuccessForLike: $isFailureOrSuccessForLike)';
+    return 'IndEventsState(indEvents: $indEvents, isLoading: $isLoading, isFailureOrSuccess: $isFailureOrSuccess, isFailureOrSuccessForLike: $isFailureOrSuccessForLike, isFailureOrSuccessForRegister: $isFailureOrSuccessForRegister, isFailureOrSuccessForImgLikes: $isFailureOrSuccessForImgLikes, likes: $likes)';
   }
 
   @override
@@ -168,12 +227,28 @@ class _$IndEventsStateImpl implements _IndEventsState {
                 other.isFailureOrSuccess == isFailureOrSuccess) &&
             (identical(other.isFailureOrSuccessForLike,
                     isFailureOrSuccessForLike) ||
-                other.isFailureOrSuccessForLike == isFailureOrSuccessForLike));
+                other.isFailureOrSuccessForLike == isFailureOrSuccessForLike) &&
+            (identical(other.isFailureOrSuccessForRegister,
+                    isFailureOrSuccessForRegister) ||
+                other.isFailureOrSuccessForRegister ==
+                    isFailureOrSuccessForRegister) &&
+            (identical(other.isFailureOrSuccessForImgLikes,
+                    isFailureOrSuccessForImgLikes) ||
+                other.isFailureOrSuccessForImgLikes ==
+                    isFailureOrSuccessForImgLikes) &&
+            const DeepCollectionEquality().equals(other._likes, _likes));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, indEvents, isLoading,
-      isFailureOrSuccess, isFailureOrSuccessForLike);
+  int get hashCode => Object.hash(
+      runtimeType,
+      indEvents,
+      isLoading,
+      isFailureOrSuccess,
+      isFailureOrSuccessForLike,
+      isFailureOrSuccessForRegister,
+      isFailureOrSuccessForImgLikes,
+      const DeepCollectionEquality().hash(_likes));
 
   @JsonKey(ignore: true)
   @override
@@ -190,7 +265,12 @@ abstract class _IndEventsState implements IndEventsState {
       required final Option<Either<MainFailure, IndEventsModel>>
           isFailureOrSuccess,
       required final Option<Either<MainFailure, bool>>
-          isFailureOrSuccessForLike}) = _$IndEventsStateImpl;
+          isFailureOrSuccessForLike,
+      required final Option<Either<MainFailure, bool>>
+          isFailureOrSuccessForRegister,
+      required final Option<Either<MainFailure, List<EventLike>>>
+          isFailureOrSuccessForImgLikes,
+      required final List<EventLike> likes}) = _$IndEventsStateImpl;
 
   @override
   IndEventsModel? get indEvents;
@@ -200,6 +280,13 @@ abstract class _IndEventsState implements IndEventsState {
   Option<Either<MainFailure, IndEventsModel>> get isFailureOrSuccess;
   @override
   Option<Either<MainFailure, bool>> get isFailureOrSuccessForLike;
+  @override
+  Option<Either<MainFailure, bool>> get isFailureOrSuccessForRegister;
+  @override
+  Option<Either<MainFailure, List<EventLike>>>
+      get isFailureOrSuccessForImgLikes;
+  @override
+  List<EventLike> get likes;
   @override
   @JsonKey(ignore: true)
   _$$IndEventsStateImplCopyWith<_$IndEventsStateImpl> get copyWith =>

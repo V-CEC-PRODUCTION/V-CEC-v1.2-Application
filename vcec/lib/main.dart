@@ -107,7 +107,7 @@ class MyApp extends StatelessWidget {
         BlocProvider<IndAnnouncementsCubit>(
           create: (context) => getIt<IndAnnouncementsCubit>(),
         ),
-          BlocProvider<ForgotpasswordCubit>(
+        BlocProvider<ForgotpasswordCubit>(
           create: (context) => getIt<ForgotpasswordCubit>(),
         ),
       ],

@@ -14,24 +14,20 @@ class ForgotpasswordCubit extends Cubit<ForgotPasswordState> {
 
   final ForgotPasswordService _forgotPasswordService;
 
-  void postPassword({required String email}) async{
+  void postPassword({required String email}) async {
     emit(state.copyWith(
-      
       isFailureOrSuccess: none(),
     ));
     final result = await _forgotPasswordService.postPassword(email: email);
     result.fold(
       (l) => emit(state.copyWith(
-            
-            isFailureOrSuccess: some(left(l)),
-          )),
+        isFailureOrSuccess: some(left(l)),
+      )),
       (r) {
         emit(state.copyWith(
-          
           isFailureOrSuccess: some(right(r)),
         ));
       },
     );
-
   }
 }
