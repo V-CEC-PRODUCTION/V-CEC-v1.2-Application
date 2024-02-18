@@ -12,6 +12,8 @@ class Annoucement {
   dynamic hashtags;
   String? buttonLink;
   String? buttonName;
+  List<dynamic>? likedBy;
+  int? totalLikes;
 
   Annoucement({
     this.id,
@@ -25,11 +27,13 @@ class Annoucement {
     this.hashtags,
     this.buttonLink,
     this.buttonName,
+    this.likedBy,
+    this.totalLikes,
   });
 
   @override
   String toString() {
-    return 'Annoucement(id: $id, title: $title, content: $content, posterImageUrl: $posterImageUrl, thumbnailPosterImageUrl: $thumbnailPosterImageUrl, whatsappLink: $whatsappLink, publishDate: $publishDate, publishedBy: $publishedBy, hashtags: $hashtags, buttonLink: $buttonLink, buttonName: $buttonName)';
+    return 'Annoucement(id: $id, title: $title, content: $content, posterImageUrl: $posterImageUrl, thumbnailPosterImageUrl: $thumbnailPosterImageUrl, whatsappLink: $whatsappLink, publishDate: $publishDate, publishedBy: $publishedBy, hashtags: $hashtags, buttonLink: $buttonLink, buttonName: $buttonName, likedBy: $likedBy, totalLikes: $totalLikes)';
   }
 
   factory Annoucement.fromMap(Map<String, dynamic> data) => Annoucement(
@@ -46,6 +50,8 @@ class Annoucement {
         hashtags: data['hashtags'] as dynamic,
         buttonLink: data['button_link'] as String?,
         buttonName: data['button_name'] as String?,
+        likedBy: data['liked_by'] as List<dynamic>?,
+        totalLikes: data['total_likes'] as int?,
       );
 
   Map<String, dynamic> toMap() => {
@@ -60,6 +66,8 @@ class Annoucement {
         'hashtags': hashtags,
         'button_link': buttonLink,
         'button_name': buttonName,
+        'liked_by': likedBy,
+        'total_likes': totalLikes,
       };
 
   /// `dart:convert`
@@ -86,6 +94,8 @@ class Annoucement {
     dynamic hashtags,
     String? buttonLink,
     String? buttonName,
+    List<dynamic>? likedBy,
+    int? totalLikes,
   }) {
     return Annoucement(
       id: id ?? this.id,
@@ -100,6 +110,8 @@ class Annoucement {
       hashtags: hashtags ?? this.hashtags,
       buttonLink: buttonLink ?? this.buttonLink,
       buttonName: buttonName ?? this.buttonName,
+      likedBy: likedBy ?? this.likedBy,
+      totalLikes: totalLikes ?? this.totalLikes,
     );
   }
 }

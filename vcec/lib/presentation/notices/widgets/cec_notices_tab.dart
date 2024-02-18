@@ -18,8 +18,19 @@ class CECNoticesTab extends StatelessWidget {
             return const Center(child: Text('Searching...'));
           }, (a) {
             return a.fold((l) {
-              return const Center(
-                child: Text('Error'),
+              return Center(
+                child: Container(
+                  width: 320,
+                  height: 320,
+                  decoration: const BoxDecoration(
+                    shape: BoxShape.rectangle,
+                    image: DecorationImage(
+                      image: NetworkImage(
+                          'https://www.nopcommerce.com/images/thumbs/0005720_coming-soon-page_550.jpeg'),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
               );
             }, (r) {
               return r.isEmpty

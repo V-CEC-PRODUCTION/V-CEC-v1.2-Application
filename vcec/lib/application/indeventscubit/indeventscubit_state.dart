@@ -8,8 +8,9 @@ class IndEventsState with _$IndEventsState {
     required Option<Either<MainFailure, IndEventsModel>> isFailureOrSuccess,
     required Option<Either<MainFailure, bool>> isFailureOrSuccessForLike,
     required Option<Either<MainFailure, bool>> isFailureOrSuccessForRegister,
-    required Option<Either<MainFailure, List<EventLike>>> isFailureOrSuccessForImgLikes,
-    required  List<EventLike> likes,
+    required Option<Either<MainFailure, List<EventLike>>>
+        isFailureOrSuccessForImgLikes,
+    required List<EventLike> likes,
   }) = _IndEventsState;
   factory IndEventsState.initial() => IndEventsState(
         indEvents: null,

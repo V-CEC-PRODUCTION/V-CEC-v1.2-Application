@@ -73,6 +73,8 @@ class AnnouncementsEventsWidget extends StatelessWidget {
                                     title: announcements[index].title!,
                                     subtitle: announcements[index].content!,
                                     tag: '',
+                                    totalLikes: announcements[index].totalLikes,
+                                    imgUrl: announcements[index].likedBy,
                                   ),
                                   onTap: () {
                                     Navigator.of(context)

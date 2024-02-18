@@ -2,16 +2,16 @@ import 'dart:convert';
 
 import 'annoucement.dart';
 
-class AnnoucementModel {
+class AnnouncementModel {
   List<Annoucement>? annoucements;
 
-  AnnoucementModel({this.annoucements});
+  AnnouncementModel({this.annoucements});
 
   @override
-  String toString() => 'AnnoucementModel(annoucements: $annoucements)';
+  String toString() => 'AnnouncementModel(annoucements: $annoucements)';
 
-  factory AnnoucementModel.fromMap(Map<String, dynamic> data) {
-    return AnnoucementModel(
+  factory AnnouncementModel.fromMap(Map<String, dynamic> data) {
+    return AnnouncementModel(
       annoucements: (data['annoucements'] as List<dynamic>?)
           ?.map((e) => Annoucement.fromMap(e as Map<String, dynamic>))
           .toList(),
@@ -24,20 +24,20 @@ class AnnoucementModel {
 
   /// `dart:convert`
   ///
-  /// Parses the string and returns the resulting Json object as [AnnoucementModel].
-  factory AnnoucementModel.fromJson(String data) {
-    return AnnoucementModel.fromMap(json.decode(data) as Map<String, dynamic>);
+  /// Parses the string and returns the resulting Json object as [AnnouncementModel].
+  factory AnnouncementModel.fromJson(String data) {
+    return AnnouncementModel.fromMap(json.decode(data) as Map<String, dynamic>);
   }
 
   /// `dart:convert`
   ///
-  /// Converts [AnnoucementModel] to a JSON string.
+  /// Converts [AnnouncementModel] to a JSON string.
   String toJson() => json.encode(toMap());
 
-  AnnoucementModel copyWith({
+  AnnouncementModel copyWith({
     List<Annoucement>? annoucements,
   }) {
-    return AnnoucementModel(
+    return AnnouncementModel(
       annoucements: annoucements ?? this.annoucements,
     );
   }

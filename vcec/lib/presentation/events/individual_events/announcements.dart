@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:vcec/application/indannouncements/indannouncements_cubit.dart';
 import 'package:vcec/domain/failure/main_failure.dart';
 import 'package:vcec/presentation/common_widgets/common_snackbar.dart';
@@ -44,6 +45,31 @@ class IndAnnouncementsPage extends StatelessWidget {
             },
           ),
         );
+
+        state.isFailureOrSuccessForImgLikes.fold(
+            () => {},
+            (either) => either.fold(
+                  (failure) {
+                    if (!state.isLoading) {
+                      if (failure == const MainFailure.serverFailure()) {
+                        displaySnackBar(
+                            context: context, text: "Server is down");
+                      } else if (failure == const MainFailure.clientFailure()) {
+                        displaySnackBar(
+                            context: context,
+                            text: "Something wrong with your network");
+                      } else if (failure == const MainFailure.authFailure()) {
+                        displaySnackBar(
+                            context: context, text: 'Access token timed out');
+                      } else {
+                        displaySnackBar(
+                            context: context,
+                            text: "Something Unexpected Happened");
+                      }
+                    }
+                  },
+                  (r) {},
+                ));
       },
       builder: (context, state) {
         if (state.isLoading) {
@@ -230,11 +256,14 @@ class IndAnnouncementsPage extends StatelessWidget {
                                                           .thumb_up_alt_outlined,
                                                       color: Colors.black,
                                                       size: 25,
-                                                      
                                                     ),
                                               Expanded(
                                                 child: TextButton(
                                                   onPressed: () {
+                                                    BlocProvider.of<
+                                                                IndAnnouncementsCubit>(
+                                                            context)
+                                                        .getLikes(id: id);
                                                     showBottomSheet(
                                                       backgroundColor:
                                                           const Color.fromARGB(
@@ -270,50 +299,142 @@ class IndAnnouncementsPage extends StatelessWidget {
                                                                       const EdgeInsets
                                                                           .all(
                                                                           8.0),
-                                                                  child: ListView
-                                                                      .separated(
-                                                                    separatorBuilder:
-                                                                        (context,
-                                                                            index) {
-                                                                      return Container(
-                                                                        color: Colors
-                                                                            .grey,
-                                                                        height:
-                                                                            1,
-                                                                      );
-                                                                    },
-                                                                    itemCount:
-                                                                        10,
-                                                                    itemBuilder:
-                                                                        (context,
-                                                                            index) {
-                                                                      return Padding(
-                                                                        padding: const EdgeInsets
-                                                                            .all(
-                                                                            8.0),
-                                                                        child:
-                                                                            Row(
-                                                                          children: [
-                                                                            Container(
-                                                                              width: 50,
-                                                                              height: 50,
-                                                                              decoration: BoxDecoration(
-                                                                                shape: BoxShape.circle,
-                                                                                color: Colors.yellow,
+                                                                  child: state
+                                                                      .isFailureOrSuccessForImgLikes
+                                                                      .fold(() {
+                                                                    return ListView
+                                                                        .separated(
+                                                                      separatorBuilder:
+                                                                          (context,
+                                                                              index) {
+                                                                        return Container(
+                                                                          color:
+                                                                              Colors.grey,
+                                                                          height:
+                                                                              1,
+                                                                        );
+                                                                      },
+                                                                      itemCount:
+                                                                          10,
+                                                                      itemBuilder:
+                                                                          (context,
+                                                                              index) {
+                                                                        return Padding(
+                                                                          padding: const EdgeInsets
+                                                                              .all(
+                                                                              8.0),
+                                                                          child:
+                                                                              Row(
+                                                                            children: [
+                                                                              Shimmer.fromColors(
+                                                                                baseColor: const Color.fromARGB(255, 0, 0, 0),
+                                                                                highlightColor: const Color.fromARGB(255, 207, 207, 207),
+                                                                                child: Container(
+                                                                                  height: 50,
+                                                                                  width: 50,
+                                                                                  decoration: const BoxDecoration(color: Color.fromARGB(34, 0, 0, 0), shape: BoxShape.circle),
+                                                                                ),
                                                                               ),
-                                                                            ),
-                                                                            const SizedBox(
-                                                                              width: 50,
-                                                                            ),
-                                                                            Text(
-                                                                              'name',
-                                                                              style: TextStyle(color: Colors.white),
-                                                                            )
-                                                                          ],
-                                                                        ),
-                                                                      );
-                                                                    },
-                                                                  ),
+                                                                              const SizedBox(
+                                                                                width: 50,
+                                                                              ),
+                                                                              Shimmer.fromColors(
+                                                                                baseColor: const Color.fromARGB(255, 0, 0, 0),
+                                                                                highlightColor: const Color.fromARGB(255, 207, 207, 207),
+                                                                                child: Container(
+                                                                                  width: 50,
+                                                                                  decoration: const BoxDecoration(
+                                                                                    color: Color.fromARGB(34, 0, 0, 0),
+                                                                                  ),
+                                                                                ),
+                                                                              ),
+                                                                            ],
+                                                                          ),
+                                                                        );
+                                                                      },
+                                                                    );
+                                                                  },
+                                                                          (a) =>
+                                                                              a.fold((l) {
+                                                                                return ListView.separated(
+                                                                                  separatorBuilder: (context, index) {
+                                                                                    return Container(
+                                                                                      color: Colors.grey,
+                                                                                      height: 1,
+                                                                                    );
+                                                                                  },
+                                                                                  itemCount: 10,
+                                                                                  itemBuilder: (context, index) {
+                                                                                    return Padding(
+                                                                                      padding: const EdgeInsets.all(8.0),
+                                                                                      child: Row(
+                                                                                        children: [
+                                                                                          Shimmer.fromColors(
+                                                                                            baseColor: const Color.fromARGB(255, 0, 0, 0),
+                                                                                            highlightColor: const Color.fromARGB(255, 207, 207, 207),
+                                                                                            child: Container(
+                                                                                              height: 50,
+                                                                                              width: 50,
+                                                                                              decoration: const BoxDecoration(color: Color.fromARGB(34, 0, 0, 0), shape: BoxShape.circle),
+                                                                                            ),
+                                                                                          ),
+                                                                                          const SizedBox(
+                                                                                            width: 50,
+                                                                                          ),
+                                                                                          Shimmer.fromColors(
+                                                                                            baseColor: const Color.fromARGB(255, 0, 0, 0),
+                                                                                            highlightColor: const Color.fromARGB(255, 207, 207, 207),
+                                                                                            child: Container(
+                                                                                              width: 50,
+                                                                                              decoration: const BoxDecoration(
+                                                                                                color: Color.fromARGB(34, 0, 0, 0),
+                                                                                              ),
+                                                                                            ),
+                                                                                          ),
+                                                                                        ],
+                                                                                      ),
+                                                                                    );
+                                                                                  },
+                                                                                );
+                                                                              }, (r) {
+                                                                                return ListView.separated(
+                                                                                  separatorBuilder: (context, index) {
+                                                                                    return Container(
+                                                                                      color: Colors.grey,
+                                                                                      height: 1,
+                                                                                    );
+                                                                                  },
+                                                                                  itemCount: state.likes.length,
+                                                                                  itemBuilder: (context, index) {
+                                                                                    return Padding(
+                                                                                      padding: const EdgeInsets.all(8.0),
+                                                                                      child: Row(
+                                                                                        children: [
+                                                                                          Container(
+                                                                                            width: 50,
+                                                                                            height: 50,
+                                                                                            decoration: BoxDecoration(
+                                                                                              shape: BoxShape.circle,
+                                                                                              color: Colors.yellow,
+                                                                                              image: DecorationImage(
+                                                                                                image: state.likes[index].imageUrl != null ? NetworkImage('$baseUrl${state.likes[index].imageUrl}') : const NetworkImage('https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTAxL3JtNjA5LXNvbGlkaWNvbi13LTAwMi1wLnBuZw.png'),
+                                                                                                fit: BoxFit.fill,
+                                                                                              ),
+                                                                                            ),
+                                                                                          ),
+                                                                                          const SizedBox(
+                                                                                            width: 50,
+                                                                                          ),
+                                                                                          Text(
+                                                                                            state.likes[index].name!,
+                                                                                            style: const TextStyle(color: Colors.white),
+                                                                                          )
+                                                                                        ],
+                                                                                      ),
+                                                                                    );
+                                                                                  },
+                                                                                );
+                                                                              })),
                                                                 ),
                                                               )
                                                             ],

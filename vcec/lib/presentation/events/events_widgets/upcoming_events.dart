@@ -100,7 +100,7 @@ class UpcomingEvents extends StatelessWidget {
                         scrollDirection: Axis.horizontal,
                         child: Row(
                           children: List.generate(
-                              events.length ,
+                              events.length,
                               (index) => GestureDetector(
                                     child: EventsCardWidget(
                                       thumpnailUrl: events[index]

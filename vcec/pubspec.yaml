@@ -114,6 +114,7 @@ flutter:
     - assets/img/sign_up.png
     - assets/img/verify.png
     - assets/img/google-logo.png
+    - assets/img/ktu.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
   # For details regarding adding assets from package dependencies, see

@@ -10,13 +10,12 @@ import 'package:vcec/strings/strings.dart';
 @LazySingleton(as: ImgLikesService)
 class ImgLikesRepository extends ImgLikesService {
   @override
-  Future<Either<MainFailure, List<EventLike>>> getLikes({required int id}) async {
+  Future<Either<MainFailure, List<EventLike>>> getLikes(
+      {required int id}) async {
     try {
-
       final response = await Dio(BaseOptions(contentType: 'application/json'))
-          .get('${baseUrl}forum/events/get/likes/event/ind/?event_id=33');
+          .get('${baseUrl}forum/events/get/likes/event/ind/?event_id=$id');
       if (response.statusCode == 200 || response.statusCode == 201) {
-  
         final likes0 = LikesModel.fromJson(response.toString());
         final likes = likes0.eventLikes;
         print(likes);

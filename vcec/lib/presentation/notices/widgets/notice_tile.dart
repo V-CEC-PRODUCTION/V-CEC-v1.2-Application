@@ -9,10 +9,11 @@ class NoticeTileWidget extends StatelessWidget {
       {super.key,
       required this.expanpsionNeeded,
       required this.notice,
-      required this.type});
+      required this.type,  this.index});
   final NoticesResult notice;
   final bool expanpsionNeeded;
   final NoticeType type;
+  final int? index;
   ValueNotifier<bool> _isexpanded = ValueNotifier(false);
 
   @override
@@ -29,7 +30,9 @@ class NoticeTileWidget extends StatelessWidget {
         left: 14,
         right: 10,
       ),
-      leading: const CircleAvatar(),
+      leading: const CircleAvatar(
+        backgroundImage: AssetImage('assets/img/ktu.png'),
+      ),
       title: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -37,7 +40,7 @@ class NoticeTileWidget extends StatelessWidget {
             child: ValueListenableBuilder(
                 valueListenable: _isexpanded,
                 builder: (BuildContext ctx, bool _isexpanded, Widget? _) {
-                  return Text(notice.headline!,
+                  return Text('Notification-${index! +1}',
                       maxLines: _isexpanded != true ? 2 : 20,
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(
@@ -47,7 +50,7 @@ class NoticeTileWidget extends StatelessWidget {
                       ));
                 }),
           ),
-          Text(notice.dateOfUpload!,
+          Text(notice.date!,
               style: const TextStyle(
                 color: Color.fromARGB(255, 46, 46, 46),
                 fontSize: 12,
@@ -59,7 +62,7 @@ class NoticeTileWidget extends StatelessWidget {
         valueListenable: _isexpanded,
         builder: (BuildContext ctx, bool _isexpanded, Widget? _) {
           return Text(
-            notice.details!,
+            notice.title!,
             maxLines: _isexpanded != true ? 2 : 30,
             overflow: TextOverflow.ellipsis,
             style: const TextStyle(
@@ -76,7 +79,7 @@ class NoticeTileWidget extends StatelessWidget {
       iconColor: expanpsionNeeded ? Colors.black : null,
       children: expanpsionNeeded
           ? List.generate(
-              notice.noticeUrls!.length,
+              notice.downloadUrl!.length,
               (index) => InnerTileWidget(
                 notice: notice,
                 index: index,
@@ -100,8 +103,8 @@ class InnerTileWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final noticeUrl = notice.noticeUrls![index];
-    final Uri _url = Uri.parse(noticeUrl.url!);
+    final noticeUrl = notice.downloadUrl![index];
+    final Uri _url = Uri.parse(noticeUrl);
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(border: Border.all(color: Colors.black12)),
@@ -118,7 +121,7 @@ class InnerTileWidget extends StatelessWidget {
           kwidth5,
           SizedBox(
             width: MediaQuery.of(context).size.width - 135,
-            child: Text(noticeUrl.urlHead!,
+            child: Text(notice.downloadName![index],
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
@@ -132,7 +135,7 @@ class InnerTileWidget extends StatelessWidget {
                 _launchUrl(_url);
               },
               icon: Icon(
-                Icons.link,
+                Icons.open_in_new,
                 size: 20,
               )),
           kwidth10,

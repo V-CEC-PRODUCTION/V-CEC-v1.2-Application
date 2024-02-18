@@ -1,39 +1,43 @@
 import 'dart:convert';
 
-import 'notice_url.dart';
-
 class NoticesResult {
-  String? dateOfUpload;
-  String? details;
-  String? headline;
-  List<NoticeUrl>? noticeUrls;
+  String? title;
+  String? date;
+  String? description;
+  int? downloadCount;
+  List<dynamic>? downloadUrl;
+  List<dynamic>? downloadName;
 
   NoticesResult({
-    this.dateOfUpload,
-    this.details,
-    this.headline,
-    this.noticeUrls,
+    this.title,
+    this.date,
+    this.description,
+    this.downloadCount,
+    this.downloadUrl,
+    this.downloadName,
   });
 
   @override
   String toString() {
-    return 'NoticesResult(dateOfUpload: $dateOfUpload, details: $details, headline: $headline, noticeUrls: $noticeUrls,)';
+    return 'NoticesResult(title: $title, date: $date, description: $description, downloadCount: $downloadCount, downloadUrl: $downloadUrl, downloadName: $downloadName)';
   }
 
   factory NoticesResult.fromMap(Map<String, dynamic> data) => NoticesResult(
-        dateOfUpload: data['date_of_upload'] as String?,
-        details: data['details'] as String?,
-        headline: data['headline'] as String?,
-        noticeUrls: (data['notice_urls'] as List<dynamic>?)
-            ?.map((e) => NoticeUrl.fromMap(e as Map<String, dynamic>))
-            .toList(),
+        title: data['title'] as String?,
+        date: data['date'] as String?,
+        description: data['description'] as String?,
+        downloadCount: data['download_count'] as int?,
+        downloadUrl: data['download_url'] as List<dynamic>?,
+        downloadName: data['download_name'] as List<dynamic>?,
       );
 
   Map<String, dynamic> toMap() => {
-        'date_of_upload': dateOfUpload,
-        'details': details,
-        'headline': headline,
-        'notice_urls': noticeUrls?.map((e) => e.toMap()).toList(),
+        'title': title,
+        'date': date,
+        'description': description,
+        'download_count': downloadCount,
+        'download_url': downloadUrl,
+        'download_name': downloadName,
       };
 
   /// `dart:convert`
@@ -47,4 +51,22 @@ class NoticesResult {
   ///
   /// Converts [NoticesResult] to a JSON string.
   String toJson() => json.encode(toMap());
+
+  NoticesResult copyWith({
+    String? title,
+    String? date,
+    String? description,
+    int? downloadCount,
+    List<dynamic>? downloadUrl,
+    List<dynamic>? downloadName,
+  }) {
+    return NoticesResult(
+      title: title ?? this.title,
+      date: date ?? this.date,
+      description: description ?? this.description,
+      downloadCount: downloadCount ?? this.downloadCount,
+      downloadUrl: downloadUrl ?? this.downloadUrl,
+      downloadName: downloadName ?? this.downloadName,
+    );
+  }
 }

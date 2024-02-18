@@ -361,49 +361,56 @@ class IndEventsPage extends StatelessWidget {
                                                                       .isFailureOrSuccessForImgLikes
                                                                       .fold(() {
                                                                     return ListView
-                                                                            .separated(
-                                                                            separatorBuilder:
-                                                                                (context, index) {
-                                                                              return Container(
-                                                                                color: Colors.grey,
-                                                                                height: 1,
-                                                                              );
-                                                                            },
-                                                                            itemCount:
-                                                                                10,
-                                                                            itemBuilder:
-                                                                                (context, index) {
-                                                                              return Padding(
-                                                                                padding: const EdgeInsets.all(8.0),
-                                                                                child: Row(
-                                                                                  children: [
-                                                                                    Shimmer.fromColors(
-                                                                                      baseColor: const Color.fromARGB(255, 0, 0, 0),
-                                                                                      highlightColor: const Color.fromARGB(255, 207, 207, 207),
-                                                                                      child: Container(
-                                                                                        height: 50,
-                                                                                        width: 50,
-                                                                                        decoration: const BoxDecoration(color: Color.fromARGB(34, 0, 0, 0), shape: BoxShape.circle),
-                                                                                      ),
-                                                                                    ),
-                                                                                    const SizedBox(
-                                                                                      width: 50,
-                                                                                    ),
-                                                                                    Shimmer.fromColors(
-                                                                                      baseColor: const Color.fromARGB(255, 0, 0, 0),
-                                                                                      highlightColor: const Color.fromARGB(255, 207, 207, 207),
-                                                                                      child: Container(
-                                                                                        width: 50,
-                                                                                        decoration: const BoxDecoration(
-                                                                                          color: Color.fromARGB(34, 0, 0, 0),
-                                                                                        ),
-                                                                                      ),
-                                                                                    ),
-                                                                                  ],
+                                                                        .separated(
+                                                                      separatorBuilder:
+                                                                          (context,
+                                                                              index) {
+                                                                        return Container(
+                                                                          color:
+                                                                              Colors.grey,
+                                                                          height:
+                                                                              1,
+                                                                        );
+                                                                      },
+                                                                      itemCount:
+                                                                          10,
+                                                                      itemBuilder:
+                                                                          (context,
+                                                                              index) {
+                                                                        return Padding(
+                                                                          padding: const EdgeInsets
+                                                                              .all(
+                                                                              8.0),
+                                                                          child:
+                                                                              Row(
+                                                                            children: [
+                                                                              Shimmer.fromColors(
+                                                                                baseColor: const Color.fromARGB(255, 0, 0, 0),
+                                                                                highlightColor: const Color.fromARGB(255, 207, 207, 207),
+                                                                                child: Container(
+                                                                                  height: 50,
+                                                                                  width: 50,
+                                                                                  decoration: const BoxDecoration(color: Color.fromARGB(34, 0, 0, 0), shape: BoxShape.circle),
                                                                                 ),
-                                                                              );
-                                                                            },
-                                                                          );
+                                                                              ),
+                                                                              const SizedBox(
+                                                                                width: 50,
+                                                                              ),
+                                                                              Shimmer.fromColors(
+                                                                                baseColor: const Color.fromARGB(255, 0, 0, 0),
+                                                                                highlightColor: const Color.fromARGB(255, 207, 207, 207),
+                                                                                child: Container(
+                                                                                  width: 50,
+                                                                                  decoration: const BoxDecoration(
+                                                                                    color: Color.fromARGB(34, 0, 0, 0),
+                                                                                  ),
+                                                                                ),
+                                                                              ),
+                                                                            ],
+                                                                          ),
+                                                                        );
+                                                                      },
+                                                                    );
                                                                   },
                                                                           (a) =>
                                                                               a.fold((l) {

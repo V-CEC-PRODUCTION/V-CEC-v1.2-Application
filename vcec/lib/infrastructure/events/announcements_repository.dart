@@ -1,8 +1,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
-import 'package:vcec/domain/Announcements/annoucement_model/annoucement.dart';
-import 'package:vcec/domain/Announcements/annoucement_model/annoucement_model.dart';
+import 'package:vcec/domain/Announcements/announcement_model/annoucement.dart';
+import 'package:vcec/domain/Announcements/announcement_model/announcement_model.dart';
 import 'package:vcec/domain/Announcements/announcements_service.dart';
 import 'package:vcec/domain/failure/main_failure.dart';
 import 'package:vcec/strings/strings.dart';
@@ -17,7 +17,7 @@ class AnnouncementRepository extends AnnouncementService {
           .get('${baseUrl}forum/announcements/get-announcement/?forum=all');
       if (response.statusCode == 200 || response.statusCode == 201) {
         print('hi');
-        final announcements0 = AnnoucementModel.fromJson(response.toString());
+        final announcements0 = AnnouncementModel.fromJson(response.toString());
         final announcements = announcements0.annoucements;
         print(announcements);
         return Right(announcements!);

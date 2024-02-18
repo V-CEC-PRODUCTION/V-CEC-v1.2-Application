@@ -61,10 +61,10 @@ class MainMenuScreen extends StatelessWidget {
                   kheight10,
                   const StoryWidget(),
                   kheight10,
-                  const CarouselMainManu(),
+                 const CarouselMainManu(),
 
                   kheight10,
-                  const Highlights(),
+                 const Highlights(),
                   kheight10,
                   //  Padding(
                   //     padding: const EdgeInsets.only(left: 20, top: 10),

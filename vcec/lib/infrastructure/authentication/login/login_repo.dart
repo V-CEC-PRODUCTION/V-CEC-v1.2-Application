@@ -15,6 +15,7 @@ class LoginRepo extends LoginService {
   Future<Either<MainFailure, void>> loginWithEmailAndPass(
       String email, String password) async {
     print(email);
+    print(password);
     try {
       final Response response = await Dio(BaseOptions(headers: {
         "Content-Type": "application/json",

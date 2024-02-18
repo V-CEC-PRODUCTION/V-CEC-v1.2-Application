@@ -32,6 +32,7 @@ class KTUNoticesTab extends StatelessWidget {
                         return NoticeTileWidget(
                           notice: r[index],
                           expanpsionNeeded: true,
+                          index: index,
                           type: NoticeType.ktu,
                         );
                       }),

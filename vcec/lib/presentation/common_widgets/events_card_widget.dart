@@ -116,7 +116,7 @@ class EventsCardWidget extends StatelessWidget {
                                 fontSize: 10,
                               ),
                             ),
-                          totalRegistrations == 0
+                          totalRegistrations == 0 || totalRegistrations == null
                               ? const SizedBox()
                               : Text(
                                   '$totalRegistrations people joined',
@@ -129,9 +129,10 @@ class EventsCardWidget extends StatelessWidget {
                       ),
                     ),
                     Expanded(
-                      child: totalLikes == 0 || totalLikes == null
+                      child: (totalLikes == 0 && imgUrl!.isEmpty) ||
+                              totalLikes == null
                           ? const SizedBox()
-                          : (totalLikes! - 1) == 0
+                          : (totalLikes! - 1) == 0 && imgUrl!.length == 1
                               ? Stack(
                                   alignment: Alignment.centerRight,
                                   children: [
@@ -151,7 +152,7 @@ class EventsCardWidget extends StatelessWidget {
                                     )
                                   ],
                                 )
-                              : (totalLikes! - 2) == 0
+                              : (totalLikes! - 2) == 0 && imgUrl!.length == 2
                                   ? Stack(
                                       alignment: Alignment.centerRight,
                                       children: [
@@ -190,7 +191,8 @@ class EventsCardWidget extends StatelessWidget {
                                         ),
                                       ],
                                     )
-                                  : (totalLikes! - 3) == 0
+                                  : (totalLikes! - 3) == 0 &&
+                                          imgUrl!.length == 3
                                       ? Stack(
                                           alignment: Alignment.centerRight,
                                           children: [

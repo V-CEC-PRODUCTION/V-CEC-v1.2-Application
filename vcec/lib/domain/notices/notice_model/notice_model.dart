@@ -31,4 +31,12 @@ class NoticeModel {
   ///
   /// Converts [NoticeModel] to a JSON string.
   String toJson() => json.encode(toMap());
+
+  NoticeModel copyWith({
+    List<NoticesResult>? noticesResult,
+  }) {
+    return NoticeModel(
+      noticesResult: noticesResult ?? this.noticesResult,
+    );
+  }
 }

@@ -28,6 +28,7 @@ import 'package:vcec/infrastructure/notification/notification_handle.dart';
 import 'package:vcec/presentation/auth_screens/login/login_screen.dart';
 import 'package:vcec/presentation/auth_screens/sign_up/sign_up_screen.dart';
 import 'package:vcec/presentation/home/home.dart';
+import 'package:vcec/presentation/mainmenu/mainmenu_screen.dart';
 import 'package:vcec/presentation/splash_screen.dart/splash_screen.dart';
 import 'package:vcec/presentation/auth_screens/otp_verification/otp_verification_screen.dart';
 import 'package:vcec/presentation/auth_screens/otp_verification/verified_screen.dart';
@@ -123,7 +124,7 @@ class MyApp extends StatelessWidget {
               initialRoute: '/home',
               routes: {
                 '/': (context) => const SplashScreen(),
-                '/login': (context) => const LoginPage(),
+                '/login': (context) => MainMenuScreen(),
                 '/signup': (context) => const SignUpScreen(),
                 '/home': (context) => HomeScreen(),
                 '/otp_verification': (context) => OtpVerificationScreen(),
