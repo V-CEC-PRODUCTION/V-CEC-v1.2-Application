@@ -3,8 +3,7 @@ import 'package:vcec/core/colors.dart';
 
 class AccountDropDownWidget extends StatelessWidget {
   AccountDropDownWidget(
-      {Key? key, required this.title, required this.dropdownItems})
-      : super(key: key);
+      {super.key, required this.title, required this.dropdownItems});
 
   final String title;
 

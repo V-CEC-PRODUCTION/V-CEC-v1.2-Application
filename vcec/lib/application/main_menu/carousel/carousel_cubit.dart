@@ -15,7 +15,7 @@ class CarouselCubit extends Cubit<CarouselState> {
   final CarouselService _carouselService;
   CarouselCubit(this._carouselService) : super(CarouselState.initial());
   void getCarouselImages() async {
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 2));
     await _carouselService.getCarouselImages().then((value) {
       value.fold(
         (failure) => emit(state.copyWith(

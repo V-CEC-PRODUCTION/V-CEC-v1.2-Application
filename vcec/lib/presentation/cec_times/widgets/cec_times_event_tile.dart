@@ -21,7 +21,7 @@ class CecTimesTileWidget extends StatelessWidget {
       child: GestureDetector(
         onTap: () {
           Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => CecTimesSubPageScreen()));
+              MaterialPageRoute(builder: (context) => const CecTimesSubPageScreen()));
         },
         child: Container(
           padding: const EdgeInsets.all(8.0),

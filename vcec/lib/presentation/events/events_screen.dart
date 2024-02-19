@@ -64,7 +64,7 @@ class EventsScreen extends StatelessWidget {
             const FindAmazingEventsWidget(),
             kheight10,
             const ForumEventFilterWidget(),
-            UpcomingEvents(),
+            const UpcomingEvents(),
             // const EventsForYouWidget(),
             const AnnouncementsEventsWidget(),
             kheight10,
@@ -84,7 +84,6 @@ class _Banner extends StatelessWidget {
   Widget build(BuildContext context) {
     String url = '$baseUrl$imageUrl'.replaceAll('auth//api/', 'auth/api/');
     String turl = '$baseUrl$thumbnailUrl'.replaceAll('auth//api/', 'auth/api/');
-    print(url);
     return CircleAvatar(
       radius: 20,
       child: ClipOval(

@@ -11,7 +11,7 @@ import 'package:vcec/presentation/common_widgets/common_snackbar.dart';
 
 class CreatePasswordScreen extends StatefulWidget {
   final String? email;
-  CreatePasswordScreen({super.key, this.email});
+  const CreatePasswordScreen({super.key, this.email});
 
   @override
   State<CreatePasswordScreen> createState() => _CreatePasswordScreenState();
@@ -35,7 +35,7 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              AuthTopTitleWidget(
+              const AuthTopTitleWidget(
                 title: 'Create Password',
               ),
               NewPasswordTextFieldWidget(

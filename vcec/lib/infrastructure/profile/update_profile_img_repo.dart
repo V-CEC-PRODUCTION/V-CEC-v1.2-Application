@@ -37,7 +37,7 @@ class UpdateProfileImgRepo extends UpdateProfileImgService {
       // Send the request
       http.Response response =
           await http.Response.fromStream(await request.send());
-      print(response);
+      
       if (response.statusCode == 200 || response.statusCode == 201) {
         return const Right(true);
       } else {
@@ -45,7 +45,6 @@ class UpdateProfileImgRepo extends UpdateProfileImgService {
         return const Left(MainFailure.serverFailure());
       }
     } catch (e) {
-      print(e);
       if (e is DioException && e.response?.statusCode == 500) {
         return const Left(MainFailure.serverFailure());
       } else if (e is SocketException) {

@@ -1,5 +1,5 @@
 void proddecButtonFunc() {
-  print('object');
+ 
 }
 
 void ieeeButtonFunc() {}
@@ -11,7 +11,7 @@ void tpcButtonFunc() {}
 void tinkerhubButtonFunc() {}
 void mediacellButtonFunc() {}
 void focesButtonFunc() {
-  print('object');
+  
 }
 
 void exessButtonFunc() {}

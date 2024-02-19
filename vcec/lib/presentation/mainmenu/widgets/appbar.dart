@@ -108,15 +108,15 @@ class _MainmenuAppbarState extends State<MainmenuAppbar> {
                               },
                               child: widget.imageUrl == ''
                                   ? Shimmer.fromColors(
-                                      baseColor: Color(0xFFC0C0C0),
-                                      highlightColor: Color(0xFFE8E8E8),
-                                      child: CircleAvatar(
+                                      baseColor: const Color(0xFFC0C0C0),
+                                      highlightColor: const Color(0xFFE8E8E8),
+                                      child: const CircleAvatar(
                                         radius: 23,
                                         backgroundColor:
                                             Color.fromARGB(255, 113, 124, 124),
                                       ))
                                   : widget.imageUrl == null
-                                      ? CircleAvatar(
+                                      ? const CircleAvatar(
                                           radius: 23,
                                           backgroundImage: NetworkImage(
                                               'https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTAxL3JtNjA5LXNvbGlkaWNvbi13LTAwMi1wLnBuZw.png'),
@@ -148,13 +148,13 @@ class _MainmenuAppbarState extends State<MainmenuAppbar> {
                                 mainAxisSize: MainAxisSize.max,
                                 children: [    
                               _TimeTableWiget(text: widget.duration),
-                                  _VerticalDivider(),
+                                  const _VerticalDivider(),
                                   _TimeTableWiget(text: widget.currentPeriod),
                                 ],
                               ),
                             ),
                           ),
-                          NotificationIcon(),
+                          const NotificationIcon(),
                         ],
                       ),
                     ),
@@ -169,26 +169,26 @@ class _MainmenuAppbarState extends State<MainmenuAppbar> {
                                   children: [
                                     Container(
                                       height: 40,
-                                      color: Color.fromRGBO(209, 219, 216, 1),
+                                      color: const Color.fromRGBO(209, 219, 216, 1),
                                       child: Row(
                                         children: [
                                           kwidth10,
                                           time.hour < 16
-                                              ? Text('Today\'s Classes',
+                                              ? const Text('Today\'s Classes',
                                                   style: TextStyle(
                                                       color: kblack,
                                                       fontSize: 17,
                                                       fontWeight:
                                                           FontWeight.w600))
-                                              : Text('Tomorrow \'s Classes',
+                                              : const Text('Tomorrow \'s Classes',
                                                   style: TextStyle(
                                                       color: kblack,
                                                       fontSize: 17,
                                                       fontWeight:
                                                           FontWeight.w600)),
-                                          Spacer(),
+                                          const Spacer(),
                                           Text(formattedDate,
-                                              style: TextStyle(
+                                              style: const TextStyle(
                                                   color: kblack,
                                                   fontSize: 17,
                                                   fontWeight: FontWeight.w600)),
@@ -250,7 +250,7 @@ class _MainmenuAppbarState extends State<MainmenuAppbar> {
                             },
                             duration: const Duration(milliseconds: 300),
                           )
-                        : SizedBox()
+                        : const SizedBox()
                   ],
                 )),
             pinned: true,
@@ -260,7 +260,7 @@ class _MainmenuAppbarState extends State<MainmenuAppbar> {
 }
 
 class _TimeTableWidget extends StatelessWidget {
-  const _TimeTableWidget({super.key, required this.text});
+  const _TimeTableWidget({required this.text});
   final String text;
 
   @override
@@ -282,7 +282,7 @@ class _TimeTableWidget extends StatelessWidget {
         child: Center(
           child: Text(
             text,
-            style: TextStyle(
+            style: const TextStyle(
               color: kwhite,
               fontSize: 16,
               fontWeight: FontWeight.w600,

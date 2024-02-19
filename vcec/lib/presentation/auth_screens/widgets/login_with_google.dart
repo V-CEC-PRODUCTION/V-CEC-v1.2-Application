@@ -16,7 +16,7 @@ class LoginWithGoogleWidget extends StatelessWidget {
       onPressed: onClick,
       style: ElevatedButton.styleFrom(
           elevation: 4,
-          backgroundColor: Color.fromARGB(255, 221, 218, 218),
+          backgroundColor: const Color.fromARGB(255, 221, 218, 218),
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(5))),
       child: Row(

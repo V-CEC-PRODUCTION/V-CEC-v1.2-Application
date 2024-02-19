@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class EventConducterLogoWidget extends StatelessWidget {
-  const EventConducterLogoWidget();
+  const EventConducterLogoWidget({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -39,7 +39,7 @@ class NotificationHandle {
       onDidReceiveNotificationResponse: (NotificationResponse response) async {
         String payload = response.payload ?? "";
         if (payload.isNotEmpty) {
-          await Future.delayed(Duration(milliseconds: 400));
+          await Future.delayed(const Duration(milliseconds: 400));
           NotificationHandle().handleNotificationNavigation(
             navigatorKey.currentContext!,
             payload: payload,
@@ -81,7 +81,7 @@ class NotificationHandle {
       eventId = payloadTokenized[1];
     }
     if (type == 'home') {
-      print(eventId);
+      
       // Navigator.push(
       //     context,
       //     MaterialPageRoute(

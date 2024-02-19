@@ -18,17 +18,17 @@ class CecTimesScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 14.0),
+            const Padding(
+              padding: EdgeInsets.only(left: 14.0),
               child: SubHeading(text: 'CEC Times'),
             ),
             Visibility(
               visible: today,
-              child: CecTimesListWidget(
+              child: const CecTimesListWidget(
                 title: 'Today',
               ),
             ),
-            CecTimesListWidget(title: 'May')
+            const CecTimesListWidget(title: 'May')
           ],
         ),
       ),

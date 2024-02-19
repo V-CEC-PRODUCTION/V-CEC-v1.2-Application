@@ -15,7 +15,7 @@ class ProfileRepo extends ProfileService {
   @override
   Future<Either<MainFailure, ProfileModel>> getProfileDetails() async {
     try {
-      print('1');
+    
       final accessToken = AuthTokenManager.instance.accessToken;
       final Map<String, dynamic> headers = {
         'Content-Type': 'application/json',
@@ -27,7 +27,7 @@ class ProfileRepo extends ProfileService {
       if (response.statusCode == 200 || response.statusCode == 201) {
         final ProfileModel profileData =
             ProfileModel.fromJson(response.toString());
-        print('object');
+        
         
         return Right(profileData);
       } else {
@@ -35,7 +35,7 @@ class ProfileRepo extends ProfileService {
         return const Left(MainFailure.serverFailure());
       }
     } catch (e) {
-      print(e);
+    
       if (e is DioException && e.response?.statusCode == 500) {
         return const Left(MainFailure.serverFailure());
       } else if (e is SocketException) {

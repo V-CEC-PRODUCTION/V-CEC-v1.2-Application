@@ -20,7 +20,7 @@ class SettingsPage extends StatelessWidget {
           ),
           centerTitle: true,
           title: Padding(
-            padding: EdgeInsets.only(left: 0),
+            padding: const EdgeInsets.only(left: 0),
             child: Text(
               'Settings',
               style: TextStyle(

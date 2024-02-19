@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:progressive_image/progressive_image.dart';
-import 'package:shimmer/shimmer.dart';
 
 import 'package:vcec/core/constants.dart';
 import 'package:vcec/domain/auth_token_manager/auth_token_manager.dart';
@@ -32,7 +31,7 @@ class AppbarWithSearch extends PreferredSize {
               children: [
                 Container(
                   height: 125,
-                  color: Color.fromARGB(255, 40, 40, 40),
+                  color:const Color.fromARGB(255, 40, 40, 40),
                   child: Row(
                     children: [
                       kwidth20,
@@ -53,7 +52,7 @@ class AppbarWithSearch extends PreferredSize {
                         children: [
                           Text(
                             date,
-                            style: TextStyle(
+                            style:const TextStyle(
                               color: Colors.white,
                               fontSize: 13,
                               fontWeight: FontWeight.w400,
@@ -66,7 +65,7 @@ class AppbarWithSearch extends PreferredSize {
                           Text(
                             
                                  AuthTokenManager.instance.name!,
-                            style: TextStyle(
+                            style:const TextStyle(
                               color: Colors.white,
                               fontSize: 16,
                               fontWeight: FontWeight.w500,
@@ -74,8 +73,8 @@ class AppbarWithSearch extends PreferredSize {
                           ),
                         ],
                       ),
-                      Spacer(),
-                      NotificationIcon(),
+                      const Spacer(),
+                      const NotificationIcon(),
                       kwidth10,
                       kwidth20,
                     ],
@@ -103,7 +102,7 @@ class _Banner extends StatelessWidget {
   Widget build(BuildContext context) {
     String url = '$baseUrl$imageUrl'.replaceAll('auth//api/', 'auth/api/');
     String turl = '$baseUrl$thumbnailUrl'.replaceAll('auth//api/', 'auth/api/');
-    print(url);
+   // print(url);
     return CircleAvatar(
       radius: 23,
       child: ClipOval(

@@ -18,7 +18,7 @@ import 'package:vcec/presentation/common_widgets/loading_widget.dart';
 
 class AccountDetailsScreen extends StatefulWidget {
   final String password;
-  AccountDetailsScreen({
+  const AccountDetailsScreen({
     super.key,
     required this.password,
   });
@@ -158,7 +158,7 @@ class _AccountDetailsScreenState extends State<AccountDetailsScreen> {
             child: SingleChildScrollView(
           child: Column(
             children: [
-              AuthTopTitleWidget(
+              const AuthTopTitleWidget(
                 title: 'Account Details',
               ),
               kheight15,

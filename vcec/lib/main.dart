@@ -27,10 +27,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:vcec/infrastructure/notification/notification_handle.dart';
 import 'package:vcec/presentation/auth_screens/login/login_screen.dart';
 import 'package:vcec/presentation/auth_screens/sign_up/sign_up_screen.dart';
-import 'package:vcec/presentation/events/events_screen.dart';
 import 'package:vcec/presentation/home/home.dart';
-import 'package:vcec/presentation/mainmenu/mainmenu_screen.dart';
-import 'package:vcec/presentation/notices/notices_screen.dart';
 import 'package:vcec/presentation/splash_screen.dart/splash_screen.dart';
 import 'package:vcec/presentation/auth_screens/otp_verification/otp_verification_screen.dart';
 import 'package:vcec/presentation/auth_screens/otp_verification/verified_screen.dart';
@@ -126,10 +123,10 @@ class MyApp extends StatelessWidget {
               initialRoute: '/home',
               routes: {
                 '/': (context) => const SplashScreen(),
-                '/login': (context) => MainMenuScreen(),
+                '/login': (context) => const LoginPage(),
                 '/signup': (context) => const SignUpScreen(),
-                '/home': (context) => HomeScreen(),
-                '/otp_verification': (context) => OtpVerificationScreen(),
+                '/home': (context) => const HomeScreen(),
+                '/otp_verification': (context) => const OtpVerificationScreen(),
                 '/otp_verified': (context) => const VerifiedScreen(),
               },
               navigatorKey: navigatorKey,

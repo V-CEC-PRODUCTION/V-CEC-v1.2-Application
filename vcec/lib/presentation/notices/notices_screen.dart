@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:progressive_image/progressive_image.dart';
-import 'package:shimmer/shimmer.dart';
 import 'package:vcec/core/colors.dart';
 import 'package:vcec/core/constants.dart';
 import 'package:vcec/domain/auth_token_manager/auth_token_manager.dart';
@@ -29,7 +28,7 @@ class NoticesScreen extends StatelessWidget {
             padding: const EdgeInsets.only(left: 20, top: 15),
             child: CircleAvatar(
               child: imgUrl == null
-                  ? CircleAvatar(
+                  ?const CircleAvatar(
                       radius: 23,
                       backgroundImage: NetworkImage(
                           'https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTAxL3JtNjA5LXNvbGlkaWNvbi13LTAwMi1wLnBuZw.png'))
@@ -44,7 +43,7 @@ class NoticesScreen extends StatelessWidget {
               children: [
                 Text(
                   date,
-                  style: TextStyle(
+                  style:const TextStyle(
                     color: Colors.white,
                     fontSize: 13,
                     fontWeight: FontWeight.w400,
@@ -56,7 +55,7 @@ class NoticesScreen extends StatelessWidget {
                       )
                     : Text(
                         name!,
-                        style: TextStyle(
+                        style:const TextStyle(
                           color: Colors.white,
                           fontSize: 16,
                           fontWeight: FontWeight.w500,
@@ -69,7 +68,7 @@ class NoticesScreen extends StatelessWidget {
             Flexible(
               child: Padding(
                 padding: EdgeInsets.only(top: size * 0.05),
-                child: Column(
+                child:const Column(
                   children: [
                     Text(
                       'Get Notified!',
@@ -97,7 +96,7 @@ class NoticesScreen extends StatelessWidget {
                 EdgeInsets.symmetric(horizontal: size * 0.07, vertical: 14),
             child:const SubHeading(text: 'Notices'),
           ),
-          Expanded(child: NoticesTabbar())
+         const Expanded(child: NoticesTabbar())
         ],
       ),
     );
@@ -112,7 +111,7 @@ class _Banner extends StatelessWidget {
   Widget build(BuildContext context) {
     String url = '$baseUrl$imageUrl'.replaceAll('auth//api/', 'auth/api/');
     String turl = '$baseUrl$thumbnailUrl'.replaceAll('auth//api/', 'auth/api/');
-    print(url);
+  //  print(url);
     return CircleAvatar(
       radius: 20,
       child: ClipOval(

@@ -20,7 +20,7 @@ class ForumEventFilterWidget extends StatelessWidget {
         ),
         ElevatedButton(
           onPressed: () {
-            print('object');
+           
           },
           style: ElevatedButton.styleFrom(
             backgroundColor: kDarkGreen,
@@ -108,18 +108,18 @@ class ForumEventFilterWidget extends StatelessWidget {
                                   onPressed: () {
                                     return forumOnTap[index]();
                                   },
-                                  child: Text(
-                                    '${forums[index].displayName}',
-                                    style: TextStyle(
-                                        color: kBlackBlurr, fontSize: 12),
-                                  ),
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor: kwhite,
                                     elevation: 4,
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(6),
                                     ),
-                                    minimumSize: Size(30, 28),
+                                    minimumSize: const Size(30, 28),
+                                  ),
+                                  child: Text(
+                                    '${forums[index].displayName}',
+                                    style: const TextStyle(
+                                        color: kBlackBlurr, fontSize: 12),
                                   ),
                                 ),
                               ),

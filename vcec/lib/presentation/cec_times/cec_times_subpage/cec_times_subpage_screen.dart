@@ -19,14 +19,14 @@ class CecTimesSubPageScreen extends StatelessWidget {
           padding: const EdgeInsets.only(left: 10),
           child: Avatar(),
         ),
-        title: Text(
+        title: const Text(
           'CEC Gallery',
           style: TextStyle(color: Colors.white),
         ),
         backgroundColor: Colors.black87,
         centerTitle: true,
         actions: [
-          MessageIcon(),
+          const MessageIcon(),
           kwidth20,
         ],
       ),
@@ -37,9 +37,9 @@ class CecTimesSubPageScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               kheight20,
-              Text('08 May 2023', style: TextStyle(color: kBlackBlurr)),
+              const Text('08 May 2023', style: TextStyle(color: kBlackBlurr)),
               kheight5,
-              Heading(
+              const Heading(
                 text: 'Satasdfg sgfd gdtsrg b gkjhdghjhkghdf jhg gs',
               ),
               kheight15,
@@ -58,12 +58,12 @@ class CecTimesSubPageScreen extends StatelessWidget {
                     )),
               ),
               kheight20,
-              Content(
+              const Content(
                 text:
                     'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which dont look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isnt anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tendto repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetitioninjected humour, or non-characteristic words etc.',
               ),
               kheight15,
-              Content(text: 'Neque porro quisqu'),
+              const Content(text: 'Neque porro quisqu'),
               kheight15,
               IntrinsicHeight(
                 child: Row(
@@ -77,7 +77,7 @@ class CecTimesSubPageScreen extends StatelessWidget {
                     kwidth10,
                     SizedBox(
                       width: size.width - 50,
-                      child: Heading(
+                      child: const Heading(
                           text:
                               'Lorem Ipsum has been the industrys s tan dar d d ummy Neque porro quisquam est qui   '),
                     )
@@ -85,7 +85,7 @@ class CecTimesSubPageScreen extends StatelessWidget {
                 ),
               ),
               kheight15,
-              Content(
+              const Content(
                 text:
                     'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which dont look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isnt anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tendto repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetitioninjected humour, or non-characteristic words etc.',
               ),
@@ -106,7 +106,7 @@ class Heading extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(text,
-        style: TextStyle(
+        style: const TextStyle(
           fontSize: 16,
           fontWeight: FontWeight.w700,
         ));
@@ -120,7 +120,7 @@ class Content extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text,
-      style: TextStyle(
+      style: const TextStyle(
           fontSize: 12, fontWeight: FontWeight.bold, color: kBlackBlurr),
     );
   }

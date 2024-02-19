@@ -18,10 +18,10 @@ class StoryUserScreen extends StatefulWidget {
   int userPageIndex;
 
   StoryUserScreen({
-    Key? key,
+    super.key,
     required this.stories,
     required this.userPageIndex,
-  }) : super(key: key);
+  });
 
   @override
   _StoryScreenState createState() => _StoryScreenState();
@@ -94,7 +94,7 @@ class _StoryScreenState extends State<StoryUserScreen>
 
       _pageController.animateToPage(
         widget.userPageIndex,
-        duration: Duration(milliseconds: 250),
+        duration:const Duration(milliseconds: 250),
         curve: Curves.easeIn,
       );
     });
@@ -123,7 +123,7 @@ class _StoryScreenState extends State<StoryUserScreen>
             builder: (context, value, child) {
               return PageView.builder(
                   controller: _pageController,
-                  physics: ClampingScrollPhysics(),
+                  physics:const ClampingScrollPhysics(),
                   itemCount: users.length,
                   onPageChanged: _handlePage,
                   itemBuilder: ((context, index) {
@@ -147,7 +147,7 @@ class _StoryScreenState extends State<StoryUserScreen>
                             children: <Widget>[
                               PageView.builder(
                                 controller: _childPageController,
-                                physics: NeverScrollableScrollPhysics(),
+                                physics:const NeverScrollableScrollPhysics(),
                                 itemCount: user.stories.length,
                                 itemBuilder: (context, index) {
                                   final Story story = user.stories[index];
@@ -229,7 +229,7 @@ class _StoryScreenState extends State<StoryUserScreen>
           _loadStory(story: widget.stories[_currentIndex]);
         } else {
           _pageController.animateToPage(widget.userPageIndex - 1,
-              duration: Duration(milliseconds: 250), curve: Curves.easeIn);
+              duration:const Duration(milliseconds: 250), curve: Curves.easeIn);
         }
       });
     } else if (dx > 2 * screenWidth / 3) {
@@ -242,7 +242,7 @@ class _StoryScreenState extends State<StoryUserScreen>
           // _loadStory(story: widget.stories[_currentIndex]);
 
           _pageController.animateToPage(widget.userPageIndex + 1,
-              duration: Duration(milliseconds: 250), curve: Curves.easeIn);
+              duration:const Duration(milliseconds: 250), curve: Curves.easeIn);
 
           if (widget.userPageIndex + 1 == users.length) {
             if (_currentIndex + 1 == widget.stories.length) {
@@ -289,7 +289,7 @@ class _StoryScreenState extends State<StoryUserScreen>
           break;
       }
     } catch (e) {
-      print(e);
+    //  print(e);
     }
     if (animateToPage) {
       _childPageController.animateToPage(

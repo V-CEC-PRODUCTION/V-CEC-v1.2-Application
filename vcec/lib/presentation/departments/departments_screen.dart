@@ -29,7 +29,7 @@ class DepartmentsScreen extends StatelessWidget {
                               value: value.isNotEmpty,
                               query: value.searchText,
                             )
-                          : DepartmentsIdleScreen(),
+                          : const DepartmentsIdleScreen(),
                     );
                   }),
             ],

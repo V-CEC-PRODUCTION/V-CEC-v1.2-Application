@@ -4,7 +4,7 @@ import 'package:vcec/core/constants.dart';
 import 'package:vcec/presentation/auth_screens/otp_verification/otp_verification_screen.dart';
 
 class AuthTopTitleWithBackWidget extends StatelessWidget {
-  AuthTopTitleWithBackWidget({
+  const AuthTopTitleWithBackWidget({
     super.key,
     required this.title,
     required this.fontSize,
@@ -29,7 +29,7 @@ class AuthTopTitleWithBackWidget extends StatelessWidget {
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
-                icon: Icon(Icons.arrow_back_ios_outlined)),
+                icon: const Icon(Icons.arrow_back_ios_outlined)),
           ),
           kheight20,
           Row(

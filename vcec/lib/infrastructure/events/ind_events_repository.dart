@@ -28,7 +28,7 @@ class EventsRepository extends IndEventsService {
         return const Left(MainFailure.serverFailure());
       }
     } catch (e) {
-      print(e);
+      
       if (e is DioException && e.response?.statusCode == 401) {
         return const Left(AuthFailure());
       } else if (e is DioException && e.response?.statusCode == 500 ||

@@ -20,7 +20,7 @@ class CecTimesListWidget extends StatelessWidget {
           padding: const EdgeInsets.only(left: 15.0, top: 13),
           child: Text(
             title,
-            style: TextStyle(
+            style: const TextStyle(
                 fontSize: 17,
                 fontWeight: FontWeight.w700,
                 color: Colors.black87),

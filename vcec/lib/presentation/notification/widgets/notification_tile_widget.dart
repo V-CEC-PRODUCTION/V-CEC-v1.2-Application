@@ -14,7 +14,7 @@ class NotificationTileWidget extends StatelessWidget {
         margin: EdgeInsets.only(bottom: 10.w),
         constraints: BoxConstraints(minHeight: 55.w),
         decoration: BoxDecoration(
-          color: Color.fromARGB(47, 159, 197, 232),
+          color: const Color.fromARGB(47, 159, 197, 232),
           borderRadius: BorderRadius.circular(20),
         ),
         child: Row(
@@ -23,12 +23,12 @@ class NotificationTileWidget extends StatelessWidget {
             SizedBox(
                 height: 50.w,
                 width: 45.w,
-                child: Center(child: BubbleNotificationWidget())),
+                child: const Center(child: BubbleNotificationWidget())),
             SizedBox(
               width: 210.w,
               child: Padding(
                 padding: EdgeInsets.symmetric(vertical: 5.w),
-                child: Column(
+                child: const Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     NotificationTitle(title: 'Recent notifications '),
@@ -38,7 +38,7 @@ class NotificationTileWidget extends StatelessWidget {
               ),
             ),
             Expanded(child: Container()),
-            NotificationSubtitleWidget(title: 'Just now'),
+            const NotificationSubtitleWidget(title: 'Just now'),
             kwidth10
           ],
         ));

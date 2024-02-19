@@ -156,7 +156,7 @@ class IndEventsPage extends StatelessWidget {
                                   left: size1 * 0.10, right: size1 * 0.09),
                               child: Text(
                                 state.indEvents!.eventResult!.content!,
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontWeight: FontWeight.w400,
                                   fontSize: 15.3,
                                 ),
@@ -245,8 +245,7 @@ class IndEventsPage extends StatelessWidget {
                                                     context)
                                                 .postRegister(id: id);
                                           } else {
-                                            print(state.indEvents!.eventResult!
-                                                .registerButtonLink!);
+                                         
                                             launchURL(
                                                 state.indEvents!.eventResult!
                                                     .registerButtonLink!
@@ -269,7 +268,7 @@ class IndEventsPage extends StatelessWidget {
                                         state.indEvents!.alreadyRegistered!
                                             ? 'Registered'
                                             : 'Register',
-                                        style: TextStyle(
+                                        style:const TextStyle(
                                             color: Colors.white, fontSize: 17),
                                       ),
                                     )
@@ -524,7 +523,7 @@ class IndEventsPage extends StatelessWidget {
                                                               : state.indEvents!
                                                                   .totalLikes!
                                                                   .toString(),
-                                                          style: TextStyle(
+                                                          style:const TextStyle(
                                                               fontSize: 9,
                                                               fontWeight:
                                                                   FontWeight
@@ -539,7 +538,7 @@ class IndEventsPage extends StatelessWidget {
                                                               : state.indEvents!
                                                                   .totalLikes!
                                                                   .toString(),
-                                                          style: TextStyle(
+                                                          style:const TextStyle(
                                                               fontSize: 9,
                                                               fontWeight:
                                                                   FontWeight

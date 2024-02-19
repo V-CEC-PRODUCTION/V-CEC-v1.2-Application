@@ -12,6 +12,8 @@ buildGalleryItem(
     required BuildContext context}) {
   return Stone(
     id: id,
+    width: _width(id),
+    height: 2,
     child: GestureDetector(
       onTap: () {
         Navigator.of(context).push(
@@ -44,19 +46,17 @@ buildGalleryItem(
                 ? Center(
                     child: CircleAvatar(
                       backgroundColor: Colors.black.withOpacity(0.5),
-                      child: Icon(
+                      child: const Icon(
                         Icons.play_arrow,
                         color: Colors.white,
                       ),
                     ),
                   )
-                : SizedBox()
+                : const SizedBox()
           ],
         ),
       ),
     ),
-    width: _width(id),
-    height: 2,
   );
 }
 

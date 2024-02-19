@@ -13,7 +13,7 @@ class FindAmazingEventsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: eventsappbarcolor,
         borderRadius: BorderRadius.only(
             bottomLeft: Radius.circular(8), bottomRight: Radius.circular(8)),
@@ -21,8 +21,8 @@ class FindAmazingEventsWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 14),
+          const Padding(
+            padding: EdgeInsets.only(left: 14),
             child: Text(
               'Find Amazing Events',
               style: TextStyle(
@@ -48,12 +48,12 @@ class FindAmazingEventsWidget extends StatelessWidget {
                     onSubmitted: onSubmit,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 5,
                 ),
                 GestureDetector(
                   onTap: () {
-                    print('hello world');
+                    
                   },
                   child: Container(
                     height: 40,
@@ -61,8 +61,8 @@ class FindAmazingEventsWidget extends StatelessWidget {
                       color: kwhite,
                       borderRadius: BorderRadius.circular(6),
                     ),
-                    child: Padding(
-                      padding: const EdgeInsets.only(
+                    child: const Padding(
+                      padding: EdgeInsets.only(
                           left: 6, right: 6, top: 2.5, bottom: 1.5),
                       child: Icon(
                         Icons.sort,
@@ -75,7 +75,7 @@ class FindAmazingEventsWidget extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox()
+          const SizedBox()
         ],
       ),
     );
@@ -87,10 +87,10 @@ class SearchTextFieldWidget extends StatelessWidget {
   final void Function(String)? onSubmitted;
 
   const SearchTextFieldWidget({
-    Key? key,
+    super.key,
     required this.controller,
     this.onSubmitted,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -103,7 +103,7 @@ class SearchTextFieldWidget extends StatelessWidget {
         //   color: Colors.grey[400]!,
         // ),
       ),
-      constraints: BoxConstraints(
+      constraints: const BoxConstraints(
         maxHeight: 40,
       ),
       child: TextField(
@@ -114,11 +114,11 @@ class SearchTextFieldWidget extends StatelessWidget {
             onPressed: () {
               onSubmitted!(controller.text);
             },
-            icon: Icon(Icons.search, size: 20),
+            icon: const Icon(Icons.search, size: 20),
           ),
           hintText: 'Search',
           border: InputBorder.none,
-          contentPadding: EdgeInsets.symmetric(
+          contentPadding: const EdgeInsets.symmetric(
             horizontal: 10,
             vertical: 10,
           ),

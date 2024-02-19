@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:vcec/presentation/mainmenu/widgets/story_video_text_editor_widget.dart';
 import 'package:video_player/video_player.dart';
@@ -31,6 +30,7 @@ class _StoryVideoUploadWidgetState extends State<StoryVideoUploadWidget> {
     super.initState();
   }
 
+  @override
   dispose() {
     _controller.dispose();
     super.dispose();
@@ -41,7 +41,7 @@ class _StoryVideoUploadWidgetState extends State<StoryVideoUploadWidget> {
     return Scaffold(
         floatingActionButton: FloatingActionButton.extended(
           onPressed: () {},
-          label: Icon(Icons.send),
+          label: const Icon(Icons.send),
           backgroundColor: Colors.white,
         ),
         body: SafeArea(
@@ -50,7 +50,7 @@ class _StoryVideoUploadWidgetState extends State<StoryVideoUploadWidget> {
               future: _initializeVideoPlayerFuture,
               builder: ((context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.done) {
-                  return Container(
+                  return SizedBox(
                     height: _controller.value.size.height,
                     width: _controller.value.size.width,
                     child: VideoPlayer(_controller),
@@ -62,7 +62,7 @@ class _StoryVideoUploadWidgetState extends State<StoryVideoUploadWidget> {
                 }
               }),
             ),
-            StoryVideoTextEditor(),
+            const StoryVideoTextEditor(),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: IconButton(

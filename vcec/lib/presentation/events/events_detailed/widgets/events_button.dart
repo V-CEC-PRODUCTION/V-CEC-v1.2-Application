@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class EventsButtonWidget extends StatelessWidget {
-  const EventsButtonWidget({
+  const EventsButtonWidget({super.key, 
     required this.onTap,
     required this.child,
   });

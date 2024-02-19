@@ -46,10 +46,10 @@ class DepartmentSearchRepo implements DepartmentSearchService {
         break;
     }
     try {
-      print(dept);
+     
       final respose = await Dio(BaseOptions(contentType: 'application/json')).get(
           '${baseUrl}staff/info/directory/search/$dept?search=$query&page=$pageNum&count=$pageCount');
-      print('hiiiiiii');
+  
       if (respose.statusCode == 200 || respose.statusCode == 201) {
         final dept = DepartmentModel.fromJson(respose.toString());
         return Right(dept);
@@ -58,7 +58,7 @@ class DepartmentSearchRepo implements DepartmentSearchService {
         return const Left(MainFailure.serverFailure());
       }
     } catch (e) {
-      print(e);
+   
       log(e.toString());
       return const Left(MainFailure.clientFailure());
     }

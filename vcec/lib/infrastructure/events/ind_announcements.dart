@@ -14,7 +14,7 @@ class AnnouncementsRepository extends IndAnnouncementsService {
       {required int id}) async {
     try {
       final accessToken = AuthTokenManager.instance.accessToken;
-      print(accessToken);
+     
       final Map<String, dynamic> headers = {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $accessToken',

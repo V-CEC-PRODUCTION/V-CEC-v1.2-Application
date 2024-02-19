@@ -17,13 +17,13 @@ class SignUpButtonWidget extends StatelessWidget {
       children: [
         Text(
           title,
-          style: TextStyle(color: Colors.grey, fontWeight: FontWeight.bold),
+          style: const TextStyle(color: Colors.grey, fontWeight: FontWeight.bold),
         ),
         TextButton(
           onPressed: onTap,
           child: Text(
             buttonTitle,
-            style: TextStyle(color: Colors.black),
+            style: const TextStyle(color: Colors.black),
           ),
         )
       ],

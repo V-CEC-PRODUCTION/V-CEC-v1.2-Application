@@ -55,10 +55,10 @@ class _NoticesTabbarState extends State<NoticesTabbar>
                   ),
                 ),
               ),
-              Expanded(
+              const Expanded(
                   child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
-                children: const [
+                children: [
                   Divider(
                     thickness: .8,
                   ),

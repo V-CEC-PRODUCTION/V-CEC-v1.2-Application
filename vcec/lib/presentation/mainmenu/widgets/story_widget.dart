@@ -26,7 +26,7 @@ class _StoryPartState extends State<StoryWidget> {
                 builder: ((context) {
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Container(
+                    child: SizedBox(
                       height: 150,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -37,19 +37,19 @@ class _StoryPartState extends State<StoryWidget> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                            StoryImageUploadWidget()));
+                                            const StoryImageUploadWidget()));
                               },
                               icon: Container(
                                 width: 60,
                                 height: 60,
-                                child: Icon(
-                                  Icons.image_sharp,
-                                  color: Colors.black,
-                                ),
                                 decoration: BoxDecoration(
                                   border:
                                       Border.all(color: Colors.pink, width: 2),
                                   shape: BoxShape.circle,
+                                ),
+                                child: const Icon(
+                                  Icons.image_sharp,
+                                  color: Colors.black,
                                 ),
                               )),
                           IconButton(
@@ -75,14 +75,14 @@ class _StoryPartState extends State<StoryWidget> {
                               icon: Container(
                                 width: 60,
                                 height: 60,
-                                child: Icon(
-                                  Icons.slow_motion_video_outlined,
-                                  color: Colors.black,
-                                ),
                                 decoration: BoxDecoration(
                                   border:
                                       Border.all(color: Colors.pink, width: 2),
                                   shape: BoxShape.circle,
+                                ),
+                                child: const Icon(
+                                  Icons.slow_motion_video_outlined,
+                                  color: Colors.black,
                                 ),
                               ))
                         ],
@@ -96,11 +96,11 @@ class _StoryPartState extends State<StoryWidget> {
               Container(
                 width: 60,
                 height: 60,
-                child: Center(child: Text('Image')),
                 decoration: BoxDecoration(
                   border: Border.all(color: Colors.pink, width: 2),
                   shape: BoxShape.circle,
                 ),
+                child: const Center(child: Text('Image')),
               ),
               Positioned(
                 top: 35,
@@ -108,11 +108,11 @@ class _StoryPartState extends State<StoryWidget> {
                 left: 40,
                 right: 3,
                 child: Container(
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       color: Colors.pink,
                       shape: BoxShape.circle,
                     ),
-                    child: Center(
+                    child: const Center(
                       child: Icon(
                         size: 15,
                         Icons.add,
@@ -124,7 +124,7 @@ class _StoryPartState extends State<StoryWidget> {
           ),
         ),
         kwidth10,
-        StoryUserWidget()
+        const StoryUserWidget()
       ],
     );
   }

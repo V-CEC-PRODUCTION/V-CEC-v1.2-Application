@@ -14,7 +14,7 @@ class NoticeTileWidget extends StatelessWidget {
   final bool expanpsionNeeded;
   final NoticeType type;
   final int? index;
-  ValueNotifier<bool> _isexpanded = ValueNotifier(false);
+  final ValueNotifier<bool> _isexpanded = ValueNotifier(false);
 
   @override
   Widget build(BuildContext context) {
@@ -39,9 +39,9 @@ class NoticeTileWidget extends StatelessWidget {
           Expanded(
             child: ValueListenableBuilder(
                 valueListenable: _isexpanded,
-                builder: (BuildContext ctx, bool _isexpanded, Widget? _) {
+                builder: (BuildContext ctx, bool isexpanded, Widget? _) {
                   return Text('Notification-${index! +1}',
-                      maxLines: _isexpanded != true ? 2 : 20,
+                      maxLines: isexpanded != true ? 2 : 20,
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(
                         color: Color.fromARGB(255, 0, 0, 0),
@@ -60,10 +60,10 @@ class NoticeTileWidget extends StatelessWidget {
       ),
       subtitle: ValueListenableBuilder(
         valueListenable: _isexpanded,
-        builder: (BuildContext ctx, bool _isexpanded, Widget? _) {
+        builder: (BuildContext ctx, bool isexpanded, Widget? _) {
           return Text(
             notice.title!,
-            maxLines: _isexpanded != true ? 2 : 30,
+            maxLines: isexpanded != true ? 2 : 30,
             overflow: TextOverflow.ellipsis,
             style: const TextStyle(
               fontSize: 11,
@@ -104,17 +104,17 @@ class InnerTileWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final noticeUrl = notice.downloadUrl![index];
-    final Uri _url = Uri.parse(noticeUrl);
+    final Uri url = Uri.parse(noticeUrl);
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(border: Border.all(color: Colors.black12)),
       child: Row(
         children: [
-          SizedBox(
+          const SizedBox(
             height: 60,
             width: 25,
           ),
-          CircleAvatar(
+          const CircleAvatar(
             radius: 4,
             backgroundColor: Color.fromARGB(255, 123, 248, 109),
           ),
@@ -124,7 +124,7 @@ class InnerTileWidget extends StatelessWidget {
             child: Text(notice.downloadName![index],
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 13,
                   fontWeight: FontWeight.w500,
                 )),
@@ -132,9 +132,9 @@ class InnerTileWidget extends StatelessWidget {
           Expanded(child: Container()),
           IconButton(
               onPressed: () {
-                _launchUrl(_url);
+                _launchUrl(url);
               },
-              icon: Icon(
+              icon: const Icon(
                 Icons.open_in_new,
                 size: 20,
               )),
@@ -142,22 +142,22 @@ class InnerTileWidget extends StatelessWidget {
           type == NoticeType.cec
               ? GestureDetector(
                   onTap: () {},
-                  child: Icon(
+                  child: const Icon(
                     Icons.file_download_outlined,
                     size: 20,
                   ),
                 )
-              : SizedBox(),
+              : const SizedBox(),
           kwidth10,
           type == NoticeType.cec
               ? GestureDetector(
                   onTap: () {},
-                  child: Icon(
+                  child: const Icon(
                     Icons.open_in_new,
                     size: 20,
                   ),
                 )
-              : SizedBox(),
+              : const SizedBox(),
           kwidth10,
         ],
       ),

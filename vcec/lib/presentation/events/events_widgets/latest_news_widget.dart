@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:vcec/core/colors.dart';
 import 'package:vcec/presentation/common_widgets/rec_event_tile.dart';
 import 'package:vcec/presentation/common_widgets/sub_heading.dart';
@@ -18,10 +17,10 @@ class LatestNewsWidget extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              SubHeading(text: 'Latest News'),
+              const SubHeading(text: 'Latest News'),
               TextButton(
                   onPressed: () {},
-                  child: Text('View All',
+                  child: const Text('View All',
                       style: TextStyle(
                         color: kBlackBlurr,
                       )))

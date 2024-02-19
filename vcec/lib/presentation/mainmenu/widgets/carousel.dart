@@ -44,8 +44,8 @@ class CarouselMainManu extends StatelessWidget {
 
         return state.carouselImages == null
             ? Shimmer.fromColors(
-                baseColor: Color.fromARGB(255, 0, 0, 0),
-                highlightColor: Color.fromARGB(255, 207, 207, 207),
+                baseColor: const Color.fromARGB(255, 0, 0, 0),
+                highlightColor: const Color.fromARGB(255, 207, 207, 207),
                 child: Container(
                   margin: const EdgeInsets.symmetric(horizontal: 10),
                   height: (size.width - 20) * 9 / 16,

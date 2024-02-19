@@ -19,13 +19,13 @@ class EventsRepository extends EventsService {
       if (response.statusCode == 200 || response.statusCode == 201) {
         final events0 = EventModel.fromJson(response.toString());
         final events = events0.events;
-        print(events);
+      
         return Right(events!);
       } else {
         return const Left(MainFailure.serverFailure());
       }
     } catch (e) {
-      print(e);
+     
       if (e is DioException && e.response?.statusCode == 401) {
         return const Left(AuthFailure());
       } else if (e is DioException && e.response?.statusCode == 500 ||

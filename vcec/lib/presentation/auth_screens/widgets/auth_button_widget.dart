@@ -30,7 +30,7 @@ class AuthButtonWidget extends StatelessWidget {
             )),
         onPressed: onclick,
         child: Padding(
-          padding: EdgeInsets.symmetric(vertical: 9),
+          padding: const EdgeInsets.symmetric(vertical: 9),
           child: Text(
             title,
             style: TextStyle(

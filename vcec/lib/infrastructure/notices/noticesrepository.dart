@@ -19,13 +19,13 @@ class NoticesRepo extends NoticesService {
       if (response.statusCode == 200 || response.statusCode == 201) {
         final notices0 = NoticeModel.fromJson(response.toString());
         final notices = notices0.noticesResult;
-        print(notices);
+       
         return Right(notices!);
       } else {
         return const Left(MainFailure.serverFailure());
       }
     } catch (e) {
-      print(e);
+     
       if (e is DioException && e.response?.statusCode == 401) {
         return const Left(AuthFailure());
       } else if (e is DioException && e.response?.statusCode == 500 ||

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class TimeDateVenueTextWidget extends StatelessWidget {
-  const TimeDateVenueTextWidget({
+  const TimeDateVenueTextWidget({super.key, 
     required this.title,
   });
   final String title;

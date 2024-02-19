@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:text_editor/text_editor.dart';
 
 class StoryVideoTextEditor extends StatefulWidget {
-  StoryVideoTextEditor({Key? key}) : super(key: key);
+  const StoryVideoTextEditor({super.key});
 
   @override
   _StoryVideoTextEditorState createState() => _StoryVideoTextEditorState();
@@ -29,7 +29,7 @@ class _StoryVideoTextEditorState extends State<StoryVideoTextEditor> {
     'TropicalAsianDemoRegular',
     'VeganStyle',
   ];
-  TextStyle _textStyle = TextStyle(
+  TextStyle _textStyle = const TextStyle(
     fontSize: 50,
     color: Colors.white,
     fontFamily: 'Billabong',
@@ -41,7 +41,7 @@ class _StoryVideoTextEditorState extends State<StoryVideoTextEditor> {
     showGeneralDialog(
       context: context,
       barrierDismissible: false,
-      transitionDuration: Duration(
+      transitionDuration: const Duration(
         milliseconds: 400,
       ), // how long it takes to popup dialog after button click
       pageBuilder: (_, __, ___) {
@@ -52,22 +52,20 @@ class _StoryVideoTextEditorState extends State<StoryVideoTextEditor> {
             backgroundColor: Colors.transparent,
             body: SafeArea(
               // top: false,
-              child: Container(
-                child: TextEditor(
-                  fonts: fonts,
-                  text: text,
-                  textStyle: textStyle,
-                  textAlingment: textAlign,
-                  minFontSize: 10,
-                  onEditCompleted: (style, align, text) {
-                    setState(() {
-                      _text = text;
-                      _textStyle = style;
-                      _textAlign = align;
-                    });
-                    Navigator.pop(context);
-                  },
-                ),
+              child: TextEditor(
+                fonts: fonts,
+                text: text,
+                textStyle: textStyle,
+                textAlingment: textAlign,
+                minFontSize: 10,
+                onEditCompleted: (style, align, text) {
+                  setState(() {
+                    _text = text;
+                    _textStyle = style;
+                    _textAlign = align;
+                  });
+                  Navigator.pop(context);
+                },
               ),
             ),
           ),

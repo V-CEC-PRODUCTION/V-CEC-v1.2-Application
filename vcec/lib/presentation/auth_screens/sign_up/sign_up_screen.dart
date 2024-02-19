@@ -81,7 +81,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           },
           (r) {
             Navigator.of(context).pushReplacement(MaterialPageRoute(
-              builder: (context) => AccountDetailsScreen(
+              builder: (context) => const AccountDetailsScreen(
                 password: '',
               ),
             ));

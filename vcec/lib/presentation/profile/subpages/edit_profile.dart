@@ -22,7 +22,7 @@ class EditProfileScreen extends StatefulWidget {
 class _EditProfileScreenState extends State<EditProfileScreen> {
   int c = 0;
   File? file;
-  TextEditingController _nameController = TextEditingController(text: "vcec");
+  final TextEditingController _nameController = TextEditingController(text: "vcec");
 
   final TextEditingController _emailController =
       TextEditingController(text: "vev@gmail.com");
@@ -71,7 +71,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     onPressed: () async {
                       profilepicNotifier.value =
                           await controller.croppedImage();
-                      print(file);
                       Navigator.pop(context);
                     },
                     icon: const Icon(Icons.done))
@@ -98,11 +97,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     super.initState();
     final profileState = BlocProvider.of<ProfileCubit>(context).state;
     profileState.failureOrSuccess.fold(() {
-      print('4');
       BlocProvider.of<ProfileCubit>(context).getProfileDetails();
     }, (a) {
       a.fold((l) {
-        print('5');
         BlocProvider.of<ProfileCubit>(context).getProfileDetails();
       }, (r) {});
     });
@@ -145,7 +142,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       },
       builder: (context, state) {
         if (state.isLoading) {
-          print('2');
           return const Center(
             child: loadingWidget,
           );
@@ -180,7 +176,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           },
           builder: (context, state) {
             if (state.isLoading) {
-              print('1');
               return const Center(
                 child: loadingWidget,
               );

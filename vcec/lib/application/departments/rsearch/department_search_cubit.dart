@@ -89,7 +89,7 @@ class DepartmentSearchCubit extends Cubit<DepartmentSearchState> {
           isLoading: false,
           hasNext: r.hasNext!,
         ));
-        print(r.hasNext);
+       // print(r.hasNext);
         pageNum1++;
       },
     );

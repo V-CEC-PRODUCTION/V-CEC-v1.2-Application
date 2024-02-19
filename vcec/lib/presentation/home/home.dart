@@ -4,12 +4,11 @@ import 'package:vcec/core/colors.dart';
 import 'package:vcec/infrastructure/notification/notification_handle.dart';
 import 'package:vcec/presentation/departments/departments_screen.dart';
 import 'package:vcec/presentation/events/events_screen.dart';
-import 'package:vcec/presentation/forums/forum_screen.dart';
 import 'package:vcec/presentation/mainmenu/mainmenu_screen.dart';
 import 'package:vcec/presentation/notices/notices_screen.dart';
 
 class HomeScreen extends StatefulWidget {
-  HomeScreen({super.key});
+  const HomeScreen({super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -26,7 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void _handleMessage(RemoteMessage message) async {
-    await Future.delayed(Duration(milliseconds: 500));
+    await Future.delayed(const Duration(milliseconds: 500));
     if (message.data["type"] == null) {
       return;
     }
@@ -43,16 +42,16 @@ class _HomeScreenState extends State<HomeScreen> {
     return await showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text('Exit App?'),
-        content: Text('Are you sure you want to exit the app?'),
+        title: const Text('Exit App?'),
+        content: const Text('Are you sure you want to exit the app?'),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(false),
-            child: Text('No'),
+            child:const Text('No'),
           ),
           TextButton(
             onPressed: () => Navigator.of(context).pop(true),
-            child: Text('Yes'),
+            child:const Text('Yes'),
           ),
         ],
       ),

@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:vcec/presentation/auth_screens/otp_verification/otp_verification_screen.dart';
 
 class AuthTopTitleWidget extends StatelessWidget {
-  AuthTopTitleWidget({
+  const AuthTopTitleWidget({
     super.key,
     required this.title,
   });
@@ -12,7 +12,7 @@ class AuthTopTitleWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 280.h,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
           borderRadius: BorderRadius.only(bottomLeft: Radius.circular(100)),
           color: auththeme),
       child: Center(

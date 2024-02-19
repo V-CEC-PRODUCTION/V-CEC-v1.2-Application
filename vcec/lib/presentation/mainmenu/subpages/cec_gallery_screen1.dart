@@ -11,7 +11,7 @@ import 'package:vcec/presentation/mainmenu/widgets/cec_gallery_img.dart';
 import 'package:vcec/presentation/mainmenu/widgets/cec_gallery_vid.dart';
 
 class CecGalleryScreen extends StatelessWidget {
-  const CecGalleryScreen({Key? key}) : super(key: key);
+  const CecGalleryScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +64,7 @@ class CecGalleryScreen extends StatelessWidget {
                   toolbarHeight: 75,
                   leadingWidth: 66,
                   leading: Padding(
-                    padding: EdgeInsets.only(left: 10),
+                    padding: const EdgeInsets.only(left: 10),
                     child: Avatar(),
                   ),
                   title: const Text(
@@ -74,12 +74,12 @@ class CecGalleryScreen extends StatelessWidget {
                   backgroundColor: Colors.black87,
                   centerTitle: true,
                   actions: [
-                    MessageIcon(),
+                    const MessageIcon(),
                     kwidth20,
                   ],
                 ),
-                body: Column(
-                  children: const [
+                body: const Column(
+                  children: [
                     Padding(
                       padding: EdgeInsets.only(right: 150),
                       child: SizedBox(

@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:vcec/presentation/mainmenu/widgets/story_data.dart';
 import 'package:vcec/presentation/mainmenu/subpages/story_user_screen.dart';
@@ -9,8 +9,8 @@ List<bool> isStoryViewed = List.generate(users.length, (index) => false);
 
 class StoryUserWidget extends StatefulWidget {
   const StoryUserWidget({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   State<StoryUserWidget> createState() => _StoryWidgetState();
@@ -25,7 +25,7 @@ class _StoryWidgetState extends State<StoryUserWidget> {
       child: SizedBox(
         height: 60,
         child: ListView.builder(
-          physics: BouncingScrollPhysics(),
+          physics: const BouncingScrollPhysics(),
           scrollDirection: Axis.horizontal,
           itemCount: users.length,
           itemBuilder: (context, index) {

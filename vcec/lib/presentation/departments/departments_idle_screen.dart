@@ -5,13 +5,13 @@ import 'package:vcec/presentation/common_widgets/sub_heading.dart';
 import 'package:vcec/presentation/departments/a_department_screen.dart';
 
 class DepartmentsIdleScreen extends StatelessWidget {
-  DepartmentsIdleScreen({super.key});
+  const DepartmentsIdleScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SubHeading(text: 'DEPARTMENTS'),
+        const SubHeading(text: 'DEPARTMENTS'),
         kheight20,
         Expanded(child: _DeptGrid(itemCount: 5)),
       ],
@@ -60,14 +60,14 @@ class _DeptGrid extends StatelessWidget {
       'dept': Department.lib
     },
   ];
-  _DeptGrid({Key? key, required this.itemCount}) {
+  _DeptGrid({required this.itemCount}) {
     noRows = (itemCount / 2).ceil();
   }
 
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
-        physics: NeverScrollableScrollPhysics(),
+        physics: const NeverScrollableScrollPhysics(),
         itemBuilder: (context, i) => Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -83,14 +83,13 @@ class _DeptGrid extends StatelessWidget {
                   _DeptTile(dept: deps[i * 2 + 2]),
               ],
             ),
-        separatorBuilder: (context, index) => SizedBox(height: 30),
+        separatorBuilder: (context, index) => const SizedBox(height: 30),
         itemCount: itemCount);
   }
 }
 
 class _DeptTile extends StatelessWidget {
   const _DeptTile({
-    super.key,
     required this.dept,
   });
   final Map dept;
@@ -109,7 +108,7 @@ class _DeptTile extends StatelessWidget {
             borderRadius: BorderRadius.circular(10),
             boxShadow: [
               BoxShadow(
-                color: Color.fromARGB(255, 0, 0, 0).withOpacity(0.15),
+                color: const Color.fromARGB(255, 0, 0, 0).withOpacity(0.15),
                 blurRadius: 9,
                 spreadRadius: 8,
                 offset: const Offset(0, 0),
@@ -119,7 +118,7 @@ class _DeptTile extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(dept['short_name'],
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w700,
                 )),

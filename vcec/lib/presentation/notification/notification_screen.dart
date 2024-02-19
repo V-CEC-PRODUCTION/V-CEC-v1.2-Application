@@ -46,10 +46,10 @@ class NotificationScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     kwidth20,
-                    NotificationTitle(title: 'Recent notifications'),
+                    const NotificationTitle(title: 'Recent notifications'),
                     Padding(
                       padding: EdgeInsets.only(top: 3.w, bottom: 18.w),
-                      child: BubbleNotificationWidget(),
+                      child: const BubbleNotificationWidget(),
                     ),
                     Expanded(child: Container()),
                     GestureDetector(
@@ -57,21 +57,21 @@ class NotificationScreen extends StatelessWidget {
                       child: CircleAvatar(
                           radius: 10.w,
                           backgroundColor: auththeme,
-                          child: ThickerCloseIcon()),
+                          child: const ThickerCloseIcon()),
                     ),
                     kwidth20
                   ],
                 ),
                 kheight15,
-                NotificationsGroupWidget(
+                const NotificationsGroupWidget(
                   length: 5,
                   title: 'Today',
                 ),
-                NotificationsGroupWidget(
+                const NotificationsGroupWidget(
                   length: 5,
                   title: 'Yesterday',
                 ),
-                NotificationsGroupWidget(
+                const NotificationsGroupWidget(
                   length: 5,
                   title: 'This week',
                 ),
@@ -85,6 +85,8 @@ class NotificationScreen extends StatelessWidget {
 }
 
 class ThickerCloseIcon extends StatelessWidget {
+  const ThickerCloseIcon({super.key});
+
   @override
   Widget build(BuildContext context) {
     return CustomPaint(

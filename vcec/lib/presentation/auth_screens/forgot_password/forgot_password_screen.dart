@@ -11,7 +11,7 @@ import 'package:vcec/presentation/auth_screens/widgets/email_text_field.dart';
 import 'package:vcec/presentation/common_widgets/common_snackbar.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
-  ForgotPasswordScreen({super.key});
+  const ForgotPasswordScreen({super.key});
 
   @override
   State<ForgotPasswordScreen> createState() => _ForgotPasswordScreenState();

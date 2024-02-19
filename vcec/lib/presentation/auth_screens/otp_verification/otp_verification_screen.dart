@@ -13,9 +13,9 @@ import 'package:vcec/presentation/common_widgets/common_snackbar.dart';
 const auththeme = Color(0xFFE4DEE5);
 
 class OtpVerificationScreen extends StatefulWidget {
-  OtpVerificationScreen({
-    Key? key,
-  }) : super(key: key);
+  const OtpVerificationScreen({
+    super.key,
+  });
 
   @override
   State<OtpVerificationScreen> createState() => _OtpVerificationScreenState();
@@ -73,7 +73,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                 const Text("Didn't recieve an OTP?"),
                 TextButton(
                     onPressed: () async {},
-                    child: Text(
+                    child: const Text(
                       'Resend OTP',
                       style: TextStyle(
                           fontWeight: FontWeight.bold, color: Colors.black),

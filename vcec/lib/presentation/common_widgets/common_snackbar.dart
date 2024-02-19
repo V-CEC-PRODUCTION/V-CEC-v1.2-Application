@@ -8,7 +8,7 @@ displaySnackBar({required BuildContext context, required String text}) {
         text,
         style: TextStyle(fontSize: 20.sp),
       ),
-      duration: Duration(seconds: 2),
+      duration: const Duration(seconds: 2),
     ),
   );
 }

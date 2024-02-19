@@ -41,8 +41,7 @@ class MainMenuScreen extends StatelessWidget {
                       );
                     },
                     (success) {
-                      print('timetable');
-                      print(success.result![0]);
+                      
                       return MainmenuAppbar(
                         currentPeriod: success.result![0].currentcode ?? '...',
                         duration: success.result![0].currenttime ?? '..',

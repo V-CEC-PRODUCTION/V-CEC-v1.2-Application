@@ -30,7 +30,6 @@ class EventsCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(totalLikes);
     final size = MediaQuery.of(context).size;
     return Container(
       padding: const EdgeInsets.all(10),

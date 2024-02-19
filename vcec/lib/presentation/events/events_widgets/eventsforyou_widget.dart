@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:vcec/core/colors.dart';
 import 'package:vcec/presentation/common_widgets/rec_event_tile.dart';
 import 'package:vcec/presentation/common_widgets/sub_heading.dart';
@@ -13,8 +12,8 @@ class EventsForYouWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
-          padding: const EdgeInsets.only(left: 15.0, top: 13),
+        const Padding(
+          padding: EdgeInsets.only(left: 15.0, top: 13),
           child: SubHeading(text: 'Events For You'),
         ),
         Column(

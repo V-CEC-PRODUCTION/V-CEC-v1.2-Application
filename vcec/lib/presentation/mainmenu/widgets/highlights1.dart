@@ -29,7 +29,7 @@ class Highlights extends StatelessWidget {
                 children: [
                   Padding(
                     padding: EdgeInsets.only(left: size.width * 0.04, top: 10),
-                    child: SubHeading(text: 'Highlights'),
+                    child: const SubHeading(text: 'Highlights'),
                   ),
                   Shimmer.fromColors(
                     baseColor: const Color.fromARGB(255, 0, 0, 0),
@@ -62,11 +62,11 @@ class Highlights extends StatelessWidget {
               children: [
                 Padding(
                   padding: EdgeInsets.only(left: size.width * 0.04, top: 10),
-                  child: SubHeading(text: 'Highlights'),
+                  child: const SubHeading(text: 'Highlights'),
                 ),
                 Shimmer.fromColors(
-                  baseColor: Color.fromARGB(255, 0, 0, 0),
-                  highlightColor: Color.fromARGB(255, 207, 207, 207),
+                  baseColor: const Color.fromARGB(255, 0, 0, 0),
+                  highlightColor: const Color.fromARGB(255, 207, 207, 207),
                   child: Container(
                     margin: const EdgeInsets.symmetric(horizontal: 10),
                     height: ((size.width * 0.65) - 12) / 16 * 9,
@@ -82,12 +82,12 @@ class Highlights extends StatelessWidget {
           : Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                state.highlights!.result!.length != 0
+                state.highlights!.result!.isNotEmpty
                     ? Padding(
                         padding:  EdgeInsets.only(left: size.width*0.04, top: 10),
-                        child: SubHeading(text: 'Highlights'),
+                        child: const SubHeading(text: 'Highlights'),
                       )
-                    : SizedBox(),
+                    : const SizedBox(),
                 kheight15,
                 SingleChildScrollView(
                   scrollDirection: Axis.horizontal,

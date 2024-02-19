@@ -15,10 +15,10 @@ class PreviousEventsWidget extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            SubHeading(text: 'Previous Events'),
+           const SubHeading(text: 'Previous Events'),
             TextButton(
                 onPressed: () {},
-                child: Text('View All',
+                child:const Text('View All',
                     style: TextStyle(
                       color: kBlackBlurr,
                     )))

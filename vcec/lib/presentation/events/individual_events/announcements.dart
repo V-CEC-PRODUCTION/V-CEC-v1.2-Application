@@ -127,7 +127,7 @@ class IndAnnouncementsPage extends StatelessWidget {
                               child: Text(
                                 state.indAnnouncements!.announcementResult!
                                     .content!,
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontWeight: FontWeight.w400,
                                   fontSize: 15.3,
                                 ),
@@ -467,7 +467,7 @@ class IndAnnouncementsPage extends StatelessWidget {
                                                                   .indAnnouncements!
                                                                   .totalLikes!
                                                                   .toString(),
-                                                          style: TextStyle(
+                                                          style: const TextStyle(
                                                               fontSize: 9,
                                                               fontWeight:
                                                                   FontWeight
@@ -483,7 +483,7 @@ class IndAnnouncementsPage extends StatelessWidget {
                                                                   .indAnnouncements!
                                                                   .totalLikes!
                                                                   .toString(),
-                                                          style: TextStyle(
+                                                          style: const TextStyle(
                                                               fontSize: 9,
                                                               fontWeight:
                                                                   FontWeight

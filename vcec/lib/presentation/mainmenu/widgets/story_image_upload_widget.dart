@@ -18,10 +18,10 @@ class _StoryPageState extends State<StoryImageUploadWidget> {
       onDone: (uri) {
         // uri is the local path of final render Uint8List
         // here your code
-        print(uri);
+        
         Share.shareFiles([uri]);
       },
-      middleBottomWidget: SizedBox(),
+      middleBottomWidget:const SizedBox(),
     );
   }
 }

@@ -35,7 +35,7 @@ class TimeTableRespository implements TimeTableService {
         return const Left(MainFailure.serverFailure());
       }
     } catch (e) {
-      print(e);
+      
       return const Left(MainFailure.clientFailure());
     }
   }

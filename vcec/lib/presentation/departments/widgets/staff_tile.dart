@@ -8,9 +8,9 @@ import 'package:flutter_profile_picture/flutter_profile_picture.dart';
 import 'package:vcec/domain/departments/search/staff/staff_info.dart';
 
 class StaffTile extends StatelessWidget {
-  StaffTile({super.key, required this.staff});
+  const StaffTile({super.key, required this.staff});
   final Staff staff;
-  final color = Color.fromRGBO(80, 82, 86, 1);
+  final color = const Color.fromRGBO(80, 82, 86, 1);
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -19,15 +19,15 @@ class StaffTile extends StatelessWidget {
         alignment: Alignment.center,
         children: [
           Transform.translate(
-            offset: Offset(-7, 0),
+            offset: const Offset(-7, 0),
             child: Container(
               decoration: BoxDecoration(
-                color: Color.fromRGBO(110, 139, 118, 1),
+                color: const Color.fromRGBO(110, 139, 118, 1),
                 borderRadius: BorderRadius.circular(5),
                 boxShadow: [
                   BoxShadow(
-                    color: Color.fromARGB(255, 0, 0, 0).withOpacity(0.2),
-                    offset: Offset(3, 3),
+                    color: const Color.fromARGB(255, 0, 0, 0).withOpacity(0.2),
+                    offset: const Offset(3, 3),
                     spreadRadius: 3,
                     blurRadius: 15,
                   ),
@@ -39,7 +39,7 @@ class StaffTile extends StatelessWidget {
           Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
-              color: Color.fromARGB(255, 255, 255, 255),
+              color: const Color.fromARGB(255, 255, 255, 255),
             ),
             height: 80,
             child: Row(
@@ -60,7 +60,7 @@ class StaffTile extends StatelessWidget {
                       AutoSizeText(
                         staff.name!,
                         textAlign: TextAlign.left,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 13,
                           fontWeight: FontWeight.w500,
                         ),
@@ -69,7 +69,7 @@ class StaffTile extends StatelessWidget {
                       AutoSizeText(
                         staff.designation!,
                         textAlign: TextAlign.left,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 10,
                           fontWeight: FontWeight.w400,
                         ),
@@ -78,7 +78,7 @@ class StaffTile extends StatelessWidget {
                     ],
                   ),
                 ),
-                Spacer(),
+                const Spacer(),
                 Container(
                   height: 30,
                   width: 30,
@@ -108,7 +108,7 @@ class StaffTile extends StatelessWidget {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(50),
                     border: Border.all(
-                      color: Color.fromARGB(120, 0, 0, 0),
+                      color: const Color.fromARGB(120, 0, 0, 0),
                       width: 1,
                     ),
                   ),
@@ -150,8 +150,8 @@ class StaffTile extends StatelessWidget {
 
   Future<void> _sendEmail({required String email}) async {
     final emailId = email.trim();
-    final subject = 'Subject';
-    final body = 'Hello this is the body of your mail';
+    const subject = 'Subject';
+    const body = 'Hello this is the body of your mail';
     final url = 'mailto:$emailId?subject=$subject&body=$body'
         '&package=com.google.android.gm';
     try {

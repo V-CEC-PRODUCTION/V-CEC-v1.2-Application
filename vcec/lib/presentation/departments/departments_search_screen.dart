@@ -40,7 +40,7 @@ class DepartmentSearchScreen extends StatelessWidget {
     }
     return BlocBuilder<DepartmentSearchCubit, DepartmentSearchState>(
       builder: (context, state) {
-        print(state.hasNext);
+     
         return state.failureOrSuccess.fold(
             () => state.isFirstFetch
                 ? const Center(
@@ -70,7 +70,6 @@ class DepartmentSearchScreen extends StatelessWidget {
               child: Text('Error'),
             );
           }, (staffs) {
-            print('stafffffs');
             return staffs.isEmpty
                 ? const Center(
                     child: Text('No results'),
