@@ -24,18 +24,27 @@ class Highlights extends StatelessWidget {
           () {},
           (either) => either.fold((failure) {
             if (failure == const MainFailure.clientFailure()) {
-              Shimmer.fromColors(
-                baseColor: const Color.fromARGB(255, 0, 0, 0),
-                highlightColor: const Color.fromARGB(255, 207, 207, 207),
-                child: Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 10),
-                  height: (size.width - 20) * 9 / 16,
-                  width: size.width,
-                  decoration: BoxDecoration(
-                    color: const Color.fromARGB(34, 0, 0, 0),
-                    borderRadius: BorderRadius.circular(20),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(left: size.width * 0.04, top: 10),
+                    child: SubHeading(text: 'Highlights'),
                   ),
-                ),
+                  Shimmer.fromColors(
+                    baseColor: const Color.fromARGB(255, 0, 0, 0),
+                    highlightColor: const Color.fromARGB(255, 207, 207, 207),
+                    child: Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 10),
+                      height: (size.width - 20) * 9 / 16,
+                      width: size.width,
+                      decoration: BoxDecoration(
+                        color: const Color.fromARGB(34, 0, 0, 0),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                    ),
+                  ),
+                ],
               );
             } else {
               ScaffoldMessenger.of(context).showSnackBar(
@@ -49,9 +58,10 @@ class Highlights extends StatelessWidget {
       });
       return state.highlights == null
           ? Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(left: 20, top: 10),
+                  padding: EdgeInsets.only(left: size.width * 0.04, top: 10),
                   child: SubHeading(text: 'Highlights'),
                 ),
                 Shimmer.fromColors(
@@ -74,7 +84,7 @@ class Highlights extends StatelessWidget {
               children: [
                 state.highlights!.result!.length != 0
                     ? Padding(
-                        padding: const EdgeInsets.only(left: 20, top: 10),
+                        padding:  EdgeInsets.only(left: size.width*0.04, top: 10),
                         child: SubHeading(text: 'Highlights'),
                       )
                     : SizedBox(),

@@ -26,6 +26,10 @@ class TimeTableRespository implements TimeTableService {
       if (response.statusCode == 200 || response.statusCode == 201) {
         final TimeTableModel timetable =
             TimeTableModel.fromJson(response.toString());
+          AuthTokenManager.instance.setDetails(
+            imageUrl: timetable.imageThumbnailUrl!,
+            name: timetable.name!,
+            thumbnailUrl: timetable.thumbnailUrl!);
         return Right(timetable);
       } else {
         return const Left(MainFailure.serverFailure());

@@ -29,6 +29,7 @@ class MainMenuScreen extends StatelessWidget {
                   return const MainmenuAppbar(
                     currentPeriod: '...',
                     duration: 'Loading...',
+                    imageUrl: '',
                   );
                 },
                 (either) {

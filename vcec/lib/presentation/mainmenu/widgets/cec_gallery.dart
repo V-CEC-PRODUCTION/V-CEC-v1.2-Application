@@ -47,7 +47,10 @@ class CecGallery extends StatelessWidget {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SubHeading(text: 'CEC Gallery'),
+              Padding(
+                padding: EdgeInsets.only(left: size.width * 0.04, top: 10),
+                child: SubHeading(text: 'CEC Gallery'),
+              ),
               Shimmer.fromColors(
                 baseColor: Color.fromARGB(255, 0, 0, 0),
                 highlightColor: Color.fromARGB(255, 207, 207, 207),
@@ -102,23 +105,26 @@ class _HeadingPortion extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        kwidth20,
-        SubHeading(text: 'CEC Gallery'),
-        Spacer(),
-        GestureDetector(
-          onTap: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => CecGalleryScreen(),
-                ));
-          },
-          child: Text('view all'),
-        ),
-        kwidth20,
-      ],
+    return Padding(
+      padding: const EdgeInsets.only(top: 10),
+      child: Row(
+        children: [
+          kwidth20,
+          SubHeading(text: 'CEC Gallery'),
+          Spacer(),
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => CecGalleryScreen(),
+                  ));
+            },
+            child: Text('view all'),
+          ),
+          kwidth20,
+        ],
+      ),
     );
   }
 }

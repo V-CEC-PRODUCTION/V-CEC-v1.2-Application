@@ -5,8 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 import 'package:vcec/core/constants.dart';
 import 'package:flutter_profile_picture/flutter_profile_picture.dart';
-//import 'package:vcec/domain/departments/department_model/result.dart';
-//import 'package:vcec/domain/departments/search/department_model/staff_info.dart';
 import 'package:vcec/domain/departments/search/staff/staff_info.dart';
 
 class StaffTile extends StatelessWidget {

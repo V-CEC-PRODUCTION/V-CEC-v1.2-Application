@@ -52,28 +52,70 @@ class UpcomingEvents extends StatelessWidget {
       },
       builder: (context, state) {
         return state.isFailureOrSuccess.fold(() {
-          return Shimmer.fromColors(
-            baseColor: const Color.fromARGB(255, 0, 0, 0),
-            highlightColor: const Color.fromARGB(255, 207, 207, 207),
-            child: Container(
-              margin: const EdgeInsets.symmetric(horizontal: 10),
-              height: 288.h,
-              width: 470.w,
-              decoration: BoxDecoration(
-                color: const Color.fromARGB(34, 0, 0, 0),
-                borderRadius: BorderRadius.circular(20),
+          return Column(
+            children: [ Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 15),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const SubHeading(text: 'Upcoming Events'),
+                            TextButton(
+                              onPressed: () {},
+                              child: const Text(
+                                'View All',
+                                style: TextStyle(
+                                  color: kBlackBlurr,
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+              Shimmer.fromColors(
+                baseColor: const Color.fromARGB(255, 0, 0, 0),
+                highlightColor: const Color.fromARGB(255, 207, 207, 207),
+                child: Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 10),
+                  height: 288.h,
+                  width: 470.w,
+                  decoration: BoxDecoration(
+                    color: const Color.fromARGB(34, 0, 0, 0),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                ),
               ),
-            ),
+            ],
           );
         },
             (either) => either.fold((l) {
-                  return Container(
-                    height: 288.h,
-                    width: 470.w,
-                    decoration: BoxDecoration(
-                      color: const Color.fromARGB(33, 255, 7, 7),
-                      borderRadius: BorderRadius.circular(20),
-                    ),
+                  return Column(
+                    children: [ Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 15),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const SubHeading(text: 'Upcoming Events'),
+                            TextButton(
+                              onPressed: () {},
+                              child: const Text(
+                                'View All',
+                                style: TextStyle(
+                                  color: kBlackBlurr,
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                      Container(
+                        height: 288.h,
+                        width: 470.w,
+                        decoration: BoxDecoration(
+                          color: const Color.fromARGB(33, 255, 7, 7),
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                      ),
+                    ],
                   );
                 }, (events) {
                   return Column(

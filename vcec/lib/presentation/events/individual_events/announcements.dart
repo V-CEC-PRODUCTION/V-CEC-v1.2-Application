@@ -246,18 +246,29 @@ class IndAnnouncementsPage extends StatelessWidget {
                                           return Column(
                                             children: [
                                               isLiked
-                                                  ? const Icon(
-                                                      Icons.thumb_up,
-                                                      color: Colors.black,
-                                                      size: 25,
+                                                  ? Positioned(
+                                                      left: size1 * 0.04,
+                                                      top: size1 * 0.02,
+                                                      child: const Icon(
+                                                        Icons.thumb_up,
+                                                        color: Colors.black,
+                                                        size: 25,
+                                                      ),
                                                     )
-                                                  : const Icon(
-                                                      Icons
-                                                          .thumb_up_alt_outlined,
-                                                      color: Colors.black,
-                                                      size: 25,
+                                                  : Positioned(
+                                                      left: size1 * 0.04,
+                                                      top: size1 * 0.02,
+                                                      child: const Icon(
+                                                        Icons
+                                                            .thumb_up_alt_outlined,
+                                                        color: Colors.black,
+                                                        size: 25,
+                                                      ),
                                                     ),
-                                              Expanded(
+                                              Positioned(
+                                                top: size1 * 0.034,
+                                                right: 0,
+                                                left: 0,
                                                 child: TextButton(
                                                   onPressed: () {
                                                     BlocProvider.of<

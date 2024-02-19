@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:progressive_image/progressive_image.dart';
-import 'package:shimmer/shimmer.dart';
 
 import 'package:vcec/core/colors.dart';
 import 'package:vcec/core/constants.dart';
@@ -33,29 +32,26 @@ class EventsScreen extends StatelessWidget {
           child: CircleAvatar(
             radius: 20,
             child: (thumbnailUrl) == null
-                ? Shimmer.fromColors(
-                    baseColor: Color(0xFFC0C0C0),
-                    highlightColor: Color(0xFFE8E8E8),
-                    child: CircleAvatar(
-                      radius: 20,
-                      backgroundColor: Color.fromARGB(255, 113, 124, 124),
-                    ))
+                ?const  CircleAvatar(
+                                    radius: 23,
+                                    backgroundImage:
+                                       NetworkImage('https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTAxL3JtNjA5LXNvbGlkaWNvbi13LTAwMi1wLnBuZw.png'),
+                                  )
                 : _Banner(imageUrl: imageUrl!, thumbnailUrl: thumbnailUrl!),
           ),
         ),
-        title: Text(
-          name ?? '...',
-          style: TextStyle(color: kwhite, fontWeight: FontWeight.bold),
+        title:
+        name == null ? const SizedBox() :
+         Text(
+          name!,
+          style:const TextStyle(color: kwhite, fontWeight: FontWeight.bold),
         ),
         actions: [
           GestureDetector(
             onTap: () {},
-            child: Container(
-              color: appbarbuttonbackground,
-              child: const Padding(
-                padding: EdgeInsets.only(left: 6, right: 6, top: 2, bottom: 2),
-                child: NotificationIcon(),
-              ),
+            child: const Padding(
+              padding: EdgeInsets.only(left: 6, right: 6, top: 2, bottom: 2),
+              child: NotificationIcon(),
             ),
           ),
         ],

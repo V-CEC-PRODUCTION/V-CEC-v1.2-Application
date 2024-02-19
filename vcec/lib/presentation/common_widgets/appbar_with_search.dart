@@ -37,14 +37,11 @@ class AppbarWithSearch extends PreferredSize {
                     children: [
                       kwidth20,
                       AuthTokenManager.instance.imageUrl == null
-                          ? Shimmer.fromColors(
-                              baseColor: Color(0xFFC0C0C0),
-                              highlightColor: Color(0xFFE8E8E8),
-                              child: CircleAvatar(
-                                radius: 23,
-                                backgroundColor:
-                                    Color.fromARGB(255, 113, 124, 124),
-                              ))
+                          ?const  CircleAvatar(
+                                    radius: 23,
+                                    backgroundImage:
+                                       NetworkImage('https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTAxL3JtNjA5LXNvbGlkaWNvbi13LTAwMi1wLnBuZw.png'),
+                                  )
                           : _Banner(
                               imageUrl: AuthTokenManager.instance.imageUrl!,
                               thumbnailUrl:
@@ -62,10 +59,13 @@ class AppbarWithSearch extends PreferredSize {
                               fontWeight: FontWeight.w400,
                             ),
                           ),
+                          AuthTokenManager.instance.name == null
+                                ? const SizedBox(
+                                    height: 10,
+                                  ):
                           Text(
-                            AuthTokenManager.instance.name == null
-                                ? '...'
-                                : AuthTokenManager.instance.name!,
+                            
+                                 AuthTokenManager.instance.name!,
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 16,

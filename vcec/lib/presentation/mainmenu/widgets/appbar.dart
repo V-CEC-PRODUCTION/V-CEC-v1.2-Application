@@ -4,6 +4,7 @@ import 'package:progressive_image/progressive_image.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:vcec/core/colors.dart';
 import 'package:vcec/core/constants.dart';
+import 'package:vcec/domain/auth_token_manager/auth_token_manager.dart';
 import 'package:vcec/domain/mainmenu/timetable/time_table/result.dart';
 import 'package:vcec/presentation/common_widgets/avatar.dart';
 import 'package:vcec/presentation/common_widgets/notification_icon.dart';
@@ -105,7 +106,7 @@ class _MainmenuAppbarState extends State<MainmenuAppbar> {
                                         builder: (context) =>
                                             const ProfileScreen()));
                               },
-                              child: widget.imageUrl == null
+                              child: widget.imageUrl == ''
                                   ? Shimmer.fromColors(
                                       baseColor: Color(0xFFC0C0C0),
                                       highlightColor: Color(0xFFE8E8E8),
@@ -114,9 +115,15 @@ class _MainmenuAppbarState extends State<MainmenuAppbar> {
                                         backgroundColor:
                                             Color.fromARGB(255, 113, 124, 124),
                                       ))
-                                  : _Banner(
-                                      imageUrl: widget.imageUrl!,
-                                      thumbnailUrl: widget.thumbnailUrl!)),
+                                  : widget.imageUrl == null
+                                      ? CircleAvatar(
+                                          radius: 23,
+                                          backgroundImage: NetworkImage(
+                                              'https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTAxL3JtNjA5LXNvbGlkaWNvbi13LTAwMi1wLnBuZw.png'),
+                                        )
+                                      : _Banner(
+                                          imageUrl: widget.imageUrl!,
+                                          thumbnailUrl: widget.thumbnailUrl!)),
                           GestureDetector(
                             onTap: () {
                               widget.timeTable == null
@@ -132,12 +139,15 @@ class _MainmenuAppbarState extends State<MainmenuAppbar> {
                               width:
                                   MediaQuery.of(context).size.width * 0.29 * 2 +
                                       21,
-                              child: Row(
+                              child:AuthTokenManager.instance.userRole ==
+                                              UserRole.guest ||
+                                          AuthTokenManager.instance.userRole ==
+                                              null ? const SizedBox(): Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 mainAxisSize: MainAxisSize.max,
-                                children: [
-                                  _TimeTableWiget(text: widget.duration),
+                                children: [    
+                              _TimeTableWiget(text: widget.duration),
                                   _VerticalDivider(),
                                   _TimeTableWiget(text: widget.currentPeriod),
                                 ],

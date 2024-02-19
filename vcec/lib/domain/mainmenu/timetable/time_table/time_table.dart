@@ -6,12 +6,13 @@ class TimeTableModel {
   List<TimeTable>? result;
   String? thumbnailUrl;
   String? imageThumbnailUrl;
+  String? name;
 
-  TimeTableModel({this.result, this.thumbnailUrl, this.imageThumbnailUrl});
+  TimeTableModel({this.result, this.thumbnailUrl, this.imageThumbnailUrl, this.name});
 
   @override
   String toString() {
-    return 'TimeTableModel(result: $result, thumbnailUrl: $thumbnailUrl, imageThumbnailUrl: $imageThumbnailUrl)';
+    return 'TimeTableModel(result: $result, thumbnailUrl: $thumbnailUrl, imageThumbnailUrl: $imageThumbnailUrl. name: $name)';
   }
 
   factory TimeTableModel.fromMap(Map<String, dynamic> data) => TimeTableModel(
@@ -26,6 +27,7 @@ class TimeTableModel {
         'result': result?.map((e) => e.toMap()).toList(),
         'thumbnail_url': thumbnailUrl,
         'image_thumbnail_url': imageThumbnailUrl,
+        'name': 'TimeTableModel',
       };
 
   /// `dart:convert`
@@ -44,11 +46,13 @@ class TimeTableModel {
     List<TimeTable>? result,
     String? thumbnailUrl,
     String? imageThumbnailUrl,
+    String? name,
   }) {
     return TimeTableModel(
       result: result ?? this.result,
       thumbnailUrl: thumbnailUrl ?? this.thumbnailUrl,
       imageThumbnailUrl: imageThumbnailUrl ?? this.imageThumbnailUrl,
+      name: name ?? this.name,
     );
   }
 }

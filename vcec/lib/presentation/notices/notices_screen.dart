@@ -18,6 +18,7 @@ class NoticesScreen extends StatelessWidget {
   final date = DateFormat('dd-MM-yyyy').format(DateTime.now());
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(
@@ -28,13 +29,10 @@ class NoticesScreen extends StatelessWidget {
             padding: const EdgeInsets.only(left: 20, top: 15),
             child: CircleAvatar(
               child: imgUrl == null
-                  ? Shimmer.fromColors(
-                      baseColor: Color(0xFFC0C0C0),
-                      highlightColor: Color(0xFFE8E8E8),
-                      child: CircleAvatar(
-                        radius: 23,
-                        backgroundColor: Color.fromARGB(255, 113, 124, 124),
-                      ))
+                  ? CircleAvatar(
+                      radius: 23,
+                      backgroundImage: NetworkImage(
+                          'https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTAxL3JtNjA5LXNvbGlkaWNvbi13LTAwMi1wLnBuZw.png'))
                   : _Banner(imageUrl: imgUrl!, thumbnailUrl: thumbnailUrl!),
             ),
           ),
@@ -52,21 +50,25 @@ class NoticesScreen extends StatelessWidget {
                     fontWeight: FontWeight.w400,
                   ),
                 ),
-                Text(
-                  name == null ? '...' : name!,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
+                name == null
+                    ? const SizedBox(
+                        height: 10,
+                      )
+                    : Text(
+                        name!,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
               ],
             ),
           ),
           actions: [
             Flexible(
               child: Padding(
-                padding: const EdgeInsets.only(top: 12.0),
+                padding: EdgeInsets.only(top: size * 0.05),
                 child: Column(
                   children: [
                     Text(
@@ -91,8 +93,9 @@ class NoticesScreen extends StatelessWidget {
         children: [
           kheight10,
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 22.0, vertical: 14),
-            child: SubHeading(text: 'Notices'),
+            padding:
+                EdgeInsets.symmetric(horizontal: size * 0.07, vertical: 14),
+            child:const SubHeading(text: 'Notices'),
           ),
           Expanded(child: NoticesTabbar())
         ],
