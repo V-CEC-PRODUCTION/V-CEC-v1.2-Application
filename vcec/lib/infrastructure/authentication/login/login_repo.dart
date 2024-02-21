@@ -14,7 +14,6 @@ class LoginRepo extends LoginService {
   @override
   Future<Either<MainFailure, void>> loginWithEmailAndPass(
       String email, String password) async {
- 
     try {
       final Response response = await Dio(BaseOptions(headers: {
         "Content-Type": "application/json",
@@ -32,7 +31,6 @@ class LoginRepo extends LoginService {
         return const Left(MainFailure.serverFailure());
       }
     } catch (e) {
-     
       if (e is DioException && e.response?.statusCode == 500) {
         return const Left(MainFailure.serverFailure());
       } else if (e is SocketException) {
@@ -49,7 +47,6 @@ class LoginRepo extends LoginService {
 
   @override
   Future<Either<MainFailure, void>> loginWithGoogle(String email) async {
-   
     try {
       final Response response = await Dio(BaseOptions(headers: {
         "Content-Type": "application/json",
@@ -69,7 +66,6 @@ class LoginRepo extends LoginService {
         return const Left(MainFailure.serverFailure());
       }
     } catch (e) {
-  
       if (e is DioException && e.response?.statusCode == 500) {
         return const Left(MainFailure.serverFailure());
       } else if (e is SocketException) {

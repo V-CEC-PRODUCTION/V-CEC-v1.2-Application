@@ -12,20 +12,17 @@ class ForumsRepository extends ForumsService {
   @override
   Future<Either<MainFailure, List<AllForum>>> getForums() async {
     try {
-      
       final response = await Dio(BaseOptions(contentType: 'application/json'))
           .get('${baseUrl}forum/management/get/roles/');
       if (response.statusCode == 200 || response.statusCode == 201) {
-     
         final forums0 = ForumModel.fromJson(response.toString());
         final forums = forums0.forumRoleNames;
-       
+
         return Right(forums!);
       } else {
         return const Left(MainFailure.serverFailure());
       }
     } catch (e) {
-      
       if (e is DioException && e.response?.statusCode == 401) {
         return const Left(AuthFailure());
       } else if (e is DioException && e.response?.statusCode == 500 ||

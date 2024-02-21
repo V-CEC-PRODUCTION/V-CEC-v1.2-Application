@@ -31,16 +31,16 @@ class AppbarWithSearch extends PreferredSize {
               children: [
                 Container(
                   height: 125,
-                  color:const Color.fromARGB(255, 40, 40, 40),
+                  color: const Color.fromARGB(255, 40, 40, 40),
                   child: Row(
                     children: [
                       kwidth20,
                       AuthTokenManager.instance.imageUrl == null
-                          ?const  CircleAvatar(
-                                    radius: 23,
-                                    backgroundImage:
-                                       NetworkImage('https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTAxL3JtNjA5LXNvbGlkaWNvbi13LTAwMi1wLnBuZw.png'),
-                                  )
+                          ? const CircleAvatar(
+                              radius: 23,
+                              backgroundImage: NetworkImage(
+                                  'https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTAxL3JtNjA5LXNvbGlkaWNvbi13LTAwMi1wLnBuZw.png'),
+                            )
                           : _Banner(
                               imageUrl: AuthTokenManager.instance.imageUrl!,
                               thumbnailUrl:
@@ -52,25 +52,24 @@ class AppbarWithSearch extends PreferredSize {
                         children: [
                           Text(
                             date,
-                            style:const TextStyle(
+                            style: const TextStyle(
                               color: Colors.white,
                               fontSize: 13,
                               fontWeight: FontWeight.w400,
                             ),
                           ),
                           AuthTokenManager.instance.name == null
-                                ? const SizedBox(
-                                    height: 10,
-                                  ):
-                          Text(
-                            
-                                 AuthTokenManager.instance.name!,
-                            style:const TextStyle(
-                              color: Colors.white,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
+                              ? const SizedBox(
+                                  height: 10,
+                                )
+                              : Text(
+                                  AuthTokenManager.instance.name!,
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
                         ],
                       ),
                       const Spacer(),
@@ -102,7 +101,7 @@ class _Banner extends StatelessWidget {
   Widget build(BuildContext context) {
     String url = '$baseUrl$imageUrl'.replaceAll('auth//api/', 'auth/api/');
     String turl = '$baseUrl$thumbnailUrl'.replaceAll('auth//api/', 'auth/api/');
-   // print(url);
+    // print(url);
     return CircleAvatar(
       radius: 23,
       child: ClipOval(

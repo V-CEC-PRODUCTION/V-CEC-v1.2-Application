@@ -24,7 +24,8 @@ class NotificationsGroupWidget extends StatelessWidget {
           ),
           kheight5,
           Column(
-            children: List.generate(5, (index) => const NotificationTileWidget()),
+            children:
+                List.generate(5, (index) => const NotificationTileWidget()),
           ),
         ],
       ),

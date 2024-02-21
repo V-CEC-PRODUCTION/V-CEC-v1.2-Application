@@ -107,14 +107,14 @@ class EventsCardWidget extends StatelessWidget {
                                   ),
                                 )
                               : const SizedBox(),
-                          if (date != null)
-                            Text(
-                              date!,
-                              style: const TextStyle(
-                                fontWeight: FontWeight.w500,
-                                fontSize: 10,
-                              ),
-                            ),
+                          //  if (date != null)
+                          //    Text(
+                          //      date!,
+                          ////      style: const TextStyle(
+                          //        fontWeight: FontWeight.w500,
+                          //        fontSize: 10,
+                          //      ),
+                          //    ),
                           totalRegistrations == 0 || totalRegistrations == null
                               ? const SizedBox()
                               : Text(

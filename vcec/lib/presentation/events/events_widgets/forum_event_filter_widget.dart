@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:vcec/application/announcements/announcements_cubit.dart';
+import 'package:vcec/application/events/events_cubit.dart';
 import 'package:vcec/application/forums/forums_cubit.dart';
 import 'package:vcec/core/colors.dart';
-import 'package:vcec/presentation/events/constant.dart';
+import 'package:vcec/domain/auth_token_manager/auth_token_manager.dart';
+import 'package:vcec/domain/events/model/event_model/event_types.dart';
 
 class ForumEventFilterWidget extends StatelessWidget {
   const ForumEventFilterWidget({super.key});
@@ -20,7 +23,12 @@ class ForumEventFilterWidget extends StatelessWidget {
         ),
         ElevatedButton(
           onPressed: () {
-           
+            BlocProvider.of<EventsCubit>(context).fetchEvents1(
+                eventType: EventType.Upcoming, forum: 'all', );
+            AuthTokenManager.instance.setForum('all');
+            BlocProvider.of<AnnouncementCubit>(context)
+                .getAnnoucements1(forum: 'all',);
+            AuthTokenManager.instance.setForum('all');
           },
           style: ElevatedButton.styleFrom(
             backgroundColor: kDarkGreen,
@@ -106,7 +114,17 @@ class ForumEventFilterWidget extends StatelessWidget {
                                 ),
                                 child: ElevatedButton(
                                   onPressed: () {
-                                    return forumOnTap[index]();
+                                    BlocProvider.of<EventsCubit>(context)
+                                        .fetchEvents1(
+                                            eventType: EventType.Upcoming,
+                                            forum: forums[index].forumRoleName!,
+                                            );
+                                    AuthTokenManager.instance
+                                        .setForum(forums[index].forumRoleName!);
+                                    BlocProvider.of<AnnouncementCubit>(context)
+                                        .getAnnoucements1(
+                                            forum: forums[index].forumRoleName!,
+                                       );
                                   },
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor: kwhite,

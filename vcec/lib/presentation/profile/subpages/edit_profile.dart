@@ -22,7 +22,8 @@ class EditProfileScreen extends StatefulWidget {
 class _EditProfileScreenState extends State<EditProfileScreen> {
   int c = 0;
   File? file;
-  final TextEditingController _nameController = TextEditingController(text: "vcec");
+  final TextEditingController _nameController =
+      TextEditingController(text: "vcec");
 
   final TextEditingController _emailController =
       TextEditingController(text: "vev@gmail.com");

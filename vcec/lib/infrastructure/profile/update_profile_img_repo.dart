@@ -37,7 +37,7 @@ class UpdateProfileImgRepo extends UpdateProfileImgService {
       // Send the request
       http.Response response =
           await http.Response.fromStream(await request.send());
-      
+
       if (response.statusCode == 200 || response.statusCode == 201) {
         return const Right(true);
       } else {

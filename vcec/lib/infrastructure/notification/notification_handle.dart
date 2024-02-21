@@ -81,7 +81,6 @@ class NotificationHandle {
       eventId = payloadTokenized[1];
     }
     if (type == 'home') {
-      
       // Navigator.push(
       //     context,
       //     MaterialPageRoute(

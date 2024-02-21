@@ -1,3 +1,1 @@
-void onSubmit(String value) {
-
-}
+void onSubmit(String value) {}

@@ -139,19 +139,21 @@ class _MainmenuAppbarState extends State<MainmenuAppbar> {
                               width:
                                   MediaQuery.of(context).size.width * 0.29 * 2 +
                                       21,
-                              child:AuthTokenManager.instance.userRole ==
-                                              UserRole.guest ||
-                                          AuthTokenManager.instance.userRole ==
-                                              null ? const SizedBox(): Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                mainAxisSize: MainAxisSize.max,
-                                children: [    
-                              _TimeTableWiget(text: widget.duration),
-                                  const _VerticalDivider(),
-                                  _TimeTableWiget(text: widget.currentPeriod),
-                                ],
-                              ),
+                              child: AuthTokenManager.instance.userRole ==
+                                          UserRole.guest ||
+                                      AuthTokenManager.instance.userRole == null
+                                  ? const SizedBox()
+                                  : Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        _TimeTableWiget(text: widget.duration),
+                                        const _VerticalDivider(),
+                                        _TimeTableWiget(
+                                            text: widget.currentPeriod),
+                                      ],
+                                    ),
                             ),
                           ),
                           const NotificationIcon(),
@@ -169,7 +171,8 @@ class _MainmenuAppbarState extends State<MainmenuAppbar> {
                                   children: [
                                     Container(
                                       height: 40,
-                                      color: const Color.fromRGBO(209, 219, 216, 1),
+                                      color: const Color.fromRGBO(
+                                          209, 219, 216, 1),
                                       child: Row(
                                         children: [
                                           kwidth10,
@@ -180,7 +183,8 @@ class _MainmenuAppbarState extends State<MainmenuAppbar> {
                                                       fontSize: 17,
                                                       fontWeight:
                                                           FontWeight.w600))
-                                              : const Text('Tomorrow \'s Classes',
+                                              : const Text(
+                                                  'Tomorrow \'s Classes',
                                                   style: TextStyle(
                                                       color: kblack,
                                                       fontSize: 17,

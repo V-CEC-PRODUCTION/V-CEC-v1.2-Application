@@ -29,14 +29,14 @@ class FindAmazingEventsWidget extends StatelessWidget {
                   fontWeight: FontWeight.bold, color: kwhite, fontSize: 19),
             ),
           ),
-        //  Padding(
-       //     padding: const EdgeInsets.only(left: 14),
-        //    child: Text(
-        //      '$eventsAroundYouNum events around you',
-       //       style: TextStyle(
-       //           fontWeight: FontWeight.bold, color: kwhite, fontSize: 13),
-       //     ),
-      //    ),
+          //  Padding(
+          //     padding: const EdgeInsets.only(left: 14),
+          //    child: Text(
+          //      '$eventsAroundYouNum events around you',
+          //       style: TextStyle(
+          //           fontWeight: FontWeight.bold, color: kwhite, fontSize: 13),
+          //     ),
+          //    ),
           Padding(
             padding: const EdgeInsets.only(
                 left: 12, right: 12, top: 12.0, bottom: 25),
@@ -52,9 +52,7 @@ class FindAmazingEventsWidget extends StatelessWidget {
                   width: 5,
                 ),
                 GestureDetector(
-                  onTap: () {
-                    
-                  },
+                  onTap: () {},
                   child: Container(
                     height: 40,
                     decoration: BoxDecoration(

@@ -1,6 +1,4 @@
-void proddecButtonFunc() {
- 
-}
+void proddecButtonFunc() {}
 
 void ieeeButtonFunc() {}
 void iedcButtonFunc() {}
@@ -10,9 +8,7 @@ void arcButtonFunc() {}
 void tpcButtonFunc() {}
 void tinkerhubButtonFunc() {}
 void mediacellButtonFunc() {}
-void focesButtonFunc() {
-  
-}
+void focesButtonFunc() {}
 
 void exessButtonFunc() {}
 void surgeButtonFunc() {}

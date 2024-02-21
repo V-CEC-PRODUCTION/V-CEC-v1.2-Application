@@ -40,7 +40,6 @@ class DepartmentSearchScreen extends StatelessWidget {
     }
     return BlocBuilder<DepartmentSearchCubit, DepartmentSearchState>(
       builder: (context, state) {
-     
         return state.failureOrSuccess.fold(
             () => state.isFirstFetch
                 ? const Center(

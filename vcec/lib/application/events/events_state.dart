@@ -5,6 +5,8 @@ class EventsState with _$EventsState {
   const factory EventsState({
     required Map<String, List<Event>> events,
     required bool isLoading,
+    required bool isFirstFetch,
+    required bool hasNext,
     required Option<Either<MainFailure, List<Event>>> isFailureOrSuccess,
   }) = _EventsState;
   factory EventsState.initial() => EventsState(
@@ -14,5 +16,7 @@ class EventsState with _$EventsState {
         },
         isLoading: false,
         isFailureOrSuccess: none(),
+        isFirstFetch: false,
+        hasNext: true,
       );
 }

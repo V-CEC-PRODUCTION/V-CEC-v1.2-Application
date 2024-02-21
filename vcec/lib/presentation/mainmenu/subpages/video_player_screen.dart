@@ -20,14 +20,14 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
     super.initState();
     videoPlayerController =
         VideoPlayerController.networkUrl(Uri.parse(widget.url));
-   
+
     _chewieController = ChewieController(
       videoPlayerController: videoPlayerController,
       autoInitialize: true,
       autoPlay: autoplay,
       aspectRatio: videoPlayerController.value.aspectRatio,
       looping: looping,
-      placeholder:const Center(child: CircularProgressIndicator()),
+      placeholder: const Center(child: CircularProgressIndicator()),
       errorBuilder: (context, errorMessage) {
         return const Center(
           child: Text(

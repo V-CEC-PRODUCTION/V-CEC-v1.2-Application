@@ -15,10 +15,10 @@ class AnnouncementsEventsWidget extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-         const   SubHeading(text: 'Announcements'),
+            const SubHeading(text: 'Announcements'),
             TextButton(
                 onPressed: () {},
-                child:const Text('View All',
+                child: const Text('View All',
                     style: TextStyle(
                       color: kBlackBlurr,
                     )))

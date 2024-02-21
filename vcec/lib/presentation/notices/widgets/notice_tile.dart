@@ -9,7 +9,8 @@ class NoticeTileWidget extends StatelessWidget {
       {super.key,
       required this.expanpsionNeeded,
       required this.notice,
-      required this.type,  this.index});
+      required this.type,
+      this.index});
   final NoticesResult notice;
   final bool expanpsionNeeded;
   final NoticeType type;
@@ -40,7 +41,7 @@ class NoticeTileWidget extends StatelessWidget {
             child: ValueListenableBuilder(
                 valueListenable: _isexpanded,
                 builder: (BuildContext ctx, bool isexpanded, Widget? _) {
-                  return Text('Notification-${index! +1}',
+                  return Text('Notification-${index! + 1}',
                       maxLines: isexpanded != true ? 2 : 20,
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(

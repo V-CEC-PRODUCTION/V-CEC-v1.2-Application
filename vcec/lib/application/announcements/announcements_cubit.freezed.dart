@@ -16,9 +16,11 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$AnnouncementState {
-  List<Annoucement> get announcements => throw _privateConstructorUsedError;
+  List<Announcement> get announcements => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
-  Option<Either<MainFailure, List<Annoucement>>> get isFailureOrSuccess =>
+  bool get isFirstFetch => throw _privateConstructorUsedError;
+  bool get hasNext => throw _privateConstructorUsedError;
+  Option<Either<MainFailure, List<Announcement>>> get isFailureOrSuccess =>
       throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -33,9 +35,11 @@ abstract class $AnnouncementStateCopyWith<$Res> {
       _$AnnouncementStateCopyWithImpl<$Res, AnnouncementState>;
   @useResult
   $Res call(
-      {List<Annoucement> announcements,
+      {List<Announcement> announcements,
       bool isLoading,
-      Option<Either<MainFailure, List<Annoucement>>> isFailureOrSuccess});
+      bool isFirstFetch,
+      bool hasNext,
+      Option<Either<MainFailure, List<Announcement>>> isFailureOrSuccess});
 }
 
 /// @nodoc
@@ -53,21 +57,31 @@ class _$AnnouncementStateCopyWithImpl<$Res, $Val extends AnnouncementState>
   $Res call({
     Object? announcements = null,
     Object? isLoading = null,
+    Object? isFirstFetch = null,
+    Object? hasNext = null,
     Object? isFailureOrSuccess = null,
   }) {
     return _then(_value.copyWith(
       announcements: null == announcements
           ? _value.announcements
           : announcements // ignore: cast_nullable_to_non_nullable
-              as List<Annoucement>,
+              as List<Announcement>,
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      isFirstFetch: null == isFirstFetch
+          ? _value.isFirstFetch
+          : isFirstFetch // ignore: cast_nullable_to_non_nullable
+              as bool,
+      hasNext: null == hasNext
+          ? _value.hasNext
+          : hasNext // ignore: cast_nullable_to_non_nullable
+              as bool,
       isFailureOrSuccess: null == isFailureOrSuccess
           ? _value.isFailureOrSuccess
           : isFailureOrSuccess // ignore: cast_nullable_to_non_nullable
-              as Option<Either<MainFailure, List<Annoucement>>>,
+              as Option<Either<MainFailure, List<Announcement>>>,
     ) as $Val);
   }
 }
@@ -81,9 +95,11 @@ abstract class _$$AnnouncementStateImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {List<Annoucement> announcements,
+      {List<Announcement> announcements,
       bool isLoading,
-      Option<Either<MainFailure, List<Annoucement>>> isFailureOrSuccess});
+      bool isFirstFetch,
+      bool hasNext,
+      Option<Either<MainFailure, List<Announcement>>> isFailureOrSuccess});
 }
 
 /// @nodoc
@@ -99,21 +115,31 @@ class __$$AnnouncementStateImplCopyWithImpl<$Res>
   $Res call({
     Object? announcements = null,
     Object? isLoading = null,
+    Object? isFirstFetch = null,
+    Object? hasNext = null,
     Object? isFailureOrSuccess = null,
   }) {
     return _then(_$AnnouncementStateImpl(
       announcements: null == announcements
           ? _value._announcements
           : announcements // ignore: cast_nullable_to_non_nullable
-              as List<Annoucement>,
+              as List<Announcement>,
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      isFirstFetch: null == isFirstFetch
+          ? _value.isFirstFetch
+          : isFirstFetch // ignore: cast_nullable_to_non_nullable
+              as bool,
+      hasNext: null == hasNext
+          ? _value.hasNext
+          : hasNext // ignore: cast_nullable_to_non_nullable
+              as bool,
       isFailureOrSuccess: null == isFailureOrSuccess
           ? _value.isFailureOrSuccess
           : isFailureOrSuccess // ignore: cast_nullable_to_non_nullable
-              as Option<Either<MainFailure, List<Annoucement>>>,
+              as Option<Either<MainFailure, List<Announcement>>>,
     ));
   }
 }
@@ -122,14 +148,16 @@ class __$$AnnouncementStateImplCopyWithImpl<$Res>
 
 class _$AnnouncementStateImpl implements _AnnouncementState {
   const _$AnnouncementStateImpl(
-      {required final List<Annoucement> announcements,
+      {required final List<Announcement> announcements,
       required this.isLoading,
+      required this.isFirstFetch,
+      required this.hasNext,
       required this.isFailureOrSuccess})
       : _announcements = announcements;
 
-  final List<Annoucement> _announcements;
+  final List<Announcement> _announcements;
   @override
-  List<Annoucement> get announcements {
+  List<Announcement> get announcements {
     if (_announcements is EqualUnmodifiableListView) return _announcements;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_announcements);
@@ -138,11 +166,15 @@ class _$AnnouncementStateImpl implements _AnnouncementState {
   @override
   final bool isLoading;
   @override
-  final Option<Either<MainFailure, List<Annoucement>>> isFailureOrSuccess;
+  final bool isFirstFetch;
+  @override
+  final bool hasNext;
+  @override
+  final Option<Either<MainFailure, List<Announcement>>> isFailureOrSuccess;
 
   @override
   String toString() {
-    return 'AnnouncementState(announcements: $announcements, isLoading: $isLoading, isFailureOrSuccess: $isFailureOrSuccess)';
+    return 'AnnouncementState(announcements: $announcements, isLoading: $isLoading, isFirstFetch: $isFirstFetch, hasNext: $hasNext, isFailureOrSuccess: $isFailureOrSuccess)';
   }
 
   @override
@@ -154,6 +186,9 @@ class _$AnnouncementStateImpl implements _AnnouncementState {
                 .equals(other._announcements, _announcements) &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
+            (identical(other.isFirstFetch, isFirstFetch) ||
+                other.isFirstFetch == isFirstFetch) &&
+            (identical(other.hasNext, hasNext) || other.hasNext == hasNext) &&
             (identical(other.isFailureOrSuccess, isFailureOrSuccess) ||
                 other.isFailureOrSuccess == isFailureOrSuccess));
   }
@@ -163,6 +198,8 @@ class _$AnnouncementStateImpl implements _AnnouncementState {
       runtimeType,
       const DeepCollectionEquality().hash(_announcements),
       isLoading,
+      isFirstFetch,
+      hasNext,
       isFailureOrSuccess);
 
   @JsonKey(ignore: true)
@@ -175,17 +212,23 @@ class _$AnnouncementStateImpl implements _AnnouncementState {
 
 abstract class _AnnouncementState implements AnnouncementState {
   const factory _AnnouncementState(
-      {required final List<Annoucement> announcements,
+      {required final List<Announcement> announcements,
       required final bool isLoading,
-      required final Option<Either<MainFailure, List<Annoucement>>>
+      required final bool isFirstFetch,
+      required final bool hasNext,
+      required final Option<Either<MainFailure, List<Announcement>>>
           isFailureOrSuccess}) = _$AnnouncementStateImpl;
 
   @override
-  List<Annoucement> get announcements;
+  List<Announcement> get announcements;
   @override
   bool get isLoading;
   @override
-  Option<Either<MainFailure, List<Annoucement>>> get isFailureOrSuccess;
+  bool get isFirstFetch;
+  @override
+  bool get hasNext;
+  @override
+  Option<Either<MainFailure, List<Announcement>>> get isFailureOrSuccess;
   @override
   @JsonKey(ignore: true)
   _$$AnnouncementStateImplCopyWith<_$AnnouncementStateImpl> get copyWith =>

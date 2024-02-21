@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:progressive_image/progressive_image.dart';
-import 'package:shimmer/shimmer.dart';
 import 'package:vcec/application/logout/log_out_cubit.dart';
 import 'package:vcec/application/profile/profile_cubit.dart';
 import 'package:vcec/domain/failure/main_failure.dart';
@@ -107,7 +106,30 @@ class ProfileScreen extends StatelessWidget {
                 }, (r) {});
               });
               return state.profileModel == null
-                  ? const Center(child: Text('Error...'))
+                  ? Scaffold(
+                      body: Center(
+                          child: Padding(
+                        padding: EdgeInsets.only(top: size1 * 0.2),
+                        child: const Column(
+                          children: [
+                            SizedBox(
+                              width: 320,
+                              height: 320,
+                              child: DecoratedBox(
+                                  decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                          image: AssetImage(
+                                              'assets/img/nothing.png')))),
+                            ),
+                            Text(
+                              'Nothing to Report',
+                              style: TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.bold),
+                            )
+                          ],
+                        ),
+                      )),
+                    )
                   : Scaffold(
                       appBar: AppBar(
                           leading: IconButton(
@@ -129,19 +151,15 @@ class ProfileScreen extends StatelessWidget {
                         child: Column(
                           children: [
                             state.profileModel!.imageUrl == null
-                                ? Shimmer.fromColors(
-                                    baseColor:
-                                        const Color.fromARGB(255, 0, 0, 0),
-                                    highlightColor: const Color.fromARGB(
-                                        255, 207, 207, 207),
-                                    child: Container(
-                                      height: size1 * 0.28,
-                                      width: size1 * 0.28,
-                                      decoration: const BoxDecoration(
+                                ? Container(
+                                    height: size1 * 0.28,
+                                    width: size1 * 0.28,
+                                    decoration: const BoxDecoration(
                                         shape: BoxShape.circle,
                                         color: Color.fromARGB(34, 0, 0, 0),
-                                      ),
-                                    ),
+                                        image: DecorationImage(
+                                            image: NetworkImage(
+                                                'https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTAxL3JtNjA5LXNvbGlkaWNvbi13LTAwMi1wLnBuZw.png'))),
                                   )
                                 : Padding(
                                     padding: EdgeInsets.only(top: size1 * 0.05),

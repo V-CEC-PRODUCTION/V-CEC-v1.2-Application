@@ -103,13 +103,38 @@ class IndEventsPage extends StatelessWidget {
       },
       builder: (context, state) {
         if (state.isLoading) {
-          return const Center(
-            child: loadingWidget,
+          return const Scaffold(
+            body: Center(
+              child: loadingWidget,
+            ),
           );
         }
 
         return state.indEvents == null
-            ? const Center(child: Text('Error...'))
+            ? Scaffold(
+                body: Padding(
+                  padding: EdgeInsets.only(top: size1 * 0.2),
+                  child: const Center(
+                      child: Column(
+                    children: [
+                      SizedBox(
+                        width: 320,
+                        height: 320,
+                        child: DecoratedBox(
+                            decoration: BoxDecoration(
+                                image: DecorationImage(
+                                    image:
+                                        AssetImage('assets/img/nothing.png')))),
+                      ),
+                      Text(
+                        'Nothing to Report',
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
+                      )
+                    ],
+                  )),
+                ),
+              )
             : Scaffold(
                 appBar: AppBar(
                   leading: IconButton(
@@ -245,7 +270,6 @@ class IndEventsPage extends StatelessWidget {
                                                     context)
                                                 .postRegister(id: id);
                                           } else {
-                                         
                                             launchURL(
                                                 state.indEvents!.eventResult!
                                                     .registerButtonLink!
@@ -268,7 +292,7 @@ class IndEventsPage extends StatelessWidget {
                                         state.indEvents!.alreadyRegistered!
                                             ? 'Registered'
                                             : 'Register',
-                                        style:const TextStyle(
+                                        style: const TextStyle(
                                             color: Colors.white, fontSize: 17),
                                       ),
                                     )
@@ -304,28 +328,28 @@ class IndEventsPage extends StatelessWidget {
                                             children: [
                                               !isLiked
                                                   ? Positioned(
-                                                   left: size1 * 0.04,
-                                top: size1 * 0.02,
-                                                    child: const Icon(
+                                                      left: size1 * 0.04,
+                                                      top: size1 * 0.02,
+                                                      child: const Icon(
                                                         Icons
                                                             .thumb_up_alt_outlined,
                                                         color: Colors.black,
                                                         size: 25,
                                                       ),
-                                                  )
+                                                    )
                                                   : Positioned(
-                                                     left: size1 * 0.04,
-                                top: size1 * 0.02,
-                                                    child: const Icon(
+                                                      left: size1 * 0.04,
+                                                      top: size1 * 0.02,
+                                                      child: const Icon(
                                                         Icons.thumb_up,
                                                         color: Colors.black,
                                                         size: 25,
                                                       ),
-                                                  ),
+                                                    ),
                                               Positioned(
-                                                 top: size1 * 0.034,
-                                right: 0,
-                                left: 0,
+                                                top: size1 * 0.034,
+                                                right: 0,
+                                                left: 0,
                                                 child: TextButton(
                                                   onPressed: () {
                                                     BlocProvider.of<
@@ -523,7 +547,7 @@ class IndEventsPage extends StatelessWidget {
                                                               : state.indEvents!
                                                                   .totalLikes!
                                                                   .toString(),
-                                                          style:const TextStyle(
+                                                          style: const TextStyle(
                                                               fontSize: 9,
                                                               fontWeight:
                                                                   FontWeight
@@ -538,7 +562,7 @@ class IndEventsPage extends StatelessWidget {
                                                               : state.indEvents!
                                                                   .totalLikes!
                                                                   .toString(),
-                                                          style:const TextStyle(
+                                                          style: const TextStyle(
                                                               fontSize: 9,
                                                               fontWeight:
                                                                   FontWeight

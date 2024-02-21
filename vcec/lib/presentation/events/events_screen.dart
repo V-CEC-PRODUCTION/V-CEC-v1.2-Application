@@ -32,20 +32,21 @@ class EventsScreen extends StatelessWidget {
           child: CircleAvatar(
             radius: 20,
             child: (thumbnailUrl) == null
-                ?const  CircleAvatar(
-                                    radius: 23,
-                                    backgroundImage:
-                                       NetworkImage('https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTAxL3JtNjA5LXNvbGlkaWNvbi13LTAwMi1wLnBuZw.png'),
-                                  )
+                ? const CircleAvatar(
+                    radius: 23,
+                    backgroundImage: NetworkImage(
+                        'https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTAxL3JtNjA5LXNvbGlkaWNvbi13LTAwMi1wLnBuZw.png'),
+                  )
                 : _Banner(imageUrl: imageUrl!, thumbnailUrl: thumbnailUrl!),
           ),
         ),
-        title:
-        name == null ? const SizedBox() :
-         Text(
-          name!,
-          style:const TextStyle(color: kwhite, fontWeight: FontWeight.bold),
-        ),
+        title: name == null
+            ? const SizedBox()
+            : Text(
+                name!,
+                style:
+                    const TextStyle(color: kwhite, fontWeight: FontWeight.bold),
+              ),
         actions: [
           GestureDetector(
             onTap: () {},

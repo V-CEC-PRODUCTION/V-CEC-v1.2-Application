@@ -20,7 +20,7 @@ class _GallerySwipeViewState extends State<GallerySwipeView> {
     galleryfiles =
         BlocProvider.of<GalleryCubit>(context).state.galleryfiles ?? [];
     _pageController = PageController(initialPage: widget.offset);
-    // 
+    //
     super.initState();
   }
 

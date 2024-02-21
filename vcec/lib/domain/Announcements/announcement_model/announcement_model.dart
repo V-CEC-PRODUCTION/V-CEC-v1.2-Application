@@ -1,25 +1,49 @@
 import 'dart:convert';
 
-import 'annoucement.dart';
+import 'announcement.dart';
 
 class AnnouncementModel {
-  List<Annoucement>? annoucements;
+  List<Announcement>? announcements;
+  int? totalPages;
+  bool? hasNext;
+  bool? hasPrevious;
+  dynamic nextPageNumber;
+  dynamic previousPageNumber;
 
-  AnnouncementModel({this.annoucements});
+  AnnouncementModel({
+    this.announcements,
+    this.totalPages,
+    this.hasNext,
+    this.hasPrevious,
+    this.nextPageNumber,
+    this.previousPageNumber,
+  });
 
   @override
-  String toString() => 'AnnouncementModel(annoucements: $annoucements)';
+  String toString() {
+    return 'AnnouncementModel(announcements: $announcements, totalPages: $totalPages, hasNext: $hasNext, hasPrevious: $hasPrevious, nextPageNumber: $nextPageNumber, previousPageNumber: $previousPageNumber)';
+  }
 
   factory AnnouncementModel.fromMap(Map<String, dynamic> data) {
     return AnnouncementModel(
-      annoucements: (data['annoucements'] as List<dynamic>?)
-          ?.map((e) => Annoucement.fromMap(e as Map<String, dynamic>))
+      announcements: (data['announcements'] as List<dynamic>?)
+          ?.map((e) => Announcement.fromMap(e as Map<String, dynamic>))
           .toList(),
+      totalPages: data['total_pages'] as int?,
+      hasNext: data['has_next'] as bool?,
+      hasPrevious: data['has_previous'] as bool?,
+      nextPageNumber: data['next_page_number'] as dynamic,
+      previousPageNumber: data['previous_page_number'] as dynamic,
     );
   }
 
   Map<String, dynamic> toMap() => {
-        'annoucements': annoucements?.map((e) => e.toMap()).toList(),
+        'announcements': announcements?.map((e) => e.toMap()).toList(),
+        'total_pages': totalPages,
+        'has_next': hasNext,
+        'has_previous': hasPrevious,
+        'next_page_number': nextPageNumber,
+        'previous_page_number': previousPageNumber,
       };
 
   /// `dart:convert`
@@ -35,10 +59,20 @@ class AnnouncementModel {
   String toJson() => json.encode(toMap());
 
   AnnouncementModel copyWith({
-    List<Annoucement>? annoucements,
+    List<Announcement>? announcements,
+    int? totalPages,
+    bool? hasNext,
+    bool? hasPrevious,
+    dynamic nextPageNumber,
+    dynamic previousPageNumber,
   }) {
     return AnnouncementModel(
-      annoucements: annoucements ?? this.annoucements,
+      announcements: announcements ?? this.announcements,
+      totalPages: totalPages ?? this.totalPages,
+      hasNext: hasNext ?? this.hasNext,
+      hasPrevious: hasPrevious ?? this.hasPrevious,
+      nextPageNumber: nextPageNumber ?? this.nextPageNumber,
+      previousPageNumber: previousPageNumber ?? this.previousPageNumber,
     );
   }
 }

@@ -84,7 +84,8 @@ class Highlights extends StatelessWidget {
               children: [
                 state.highlights!.result!.isNotEmpty
                     ? Padding(
-                        padding:  EdgeInsets.only(left: size.width*0.04, top: 10),
+                        padding:
+                            EdgeInsets.only(left: size.width * 0.04, top: 10),
                         child: const SubHeading(text: 'Highlights'),
                       )
                     : const SizedBox(),

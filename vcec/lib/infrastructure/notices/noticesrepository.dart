@@ -13,19 +13,18 @@ class NoticesRepo extends NoticesService {
   Future<Either<MainFailure, List<NoticesResult>>> getnotices(
       {required NoticeType type}) async {
     try {
-       final String source = type == NoticeType.cec ? 'cec' : 'ktu';
-      final response = await Dio(BaseOptions(contentType: 'application/json')).get(
-          '${baseUrl}notices/nav/$source');
+      final String source = type == NoticeType.cec ? 'cec' : 'ktu';
+      final response = await Dio(BaseOptions(contentType: 'application/json'))
+          .get('${baseUrl}notices/nav/$source');
       if (response.statusCode == 200 || response.statusCode == 201) {
         final notices0 = NoticeModel.fromJson(response.toString());
         final notices = notices0.noticesResult;
-       
+
         return Right(notices!);
       } else {
         return const Left(MainFailure.serverFailure());
       }
     } catch (e) {
-     
       if (e is DioException && e.response?.statusCode == 401) {
         return const Left(AuthFailure());
       } else if (e is DioException && e.response?.statusCode == 500 ||

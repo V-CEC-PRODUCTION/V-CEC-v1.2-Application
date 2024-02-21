@@ -14,11 +14,49 @@ part 'events_cubit.freezed.dart';
 class EventsCubit extends Cubit<EventsState> {
   final EventsService _eventsService;
   EventsCubit(this._eventsService) : super(EventsState.initial());
-  fetchEvents({required EventType eventType}) async {
+  int pageNum = 1;
+  fetchEvents({
+    required EventType eventType,
+    required String forum,
+  }) async {
     emit(state.copyWith(
       isLoading: true,
+      isFirstFetch: pageNum == 1,
     ));
-    final response = await _eventsService.getEvents(eventType: eventType);
+    final response = await _eventsService.getEvents(
+        eventType: eventType, forum: forum, pageNum: pageNum, call: true);
+    response.fold((l) {
+      emit(state.copyWith(
+        isLoading: false,
+        isFailureOrSuccess: some(left(l)),
+      ));
+    }, (r) {
+      List<Event> updatedEvents = List.from(state.events[eventType.name]!);
+      updatedEvents.addAll(r.events!);
+      emit(state.copyWith(
+        isLoading: false,
+        events: {
+          EventType.Ended.name: state.events[EventType.Ended.name]!,
+          EventType.Upcoming.name: updatedEvents,
+        },
+        isFailureOrSuccess: some(right(updatedEvents)),
+       hasNext: r.hasNext!,
+      ));
+
+      pageNum++;
+    });
+  }
+
+  fetchEvents1({
+    required EventType eventType,
+    required String forum,
+  }) async {
+    emit(state.copyWith(isLoading: true, events: {
+      EventType.Ended.name: [],
+      EventType.Upcoming.name: [],
+    }));
+    final response = await _eventsService.getEvents(
+        eventType: eventType, forum: forum, pageNum: pageNum, call: false);
     response.fold((l) {
       emit(state.copyWith(
         isLoading: false,
@@ -29,9 +67,9 @@ class EventsCubit extends Cubit<EventsState> {
         isLoading: false,
         events: {
           EventType.Ended.name: state.events[EventType.Ended.name]!,
-          EventType.Upcoming.name: r,
+          EventType.Upcoming.name: r.events!,
         },
-        isFailureOrSuccess: some(right(r)),
+        isFailureOrSuccess: some(right(r.events!)),
       ));
     });
   }

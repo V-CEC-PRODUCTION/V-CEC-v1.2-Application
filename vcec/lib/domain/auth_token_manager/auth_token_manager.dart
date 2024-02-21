@@ -12,6 +12,7 @@ class AuthTokenManager {
   String? _thumbnailUrl;
   GoogleSignInAccount? _googleuser;
   UserRole? _userRole;
+  String? _forum;
   LoginType? _loginType;
   String? get email => _email;
   String? get accessToken => _accessToken;
@@ -20,6 +21,7 @@ class AuthTokenManager {
   LoginType? get logintype => _loginType;
   GoogleSignInAccount? get googleuser => _googleuser;
   String? get name => _name;
+  String? get forum => _forum;
   String? get imageUrl => _imageUrl;
   String? get thumbnailUrl => _thumbnailUrl;
   setTokens({required String accessToken, required String refreshToken}) {
@@ -54,6 +56,10 @@ class AuthTokenManager {
 
   setEmail(String email) {
     _email = email;
+  }
+
+  setForum(String forum) {
+    _forum = forum;
   }
 
   void clearTokens() {

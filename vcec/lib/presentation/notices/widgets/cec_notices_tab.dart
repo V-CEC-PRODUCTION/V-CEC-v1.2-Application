@@ -11,6 +11,7 @@ class CECNoticesTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size.width;
     return SingleChildScrollView(
       child: BlocBuilder<NoticesCubit, NoticesState>(
         builder: (context, state) {
@@ -18,18 +19,25 @@ class CECNoticesTab extends StatelessWidget {
             return const Center(child: Text('Searching...'));
           }, (a) {
             return a.fold((l) {
-              return Center(
-                child: Container(
-                  width: 320,
-                  height: 320,
-                  decoration: const BoxDecoration(
-                    shape: BoxShape.rectangle,
-                    image: DecorationImage(
-                      image: NetworkImage(
-                          'https://www.nopcommerce.com/images/thumbs/0005720_coming-soon-page_550.jpeg'),
-                      fit: BoxFit.cover,
+              return Padding(
+                padding: EdgeInsets.only(top: size * 0.1),
+                child: const Column(
+                  children: [
+                    SizedBox(
+                      width: 320,
+                      height: 320,
+                      child: DecoratedBox(
+                          decoration: BoxDecoration(
+                              image: DecorationImage(
+                                  image:
+                                      AssetImage('assets/img/nothing.png')))),
                     ),
-                  ),
+                    Text(
+                      'Nothing to Report',
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    )
+                  ],
                 ),
               );
             }, (r) {

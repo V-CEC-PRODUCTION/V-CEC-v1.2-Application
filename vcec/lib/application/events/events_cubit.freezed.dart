@@ -18,6 +18,8 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$EventsState {
   Map<String, List<Event>> get events => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
+  bool get isFirstFetch => throw _privateConstructorUsedError;
+  bool get hasNext => throw _privateConstructorUsedError;
   Option<Either<MainFailure, List<Event>>> get isFailureOrSuccess =>
       throw _privateConstructorUsedError;
 
@@ -35,6 +37,8 @@ abstract class $EventsStateCopyWith<$Res> {
   $Res call(
       {Map<String, List<Event>> events,
       bool isLoading,
+      bool isFirstFetch,
+      bool hasNext,
       Option<Either<MainFailure, List<Event>>> isFailureOrSuccess});
 }
 
@@ -53,6 +57,8 @@ class _$EventsStateCopyWithImpl<$Res, $Val extends EventsState>
   $Res call({
     Object? events = null,
     Object? isLoading = null,
+    Object? isFirstFetch = null,
+    Object? hasNext = null,
     Object? isFailureOrSuccess = null,
   }) {
     return _then(_value.copyWith(
@@ -63,6 +69,14 @@ class _$EventsStateCopyWithImpl<$Res, $Val extends EventsState>
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isFirstFetch: null == isFirstFetch
+          ? _value.isFirstFetch
+          : isFirstFetch // ignore: cast_nullable_to_non_nullable
+              as bool,
+      hasNext: null == hasNext
+          ? _value.hasNext
+          : hasNext // ignore: cast_nullable_to_non_nullable
               as bool,
       isFailureOrSuccess: null == isFailureOrSuccess
           ? _value.isFailureOrSuccess
@@ -83,6 +97,8 @@ abstract class _$$EventsStateImplCopyWith<$Res>
   $Res call(
       {Map<String, List<Event>> events,
       bool isLoading,
+      bool isFirstFetch,
+      bool hasNext,
       Option<Either<MainFailure, List<Event>>> isFailureOrSuccess});
 }
 
@@ -99,6 +115,8 @@ class __$$EventsStateImplCopyWithImpl<$Res>
   $Res call({
     Object? events = null,
     Object? isLoading = null,
+    Object? isFirstFetch = null,
+    Object? hasNext = null,
     Object? isFailureOrSuccess = null,
   }) {
     return _then(_$EventsStateImpl(
@@ -109,6 +127,14 @@ class __$$EventsStateImplCopyWithImpl<$Res>
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isFirstFetch: null == isFirstFetch
+          ? _value.isFirstFetch
+          : isFirstFetch // ignore: cast_nullable_to_non_nullable
+              as bool,
+      hasNext: null == hasNext
+          ? _value.hasNext
+          : hasNext // ignore: cast_nullable_to_non_nullable
               as bool,
       isFailureOrSuccess: null == isFailureOrSuccess
           ? _value.isFailureOrSuccess
@@ -124,6 +150,8 @@ class _$EventsStateImpl implements _EventsState {
   const _$EventsStateImpl(
       {required final Map<String, List<Event>> events,
       required this.isLoading,
+      required this.isFirstFetch,
+      required this.hasNext,
       required this.isFailureOrSuccess})
       : _events = events;
 
@@ -138,11 +166,15 @@ class _$EventsStateImpl implements _EventsState {
   @override
   final bool isLoading;
   @override
+  final bool isFirstFetch;
+  @override
+  final bool hasNext;
+  @override
   final Option<Either<MainFailure, List<Event>>> isFailureOrSuccess;
 
   @override
   String toString() {
-    return 'EventsState(events: $events, isLoading: $isLoading, isFailureOrSuccess: $isFailureOrSuccess)';
+    return 'EventsState(events: $events, isLoading: $isLoading, isFirstFetch: $isFirstFetch, hasNext: $hasNext, isFailureOrSuccess: $isFailureOrSuccess)';
   }
 
   @override
@@ -153,6 +185,9 @@ class _$EventsStateImpl implements _EventsState {
             const DeepCollectionEquality().equals(other._events, _events) &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
+            (identical(other.isFirstFetch, isFirstFetch) ||
+                other.isFirstFetch == isFirstFetch) &&
+            (identical(other.hasNext, hasNext) || other.hasNext == hasNext) &&
             (identical(other.isFailureOrSuccess, isFailureOrSuccess) ||
                 other.isFailureOrSuccess == isFailureOrSuccess));
   }
@@ -162,6 +197,8 @@ class _$EventsStateImpl implements _EventsState {
       runtimeType,
       const DeepCollectionEquality().hash(_events),
       isLoading,
+      isFirstFetch,
+      hasNext,
       isFailureOrSuccess);
 
   @JsonKey(ignore: true)
@@ -175,6 +212,8 @@ abstract class _EventsState implements EventsState {
   const factory _EventsState(
       {required final Map<String, List<Event>> events,
       required final bool isLoading,
+      required final bool isFirstFetch,
+      required final bool hasNext,
       required final Option<Either<MainFailure, List<Event>>>
           isFailureOrSuccess}) = _$EventsStateImpl;
 
@@ -182,6 +221,10 @@ abstract class _EventsState implements EventsState {
   Map<String, List<Event>> get events;
   @override
   bool get isLoading;
+  @override
+  bool get isFirstFetch;
+  @override
+  bool get hasNext;
   @override
   Option<Either<MainFailure, List<Event>>> get isFailureOrSuccess;
   @override

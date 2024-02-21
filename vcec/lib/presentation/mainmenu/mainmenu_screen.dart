@@ -41,7 +41,6 @@ class MainMenuScreen extends StatelessWidget {
                       );
                     },
                     (success) {
-                      
                       return MainmenuAppbar(
                         currentPeriod: success.result![0].currentcode ?? '...',
                         duration: success.result![0].currenttime ?? '..',
@@ -61,10 +60,10 @@ class MainMenuScreen extends StatelessWidget {
                   kheight10,
                   const StoryWidget(),
                   kheight10,
-                 const CarouselMainManu(),
+                  const CarouselMainManu(),
 
                   kheight10,
-                 const Highlights(),
+                  const Highlights(),
                   kheight10,
                   //  Padding(
                   //     padding: const EdgeInsets.only(left: 20, top: 10),

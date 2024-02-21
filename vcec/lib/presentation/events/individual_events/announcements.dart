@@ -73,13 +73,38 @@ class IndAnnouncementsPage extends StatelessWidget {
       },
       builder: (context, state) {
         if (state.isLoading) {
-          return const Center(
-            child: loadingWidget,
+          return const Scaffold(
+            body: Center(
+              child: loadingWidget,
+            ),
           );
         }
 
         return state.indAnnouncements == null
-            ? const Center(child: Text('Error...'))
+            ? Scaffold(
+                body: Center(
+                    child: Padding(
+                  padding: EdgeInsets.only(top: size1 * 0.2),
+                  child: const Column(
+                    children: [
+                      SizedBox(
+                        width: 320,
+                        height: 320,
+                        child: DecoratedBox(
+                            decoration: BoxDecoration(
+                                image: DecorationImage(
+                                    image:
+                                        AssetImage('assets/img/nothing.png')))),
+                      ),
+                      Text(
+                        'Nothing to Report',
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
+                      )
+                    ],
+                  ),
+                )),
+              )
             : Scaffold(
                 appBar: AppBar(
                   leading: IconButton(

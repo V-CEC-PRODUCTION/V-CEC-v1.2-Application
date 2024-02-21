@@ -18,7 +18,7 @@ class ImgLikesRepository extends ImgLikesService {
       if (response.statusCode == 200 || response.statusCode == 201) {
         final likes0 = LikesModel.fromJson(response.toString());
         final likes = likes0.eventLikes;
-       
+
         return Right(likes!);
       } else {
         return const Left(MainFailure.serverFailure());

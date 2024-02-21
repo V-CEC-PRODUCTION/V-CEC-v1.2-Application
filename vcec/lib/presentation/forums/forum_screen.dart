@@ -21,11 +21,11 @@ class ForumScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-           const UpcomingEventsWidget(),
+            const UpcomingEventsWidget(),
             kheight10,
-           const  AnnouncementsEventsWidget(),
+            const AnnouncementsEventsWidget(),
             kheight10,
-           const PreviousEventsWidget()
+            const PreviousEventsWidget()
           ],
         ),
       )),

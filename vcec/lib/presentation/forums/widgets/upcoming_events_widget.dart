@@ -15,7 +15,7 @@ class UpcomingEventsWidget extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-           const SubHeading(text: 'Upcoming Events'),
+            const SubHeading(text: 'Upcoming Events'),
             TextButton(
                 onPressed: () {},
                 child: const Text('View All',

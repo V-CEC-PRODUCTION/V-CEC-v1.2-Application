@@ -47,11 +47,11 @@ class _HomeScreenState extends State<HomeScreen> {
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(false),
-            child:const Text('No'),
+            child: const Text('No'),
           ),
           TextButton(
             onPressed: () => Navigator.of(context).pop(true),
-            child:const Text('Yes'),
+            child: const Text('Yes'),
           ),
         ],
       ),
@@ -81,7 +81,7 @@ class _HomeScreenState extends State<HomeScreen> {
               return IndexedStack(
                 index: newIndex,
                 children: [
-                  const MainMenuScreen(),
+                //  const MainMenuScreen(),
                   EventsScreen(),
                   NoticesScreen(),
                   DepartmentsScreen(),

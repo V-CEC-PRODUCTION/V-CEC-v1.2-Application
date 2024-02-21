@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-class Annoucement {
+class Announcement {
   int? id;
   String? title;
   String? content;
@@ -15,7 +15,7 @@ class Annoucement {
   List<dynamic>? likedBy;
   int? totalLikes;
 
-  Annoucement({
+  Announcement({
     this.id,
     this.title,
     this.content,
@@ -33,10 +33,10 @@ class Annoucement {
 
   @override
   String toString() {
-    return 'Annoucement(id: $id, title: $title, content: $content, posterImageUrl: $posterImageUrl, thumbnailPosterImageUrl: $thumbnailPosterImageUrl, whatsappLink: $whatsappLink, publishDate: $publishDate, publishedBy: $publishedBy, hashtags: $hashtags, buttonLink: $buttonLink, buttonName: $buttonName, likedBy: $likedBy, totalLikes: $totalLikes)';
+    return 'Announcement(id: $id, title: $title, content: $content, posterImageUrl: $posterImageUrl, thumbnailPosterImageUrl: $thumbnailPosterImageUrl, whatsappLink: $whatsappLink, publishDate: $publishDate, publishedBy: $publishedBy, hashtags: $hashtags, buttonLink: $buttonLink, buttonName: $buttonName, likedBy: $likedBy, totalLikes: $totalLikes)';
   }
 
-  factory Annoucement.fromMap(Map<String, dynamic> data) => Annoucement(
+  factory Announcement.fromMap(Map<String, dynamic> data) => Announcement(
         id: data['id'] as int?,
         title: data['title'] as String?,
         content: data['content'] as String?,
@@ -72,17 +72,17 @@ class Annoucement {
 
   /// `dart:convert`
   ///
-  /// Parses the string and returns the resulting Json object as [Annoucement].
-  factory Annoucement.fromJson(String data) {
-    return Annoucement.fromMap(json.decode(data) as Map<String, dynamic>);
+  /// Parses the string and returns the resulting Json object as [Announcement].
+  factory Announcement.fromJson(String data) {
+    return Announcement.fromMap(json.decode(data) as Map<String, dynamic>);
   }
 
   /// `dart:convert`
   ///
-  /// Converts [Annoucement] to a JSON string.
+  /// Converts [Announcement] to a JSON string.
   String toJson() => json.encode(toMap());
 
-  Annoucement copyWith({
+  Announcement copyWith({
     int? id,
     String? title,
     String? content,
@@ -97,7 +97,7 @@ class Annoucement {
     List<dynamic>? likedBy,
     int? totalLikes,
   }) {
-    return Annoucement(
+    return Announcement(
       id: id ?? this.id,
       title: title ?? this.title,
       content: content ?? this.content,

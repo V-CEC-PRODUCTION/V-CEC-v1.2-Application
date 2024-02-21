@@ -8,7 +8,8 @@ class TimeTableModel {
   String? imageThumbnailUrl;
   String? name;
 
-  TimeTableModel({this.result, this.thumbnailUrl, this.imageThumbnailUrl, this.name});
+  TimeTableModel(
+      {this.result, this.thumbnailUrl, this.imageThumbnailUrl, this.name});
 
   @override
   String toString() {

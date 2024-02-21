@@ -3,13 +3,16 @@ part of 'announcements_cubit.dart';
 @freezed
 class AnnouncementState with _$AnnouncementState {
   const factory AnnouncementState({
-    required List<Annoucement> announcements,
+    required List<Announcement> announcements,
     required bool isLoading,
-    required Option<Either<MainFailure, List<Annoucement>>> isFailureOrSuccess,
+    required bool isFirstFetch,
+    required bool hasNext,
+    required Option<Either<MainFailure, List<Announcement>>> isFailureOrSuccess,
   }) = _AnnouncementState;
   factory AnnouncementState.initial() => AnnouncementState(
-        announcements: [],
-        isLoading: false,
-        isFailureOrSuccess: none(),
-      );
+      announcements: [],
+      isLoading: false,
+      isFailureOrSuccess: none(),
+      isFirstFetch: false,
+      hasNext: true);
 }

@@ -12,8 +12,8 @@ class ForgotPasswordWidget extends StatelessWidget {
       alignment: Alignment.centerRight,
       child: TextButton(
         onPressed: () {
-          Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => const ForgotPasswordScreen()));
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => const ForgotPasswordScreen()));
         },
         child: const Text(
           'Forgot Password?',

@@ -49,11 +49,11 @@ class CecGallery extends StatelessWidget {
             children: [
               Padding(
                 padding: EdgeInsets.only(left: size.width * 0.04, top: 10),
-                child:const SubHeading(text: 'CEC Gallery'),
+                child: const SubHeading(text: 'CEC Gallery'),
               ),
               Shimmer.fromColors(
-                baseColor:const Color.fromARGB(255, 0, 0, 0),
-                highlightColor:const Color.fromARGB(255, 207, 207, 207),
+                baseColor: const Color.fromARGB(255, 0, 0, 0),
+                highlightColor: const Color.fromARGB(255, 207, 207, 207),
                 child: Container(
                   margin: const EdgeInsets.symmetric(horizontal: 10),
                   height: (size.width - 20) * 9 / 16,
@@ -76,10 +76,10 @@ class CecGallery extends StatelessWidget {
           }
           return Column(
             children: [
-           const   _HeadingPortion(),
+              const _HeadingPortion(),
               WallLayout(
                 stones: List.generate(galleryLength, (index) {
-                //  print(state.galleryfiles![index]);
+                  //  print(state.galleryfiles![index]);
                   final galleryImages = state.galleryfiles![index % 5];
                   return buildGalleryItem(
                       context: context,
@@ -110,17 +110,17 @@ class _HeadingPortion extends StatelessWidget {
       child: Row(
         children: [
           kwidth20,
-        const  SubHeading(text: 'CEC Gallery'),
-        const  Spacer(),
+          const SubHeading(text: 'CEC Gallery'),
+          const Spacer(),
           GestureDetector(
             onTap: () {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) =>const CecGalleryScreen(),
+                    builder: (context) => const CecGalleryScreen(),
                   ));
             },
-            child:const Text('view all'),
+            child: const Text('view all'),
           ),
           kwidth20,
         ],
