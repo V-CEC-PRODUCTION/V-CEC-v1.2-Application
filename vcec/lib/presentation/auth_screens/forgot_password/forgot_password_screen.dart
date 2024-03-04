@@ -38,7 +38,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
               } else if (failure == const MainFailure.clientFailure()) {
                 displaySnackBar(
                     context: context,
-                    text: "Something wrong with your network");
+                    text: "Something wrong with your network9");
               } else {
                 displaySnackBar(
                     context: context, text: "Something Unexpected Happened");

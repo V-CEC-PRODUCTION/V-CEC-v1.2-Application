@@ -2,6 +2,7 @@ import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vcec/domain/auth_token_manager/auth_token_manager.dart';
 import 'package:vcec/domain/splash_screen/splash_screen_service.dart';
+import 'dart:developer';
 
 @LazySingleton(as: SplashScreenService)
 class SplashScreenRepo extends SplashScreenService {
@@ -13,6 +14,7 @@ class SplashScreenRepo extends SplashScreenService {
     if (accessToken == null && refreshToken == null) {
       return false;
     } else {
+      log(accessToken.toString());
       AuthTokenManager.instance
           .setTokens(accessToken: accessToken!, refreshToken: refreshToken!);
       return true;

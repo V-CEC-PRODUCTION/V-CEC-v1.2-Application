@@ -81,7 +81,7 @@ class _HomeScreenState extends State<HomeScreen> {
               return IndexedStack(
                 index: newIndex,
                 children: [
-                //  const MainMenuScreen(),
+                  const MainMenuScreen(),
                   EventsScreen(),
                   NoticesScreen(),
                   DepartmentsScreen(),

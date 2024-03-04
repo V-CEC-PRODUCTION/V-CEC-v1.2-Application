@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vcec/application/splash_screen/splash_screen_cubit.dart';
@@ -13,7 +15,10 @@ class SplashScreen extends StatelessWidget {
 
     return BlocListener<SplashScreenCubit, SplashScreenState>(
       listener: (context, state) {
-        Navigator.of(context).pushReplacementNamed(state.page);
+        log(state.page);
+        if (state.page.isNotEmpty) {
+          Navigator.of(context).pushReplacementNamed(state.page);
+        }
       },
       child: const Scaffold(
         body: Center(

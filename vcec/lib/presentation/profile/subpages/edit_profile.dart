@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:developer';
 import 'package:crop_image/crop_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -95,6 +96,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
   @override
   void initState() {
+    log("init state");
     super.initState();
     final profileState = BlocProvider.of<ProfileCubit>(context).state;
     profileState.failureOrSuccess.fold(() {
@@ -120,7 +122,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 } else if (failure == const MainFailure.clientFailure()) {
                   displaySnackBar(
                       context: context,
-                      text: "Something wrong with your network");
+                      text: "Something wrong with your network16");
                 } else if (failure == const MainFailure.authFailure()) {
                   displaySnackBar(
                       context: context, text: 'Access token timed out');
@@ -131,7 +133,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               }
             },
             (r) async {
-              BlocProvider.of<ProfileCubit>(context).edited();
+              
               Navigator.of(context).pop(MaterialPageRoute(
                 builder: (context) {
                   return const ProfileScreen();
@@ -160,7 +162,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     } else if (failure == const MainFailure.clientFailure()) {
                       displaySnackBar(
                           context: context,
-                          text: "Something wrong with your network");
+                          text: "Something wrong with your network17");
                     } else if (failure == const MainFailure.authFailure()) {
                       displaySnackBar(
                           context: context, text: 'Access token timed out');
@@ -231,11 +233,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           regno: _regController.text,
                           div: _divController.text,
                           ieeeno: _ieeeController.text,
+                          image: file
                         );
-                        if (file != null) {
-                          BlocProvider.of<EditProfileCubit>(context)
-                              .putProfileImg(imgFile: file!);
-                        }
+                        
                       },
                       child: const Text(
                         'Save',

@@ -120,7 +120,7 @@ class MyApp extends StatelessWidget {
               theme: ThemeData(
                 useMaterial3: true,
               ),
-              initialRoute: '/home',
+              initialRoute: '/',
               routes: {
                 '/': (context) => const SplashScreen(),
                 '/login': (context) => const LoginPage(),

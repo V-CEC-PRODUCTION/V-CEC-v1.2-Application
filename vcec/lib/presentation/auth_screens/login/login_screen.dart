@@ -63,7 +63,7 @@ class _LoginPageState extends State<LoginPage> {
                   } else if (failure == const MainFailure.clientFailure()) {
                     displaySnackBar(
                         context: context,
-                        text: "Something wrong with your network");
+                        text: "Something wrong with your networkkk");
                   } else {
                     displaySnackBar(
                         context: context,
@@ -95,7 +95,7 @@ class _LoginPageState extends State<LoginPage> {
                   } else if (failure == const MainFailure.clientFailure()) {
                     displaySnackBar(
                         context: context,
-                        text: "Something wrong with your network");
+                        text: "Something wrong with your network3");
                   } else {
                     displaySnackBar(
                         context: context,

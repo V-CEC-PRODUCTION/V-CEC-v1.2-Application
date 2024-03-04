@@ -58,6 +58,9 @@ class DepartmentSearchRepo implements DepartmentSearchService {
       }
     } catch (e) {
       log(e.toString());
+      if (e is DioException && e.response?.statusCode == 500) {
+        log(e.response?.data.toString() ?? "err");
+      }
       return const Left(MainFailure.clientFailure());
     }
   }
