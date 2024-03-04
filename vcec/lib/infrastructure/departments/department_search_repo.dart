@@ -46,6 +46,7 @@ class DepartmentSearchRepo implements DepartmentSearchService {
         break;
     }
     try {
+      log('${baseUrl}staff/info/directory/search/$dept?search=$query&page=$pageNum&count=$pageCount');
       final respose = await Dio(BaseOptions(contentType: 'application/json')).get(
           '${baseUrl}staff/info/directory/search/$dept?search=$query&page=$pageNum&count=$pageCount');
 
