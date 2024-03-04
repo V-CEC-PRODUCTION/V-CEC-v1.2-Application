@@ -28,9 +28,6 @@ class ProfileScreen extends StatelessWidget {
           BlocProvider.of<ProfileCubit>(context).getProfileDetails();
         }, (r) => null);
       });
-      profileState.hasEdited
-          ? BlocProvider.of<ProfileCubit>(context).getProfileDetails()
-          : null;
     });
     final size1 = MediaQuery.of(context).size.width;
     return Scaffold(
@@ -73,7 +70,7 @@ class ProfileScreen extends StatelessWidget {
                       } else if (failure == const MainFailure.clientFailure()) {
                         displaySnackBar(
                             context: context,
-                            text: "Something wrong with your network");
+                            text: "Something wrong with your network15");
                       } else if (failure == const MainFailure.authFailure()) {
                         displaySnackBar(
                             context: context, text: 'Access token timed out');

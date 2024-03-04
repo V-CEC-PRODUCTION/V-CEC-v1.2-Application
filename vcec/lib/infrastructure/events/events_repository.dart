@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:vcec/domain/events/events_service.dart';
@@ -17,17 +18,18 @@ class EventsRepository extends EventsService {
       required bool call}) async {
     int pageCount = 4;
     try {
-      final response = await Dio(BaseOptions(contentType: 'application/json')).get(
-        call ?  '${baseUrl}forum/events/get-event/?status=${eventType.name}&forum=$forum&page=$pageNum&count=$pageCount' : '${baseUrl}forum/events/get-event/?status=${eventType.name}&forum=$forum');
+      final response = await Dio(BaseOptions(contentType: 'application/json')).get(call
+          ? '${baseUrl}forum/events/get-event/?status=${eventType.name}&forum=$forum&page=$pageNum&count=$pageCount'
+          : '${baseUrl}forum/events/get-event/?status=${eventType.name}&forum=$forum');
       if (response.statusCode == 200 || response.statusCode == 201) {
         final events0 = EventModel.fromJson(response.toString());
-       
-
         return Right(events0);
       } else {
         return const Left(MainFailure.serverFailure());
       }
     } catch (e) {
+      print(e);
+      log(e.toString());
       if (e is DioException && e.response?.statusCode == 401) {
         return const Left(AuthFailure());
       } else if (e is DioException && e.response?.statusCode == 500 ||

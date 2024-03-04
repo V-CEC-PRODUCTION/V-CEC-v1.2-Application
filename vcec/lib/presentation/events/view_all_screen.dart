@@ -67,7 +67,7 @@ class ViewAllScreen extends StatelessWidget {
                   } else if (failure == const MainFailure.clientFailure()) {
                     displaySnackBar(
                         context: context,
-                        text: "Something wrong with your network");
+                        text: "Something wrong with your network10");
                   } else if (failure == const MainFailure.authFailure()) {
                     displaySnackBar(
                         context: context, text: 'Access token timed out');

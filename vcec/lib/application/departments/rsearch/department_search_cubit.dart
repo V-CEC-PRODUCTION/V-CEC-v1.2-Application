@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -17,81 +19,93 @@ class DepartmentSearchCubit extends Cubit<DepartmentSearchState> {
   final DepartmentSearchService _searchService;
   DepartmentSearchCubit(this._searchService)
       : super(DepartmentSearchState.initial());
+  bool _searchDepartmentsIsExecuting = false;
+  bool _searchDepartmentsWithSearchBarIsExecuting = false;
   int pageNum = 1;
   int pageNum1 = 1;
   void searchDepartments(String query, Department? deptType) async {
-    if (state.department != deptType) {
-      pageNum = 1;
-      emit(state.copyWith(
-        staffs: [],
-        failureOrSuccess: none(),
-        isFirstFetch: pageNum == 1,
-        isLoading: true,
-        department: deptType!,
-      ));
-    } else {
-      emit(state.copyWith(
-        failureOrSuccess: none(),
-        isFirstFetch: pageNum == 1,
-        isLoading: true,
-      ));
-    }
-    final result =
-        await _searchService.searchDepartments(query, deptType, pageNum);
-    result.fold(
-      (l) => emit(state.copyWith(
-        failureOrSuccess: some(left(l)),
-        isLoading: false,
-      )),
-      (r) {
-        List<Staff> updatedStaffs = List.from(state.staffs);
-        updatedStaffs.addAll(r.staffInfo!);
+    if (!_searchDepartmentsIsExecuting) {
+      _searchDepartmentsIsExecuting = true;
+      log(pageNum.toString());
+      if (state.department != deptType) {
+        pageNum = 1;
         emit(state.copyWith(
-          staffs: updatedStaffs,
-          failureOrSuccess: some(right(updatedStaffs)),
-          isLoading: false,
-          hasNext: r.hasNext!,
+          staffs: [],
+          failureOrSuccess: none(),
+          isFirstFetch: pageNum == 1,
+          isLoading: true,
+          department: deptType!,
         ));
-        pageNum++;
-      },
-    );
+      } else {
+        emit(state.copyWith(
+          failureOrSuccess: none(),
+          isFirstFetch: pageNum == 1,
+          isLoading: true,
+        ));
+      }
+      final result =
+          await _searchService.searchDepartments(query, deptType, pageNum);
+      result.fold(
+        (l) => emit(state.copyWith(
+          failureOrSuccess: some(left(l)),
+          isLoading: false,
+        )),
+        (r) {
+          List<Staff> updatedStaffs = List.from(state.staffs);
+          updatedStaffs.addAll(r.staffInfo!);
+          emit(state.copyWith(
+            staffs: updatedStaffs,
+            failureOrSuccess: some(right(updatedStaffs)),
+            isLoading: false,
+            hasNext: r.hasNext!,
+          ));
+          _searchDepartmentsIsExecuting = false;
+          pageNum++;
+        },
+      );
+    }
   }
 
   void searchDepartmentsWithSearchBar(
       String query, Department? deptType) async {
-    if (state.department != deptType) {
-      emit(state.copyWith(
-        staffs: [],
-        failureOrSuccess: none(),
-        isFirstFetch: pageNum1 == 1,
-        isLoading: true,
-      ));
-    } else {
-      emit(state.copyWith(
-        failureOrSuccess: none(),
-        isFirstFetch: pageNum1 == 1,
-        isLoading: true,
-      ));
-    }
-    final result =
-        await _searchService.searchDepartments(query, deptType, pageNum1);
-    result.fold(
-      (l) => emit(state.copyWith(
-        failureOrSuccess: some(left(l)),
-        isLoading: false,
-      )),
-      (r) {
-        List<Staff> updatedStaffs = List.from(state.staffs);
-        updatedStaffs.addAll(r.staffInfo!);
+    if (!_searchDepartmentsWithSearchBarIsExecuting) {
+      
+      _searchDepartmentsWithSearchBarIsExecuting = true;
+      if (state.department != deptType) {
         emit(state.copyWith(
-          staffs: updatedStaffs,
-          failureOrSuccess: some(right(updatedStaffs)),
-          isLoading: false,
-          hasNext: r.hasNext!,
+          staffs: [],
+          failureOrSuccess: none(),
+          isFirstFetch: pageNum1 == 1,
+          isLoading: true,
         ));
-        // print(r.hasNext);
-        pageNum1++;
-      },
-    );
+      } else {
+        emit(state.copyWith(
+          failureOrSuccess: none(),
+          isFirstFetch: pageNum1 == 1,
+          isLoading: true,
+        ));
+      }
+      final result =
+          await _searchService.searchDepartments(query, deptType, pageNum1);
+      result.fold(
+        (l) => emit(state.copyWith(
+          failureOrSuccess: some(left(l)),
+          isLoading: false,
+        )),
+        (r) {
+          List<Staff> updatedStaffs = List.from(state.staffs);
+          updatedStaffs.addAll(r.staffInfo!);
+          emit(state.copyWith(
+            staffs: updatedStaffs,
+            failureOrSuccess: some(right(updatedStaffs)),
+            isLoading: false,
+            hasNext: r.hasNext!,
+          ));
+          // print(r.hasNext);
+          _searchDepartmentsWithSearchBarIsExecuting = false;
+          pageNum1++;
+        },
+      );
+    }
   }
 }

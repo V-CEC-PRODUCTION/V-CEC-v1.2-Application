@@ -42,7 +42,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               } else if (failure == const MainFailure.clientFailure()) {
                 displaySnackBar(
                     context: context,
-                    text: "Something wrong with your network");
+                    text: "Something wrong with your network4");
               } else if (failure == const MainFailure.authFailure()) {
                 displaySnackBar(
                     context: context, text: 'Account already exists');
@@ -72,7 +72,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               } else if (failure == const MainFailure.clientFailure()) {
                 displaySnackBar(
                     context: context,
-                    text: "Something wrong with your network");
+                    text: "Something wrong with your network5");
               } else {
                 displaySnackBar(
                     context: context, text: "Something Unexpected Happened");

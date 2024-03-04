@@ -46,6 +46,7 @@ class DepartmentSearchRepo implements DepartmentSearchService {
         break;
     }
     try {
+      log('${baseUrl}staff/info/directory/search/$dept?search=$query&page=$pageNum&count=$pageCount');
       final respose = await Dio(BaseOptions(contentType: 'application/json')).get(
           '${baseUrl}staff/info/directory/search/$dept?search=$query&page=$pageNum&count=$pageCount');
 
@@ -58,6 +59,9 @@ class DepartmentSearchRepo implements DepartmentSearchService {
       }
     } catch (e) {
       log(e.toString());
+      if (e is DioException && e.response?.statusCode == 500) {
+        log(e.response?.data.toString() ?? "err");
+      }
       return const Left(MainFailure.clientFailure());
     }
   }

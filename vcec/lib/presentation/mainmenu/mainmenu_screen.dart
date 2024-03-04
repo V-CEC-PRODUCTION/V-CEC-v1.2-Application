@@ -10,6 +10,8 @@ import 'package:vcec/presentation/mainmenu/widgets/cecify_radio_widget.dart';
 import 'package:vcec/presentation/mainmenu/widgets/highlights1.dart';
 import 'package:vcec/presentation/mainmenu/widgets/story_widget.dart';
 
+String myUri="";
+
 class MainMenuScreen extends StatelessWidget {
   const MainMenuScreen({super.key});
 
@@ -58,8 +60,8 @@ class MainMenuScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  kheight10,
-                  const StoryWidget(),
+                 
+               
                   kheight10,
                   const CarouselMainManu(),
 

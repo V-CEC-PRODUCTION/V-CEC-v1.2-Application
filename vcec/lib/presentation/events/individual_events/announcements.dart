@@ -30,7 +30,7 @@ class IndAnnouncementsPage extends StatelessWidget {
                 } else if (failure == const MainFailure.clientFailure()) {
                   displaySnackBar(
                       context: context,
-                      text: "Something wrong with your network");
+                      text: "Something wrong with your network12");
                 } else if (failure == const MainFailure.authFailure()) {
                   displaySnackBar(
                       context: context, text: 'Access token timed out');
@@ -57,7 +57,7 @@ class IndAnnouncementsPage extends StatelessWidget {
                       } else if (failure == const MainFailure.clientFailure()) {
                         displaySnackBar(
                             context: context,
-                            text: "Something wrong with your network");
+                            text: "Something wrong with your network13");
                       } else if (failure == const MainFailure.authFailure()) {
                         displaySnackBar(
                             context: context, text: 'Access token timed out');

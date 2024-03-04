@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_wall_layout/flutter_wall_layout.dart';
 import 'package:shimmer/shimmer.dart';
@@ -6,6 +7,7 @@ import 'package:vcec/application/gallery/gallery_cubit.dart';
 import 'package:vcec/core/constants.dart';
 import 'package:vcec/domain/failure/main_failure.dart';
 import 'package:vcec/presentation/common_widgets/sub_heading.dart';
+import 'package:vcec/presentation/mainmenu/mainmenu_screen.dart';
 import 'package:vcec/presentation/mainmenu/subpages/cec_gallery_screen1.dart';
 import 'package:vcec/presentation/mainmenu/widgets/gallery_tile.dart';
 
@@ -128,3 +130,13 @@ class _HeadingPortion extends StatelessWidget {
     );
   }
 }
+// class _Temp extends StatelessWidget {
+//   const _Temp({super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return const Scaffold(
+//       body: Image.file(file)
+//     );
+//   }
+// }

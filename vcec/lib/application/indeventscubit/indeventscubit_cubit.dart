@@ -25,11 +25,11 @@ class IndEventsCubit extends Cubit<IndEventsState> {
   final ImgLikesService _imgLikesService;
 
   void getIndEvents({required int id}) async {
-    final result1 = await _viewsService.postView(id: id);
     emit(state.copyWith(
       isLoading: true,
       isFailureOrSuccess: none(),
     ));
+    final result1 = await _viewsService.postView(id: id);
     final result = await _indEventsService.getIndEvents(id: id);
     result1.fold((l) {
       emit(state.copyWith(

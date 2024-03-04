@@ -1,6 +1,9 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:stories_editor/stories_editor.dart';
+import 'package:vcec/presentation/mainmenu/mainmenu_screen.dart';
 //import 'package:stories_editor/stories_editor.dart';
 
 class StoryImageUploadWidget extends StatefulWidget {
@@ -16,10 +19,10 @@ class _StoryPageState extends State<StoryImageUploadWidget> {
     return StoriesEditor(
       giphyKey: '3tKgbOFuFHMlzPYqJi6jH5cev6N9KFsQ',
       onDone: (uri) {
-        // uri is the local path of final render Uint8List
-        // here your code
-
-        Share.shareFiles([uri]);
+        myUri = uri;
+        log('myUri: $myUri');
+        Navigator.pop(context);
+        Navigator.pop(context);
       },
       middleBottomWidget: const SizedBox(),
     );
