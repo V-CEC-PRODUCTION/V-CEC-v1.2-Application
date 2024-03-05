@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:vcec/core/colors.dart';
 import 'package:vcec/core/constants.dart';
+import 'package:vcec/presentation/auth_screens/account_details/account_details_screen.dart';
 
 import 'package:vcec/presentation/auth_screens/login/widgets/forgot_password_button.dart';
 import 'package:vcec/presentation/auth_screens/login/widgets/login_image.dart';
@@ -85,9 +86,9 @@ class _LoginPageState extends State<LoginPage> {
                   if (failure == const MainFailure.serverFailure()) {
                     displaySnackBar(context: context, text: "Server is down");
                   } else if (failure == const MainFailure.authFailure()) {
-                    displaySnackBar(
-                        context: context,
-                        text: "Please check the email address");
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) =>const AccountDetailsScreen(password: ''),
+                    ));
                   } else if (failure ==
                       const MainFailure.incorrectCredential()) {
                     displaySnackBar(

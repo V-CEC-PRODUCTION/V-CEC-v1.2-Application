@@ -35,8 +35,8 @@ class _MainmenuAppbarState extends State<MainmenuAppbar> {
   bool initial = true;
   bool expanded = false;
   bool isOpen = false;
-  final collapsedHeight = 65.0;
-  final expandedHeight = 225.0;
+  final collapsedHeight = 95.0;
+  final expandedHeight = 255.0;
   late final Avatar avatar;
   @override
   void initState() {
@@ -73,6 +73,7 @@ class _MainmenuAppbarState extends State<MainmenuAppbar> {
             }),
         builder: (context, value, child) {
           return SliverAppBar(
+            primary: false,
             automaticallyImplyLeading: false,
             backgroundColor: Colors.transparent,
             elevation: 0,
@@ -93,7 +94,8 @@ class _MainmenuAppbarState extends State<MainmenuAppbar> {
                 child: Column(
                   children: [
                     Container(
-                      color: kblack,
+                      padding: EdgeInsets.only(top: 25),
+                      color: Color(0xff2E3136),
                       height: collapsedHeight,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -205,22 +207,22 @@ class _MainmenuAppbarState extends State<MainmenuAppbar> {
                                           MainAxisAlignment.center,
                                       children: [
                                         _TimeTableWidget(
-                                          text: widget.timeTable!.firsttime!,
+                                          text: widget.timeTable!.firsttime,
                                         ),
                                         _TimeTableWidget(
-                                          text: widget.timeTable!.secondtime!,
+                                          text: widget.timeTable!.secondtime,
                                         ),
                                         _TimeTableWidget(
-                                          text: widget.timeTable!.thirdtime!,
+                                          text: widget.timeTable!.thirdtime,
                                         ),
                                         _TimeTableWidget(
-                                          text: widget.timeTable!.fourthtime!,
+                                          text: widget.timeTable!.fourthtime,
                                         ),
                                         _TimeTableWidget(
-                                          text: widget.timeTable!.fifthtime!,
+                                          text: widget.timeTable!.fifthtime,
                                         ),
                                         _TimeTableWidget(
-                                          text: widget.timeTable!.sixthtime!,
+                                          text: widget.timeTable!.sixthtime,
                                         ),
                                       ],
                                     ),
@@ -229,22 +231,22 @@ class _MainmenuAppbarState extends State<MainmenuAppbar> {
                                           MainAxisAlignment.center,
                                       children: [
                                         _TimeTableWidget(
-                                          text: widget.timeTable!.firstcode!,
+                                          text: widget.timeTable!.firstcode,
                                         ),
                                         _TimeTableWidget(
-                                          text: widget.timeTable!.secondcode!,
+                                          text: widget.timeTable!.secondcode,
                                         ),
                                         _TimeTableWidget(
-                                          text: widget.timeTable!.thirdcode!,
+                                          text: widget.timeTable!.thirdcode,
                                         ),
                                         _TimeTableWidget(
-                                          text: widget.timeTable!.fourthcode!,
+                                          text: widget.timeTable!.fourthcode,
                                         ),
                                         _TimeTableWidget(
-                                          text: widget.timeTable!.fifthcode!,
+                                          text: widget.timeTable!.fifthcode,
                                         ),
                                         _TimeTableWidget(
-                                          text: widget.timeTable!.sixthcode!,
+                                          text: widget.timeTable!.sixthcode,
                                         ),
                                       ],
                                     ),
@@ -307,7 +309,7 @@ class _TimeTableWiget extends StatelessWidget {
       height: 30,
       width: MediaQuery.of(context).size.width * 0.29,
       decoration: BoxDecoration(
-        color: const Color.fromARGB(255, 53, 53, 53),
+        color: Color.fromARGB(255, 97, 97, 97),
         borderRadius: BorderRadius.circular(10),
       ),
       child: Center(
@@ -340,8 +342,8 @@ class _Banner extends StatelessWidget {
   final String thumbnailUrl;
   @override
   Widget build(BuildContext context) {
-    String url = '$baseUrl$imageUrl'.replaceAll('auth//api/', 'auth/api/');
-    String turl = '$baseUrl$thumbnailUrl'.replaceAll('auth//api/', 'auth/api/');
+    String url = imageUrl.replaceAll('auth//api/', 'auth/api/');
+    String turl = thumbnailUrl.replaceAll('auth//api/', 'auth/api/');
     return CircleAvatar(
       radius: 23,
       child: ClipOval(

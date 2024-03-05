@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -41,6 +43,7 @@ class LoginWithEmailAndGoogleCubit extends Cubit<LoginWithEmailAndGoogleState> {
     emit(state.copyWith(isFailureOrSuccessForGoogle: none(), isLoading: true));
     final response = await _signupService.signUpWithGoogle();
     response.fold((l) {
+      log("google sign in failed");
       emit(state.copyWith(
           isFailureOrSuccessForGoogle: some(left(l)), isLoading: false));
     }, (r) async {

@@ -25,7 +25,7 @@ class ProfileRepo extends ProfileService {
       );
       if (response.statusCode == 200 || response.statusCode == 201) {
         final ProfileModel profileData =
-            ProfileModel.fromJson(response.toString());
+            ProfileModel.fromJson(response.data);
 
         return Right(profileData);
       } else {
@@ -33,6 +33,7 @@ class ProfileRepo extends ProfileService {
         return const Left(MainFailure.serverFailure());
       }
     } catch (e) {
+      log("profile $e");
       if (e is DioException && e.response?.statusCode == 500) {
         return const Left(MainFailure.serverFailure());
       } else if (e is SocketException) {

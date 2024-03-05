@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:dartz/dartz.dart';
@@ -66,6 +67,7 @@ class LoginRepo extends LoginService {
         return const Left(MainFailure.serverFailure());
       }
     } catch (e) {
+      log(e.toString());
       if (e is DioException && e.response?.statusCode == 500) {
         return const Left(MainFailure.serverFailure());
       } else if (e is SocketException) {

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:vcec/application/login/login_cubit.dart';
 
 import 'package:vcec/application/signup/verify_email/verify_email_cubit.dart';
 import 'package:vcec/core/colors.dart';
@@ -30,141 +31,190 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: BlocConsumer<VerifyEmailAndSignUpWithGoogleCubit,
-            VerifyEmailAndSignUpWithGoogleState>(listener: (context, state) {
-      state.isFailureOrSuccess.fold(
-        () {},
-        (either) => either.fold(
-          (failure) {
-            if (!state.isLoading) {
-              if (failure == const MainFailure.serverFailure()) {
-                displaySnackBar(context: context, text: "Server is down");
-              } else if (failure == const MainFailure.clientFailure()) {
-                displaySnackBar(
-                    context: context,
-                    text: "Something wrong with your network4");
-              } else if (failure == const MainFailure.authFailure()) {
-                displaySnackBar(
-                    context: context, text: 'Account already exists');
-              } else {
-                displaySnackBar(
-                    context: context, text: "Something Unexpected Happened");
+        body: BlocListener<LoginWithEmailAndGoogleCubit, LoginWithEmailAndGoogleState>(
+          listener: (context, state) {
+             state.isFailureOrSuccessForGoogle.fold(
+            () {},
+            (either) => either.fold(
+              (failure) {
+                if (!state.isLoading) {
+                  if (failure == const MainFailure.serverFailure()) {
+                    displaySnackBar(context: context, text: "Server is down");
+                  } else if (failure == const MainFailure.authFailure()) {
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) =>const AccountDetailsScreen(password: ''),
+                    ));
+                  } else if (failure ==
+                      const MainFailure.incorrectCredential()) {
+                    displaySnackBar(
+                        context: context, text: "Incorrect Password");
+                  } else if (failure == const MainFailure.clientFailure()) {
+                    displaySnackBar(
+                        context: context,
+                        text: "Something wrong with your network3");
+                  } else {
+                    displaySnackBar(
+                        context: context,
+                        text: "Something Unexpected Happened");
+                  }
+                }
+              },
+              (r) {
+                Navigator.of(context)
+                    .pushNamedAndRemoveUntil('/home', (route) => false);
+              },
+            ),
+          );
+          },
+          child: BlocConsumer < VerifyEmailAndSignUpWithGoogleCubit,
+        VerifyEmailAndSignUpWithGoogleState >
+            (
+              listener: (context, state) {
+                state.isFailureOrSuccess.fold(
+                  () {},
+                  (either) => either.fold(
+                    (failure) {
+                      if (!state.isLoading) {
+                        if (failure == const MainFailure.serverFailure()) {
+                          displaySnackBar(
+                              context: context, text: "Server is down");
+                        } else if (failure ==
+                            const MainFailure.clientFailure()) {
+                          displaySnackBar(
+                              context: context,
+                              text: "Something wrong with your network4");
+                        } else if (failure == const MainFailure.authFailure()) {
+                          displaySnackBar(
+                              context: context, text: 'Account already exists');
+                        } else {
+                          displaySnackBar(
+                              context: context,
+                              text: "Something Unexpected Happened");
+                        }
+                      }
+                    },
+                    (r) {
+                      Navigator.of(context).pushNamed(
+                        '/otp_verification',
+                      );
+                    },
+                  ),
+                );
+                state.isFailureOrSuccessForGoogle.fold(
+                  () {},
+                  (either) => either.fold(
+                    (failure) {
+                      if (!state.isLoading) {
+                        if (failure == const MainFailure.serverFailure()) {
+                          displaySnackBar(
+                              context: context, text: "Server is down");
+                        } else if (failure ==
+                            const MainFailure.incorrectCredential()) {
+                          BlocProvider.of<LoginWithEmailAndGoogleCubit>(context)
+                              .loginWithGoogle();
+                        } else if (failure ==
+                            const MainFailure.clientFailure()) {
+                          displaySnackBar(
+                              context: context,
+                              text: "Something wrong with your network5");
+                        } else {
+                          displaySnackBar(
+                              context: context,
+                              text: "Something Unexpected Happened");
+                        }
+                      }
+                    },
+                    (r) {
+                      Navigator.of(context).pushReplacement(MaterialPageRoute(
+                        builder: (context) => const AccountDetailsScreen(
+                          password: '',
+                        ),
+                      ));
+                    },
+                  ),
+                );
+              },
+              builder: (context, state) {
+                if (state.isLoading) {
+                  return const Center(
+                    child: loadingWidget,
+                  );
+                }
+                return Scaffold(
+                  body: SafeArea(
+                      child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        const SignUpImage(),
+                        SizedBox(
+                          height: 50.h,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            kwidth30,
+                            AuthPageTitle(name: 'Sign up', fontsize: 43.w),
+                          ],
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(
+                              left: 30.w, right: 30.w, top: 25.w),
+                          child: EmailTextField(
+                            icon: Icons.attachment_outlined,
+                            text: 'Email ID',
+                            color: Colors.grey,
+                            controller: emailController,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 45.h,
+                        ),
+                        SizedBox(
+                          width: 420.w,
+                          height: 52.w,
+                          child: AuthButtonWidget(
+                            title: "Verify",
+                            bgcolor: Colors.black87,
+                            tcolor: kwhite,
+                            elevation: 5,
+                            borderRadius: 8,
+                            onclick: () {
+                              BlocProvider.of<
+                                          VerifyEmailAndSignUpWithGoogleCubit>(
+                                      context)
+                                  .verifyEmail(email: emailController.text);
+                            },
+                          ),
+                        ),
+                        kheight20,
+                        const OrWidget(),
+                        kheight15,
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 34.w),
+                          child: LoginWithGoogleWidget(
+                            title: "Sign up with Google",
+                            onClick: () {
+                              BlocProvider.of<
+                                          VerifyEmailAndSignUpWithGoogleCubit>(
+                                      context)
+                                  .signInWithGoogle();
+                            },
+                          ),
+                        ),
+                        kheight10,
+                        SignUpButtonWidget(
+                          title: "Already a user?",
+                          buttonTitle: "Login",
+                          onTap: () {
+                            Navigator.of(context).pushNamedAndRemoveUntil(
+                                '/login', (route) => false);
+                          },
+                        )
+                      ],
+                    ),
+                  )),
+                );
               }
-            }
-          },
-          (r) {
-            Navigator.of(context).pushNamed(
-              '/otp_verification',
-            );
-          },
-        ),
-      );
-      state.isFailureOrSuccessForGoogle.fold(
-        () {},
-        (either) => either.fold(
-          (failure) {
-            if (!state.isLoading) {
-              if (failure == const MainFailure.serverFailure()) {
-                displaySnackBar(context: context, text: "Server is down");
-              } else if (failure == const MainFailure.incorrectCredential()) {
-                displaySnackBar(
-                    context: context, text: "Account already exists");
-              } else if (failure == const MainFailure.clientFailure()) {
-                displaySnackBar(
-                    context: context,
-                    text: "Something wrong with your network5");
-              } else {
-                displaySnackBar(
-                    context: context, text: "Something Unexpected Happened");
-              }
-            }
-          },
-          (r) {
-            Navigator.of(context).pushReplacement(MaterialPageRoute(
-              builder: (context) => const AccountDetailsScreen(
-                password: '',
-              ),
-            ));
-          },
-        ),
-      );
-    }, builder: (context, state) {
-      if (state.isLoading) {
-        return const Center(
-          child: loadingWidget,
-        );
-      }
-      return Scaffold(
-        body: SafeArea(
-            child: SingleChildScrollView(
-          child: Column(
-            children: [
-              const SignUpImage(),
-              SizedBox(
-                height: 50.h,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  kwidth30,
-                  AuthPageTitle(name: 'Sign up', fontsize: 43.w),
-                ],
-              ),
-              Padding(
-                padding: EdgeInsets.only(left: 30.w, right: 30.w, top: 25.w),
-                child: EmailTextField(
-                  icon: Icons.attachment_outlined,
-                  text: 'Email ID',
-                  color: Colors.grey,
-                  controller: emailController,
-                ),
-              ),
-              SizedBox(
-                height: 45.h,
-              ),
-              SizedBox(
-                width: 420.w,
-                height: 52.w,
-                child: AuthButtonWidget(
-                  title: "Verify",
-                  bgcolor: Colors.black87,
-                  tcolor: kwhite,
-                  elevation: 5,
-                  borderRadius: 8,
-                  onclick: () {
-                    BlocProvider.of<VerifyEmailAndSignUpWithGoogleCubit>(
-                            context)
-                        .verifyEmail(email: emailController.text);
-                  },
-                ),
-              ),
-              kheight20,
-              const OrWidget(),
-              kheight15,
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 34.w),
-                child: LoginWithGoogleWidget(
-                  title: "Sign up with Google",
-                  onClick: () {
-                    BlocProvider.of<VerifyEmailAndSignUpWithGoogleCubit>(
-                            context)
-                        .signInWithGoogle();
-                  },
-                ),
-              ),
-              kheight10,
-              SignUpButtonWidget(
-                title: "Already a user?",
-                buttonTitle: "Login",
-                onTap: () {
-                  Navigator.of(context)
-                      .pushNamedAndRemoveUntil('/login', (route) => false);
-                },
-              )
-            ],
-          ),
-        )),
-      );
-    }));
+            )));
   }
 }

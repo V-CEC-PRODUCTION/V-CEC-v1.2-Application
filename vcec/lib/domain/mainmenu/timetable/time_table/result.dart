@@ -1,120 +1,51 @@
-import 'dart:convert';
-
 class TimeTable {
-  String? firstcode;
-  String? secondcode;
-  String? thirdcode;
-  String? fourthcode;
-  String? fifthcode;
-  String? sixthcode;
-  String? firsttime;
-  String? secondtime;
-  String? thirdtime;
-  String? fourthtime;
-  String? fifthtime;
-  String? sixthtime;
-  String? currentcode;
-  String? currenttime;
+  final String firstcode;
+  final String secondcode;
+  final String thirdcode;
+  final String fourthcode;
 
+  final String fifthcode;
+  final String sixthcode;
+  final String firsttime;
+  final String secondtime;
+  final String thirdtime;
+  final String fourthtime;
+  final String fifthtime;
+  final String sixthtime;
+  final String currentcode;
+  final String currenttime;
   TimeTable({
-    this.firstcode,
-    this.secondcode,
-    this.thirdcode,
-    this.fourthcode,
-    this.fifthcode,
-    this.sixthcode,
-    this.firsttime,
-    this.secondtime,
-    this.thirdtime,
-    this.fourthtime,
-    this.fifthtime,
-    this.sixthtime,
-    this.currentcode,
-    this.currenttime,
+    required this.firstcode,
+    required this.secondcode,
+    required this.thirdcode,
+    required this.fourthcode,
+    required this.fifthcode,
+    required this.sixthcode,
+    required this.firsttime,
+    required this.secondtime,
+    required this.thirdtime,
+    required this.fourthtime,
+    required this.fifthtime,
+    required this.sixthtime,
+    required this.currentcode,
+    required this.currenttime,
   });
-
-  @override
-  String toString() {
-    return 'TimeTable(firstcode: $firstcode, secondcode: $secondcode, thirdcode: $thirdcode, fourthcode: $fourthcode, fifthcode: $fifthcode, sixthcode: $sixthcode, firsttime: $firsttime, secondtime: $secondtime, thirdtime: $thirdtime, fourthtime: $fourthtime, fifthtime: $fifthtime, sixthtime: $sixthtime, currentcode: $currentcode, currenttime: $currenttime)';
-  }
-
-  factory TimeTable.fromMap(Map<String, dynamic> data) => TimeTable(
-        firstcode: data['firstcode'] as String?,
-        secondcode: data['secondcode'] as String?,
-        thirdcode: data['thirdcode'] as String?,
-        fourthcode: data['fourthcode'] as String?,
-        fifthcode: data['fifthcode'] as String?,
-        sixthcode: data['sixthcode'] as String?,
-        firsttime: data['firsttime'] as String?,
-        secondtime: data['secondtime'] as String?,
-        thirdtime: data['thirdtime'] as String?,
-        fourthtime: data['fourthtime'] as String?,
-        fifthtime: data['fifthtime'] as String?,
-        sixthtime: data['sixthtime'] as String?,
-        currentcode: data['currentcode'] as String?,
-        currenttime: data['currenttime'] as String?,
-      );
-
-  Map<String, dynamic> toMap() => {
-        'firstcode': firstcode,
-        'secondcode': secondcode,
-        'thirdcode': thirdcode,
-        'fourthcode': fourthcode,
-        'fifthcode': fifthcode,
-        'sixthcode': sixthcode,
-        'firsttime': firsttime,
-        'secondtime': secondtime,
-        'thirdtime': thirdtime,
-        'fourthtime': fourthtime,
-        'fifthtime': fifthtime,
-        'sixthtime': sixthtime,
-        'currentcode': currentcode,
-        'currenttime': currenttime,
-      };
-
-  /// `dart:convert`
-  ///
-  /// Parses the string and returns the resulting Json object as [TimeTable].
-  factory TimeTable.fromJson(String data) {
-    return TimeTable.fromMap(json.decode(data) as Map<String, dynamic>);
-  }
-
-  /// `dart:convert`
-  ///
-  /// Converts [TimeTable] to a JSON string.
-  String toJson() => json.encode(toMap());
-
-  TimeTable copyWith({
-    String? firstcode,
-    String? secondcode,
-    String? thirdcode,
-    String? fourthcode,
-    String? fifthcode,
-    String? sixthcode,
-    String? firsttime,
-    String? secondtime,
-    String? thirdtime,
-    String? fourthtime,
-    String? fifthtime,
-    String? sixthtime,
-    String? currentcode,
-    String? currenttime,
-  }) {
+  factory TimeTable.fromJson(Map<String, dynamic> json) {
     return TimeTable(
-      firstcode: firstcode ?? this.firstcode,
-      secondcode: secondcode ?? this.secondcode,
-      thirdcode: thirdcode ?? this.thirdcode,
-      fourthcode: fourthcode ?? this.fourthcode,
-      fifthcode: fifthcode ?? this.fifthcode,
-      sixthcode: sixthcode ?? this.sixthcode,
-      firsttime: firsttime ?? this.firsttime,
-      secondtime: secondtime ?? this.secondtime,
-      thirdtime: thirdtime ?? this.thirdtime,
-      fourthtime: fourthtime ?? this.fourthtime,
-      fifthtime: fifthtime ?? this.fifthtime,
-      sixthtime: sixthtime ?? this.sixthtime,
-      currentcode: currentcode ?? this.currentcode,
-      currenttime: currenttime ?? this.currenttime,
+      firstcode: json['firstcode'],
+      secondcode: json['secondcode'],
+      thirdcode: json['thirdcode'],
+      fourthcode: json['fourthcode'],
+      fifthcode: json['fifthcode'],
+      sixthcode: json['sixthcode'],
+      firsttime: json['firsttime'],
+      secondtime: json['secondtime'],
+      thirdtime: json['thirdtime'],
+      fourthtime: json['fourthtime'],
+      fifthtime: json['fifthtime'],
+      sixthtime: json['sixthtime'],
+      currentcode: json['currentcode'],
+      currenttime: json['currenttime'],
     );
   }
 }

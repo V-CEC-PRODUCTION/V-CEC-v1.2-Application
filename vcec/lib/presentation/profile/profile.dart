@@ -147,7 +147,7 @@ class ProfileScreen extends StatelessWidget {
                       body: SingleChildScrollView(
                         child: Column(
                           children: [
-                            state.profileModel!.imageUrl == null
+                            state.profileModel!.imageUrl == " "
                                 ? Container(
                                     height: size1 * 0.28,
                                     width: size1 * 0.28,
@@ -178,33 +178,35 @@ class ProfileScreen extends StatelessWidget {
                             Padding(
                               padding: EdgeInsets.only(
                                   left: size1 * 0.301, top: size1 * 0.015),
-                              child: Row(
-                                children: [
-                                  Text(
-                                      '${maps["${state.profileModel!.branch}"]}',
-                                      style: TextStyle(
-                                          fontSize: size1 * 0.03,
-                                          fontWeight: FontWeight.bold)),
-                                  const SizedBox(
-                                    width: 10,
-                                  ),
-                                  Container(
-                                    width: size1 * 0.025,
-                                    height: size1 * 0.025,
-                                    decoration: const BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        color: Colors.green),
-                                  ),
-                                  const SizedBox(
-                                    width: 10,
-                                  ),
-                                  Text(
-                                      '${state.profileModel!.semester} ${state.profileModel!.division}',
-                                      style: TextStyle(
-                                          fontSize: size1 * 0.03,
-                                          fontWeight: FontWeight.bold)),
-                                ],
-                              ),
+                              child: state.profileModel!.branch! != " "
+                                  ? Row(
+                                      children: [
+                                        Text(
+                                            '${maps["${state.profileModel!.branch}"]}',
+                                            style: TextStyle(
+                                                fontSize: size1 * 0.03,
+                                                fontWeight: FontWeight.bold)),
+                                        const SizedBox(
+                                          width: 10,
+                                        ),
+                                        Container(
+                                          width: size1 * 0.025,
+                                          height: size1 * 0.025,
+                                          decoration: const BoxDecoration(
+                                              shape: BoxShape.circle,
+                                              color: Colors.green),
+                                        ),
+                                        const SizedBox(
+                                          width: 10,
+                                        ),
+                                        Text(
+                                            '${state.profileModel!.semester} ${state.profileModel!.division}',
+                                            style: TextStyle(
+                                                fontSize: size1 * 0.03,
+                                                fontWeight: FontWeight.bold)),
+                                      ],
+                                    )
+                                  : const SizedBox(),
                             ),
                             const SizedBox(height: 20),
                             SizedBox(
@@ -255,13 +257,14 @@ class ProfileScreen extends StatelessWidget {
                                   const SizedBox(
                                     height: 10,
                                   ),
-                                  state.profileModel!.ieeeNo!.isNotEmpty
+                                  state.profileModel!.ieeeMembershipNo!
+                                          .isNotEmpty
                                       ? MultipleColumnText(
                                           width: 20,
                                           size1: size1,
                                           text: 'IEEE Membership ID',
                                           text1:
-                                              '${state.profileModel!.ieeeNo}')
+                                              '${state.profileModel!.ieeeMembershipNo}')
                                       : const SizedBox(),
                                 ],
                               ),
@@ -320,8 +323,8 @@ class _Banner extends StatelessWidget {
   final String thumbnailUrl;
   @override
   Widget build(BuildContext context) {
-    String url = '$baseUrl$imageUrl'.replaceAll('auth//api/', 'auth/api/');
-    String turl = '$baseUrl$thumbnailUrl'.replaceAll('auth//api/', 'auth/api/');
+    String url = imageUrl.replaceAll('auth//api/', 'auth/api/');
+    String turl = thumbnailUrl.replaceAll('auth//api/', 'auth/api/');
     final size1 = MediaQuery.of(context).size.width;
     return Container(
       width: size1 * 0.28,

@@ -197,14 +197,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               }, (r) {
                 _nameController.text = r.name!;
                 _emailController.text = r.email!;
-                _ieeeController.text = r.ieeeNo!;
+                _ieeeController.text = r.ieeeMembershipNo!;
                 _admissionController.text = r.admissionNo!;
                 _semController.text = r.semester!;
                 _branchController.text = r.branch!;
                 _regController.text = r.registerNo!;
                 _divController.text = r.division!;
                 profilepicNotifier.value =
-                    Image(image: NetworkImage('$baseUrl${r.imageUrl}'));
+                    Image(image: NetworkImage('${r.imageUrl}'));
               });
             });
             return Scaffold(

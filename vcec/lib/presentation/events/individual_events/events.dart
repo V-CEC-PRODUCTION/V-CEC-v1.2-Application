@@ -165,7 +165,7 @@ class IndEventsPage extends StatelessWidget {
                                 color: Colors.yellow,
                                 image: DecorationImage(
                                   image: NetworkImage(
-                                      '$baseUrl${state.indEvents!.eventResult!.posterImageUrl!}'),
+                                      state.indEvents!.eventResult!.posterImageUrl!),
                                   fit: BoxFit.fill,
                                 ),
                               ),
@@ -220,7 +220,7 @@ class IndEventsPage extends StatelessWidget {
                                               color: Colors.yellow,
                                               image: DecorationImage(
                                                 image: NetworkImage(
-                                                    '$baseUrl${state.indEvents!.conductedBy![index].imageUrl}'),
+                                                    '${state.indEvents!.conductedBy![index].imageUrl}'),
                                                 fit: BoxFit.fill,
                                               ),
                                             ),
@@ -515,7 +515,7 @@ class IndEventsPage extends StatelessWidget {
                                                                                           shape: BoxShape.circle,
                                                                                           color: Colors.yellow,
                                                                                           image: DecorationImage(
-                                                                                            image: state.likes[index].imageUrl != null ? NetworkImage('$baseUrl${state.likes[index].imageUrl}') : const NetworkImage('https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTAxL3JtNjA5LXNvbGlkaWNvbi13LTAwMi1wLnBuZw.png'),
+                                                                                            image: state.likes[index].imageUrl != null ? NetworkImage('${state.likes[index].imageUrl}') : const NetworkImage('https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTAxL3JtNjA5LXNvbGlkaWNvbi13LTAwMi1wLnBuZw.png'),
                                                                                             fit: BoxFit.fill,
                                                                                           ),
                                                                                         ),
