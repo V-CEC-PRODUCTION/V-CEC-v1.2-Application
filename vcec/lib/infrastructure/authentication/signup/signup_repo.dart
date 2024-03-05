@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:dartz/dartz.dart';
@@ -108,6 +109,7 @@ class SignupRepo implements SignupService {
         return const Left(MainFailure.serverFailure());
       }
     } catch (e) {
+      log(e.toString());
       if (e is DioException && e.response?.statusCode == 500) {
         return const Left(MainFailure.serverFailure());
       } else if (e is SocketException) {
@@ -240,6 +242,7 @@ class SignupRepo implements SignupService {
         return const Left(MainFailure.serverFailure());
       }
     } catch (e) {
+      log(e.toString());
       if (e is DioException && e.response?.statusCode == 500) {
         return const Left(MainFailure.serverFailure());
       } else if (e is SocketException) {

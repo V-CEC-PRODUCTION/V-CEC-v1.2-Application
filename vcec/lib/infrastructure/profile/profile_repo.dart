@@ -33,6 +33,7 @@ class ProfileRepo extends ProfileService {
         return const Left(MainFailure.serverFailure());
       }
     } catch (e) {
+      log("profile $e");
       if (e is DioException && e.response?.statusCode == 500) {
         return const Left(MainFailure.serverFailure());
       } else if (e is SocketException) {

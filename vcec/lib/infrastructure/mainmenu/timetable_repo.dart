@@ -1,5 +1,7 @@
 //import 'dart:developer';
 
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:vcec/domain/auth_token_manager/auth_token_manager.dart';
@@ -23,19 +25,19 @@ class TimeTableRespository implements TimeTableService {
       final response = await Dio(BaseOptions(
         headers: headers,
       )).get('${baseUrl}timetable/cec/get-timetable/current/');
-      if (response.statusCode == 200 || response.statusCode == 201) {
-        final TimeTableModel timetable =
-            TimeTableModel.fromJson(response.toString());
 
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        final TimeTableModel timetable = TimeTableModel.fromJson(response.data);
         AuthTokenManager.instance.setDetails(
-            imageUrl: timetable.imageThumbnailUrl!,
-            name: timetable.name!,
-            thumbnailUrl: timetable.thumbnailUrl!);
+            imageUrl: timetable.imageThumbnailUrl,
+            name: timetable.name,
+            thumbnailUrl: timetable.thumbnailUrl);
         return Right(timetable);
       } else {
         return const Left(MainFailure.serverFailure());
       }
     } catch (e) {
+      log(e.toString());
       return const Left(MainFailure.clientFailure());
     }
   }

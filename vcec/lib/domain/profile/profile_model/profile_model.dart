@@ -5,7 +5,7 @@ class ProfileModel {
   String? email;
   String? branch;
   String? imageUrl;
-  dynamic thumbnailUrl;
+  String? thumbnailUrl;
   String? semester;
   String? division;
   String? admissionNo;
@@ -35,7 +35,7 @@ class ProfileModel {
         email: data['email'] as String?,
         branch: data['branch'] as String?,
         imageUrl: data['image_url'] as String?,
-        thumbnailUrl: data['thumbnail_url'] as dynamic,
+        thumbnailUrl: data['thumbnail_url'] as String?,
         semester: data['semester'] as String?,
         division: data['division'] as String?,
         admissionNo: data['admission_no'] as String?,

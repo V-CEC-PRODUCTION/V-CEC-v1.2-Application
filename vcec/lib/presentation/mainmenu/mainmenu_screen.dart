@@ -9,7 +9,7 @@ import 'package:vcec/presentation/mainmenu/widgets/cec_gallery.dart';
 import 'package:vcec/presentation/mainmenu/widgets/highlights1.dart';
 import 'package:vcec/presentation/mainmenu/widgets/story_widget.dart';
 
-String myUri="";
+String myUri = "";
 
 class MainMenuScreen extends StatelessWidget {
   const MainMenuScreen({super.key});
@@ -21,65 +21,61 @@ class MainMenuScreen extends StatelessWidget {
       BlocProvider.of<ProfileCubit>(context).getProfileDetails();
     });
     return Scaffold(
-      body: SafeArea(
-        child: BlocBuilder<TimetableCubit, TimetableState>(
-            builder: (context, state) {
-          return NestedScrollView(
-            headerSliverBuilder: (context, innerBoxIsScrolled) => [
-              state.timetableFailureOrSuccess.fold(
-                () {
-                  return const MainmenuAppbar(
-                    currentPeriod: '...',
-                    duration: 'Loading...',
-                    imageUrl: '',
-                  );
-                },
-                (either) {
-                  return either.fold(
-                    (failure) {
-                      return const MainmenuAppbar(
-                        currentPeriod: 'Error',
-                        duration: '00-00',
-                      );
-                    },
-                    (success) {
-                      return MainmenuAppbar(
-                        currentPeriod: success.result![0].currentcode ?? '...',
-                        duration: success.result![0].currenttime ?? '..',
-                        timeTable: success.result![0],
-                        imageUrl: success.imageThumbnailUrl,
-                        thumbnailUrl: success.thumbnailUrl,
-                      );
-                    },
-                  );
-                },
-              )
-            ],
-            body: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                 
-               
-                  kheight10,
-                  const CarouselMainManu(),
+      body: BlocBuilder<TimetableCubit, TimetableState>(
+          builder: (context, state) {
+        return NestedScrollView(
+          headerSliverBuilder: (context, innerBoxIsScrolled) => [
+            state.timetableFailureOrSuccess.fold(
+              () {
+                return const MainmenuAppbar(
+                  currentPeriod: '...',
+                  duration: 'Loading...',
+                  imageUrl: '',
+                );
+              },
+              (either) {
+                return either.fold(
+                  (failure) {
+                    return const MainmenuAppbar(
+                      currentPeriod: 'Error',
+                      duration: '00-00',
+                    );
+                  },
+                  (success) {
+                    return MainmenuAppbar(
+                      currentPeriod: success.result[0].currentcode,
+                      duration: success.result[0].currenttime,
+                      timeTable: success.result[0],
+                      imageUrl: success.imageThumbnailUrl,
+                      thumbnailUrl: success.thumbnailUrl,
+                    );
+                  },
+                );
+              },
+            )
+          ],
+          body: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                kheight10,
+                const CarouselMainManu(),
 
-                  kheight10,
-                  const Highlights(),
-                  kheight10,
-                  //  Padding(
-                  //     padding: const EdgeInsets.only(left: 20, top: 10),
-                  //     child: SubHeading(text: 'CEC Today'),
-                  //   ),
-                  //   CecToday(),
+                kheight10,
+                const Highlights(),
+                kheight10,
+                //  Padding(
+                //     padding: const EdgeInsets.only(left: 20, top: 10),
+                //     child: SubHeading(text: 'CEC Today'),
+                //   ),
+                //   CecToday(),
 
-                  CecGallery(),
-                ],
-              ),
+                CecGallery(),
+              ],
             ),
-          );
-        }),
-      ),
+          ),
+        );
+      }),
     );
   }
 }
