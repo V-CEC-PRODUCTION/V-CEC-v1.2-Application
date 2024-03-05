@@ -114,6 +114,11 @@ flutter:
     - assets/img/sign_up.png
     - assets/img/verify.png
     - assets/img/google-logo.png
+    - assets/img/Google_Podcasts-logo.png
+    - assets/img/spotify-logo.png
+    - assets/img/youtube-logo.png
+    - assets/img/spotify-bw.png
+    - assets/img/g-podcast-bw.png
     - assets/img/ktu.png
     - assets/img/nothing.png
   # An image asset can refer to one or more resolution-specific "variants", see
