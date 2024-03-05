@@ -6,6 +6,7 @@ import 'package:vcec/core/constants.dart';
 import 'package:vcec/presentation/mainmenu/widgets/appbar.dart';
 import 'package:vcec/presentation/mainmenu/widgets/carousel.dart';
 import 'package:vcec/presentation/mainmenu/widgets/cec_gallery.dart';
+import 'package:vcec/presentation/mainmenu/widgets/cecify_radio_widget.dart';
 import 'package:vcec/presentation/mainmenu/widgets/highlights1.dart';
 import 'package:vcec/presentation/mainmenu/widgets/story_widget.dart';
 
@@ -63,6 +64,7 @@ class MainMenuScreen extends StatelessWidget {
 
                 kheight10,
                 const Highlights(),
+                CecifyRadioWidget(),
                 kheight10,
                 //  Padding(
                 //     padding: const EdgeInsets.only(left: 20, top: 10),
