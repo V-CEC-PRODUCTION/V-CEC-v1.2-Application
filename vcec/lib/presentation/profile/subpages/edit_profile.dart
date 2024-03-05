@@ -204,7 +204,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 _regController.text = r.registerNo!;
                 _divController.text = r.division!;
                 profilepicNotifier.value =
-                    Image(image: NetworkImage('$baseUrl${r.imageUrl}'));
+                    Image(image: NetworkImage('${r.imageUrl}'));
               });
             });
             return Scaffold(

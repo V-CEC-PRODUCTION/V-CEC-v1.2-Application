@@ -342,8 +342,8 @@ class _Banner extends StatelessWidget {
   final String thumbnailUrl;
   @override
   Widget build(BuildContext context) {
-    String url = '$baseUrl$imageUrl'.replaceAll('auth//api/', 'auth/api/');
-    String turl = '$baseUrl$thumbnailUrl'.replaceAll('auth//api/', 'auth/api/');
+    String url = imageUrl.replaceAll('auth//api/', 'auth/api/');
+    String turl = thumbnailUrl.replaceAll('auth//api/', 'auth/api/');
     return CircleAvatar(
       radius: 23,
       child: ClipOval(
