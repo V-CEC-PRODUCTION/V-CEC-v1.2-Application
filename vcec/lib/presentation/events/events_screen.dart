@@ -10,6 +10,7 @@ import 'package:vcec/presentation/events/events_widgets/announcments_widget.dart
 import 'package:vcec/presentation/events/events_widgets/find_amazing_events_widget.dart';
 import 'package:vcec/presentation/events/events_widgets/forum_event_filter_widget.dart';
 import 'package:vcec/presentation/events/events_widgets/upcoming_events.dart';
+import 'package:vcec/presentation/mainmenu/widgets/common_app_bar.dart';
 import 'package:vcec/strings/strings.dart';
 
 class EventsScreen extends StatelessWidget {
@@ -25,44 +26,17 @@ class EventsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: eventsappbarcolor,
-        leading: Padding(
-          padding: const EdgeInsets.only(left: 20),
-          child: CircleAvatar(
-            radius: 20,
-            child: (thumbnailUrl) == null
-                ? const CircleAvatar(
-                    radius: 23,
-                    backgroundImage: NetworkImage(
-                        'https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTAxL3JtNjA5LXNvbGlkaWNvbi13LTAwMi1wLnBuZw.png'),
-                  )
-                : _Banner(imageUrl: imageUrl!, thumbnailUrl: thumbnailUrl!),
-          ),
-        ),
-        title: name == null
-            ? const SizedBox()
-            : Text(
-                name!,
-                style:
-                    const TextStyle(color: kwhite, fontWeight: FontWeight.bold),
-              ),
-        actions: [
-          GestureDetector(
-            onTap: () {},
-            child: const Padding(
-              padding: EdgeInsets.only(left: 6, right: 6, top: 2, bottom: 2),
-              child: NotificationIcon(),
-            ),
-          ),
-        ],
+      appBar: CommonAppBarWidget(
+        imageUrl: imageUrl,
+        thumbnailUrl: thumbnailUrl,
+        name: name,
+        value: true,
       ),
       body: SafeArea(
           child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const FindAmazingEventsWidget(),
             kheight10,
             const ForumEventFilterWidget(),
             const UpcomingEvents(),

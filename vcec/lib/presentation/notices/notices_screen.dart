@@ -5,6 +5,7 @@ import 'package:vcec/core/colors.dart';
 import 'package:vcec/core/constants.dart';
 import 'package:vcec/domain/auth_token_manager/auth_token_manager.dart';
 import 'package:vcec/presentation/common_widgets/sub_heading.dart';
+import 'package:vcec/presentation/mainmenu/widgets/common_app_bar.dart';
 import 'package:vcec/presentation/notices/widgets/notices_tabbar.dart';
 import 'package:vcec/strings/strings.dart';
 
@@ -19,73 +20,11 @@ class NoticesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size.width;
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(
-            MediaQuery.of(context).size.width * .35 * 518 / 1019),
-        child: AppBar(
-          backgroundColor: eventsappbarcolor,
-          leading: Padding(
-            padding: const EdgeInsets.only(left: 20, top: 15),
-            child: CircleAvatar(
-              child: imgUrl == null
-                  ? const CircleAvatar(
-                      radius: 23,
-                      backgroundImage: NetworkImage(
-                          'https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTAxL3JtNjA5LXNvbGlkaWNvbi13LTAwMi1wLnBuZw.png'))
-                  : _Banner(imageUrl: imgUrl!, thumbnailUrl: thumbnailUrl!),
-            ),
-          ),
-          title: Padding(
-            padding: const EdgeInsets.only(top: 15.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  date,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 13,
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
-                name == null
-                    ? const SizedBox(
-                        height: 10,
-                      )
-                    : Text(
-                        name!,
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-              ],
-            ),
-          ),
-          actions: [
-            Flexible(
-              child: Padding(
-                padding: EdgeInsets.only(top: size * 0.05),
-                child: const Column(
-                  children: [
-                    Text(
-                      'Get Notified!',
-                      textAlign: TextAlign.left,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            kwidth20,
-          ],
-        ),
+      appBar: CommonAppBarWidget(
+        imageUrl: imgUrl,
+        thumbnailUrl: thumbnailUrl,
+        name: name,
+        value: false,
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
