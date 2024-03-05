@@ -25,7 +25,7 @@ class ProfileRepo extends ProfileService {
       );
       if (response.statusCode == 200 || response.statusCode == 201) {
         final ProfileModel profileData =
-            ProfileModel.fromJson(response.toString());
+            ProfileModel.fromJson(response.data);
 
         return Right(profileData);
       } else {
