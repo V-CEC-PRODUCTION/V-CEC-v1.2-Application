@@ -209,6 +209,7 @@ class SignupRepo implements SignupService {
         return const Left(MainFailure.serverFailure());
       }
     } catch (e) {
+      log("logout $e");
       if (e is DioException && e.response?.statusCode == 500) {
         return const Left(MainFailure.serverFailure());
       } else if (e is SocketException) {

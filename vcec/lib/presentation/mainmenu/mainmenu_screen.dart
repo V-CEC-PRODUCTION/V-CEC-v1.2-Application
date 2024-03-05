@@ -61,7 +61,6 @@ class MainMenuScreen extends StatelessWidget {
               children: [
                 kheight10,
                 const CarouselMainManu(),
-
                 kheight10,
                 const Highlights(),
                 CecifyRadioWidget(),

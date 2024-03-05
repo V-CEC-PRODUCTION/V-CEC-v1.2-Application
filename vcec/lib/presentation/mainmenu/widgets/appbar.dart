@@ -35,8 +35,8 @@ class _MainmenuAppbarState extends State<MainmenuAppbar> {
   bool initial = true;
   bool expanded = false;
   bool isOpen = false;
-  final collapsedHeight = 65.0;
-  final expandedHeight = 225.0;
+  final collapsedHeight = 95.0;
+  final expandedHeight = 255.0;
   late final Avatar avatar;
   @override
   void initState() {
@@ -73,6 +73,7 @@ class _MainmenuAppbarState extends State<MainmenuAppbar> {
             }),
         builder: (context, value, child) {
           return SliverAppBar(
+            primary: false,
             automaticallyImplyLeading: false,
             backgroundColor: Colors.transparent,
             elevation: 0,
@@ -93,6 +94,7 @@ class _MainmenuAppbarState extends State<MainmenuAppbar> {
                 child: Column(
                   children: [
                     Container(
+                      padding: EdgeInsets.only(top: 25),
                       color: Color(0xff2E3136),
                       height: collapsedHeight,
                       child: Row(
