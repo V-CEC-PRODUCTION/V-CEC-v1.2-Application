@@ -55,7 +55,7 @@ dependencies:
   flutter_swipe_detector: ^2.0.0
   flutter_wall_layout: ^2.1.1
   freezed_annotation: ^2.2.0
-  
+
   get_it: ^7.6.0
   google_sign_in: ^6.1.5
   http: null
@@ -68,7 +68,7 @@ dependencies:
   pin_input_text_field: ^4.5.1
   pinput: null
   progressive_image: ^2.0.1
-  share_plus: 
+  share_plus:
   shared_preferences: null
   shimmer: ^3.0.0
 
@@ -116,6 +116,7 @@ flutter:
     - assets/img/google-logo.png
     - assets/img/ktu.png
     - assets/img/nothing.png
+    - assets/img/splash/
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
   # For details regarding adding assets from package dependencies, see

@@ -122,16 +122,44 @@ class MyApp extends StatelessWidget {
               ),
               initialRoute: '/',
               routes: {
-                '/': (context) => const SplashScreen(),
+                '/': (context) => SplashScreen(),
                 '/login': (context) => const LoginPage(),
                 '/signup': (context) => const SignUpScreen(),
                 '/home': (context) => const HomeScreen(),
                 '/otp_verification': (context) => const OtpVerificationScreen(),
                 '/otp_verified': (context) => const VerifiedScreen(),
               },
+              onGenerateRoute: (settings) {
+                switch (settings.name) {
+                  case '/login':
+                    return _createRoute(const LoginPage());
+                  case '/signup':
+                    return _createRoute(const SignUpScreen());
+                  case '/home':
+                    return _createRoute(const HomeScreen());
+                  case '/otp_verification':
+                    return _createRoute(const OtpVerificationScreen());
+                  case '/otp_verified':
+                    return _createRoute(const VerifiedScreen());
+                  default:
+                    return null;
+                }
+              },
               navigatorKey: navigatorKey,
             );
           }),
     );
   }
+}
+
+Route _createRoute(Widget page) {
+  return PageRouteBuilder(
+    pageBuilder: (context, animation, secondaryAnimation) => page,
+    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+      return FadeTransition(
+        opacity: animation,
+        child: child,
+      );
+    },
+  );
 }
