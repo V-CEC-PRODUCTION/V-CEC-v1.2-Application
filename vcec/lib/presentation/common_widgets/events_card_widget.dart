@@ -53,9 +53,9 @@ class EventsCardWidget extends StatelessWidget {
             height: ((size.width * 0.65) - 12) / 16 * 9,
             child: ProgressiveImage(
                 blur: 1,
-                placeholder: NetworkImage('$baseUrl$thumpnailUrl'),
-                thumbnail: NetworkImage('$baseUrl$thumpnailUrl'),
-                image: NetworkImage('$baseUrl$pimgUrl'),
+                placeholder: NetworkImage('$thumpnailUrl'),
+                thumbnail: NetworkImage('$thumpnailUrl'),
+                image: NetworkImage('$pimgUrl'),
                 width: double.infinity,
                 height: double.infinity),
           ),
@@ -144,7 +144,7 @@ class EventsCardWidget extends StatelessWidget {
                                         image: DecorationImage(
                                             image: NetworkImage(imgUrl![0] !=
                                                     null
-                                                ? '$baseUrl${imgUrl![0]}'
+                                                ? '${imgUrl![0]}'
                                                 : 'https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTAxL3JtNjA5LXNvbGlkaWNvbi13LTAwMi1wLnBuZw.png'),
                                             fit: BoxFit.cover),
                                       ),
@@ -165,7 +165,7 @@ class EventsCardWidget extends StatelessWidget {
                                                 image: NetworkImage(imgUrl![
                                                             1] !=
                                                         null
-                                                    ? '$baseUrl${imgUrl![1]}'
+                                                    ? '${imgUrl![1]}'
                                                     : 'https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTAxL3JtNjA5LXNvbGlkaWNvbi13LTAwMi1wLnBuZw.png'),
                                                 fit: BoxFit.cover),
                                           ),
@@ -182,7 +182,7 @@ class EventsCardWidget extends StatelessWidget {
                                                   image: NetworkImage(imgUrl![
                                                               0] !=
                                                           null
-                                                      ? '$baseUrl${imgUrl![0]}'
+                                                      ? '${imgUrl![0]}'
                                                       : 'https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTAxL3JtNjA5LXNvbGlkaWNvbi13LTAwMi1wLnBuZw.png'),
                                                   fit: BoxFit.cover),
                                             ),
@@ -205,7 +205,7 @@ class EventsCardWidget extends StatelessWidget {
                                                     image: NetworkImage(imgUrl![
                                                                 2] !=
                                                             null
-                                                        ? '$baseUrl${imgUrl![2]}'
+                                                        ? '${imgUrl![2]}'
                                                         : 'https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTAxL3JtNjA5LXNvbGlkaWNvbi13LTAwMi1wLnBuZw.png'),
                                                     fit: BoxFit.cover),
                                               ),
@@ -222,7 +222,7 @@ class EventsCardWidget extends StatelessWidget {
                                                       image: NetworkImage(imgUrl![
                                                                   1] !=
                                                               null
-                                                          ? '$baseUrl${imgUrl![1]}'
+                                                          ? '${imgUrl![1]}'
                                                           : 'https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTAxL3JtNjA5LXNvbGlkaWNvbi13LTAwMi1wLnBuZw.png'),
                                                       fit: BoxFit.cover),
                                                 ),
@@ -240,7 +240,7 @@ class EventsCardWidget extends StatelessWidget {
                                                       image: NetworkImage(imgUrl![
                                                                   0] !=
                                                               null
-                                                          ? '$baseUrl${imgUrl![0]}'
+                                                          ? '${imgUrl![0]}'
                                                           : 'https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTAxL3JtNjA5LXNvbGlkaWNvbi13LTAwMi1wLnBuZw.png'),
                                                       fit: BoxFit.cover),
                                                 ),
@@ -263,7 +263,7 @@ class EventsCardWidget extends StatelessWidget {
                                                       image: NetworkImage(imgUrl![
                                                                   0] !=
                                                               null
-                                                          ? '$baseUrl${imgUrl![0]}'
+                                                          ? '${imgUrl![0]}'
                                                           : 'https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTAxL3JtNjA5LXNvbGlkaWNvbi13LTAwMi1wLnBuZw.png'),
                                                       fit: BoxFit.cover),
                                                 ),
@@ -281,7 +281,7 @@ class EventsCardWidget extends StatelessWidget {
                                                       image: NetworkImage(imgUrl![
                                                                   1] !=
                                                               null
-                                                          ? '$baseUrl${imgUrl![1]}'
+                                                          ? '${imgUrl![1]}'
                                                           : 'https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTAxL3JtNjA5LXNvbGlkaWNvbi13LTAwMi1wLnBuZw.png'),
                                                       fit: BoxFit.cover),
                                                 ),
@@ -299,7 +299,7 @@ class EventsCardWidget extends StatelessWidget {
                                                       image: NetworkImage(imgUrl![
                                                                   2] !=
                                                               null
-                                                          ? '$baseUrl${imgUrl![2]}'
+                                                          ? '${imgUrl![2]}'
                                                           : 'https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTAxL3JtNjA5LXNvbGlkaWNvbi13LTAwMi1wLnBuZw.png'),
                                                       fit: BoxFit.cover),
                                                 ),
