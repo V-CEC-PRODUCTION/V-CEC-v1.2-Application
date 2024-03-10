@@ -3,12 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vcec/application/main_menu/timetable/timetable_cubit.dart';
 import 'package:vcec/application/profile/profile_cubit.dart';
 import 'package:vcec/core/constants.dart';
+import 'package:vcec/domain/auth_token_manager/auth_token_manager.dart';
 import 'package:vcec/presentation/mainmenu/widgets/appbar.dart';
 import 'package:vcec/presentation/mainmenu/widgets/carousel.dart';
 import 'package:vcec/presentation/mainmenu/widgets/cec_gallery.dart';
 import 'package:vcec/presentation/mainmenu/widgets/cecify_radio_widget.dart';
 import 'package:vcec/presentation/mainmenu/widgets/highlights1.dart';
-
 
 String myUri = "";
 
@@ -43,13 +43,21 @@ class MainMenuScreen extends StatelessWidget {
                     );
                   },
                   (success) {
-                    return MainmenuAppbar(
-                      currentPeriod: success.result[0].currentcode,
-                      duration: success.result[0].currenttime,
-                      timeTable: success.result[0],
-                      imageUrl: success.imageThumbnailUrl,
-                      thumbnailUrl: success.thumbnailUrl,
-                    );
+                    if (AuthTokenManager.instance.userRole ==
+                        UserRole.student) {
+                      return MainmenuAppbar(
+                        currentPeriod: success.result[0].currentcode,
+                        duration: success.result[0].currenttime,
+                        timeTable: success.result[0],
+                        imageUrl: success.imageThumbnailUrl,
+                        thumbnailUrl: success.thumbnailUrl,
+                      );
+                    } else {
+                      return MainmenuAppbar(
+                        currentPeriod: "",
+                        duration: "",
+                      );
+                    }
                   },
                 );
               },

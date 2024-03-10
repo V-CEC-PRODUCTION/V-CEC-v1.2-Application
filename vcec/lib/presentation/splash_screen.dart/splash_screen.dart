@@ -42,12 +42,14 @@ class _SplashScreenState extends State<SplashScreen>
     );
     leftAnimation.forward();
     rightAnimation.forward();
-    // TODO: implement initState
+
     super.initState();
   }
 
   @override
   void dispose() {
+    leftAnimation.dispose();
+    rightAnimation.dispose();
     // TODO: implement dispose
     super.dispose();
   }
