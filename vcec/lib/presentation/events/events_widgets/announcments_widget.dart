@@ -16,8 +16,9 @@ class AnnouncementsEventsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      BlocProvider.of<AnnouncementCubit>(context)
-          .getAnnoucements1(forum: 'all',);
+      BlocProvider.of<AnnouncementCubit>(context).getAnnoucements1(
+        forum: 'all',
+      );
     });
     return Column(children: [
       Padding(
@@ -29,8 +30,9 @@ class AnnouncementsEventsWidget extends StatelessWidget {
             TextButton(
                 onPressed: () {
                   final forum = AuthTokenManager.instance.forum;
-                  BlocProvider.of<AnnouncementCubit>(context)
-                      .getAnnoucements(forum: forum!,);
+                  BlocProvider.of<AnnouncementCubit>(context).getAnnoucements(
+                    forum: forum!,
+                  );
                   Navigator.of(context).push(MaterialPageRoute(
                     builder: (context) => ViewAllAnnouncements(),
                   ));

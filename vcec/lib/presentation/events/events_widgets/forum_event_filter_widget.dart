@@ -24,10 +24,13 @@ class ForumEventFilterWidget extends StatelessWidget {
         ElevatedButton(
           onPressed: () {
             BlocProvider.of<EventsCubit>(context).fetchEvents1(
-                eventType: EventType.Upcoming, forum: 'all', );
+              eventType: EventType.Upcoming,
+              forum: 'all',
+            );
             AuthTokenManager.instance.setForum('all');
-            BlocProvider.of<AnnouncementCubit>(context)
-                .getAnnoucements1(forum: 'all',);
+            BlocProvider.of<AnnouncementCubit>(context).getAnnoucements1(
+              forum: 'all',
+            );
             AuthTokenManager.instance.setForum('all');
           },
           style: ElevatedButton.styleFrom(
@@ -116,15 +119,15 @@ class ForumEventFilterWidget extends StatelessWidget {
                                   onPressed: () {
                                     BlocProvider.of<EventsCubit>(context)
                                         .fetchEvents1(
-                                            eventType: EventType.Upcoming,
-                                            forum: forums[index].forumRoleName!,
-                                            );
+                                      eventType: EventType.Upcoming,
+                                      forum: forums[index].forumRoleName!,
+                                    );
                                     AuthTokenManager.instance
                                         .setForum(forums[index].forumRoleName!);
                                     BlocProvider.of<AnnouncementCubit>(context)
                                         .getAnnoucements1(
-                                            forum: forums[index].forumRoleName!,
-                                       );
+                                      forum: forums[index].forumRoleName!,
+                                    );
                                   },
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor: kwhite,

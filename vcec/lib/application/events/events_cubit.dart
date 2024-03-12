@@ -40,7 +40,7 @@ class EventsCubit extends Cubit<EventsState> {
           EventType.Upcoming.name: updatedEvents,
         },
         isFailureOrSuccess: some(right(updatedEvents)),
-       hasNext: r.hasNext!,
+        hasNext: r.hasNext!,
       ));
 
       pageNum++;

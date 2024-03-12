@@ -69,7 +69,6 @@ class DepartmentSearchCubit extends Cubit<DepartmentSearchState> {
   void searchDepartmentsWithSearchBar(
       String query, Department? deptType) async {
     if (!_searchDepartmentsWithSearchBarIsExecuting) {
-      
       _searchDepartmentsWithSearchBarIsExecuting = true;
       if (state.department != deptType) {
         emit(state.copyWith(

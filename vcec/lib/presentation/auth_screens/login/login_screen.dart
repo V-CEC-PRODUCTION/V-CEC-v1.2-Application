@@ -87,7 +87,8 @@ class _LoginPageState extends State<LoginPage> {
                     displaySnackBar(context: context, text: "Server is down");
                   } else if (failure == const MainFailure.authFailure()) {
                     Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) =>const AccountDetailsScreen(password: ''),
+                      builder: (context) =>
+                          const AccountDetailsScreen(password: ''),
                     ));
                   } else if (failure ==
                       const MainFailure.incorrectCredential()) {

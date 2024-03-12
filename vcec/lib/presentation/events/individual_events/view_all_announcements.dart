@@ -31,11 +31,9 @@ class ViewAllAnnouncements extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final state = BlocProvider.of<AnnouncementCubit>(context).state;
-    if (state.hasNext)
-     {
+    if (state.hasNext) {
       setupScrollController(context);
-     }
-    
+    }
 
     final size1 = MediaQuery.of(context).size.width;
     return Scaffold(
@@ -178,7 +176,7 @@ class ViewAllAnnouncements extends StatelessWidget {
                                       ));
                                     },
                                   );
-                                }else {
+                                } else {
                                   Timer(const Duration(milliseconds: 30), () {
                                     if (scrollController.hasClients) {
                                       scrollController.jumpTo(scrollController

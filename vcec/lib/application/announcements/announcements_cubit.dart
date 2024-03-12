@@ -22,7 +22,7 @@ class AnnouncementCubit extends Cubit<AnnouncementState> {
       isFirstFetch: pageNum == 1,
     ));
     final result = await _announcementService.getAnnouncements(
-        forum: forum, pageNum: pageNum,call:true);
+        forum: forum, pageNum: pageNum, call: true);
     result.fold(
         (l) => emit(state.copyWith(
               isLoading: false,
@@ -32,24 +32,23 @@ class AnnouncementCubit extends Cubit<AnnouncementState> {
       updatedEvents.addAll(r.announcements!);
       emit(state.copyWith(
         isLoading: false,
-        announcements: updatedEvents ,
+        announcements: updatedEvents,
         isFailureOrSuccess: some(right(updatedEvents)),
         hasNext: r.hasNext!,
       ));
-    
-        pageNum++;
-     
+
+      pageNum++;
     });
   }
 
-   void getAnnoucements1({required String forum}) async {
+  void getAnnoucements1({required String forum}) async {
     emit(state.copyWith(
       announcements: [],
       isLoading: true,
       isFailureOrSuccess: none(),
     ));
     final result = await _announcementService.getAnnouncements(
-        forum: forum, pageNum: pageNum,call:false);
+        forum: forum, pageNum: pageNum, call: false);
     result.fold(
         (l) => emit(state.copyWith(
               isLoading: false,
@@ -57,7 +56,7 @@ class AnnouncementCubit extends Cubit<AnnouncementState> {
             )), (r) {
       emit(state.copyWith(
         isLoading: false,
-        announcements: r.announcements! ,
+        announcements: r.announcements!,
         isFailureOrSuccess: some(right(r.announcements!)),
       ));
     });

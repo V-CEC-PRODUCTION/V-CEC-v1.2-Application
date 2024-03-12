@@ -46,7 +46,7 @@ class EditProfileCubit extends Cubit<EditProfileState> {
       if (image != null) {
         final imagePostResonce =
             await _profileImgService.putProfileImg(imageFile: image);
-         imagePostResonce.fold((l) {
+        imagePostResonce.fold((l) {
           emit(state.copyWith(
               isLoading: false, failureOrSuccesss: some(left(l))));
         }, (r) {

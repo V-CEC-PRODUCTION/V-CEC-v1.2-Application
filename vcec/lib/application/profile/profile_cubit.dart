@@ -27,5 +27,4 @@ class ProfileCubit extends Cubit<ProfileState> {
             failureOrSuccess: some(right(r)),
             profileModel: r))));
   }
-
 }

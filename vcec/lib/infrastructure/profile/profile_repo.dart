@@ -24,8 +24,7 @@ class ProfileRepo extends ProfileService {
         '${baseUrl}users/auth/get/user/details/',
       );
       if (response.statusCode == 200 || response.statusCode == 201) {
-        final ProfileModel profileData =
-            ProfileModel.fromJson(response.data);
+        final ProfileModel profileData = ProfileModel.fromJson(response.data);
 
         return Right(profileData);
       } else {

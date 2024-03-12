@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -11,7 +10,7 @@ class CecifyButtonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        launchUrl(Uri.parse('https://www.youtube.com/watch?v=3nQNiWdeH2Q'));
+        launchUrl(Uri.parse(url));
       },
       child: Container(
         decoration: BoxDecoration(

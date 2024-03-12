@@ -23,7 +23,9 @@ class UpcomingEvents extends StatelessWidget {
   Widget build(BuildContext context) {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       BlocProvider.of<EventsCubit>(context).fetchEvents1(
-          eventType: EventType.Upcoming, forum: 'all',);
+        eventType: EventType.Upcoming,
+        forum: 'all',
+      );
       AuthTokenManager.instance.setForum('all');
     });
     return BlocConsumer<EventsCubit, EventsState>(
@@ -135,9 +137,9 @@ class UpcomingEvents extends StatelessWidget {
                                 final forum = AuthTokenManager.instance.forum;
                                 BlocProvider.of<EventsCubit>(context)
                                     .fetchEvents(
-                                        eventType: EventType.Upcoming,
-                                        forum: forum!,
-                                       );
+                                  eventType: EventType.Upcoming,
+                                  forum: forum!,
+                                );
                                 Navigator.of(context).push(MaterialPageRoute(
                                   builder: (context) => ViewAllScreen(),
                                 ));

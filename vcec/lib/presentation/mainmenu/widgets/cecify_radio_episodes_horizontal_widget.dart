@@ -3,17 +3,20 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:vcec/core/colors.dart';
+import 'package:vcec/domain/cecify/episodes/episodes_model.dart';
 
 class CecifyRadioEpisodesHorizontalWidget extends StatelessWidget {
   CecifyRadioEpisodesHorizontalWidget({
-    super.key,
+    super.key, required this.imageUrl, required this.length,
   });
-
-  List<ValueNotifier<bool>> isSecondWidgetVisible =
-      List.generate(9, (index) => ValueNotifier<bool>(false));
+  final List<EpisodeResult> imageUrl;
+  final int length;
+ 
 
   @override
   Widget build(BuildContext context) {
+     List<ValueNotifier<bool>> isSecondWidgetVisible =
+      List.generate(length, (index) => ValueNotifier<bool>(false));
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 3.w),
       child: SingleChildScrollView(
@@ -22,7 +25,7 @@ class CecifyRadioEpisodesHorizontalWidget extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 8.w),
           child: Row(
             children: List.generate(
-              9,
+              length,
               (index) => Padding(
                 padding: EdgeInsets.only(
                   left: 10.0.w,
@@ -51,7 +54,7 @@ class CecifyRadioEpisodesHorizontalWidget extends StatelessWidget {
                                 image: DecorationImage(
                                   fit: BoxFit.cover,
                                   image: NetworkImage(
-                                    'https://buffer.com/cdn-cgi/image/w=1000,fit=contain,q=90,f=auto/library/content/images/size/w1200/2023/10/free-images.jpg',
+                                    imageUrl[index].imageUrl!,
                                   ),
                                 ),
                                 borderRadius: BorderRadius.circular(20),
@@ -140,7 +143,7 @@ class CecifyRadioEpisodesHorizontalWidget extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Title',
+                                 imageUrl[index].content!,
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 15.w,
@@ -151,7 +154,7 @@ class CecifyRadioEpisodesHorizontalWidget extends StatelessWidget {
                                   padding:
                                       EdgeInsets.only(left: 0.w, bottom: 8.w),
                                   child: Text(
-                                    'Subtitle',
+                                   '',
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 12.w,

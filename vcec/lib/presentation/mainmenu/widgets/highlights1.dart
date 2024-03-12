@@ -96,10 +96,9 @@ class Highlights extends StatelessWidget {
                     children: List.generate(
                       state.highlights!.result!.length,
                       (index) => EventsCardWidget(
-                        pimgUrl:  
-                            state.highlights!.result![index].imageUrl!,
+                        pimgUrl: state.highlights!.result![index].imageUrl!,
                         title: state.highlights!.result![index].content!,
-                        thumpnailUrl:  
+                        thumpnailUrl:
                             state.highlights!.result![index].thumbnailUrl!,
                         date: state.highlights!.result![index].uploadTime!,
                         tag: state.highlights!.result![index].tag,

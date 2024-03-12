@@ -1,21 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:vcec/application/cecify/cecify_cubit.dart';
 import 'package:vcec/core/colors.dart';
-
-const List<String> SeasonLabel = [
-  'Season 1',
-  'Season 2',
-  'Season 3',
-  'Season 4'
-];
+import 'package:vcec/domain/auth_token_manager/auth_token_manager.dart';
 
 class CecifySeasonDropDownWidget extends StatelessWidget {
   CecifySeasonDropDownWidget({
     super.key,
-    required this.selectedSeason,
+    required this.selectedSeason, required this.seasonLength,
   });
   final ValueNotifier<String> selectedSeason;
-
+  final int seasonLength;
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
@@ -27,17 +23,22 @@ class CecifySeasonDropDownWidget extends StatelessWidget {
           underline: Container(),
           elevation: 0,
           dropdownColor: Color.fromARGB(93, 3, 3, 3),
-          items: SeasonLabel.map<DropdownMenuItem<String>>((String value) {
-            return DropdownMenuItem<String>(
-              value: value,
-              child: Text(
-                value,
-                style: TextStyle(color: kwhite, fontSize: 18.w),
+          items:[
+            for (int i = 1; i <= seasonLength; i++)
+              DropdownMenuItem<String>(
+                value: 'Season $i',
+                child: Text(
+                  'Season $i',
+                  style: TextStyle(color: kwhite, fontSize: 18.w),
+                ),
               ),
-            );
-          }).toList(),
+          ],
           onChanged: (String? value) {
             selectedSeason.value = value!;
+            AuthTokenManager.instance.setIndex(int.parse(value.split(' ')[1]) - 1);
+             BlocProvider.of<CecifyCubit>(context).getColors();
+      BlocProvider.of<CecifyCubit>(context).getEpisodes(int.parse(value.split(' ')[1]));
+      AuthTokenManager.instance.setIndex(0);
           },
         );
       },

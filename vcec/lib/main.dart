@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:injectable/injectable.dart';
 import 'package:vcec/application/announcements/announcements_cubit.dart';
+import 'package:vcec/application/cecify/cecify_cubit.dart';
 import 'package:vcec/application/departments/rsearch/department_search_cubit.dart';
 import 'package:vcec/application/edit_profile/edit_profile_cubit.dart';
 import 'package:vcec/application/events/events_cubit.dart';
@@ -109,6 +110,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider<ForgotpasswordCubit>(
           create: (context) => getIt<ForgotpasswordCubit>(),
+        ),
+        BlocProvider<CecifyCubit>(
+          create: (context) => getIt<CecifyCubit>(),
         ),
       ],
       child: ScreenUtilInit(

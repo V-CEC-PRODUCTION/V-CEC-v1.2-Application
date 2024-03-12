@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:vcec/core/constants.dart';
+import 'package:vcec/domain/cecify/episodes/episodes_model.dart';
 import 'package:vcec/presentation/cecify_radio/cecify_radio_screen.dart';
 import 'package:vcec/presentation/cecify_radio/widgets/cecify_button_widget.dart';
 
 class EpisodesListWidget extends StatelessWidget {
-  const EpisodesListWidget({super.key});
-
+  const EpisodesListWidget({super.key, required this.index, required this.model});
+  final int index;
+  final List<EpisodeResult> model;
   @override
   Widget build(BuildContext context) {
     return Column(
       children: List.generate(
-          10,
+          index,
           (index) => Padding(
                 padding:
                     const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
@@ -24,7 +26,7 @@ class EpisodesListWidget extends StatelessWidget {
                         decoration: BoxDecoration(
                             image: DecorationImage(
                               image: NetworkImage(
-                                  'https://buffer.com/cdn-cgi/image/w=1000,fit=contain,q=90,f=auto/library/content/images/size/w1200/2023/10/free-images.jpg'),
+                                  model[index].imageUrl!),
                               fit: BoxFit.cover,
                             ),
                             borderRadius: BorderRadius.circular(20)),
@@ -37,13 +39,13 @@ class EpisodesListWidget extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'Chapter 2012: Beyond the Classrooms',
+                                model[index].content!,
                                 style: TextStyle(
                                     fontWeight: FontWeight.w600,
                                     fontSize: 19.w),
                               ),
                               Text(
-                                'Season 3, Episode 8',
+                                'Season ${model[index].seasonNumber}, Episode ${model[index].episode}',
                                 style: TextStyle(fontSize: 13.w),
                               ),
                               kheight5,
@@ -51,12 +53,15 @@ class EpisodesListWidget extends StatelessWidget {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceEvenly,
                                 children: [
+                                  model[index].youtubeUrl == '' ? Container() :
                                   CecifyButtonWidget(
                                       title: 'Youtube',
                                       url: 'assets/img/youtube-logo.png'),
+                                  model[index].spotifyUrl == '' ? Container() :
                                   CecifyButtonWidget(
                                       title: 'Spotify',
                                       url: 'assets/img/spotify-logo.png'),
+                                  model[index].googlePodcastUrl == '' ? Container() :
                                   CecifyButtonWidget(
                                       title: 'Podcast',
                                       url:
@@ -71,7 +76,7 @@ class EpisodesListWidget extends StatelessWidget {
                   ),
                   kheight10,
                   Text(
-                    "Our podcast on Anuraj K A remarkable journey now features a new YouTube link for a smoother experience. The previous link had some technical issues. Apologies for any inconvenience. You can now stream the podcast on: Join us in celebrating CEC's spirit and Anuraj K A journey. Don't miss this treasure trove of experiences! Stay tuned, get CECified, and enjoy the podcast! ",
+                    model[index].content!,
                     textAlign: TextAlign.justify,
                     style: TextStyle(fontSize: 11.w, height: 0.w),
                   ),

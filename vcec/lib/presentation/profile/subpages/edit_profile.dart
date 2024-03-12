@@ -133,7 +133,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               }
             },
             (r) async {
-              
               Navigator.of(context).pop(MaterialPageRoute(
                 builder: (context) {
                   return const ProfileScreen();
@@ -225,17 +224,15 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       onTap: () {
                         BlocProvider.of<EditProfileCubit>(context)
                             .putProfileDetails(
-                          name: _nameController.text,
-                          email: _emailController.text,
-                          adno: _admissionController.text,
-                          sem: _semController.text,
-                          branch: _branchController.text,
-                          regno: _regController.text,
-                          div: _divController.text,
-                          ieeeno: _ieeeController.text,
-                          image: file
-                        );
-                        
+                                name: _nameController.text,
+                                email: _emailController.text,
+                                adno: _admissionController.text,
+                                sem: _semController.text,
+                                branch: _branchController.text,
+                                regno: _regController.text,
+                                div: _divController.text,
+                                ieeeno: _ieeeController.text,
+                                image: file);
                       },
                       child: const Text(
                         'Save',

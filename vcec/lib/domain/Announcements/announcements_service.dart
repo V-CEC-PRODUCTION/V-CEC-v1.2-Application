@@ -4,5 +4,5 @@ import 'package:vcec/domain/failure/main_failure.dart';
 
 abstract class AnnouncementService {
   Future<Either<MainFailure, AnnouncementModel>> getAnnouncements(
-      {required String forum, required int pageNum,required bool call});
+      {required String forum, required int pageNum, required bool call});
 }

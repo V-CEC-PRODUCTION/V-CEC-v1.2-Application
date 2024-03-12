@@ -134,8 +134,8 @@ class IndAnnouncementsPage extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(20),
                                 color: Colors.yellow,
                                 image: DecorationImage(
-                                  image: NetworkImage(
-                                      state.indAnnouncements!.announcementResult!.posterImageUrl!),
+                                  image: NetworkImage(state.indAnnouncements!
+                                      .announcementResult!.posterImageUrl!),
                                   fit: BoxFit.fill,
                                 ),
                               ),

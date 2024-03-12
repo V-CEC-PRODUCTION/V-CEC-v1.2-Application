@@ -33,11 +33,11 @@ class _GallerySwipeViewState extends State<GallerySwipeView> {
           final galleryfile = galleryfiles[index];
           if (galleryfile.tag == 'img') {
             return Image.network(
-                galleryfile.mediaUrl!,
+              galleryfile.mediaUrl!,
               fit: BoxFit.contain,
             );
           } else {
-            return VideoPlayerScreen(url:   galleryfile.videoUrl!);
+            return VideoPlayerScreen(url: galleryfile.videoUrl!);
           }
         },
         itemCount: galleryfiles.length,
