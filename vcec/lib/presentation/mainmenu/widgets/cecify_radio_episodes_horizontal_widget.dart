@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:vcec/core/colors.dart';
@@ -7,16 +5,17 @@ import 'package:vcec/domain/cecify/episodes/episodes_model.dart';
 
 class CecifyRadioEpisodesHorizontalWidget extends StatelessWidget {
   CecifyRadioEpisodesHorizontalWidget({
-    super.key, required this.imageUrl, required this.length,
+    super.key,
+    required this.imageUrl,
+    required this.length,
   });
   final List<EpisodeResult> imageUrl;
   final int length;
- 
 
   @override
   Widget build(BuildContext context) {
-     List<ValueNotifier<bool>> isSecondWidgetVisible =
-      List.generate(length, (index) => ValueNotifier<bool>(false));
+    List<ValueNotifier<bool>> isSecondWidgetVisible =
+        List.generate(length, (index) => ValueNotifier<bool>(false));
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 3.w),
       child: SingleChildScrollView(
@@ -24,6 +23,7 @@ class CecifyRadioEpisodesHorizontalWidget extends StatelessWidget {
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 8.w),
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
             children: List.generate(
               length,
               (index) => Padding(
@@ -37,6 +37,7 @@ class CecifyRadioEpisodesHorizontalWidget extends StatelessWidget {
                         !isSecondWidgetVisible[index].value;
                   },
                   child: Container(
+                    height: 235.w,
                     decoration: BoxDecoration(
                       color: Colors.black54,
                       borderRadius: BorderRadius.circular(20.w),
@@ -143,24 +144,14 @@ class CecifyRadioEpisodesHorizontalWidget extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                 imageUrl[index].content!,
+                                  imageUrl[index].content!,
                                   style: TextStyle(
                                     color: Colors.white,
+                                    height: 1.3.w,
                                     fontSize: 15.w,
                                     fontWeight: FontWeight.w600,
                                   ),
-                                ),
-                                Padding(
-                                  padding:
-                                      EdgeInsets.only(left: 0.w, bottom: 8.w),
-                                  child: Text(
-                                   '',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 12.w,
-                                      fontWeight: FontWeight.w400,
-                                    ),
-                                  ),
+                                  maxLines: 2,
                                 ),
                               ],
                             ),

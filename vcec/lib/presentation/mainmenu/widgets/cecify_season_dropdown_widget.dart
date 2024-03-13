@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -8,7 +10,8 @@ import 'package:vcec/domain/auth_token_manager/auth_token_manager.dart';
 class CecifySeasonDropDownWidget extends StatelessWidget {
   CecifySeasonDropDownWidget({
     super.key,
-    required this.selectedSeason, required this.seasonLength,
+    required this.selectedSeason,
+    required this.seasonLength,
   });
   final ValueNotifier<String> selectedSeason;
   final int seasonLength;
@@ -23,7 +26,7 @@ class CecifySeasonDropDownWidget extends StatelessWidget {
           underline: Container(),
           elevation: 0,
           dropdownColor: Color.fromARGB(93, 3, 3, 3),
-          items:[
+          items: [
             for (int i = 1; i <= seasonLength; i++)
               DropdownMenuItem<String>(
                 value: 'Season $i',
@@ -35,10 +38,9 @@ class CecifySeasonDropDownWidget extends StatelessWidget {
           ],
           onChanged: (String? value) {
             selectedSeason.value = value!;
-            AuthTokenManager.instance.setIndex(int.parse(value.split(' ')[1]) - 1);
-             BlocProvider.of<CecifyCubit>(context).getColors();
-      BlocProvider.of<CecifyCubit>(context).getEpisodes(int.parse(value.split(' ')[1]));
-      AuthTokenManager.instance.setIndex(0);
+            BlocProvider.of<CecifyCubit>(context).getEpisodes(
+              int.parse(value.split(' ')[1]),
+            );
           },
         );
       },

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vcec/application/main_menu/timetable/timetable_cubit.dart';
@@ -43,6 +45,8 @@ class MainMenuScreen extends StatelessWidget {
                     );
                   },
                   (success) {
+                    log("Success: ${success.imageThumbnailUrl}");
+                    log("Success: ${success.thumbnailUrl}");
                     if (AuthTokenManager.instance.userRole ==
                         UserRole.student) {
                       return MainmenuAppbar(
@@ -56,6 +60,8 @@ class MainMenuScreen extends StatelessWidget {
                       return MainmenuAppbar(
                         currentPeriod: "",
                         duration: "",
+                        imageUrl: success.imageThumbnailUrl,
+                        thumbnailUrl: success.thumbnailUrl,
                       );
                     }
                   },
@@ -71,6 +77,7 @@ class MainMenuScreen extends StatelessWidget {
                 const CarouselMainManu(),
                 kheight10,
                 const Highlights(),
+                kheight10,
                 CecifyRadioWidget(),
                 kheight10,
                 //  Padding(

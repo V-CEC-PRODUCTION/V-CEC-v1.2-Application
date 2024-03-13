@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -20,12 +22,35 @@ class CecifyCubit extends Cubit<CecifyState> {
   CecifyCubit(this._seasonService, this._colorService, this._episodesService)
       : super(CecifyState.initial());
 
-  void getSeasons() async {
+  void getColors() async {
+    log("magaaaaaa");
     emit(state.copyWith(
       isLoading: true,
       isFailureOrSuccess: none(),
     ));
-    final result = await _seasonService.getFilterSeasons();
+    final result = await _colorService.getFilterColors();
+    result.fold(
+        (l) => emit(state.copyWith(
+              isLoading: false,
+              isFailureOrSuccess: some(left(l)),
+            )), (r) {
+      log("colors" + r.toString());
+      getEpisodes(r.first.season!);
+      emit(state.copyWith(
+        colors: r,
+        isFailureOrSuccess: some(right(null)),
+      ));
+    });
+  }
+
+  void getEpisodes(int season) async {
+    emit(state.copyWith(
+      selectedSeason: season,
+      isLoading: true,
+      isFirstFetch: true,
+      isFailureOrSuccess: none(),
+    ));
+    final result = await _episodesService.getFilterEpisodes(season);
     result.fold(
         (l) => emit(state.copyWith(
               isLoading: false,
@@ -33,47 +58,8 @@ class CecifyCubit extends Cubit<CecifyState> {
             )), (r) {
       emit(state.copyWith(
         isLoading: false,
-        seasons: r,
-        isFailureOrSuccess: some(right(r)),
-      ));
-    });
-  }
-
-  void getColors() async {
-    emit(state.copyWith(
-      isLoading: true,
-      isFailureOrSuccessForColors: none(),
-    ));
-    final result = await _colorService.getFilterColors();
-    result.fold(
-        (l) => emit(state.copyWith(
-              isLoading: false,
-              isFailureOrSuccessForColors: some(left(l)),
-            )), (r) {
-      emit(state.copyWith(
-        isLoading: false,
-        colors: r,
-        isFailureOrSuccessForColors: some(right(r)),
-      ));
-    });
-  }
-
-  void getEpisodes(int season) async {
-    emit(state.copyWith(
-      isLoading: true,
-      isFirstFetch: true,
-      isFailureOrSuccessForEpisodes: none(),
-    ));
-    final result = await _episodesService.getFilterEpisodes(season);
-    result.fold(
-        (l) => emit(state.copyWith(
-              isLoading: false,
-              isFailureOrSuccessForEpisodes: some(left(l)),
-            )), (r) {
-      emit(state.copyWith(
-        isLoading: false,
         episodes: r,
-        isFailureOrSuccessForEpisodes: some(right(r)),
+        isFailureOrSuccess: some(right(null)),
       ));
     });
   }

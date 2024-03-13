@@ -1,3 +1,6 @@
+import 'dart:developer';
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:progressive_image/progressive_image.dart';
@@ -81,7 +84,10 @@ class ProfileScreen extends StatelessWidget {
                       }
                     }
                   },
-                  (r) {},
+                  (r) {
+                    log(state.profileModel!.imageUrl!);
+                    log(state.profileModel!.thumbnailUrl!);
+                  },
                 ),
               );
             },
@@ -323,8 +329,6 @@ class _Banner extends StatelessWidget {
   final String thumbnailUrl;
   @override
   Widget build(BuildContext context) {
-    String url = imageUrl.replaceAll('auth//api/', 'auth/api/');
-    String turl = thumbnailUrl.replaceAll('auth//api/', 'auth/api/');
     final size1 = MediaQuery.of(context).size.width;
     return Container(
       width: size1 * 0.28,
@@ -333,14 +337,23 @@ class _Banner extends StatelessWidget {
         shape: BoxShape.circle,
       ),
       child: ClipOval(
-        child: ProgressiveImage(
-            blur: 1,
-            fit: BoxFit.cover,
-            placeholder: null,
-            thumbnail: NetworkImage(turl),
-            image: NetworkImage(url),
-            width: double.infinity,
-            height: double.infinity),
+        child: Image.network(imageUrl, fit: BoxFit.cover, loadingBuilder:
+                (BuildContext context, Widget child,
+                    ImageChunkEvent? loadingProgress) {
+          if (loadingProgress == null) {
+            return child;
+          }
+          return Center(
+            child: ImageFiltered(
+              imageFilter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+              child: Image.network(
+                thumbnailUrl,
+                fit: BoxFit.cover,
+              ),
+            ),
+          );
+        } 
+            ),
       ),
     );
   }

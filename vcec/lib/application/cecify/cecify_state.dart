@@ -8,12 +8,9 @@ class CecifyState with _$CecifyState {
     required List<EpisodeResult> episodes,
     required bool isLoading,
     required bool isFirstFetch,
+    required int selectedSeason,
     required bool hasNext,
-    required Option<Either<MainFailure, List<SeasonResult>>> isFailureOrSuccess,
-    required Option<Either<MainFailure, List<ColorResult>>>
-        isFailureOrSuccessForColors,
-    required Option<Either<MainFailure, List<EpisodeResult>>>
-        isFailureOrSuccessForEpisodes,
+    required Option<Either<MainFailure, void>> isFailureOrSuccess,
   }) = _CecifyState;
   factory CecifyState.initial() => CecifyState(
       seasons: [],
@@ -21,8 +18,7 @@ class CecifyState with _$CecifyState {
       episodes: [],
       isLoading: false,
       isFailureOrSuccess: none(),
-      isFailureOrSuccessForColors: none(),
-      isFailureOrSuccessForEpisodes: none(),
       isFirstFetch: false,
+      selectedSeason: 0,
       hasNext: true);
 }

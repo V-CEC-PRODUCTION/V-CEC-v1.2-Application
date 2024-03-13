@@ -20,7 +20,7 @@ class CecifyRadioScreen extends StatelessWidget {
     final size = MediaQuery.of(context).size.width;
     return BlocConsumer<CecifyCubit, CecifyState>(
       listener: (context, state) {
-        state.isFailureOrSuccessForEpisodes.fold(
+        state.isFailureOrSuccess.fold(
             () => {},
             (either) => either.fold(
                   (failure) {
@@ -53,7 +53,7 @@ class CecifyRadioScreen extends StatelessWidget {
             ),
           );
         }
-        state.isFailureOrSuccessForEpisodes.fold(() {}, (either) {
+        state.isFailureOrSuccess.fold(() {}, (either) {
           either.fold((failure) {
             if (failure == const MainFailure.clientFailure()) {
               return const Center(child: Text('Network Error...'));

@@ -7,7 +7,6 @@ class AuthTokenManager {
   String? _accessToken;
   String? _refreshToken;
   String? _email;
-  int? _index;
   String? _name;
   String? _imageUrl;
   String? _thumbnailUrl;
@@ -16,7 +15,7 @@ class AuthTokenManager {
   String? _forum;
   LoginType? _loginType;
   String? get email => _email;
-  int? get index => _index;
+
   String? get accessToken => _accessToken;
   String? get refreshToken => _refreshToken;
   UserRole? get userRole => _userRole;
@@ -42,10 +41,6 @@ class AuthTokenManager {
 
   setAccessToken(String accessToken) {
     _accessToken = null;
-  }
-
-  setIndex(int index) {
-    _index = index;
   }
 
   setUserAccount(GoogleSignInAccount googleuser) {

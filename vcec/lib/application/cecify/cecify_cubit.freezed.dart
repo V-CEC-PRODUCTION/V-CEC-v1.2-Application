@@ -21,13 +21,10 @@ mixin _$CecifyState {
   List<EpisodeResult> get episodes => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
   bool get isFirstFetch => throw _privateConstructorUsedError;
+  int get selectedSeason => throw _privateConstructorUsedError;
   bool get hasNext => throw _privateConstructorUsedError;
-  Option<Either<MainFailure, List<SeasonResult>>> get isFailureOrSuccess =>
+  Option<Either<MainFailure, void>> get isFailureOrSuccess =>
       throw _privateConstructorUsedError;
-  Option<Either<MainFailure, List<ColorResult>>>
-      get isFailureOrSuccessForColors => throw _privateConstructorUsedError;
-  Option<Either<MainFailure, List<EpisodeResult>>>
-      get isFailureOrSuccessForEpisodes => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $CecifyStateCopyWith<CecifyState> get copyWith =>
@@ -46,12 +43,9 @@ abstract class $CecifyStateCopyWith<$Res> {
       List<EpisodeResult> episodes,
       bool isLoading,
       bool isFirstFetch,
+      int selectedSeason,
       bool hasNext,
-      Option<Either<MainFailure, List<SeasonResult>>> isFailureOrSuccess,
-      Option<Either<MainFailure, List<ColorResult>>>
-          isFailureOrSuccessForColors,
-      Option<Either<MainFailure, List<EpisodeResult>>>
-          isFailureOrSuccessForEpisodes});
+      Option<Either<MainFailure, void>> isFailureOrSuccess});
 }
 
 /// @nodoc
@@ -72,10 +66,9 @@ class _$CecifyStateCopyWithImpl<$Res, $Val extends CecifyState>
     Object? episodes = null,
     Object? isLoading = null,
     Object? isFirstFetch = null,
+    Object? selectedSeason = null,
     Object? hasNext = null,
     Object? isFailureOrSuccess = null,
-    Object? isFailureOrSuccessForColors = null,
-    Object? isFailureOrSuccessForEpisodes = null,
   }) {
     return _then(_value.copyWith(
       seasons: null == seasons
@@ -98,6 +91,10 @@ class _$CecifyStateCopyWithImpl<$Res, $Val extends CecifyState>
           ? _value.isFirstFetch
           : isFirstFetch // ignore: cast_nullable_to_non_nullable
               as bool,
+      selectedSeason: null == selectedSeason
+          ? _value.selectedSeason
+          : selectedSeason // ignore: cast_nullable_to_non_nullable
+              as int,
       hasNext: null == hasNext
           ? _value.hasNext
           : hasNext // ignore: cast_nullable_to_non_nullable
@@ -105,15 +102,7 @@ class _$CecifyStateCopyWithImpl<$Res, $Val extends CecifyState>
       isFailureOrSuccess: null == isFailureOrSuccess
           ? _value.isFailureOrSuccess
           : isFailureOrSuccess // ignore: cast_nullable_to_non_nullable
-              as Option<Either<MainFailure, List<SeasonResult>>>,
-      isFailureOrSuccessForColors: null == isFailureOrSuccessForColors
-          ? _value.isFailureOrSuccessForColors
-          : isFailureOrSuccessForColors // ignore: cast_nullable_to_non_nullable
-              as Option<Either<MainFailure, List<ColorResult>>>,
-      isFailureOrSuccessForEpisodes: null == isFailureOrSuccessForEpisodes
-          ? _value.isFailureOrSuccessForEpisodes
-          : isFailureOrSuccessForEpisodes // ignore: cast_nullable_to_non_nullable
-              as Option<Either<MainFailure, List<EpisodeResult>>>,
+              as Option<Either<MainFailure, void>>,
     ) as $Val);
   }
 }
@@ -132,12 +121,9 @@ abstract class _$$CecifyStateImplCopyWith<$Res>
       List<EpisodeResult> episodes,
       bool isLoading,
       bool isFirstFetch,
+      int selectedSeason,
       bool hasNext,
-      Option<Either<MainFailure, List<SeasonResult>>> isFailureOrSuccess,
-      Option<Either<MainFailure, List<ColorResult>>>
-          isFailureOrSuccessForColors,
-      Option<Either<MainFailure, List<EpisodeResult>>>
-          isFailureOrSuccessForEpisodes});
+      Option<Either<MainFailure, void>> isFailureOrSuccess});
 }
 
 /// @nodoc
@@ -156,10 +142,9 @@ class __$$CecifyStateImplCopyWithImpl<$Res>
     Object? episodes = null,
     Object? isLoading = null,
     Object? isFirstFetch = null,
+    Object? selectedSeason = null,
     Object? hasNext = null,
     Object? isFailureOrSuccess = null,
-    Object? isFailureOrSuccessForColors = null,
-    Object? isFailureOrSuccessForEpisodes = null,
   }) {
     return _then(_$CecifyStateImpl(
       seasons: null == seasons
@@ -182,6 +167,10 @@ class __$$CecifyStateImplCopyWithImpl<$Res>
           ? _value.isFirstFetch
           : isFirstFetch // ignore: cast_nullable_to_non_nullable
               as bool,
+      selectedSeason: null == selectedSeason
+          ? _value.selectedSeason
+          : selectedSeason // ignore: cast_nullable_to_non_nullable
+              as int,
       hasNext: null == hasNext
           ? _value.hasNext
           : hasNext // ignore: cast_nullable_to_non_nullable
@@ -189,15 +178,7 @@ class __$$CecifyStateImplCopyWithImpl<$Res>
       isFailureOrSuccess: null == isFailureOrSuccess
           ? _value.isFailureOrSuccess
           : isFailureOrSuccess // ignore: cast_nullable_to_non_nullable
-              as Option<Either<MainFailure, List<SeasonResult>>>,
-      isFailureOrSuccessForColors: null == isFailureOrSuccessForColors
-          ? _value.isFailureOrSuccessForColors
-          : isFailureOrSuccessForColors // ignore: cast_nullable_to_non_nullable
-              as Option<Either<MainFailure, List<ColorResult>>>,
-      isFailureOrSuccessForEpisodes: null == isFailureOrSuccessForEpisodes
-          ? _value.isFailureOrSuccessForEpisodes
-          : isFailureOrSuccessForEpisodes // ignore: cast_nullable_to_non_nullable
-              as Option<Either<MainFailure, List<EpisodeResult>>>,
+              as Option<Either<MainFailure, void>>,
     ));
   }
 }
@@ -211,10 +192,9 @@ class _$CecifyStateImpl implements _CecifyState {
       required final List<EpisodeResult> episodes,
       required this.isLoading,
       required this.isFirstFetch,
+      required this.selectedSeason,
       required this.hasNext,
-      required this.isFailureOrSuccess,
-      required this.isFailureOrSuccessForColors,
-      required this.isFailureOrSuccessForEpisodes})
+      required this.isFailureOrSuccess})
       : _seasons = seasons,
         _colors = colors,
         _episodes = episodes;
@@ -248,19 +228,15 @@ class _$CecifyStateImpl implements _CecifyState {
   @override
   final bool isFirstFetch;
   @override
+  final int selectedSeason;
+  @override
   final bool hasNext;
   @override
-  final Option<Either<MainFailure, List<SeasonResult>>> isFailureOrSuccess;
-  @override
-  final Option<Either<MainFailure, List<ColorResult>>>
-      isFailureOrSuccessForColors;
-  @override
-  final Option<Either<MainFailure, List<EpisodeResult>>>
-      isFailureOrSuccessForEpisodes;
+  final Option<Either<MainFailure, void>> isFailureOrSuccess;
 
   @override
   String toString() {
-    return 'CecifyState(seasons: $seasons, colors: $colors, episodes: $episodes, isLoading: $isLoading, isFirstFetch: $isFirstFetch, hasNext: $hasNext, isFailureOrSuccess: $isFailureOrSuccess, isFailureOrSuccessForColors: $isFailureOrSuccessForColors, isFailureOrSuccessForEpisodes: $isFailureOrSuccessForEpisodes)';
+    return 'CecifyState(seasons: $seasons, colors: $colors, episodes: $episodes, isLoading: $isLoading, isFirstFetch: $isFirstFetch, selectedSeason: $selectedSeason, hasNext: $hasNext, isFailureOrSuccess: $isFailureOrSuccess)';
   }
 
   @override
@@ -275,17 +251,11 @@ class _$CecifyStateImpl implements _CecifyState {
                 other.isLoading == isLoading) &&
             (identical(other.isFirstFetch, isFirstFetch) ||
                 other.isFirstFetch == isFirstFetch) &&
+            (identical(other.selectedSeason, selectedSeason) ||
+                other.selectedSeason == selectedSeason) &&
             (identical(other.hasNext, hasNext) || other.hasNext == hasNext) &&
             (identical(other.isFailureOrSuccess, isFailureOrSuccess) ||
-                other.isFailureOrSuccess == isFailureOrSuccess) &&
-            (identical(other.isFailureOrSuccessForColors,
-                    isFailureOrSuccessForColors) ||
-                other.isFailureOrSuccessForColors ==
-                    isFailureOrSuccessForColors) &&
-            (identical(other.isFailureOrSuccessForEpisodes,
-                    isFailureOrSuccessForEpisodes) ||
-                other.isFailureOrSuccessForEpisodes ==
-                    isFailureOrSuccessForEpisodes));
+                other.isFailureOrSuccess == isFailureOrSuccess));
   }
 
   @override
@@ -296,10 +266,9 @@ class _$CecifyStateImpl implements _CecifyState {
       const DeepCollectionEquality().hash(_episodes),
       isLoading,
       isFirstFetch,
+      selectedSeason,
       hasNext,
-      isFailureOrSuccess,
-      isFailureOrSuccessForColors,
-      isFailureOrSuccessForEpisodes);
+      isFailureOrSuccess);
 
   @JsonKey(ignore: true)
   @override
@@ -315,13 +284,10 @@ abstract class _CecifyState implements CecifyState {
       required final List<EpisodeResult> episodes,
       required final bool isLoading,
       required final bool isFirstFetch,
+      required final int selectedSeason,
       required final bool hasNext,
-      required final Option<Either<MainFailure, List<SeasonResult>>>
-          isFailureOrSuccess,
-      required final Option<Either<MainFailure, List<ColorResult>>>
-          isFailureOrSuccessForColors,
-      required final Option<Either<MainFailure, List<EpisodeResult>>>
-          isFailureOrSuccessForEpisodes}) = _$CecifyStateImpl;
+      required final Option<Either<MainFailure, void>>
+          isFailureOrSuccess}) = _$CecifyStateImpl;
 
   @override
   List<SeasonResult> get seasons;
@@ -334,15 +300,11 @@ abstract class _CecifyState implements CecifyState {
   @override
   bool get isFirstFetch;
   @override
+  int get selectedSeason;
+  @override
   bool get hasNext;
   @override
-  Option<Either<MainFailure, List<SeasonResult>>> get isFailureOrSuccess;
-  @override
-  Option<Either<MainFailure, List<ColorResult>>>
-      get isFailureOrSuccessForColors;
-  @override
-  Option<Either<MainFailure, List<EpisodeResult>>>
-      get isFailureOrSuccessForEpisodes;
+  Option<Either<MainFailure, void>> get isFailureOrSuccess;
   @override
   @JsonKey(ignore: true)
   _$$CecifyStateImplCopyWith<_$CecifyStateImpl> get copyWith =>

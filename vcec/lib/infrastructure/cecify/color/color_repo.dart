@@ -18,13 +18,13 @@ class ColorssRepo extends ColorService {
       if (response.statusCode == 200 || response.statusCode == 201) {
         final seasons = ColorModel.fromJson(response.data);
         final seasons0 = seasons.colorResult;
-        print(seasons0.toString());
+        log(response.data.toString());
         return Right(seasons0!);
       } else {
         return const Left(MainFailure.serverFailure());
       }
     } catch (e) {
-      log("${e}colors");
+      log("colors${e}");
       if (e is DioException && e.response?.statusCode == 401) {
         return const Left(AuthFailure());
       } else if (e is DioException && e.response?.statusCode == 500 ||
