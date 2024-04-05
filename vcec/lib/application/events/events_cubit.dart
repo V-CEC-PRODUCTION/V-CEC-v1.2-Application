@@ -51,7 +51,8 @@ class EventsCubit extends Cubit<EventsState> {
     required EventType eventType,
     required String forum,
   }) async {
-    emit(state.copyWith(isLoading: true, events: {
+    emit(state.copyWith(isLoading: true,
+    isFailureOrSuccess: none(), events: {
       EventType.Ended.name: [],
       EventType.Upcoming.name: [],
     }));

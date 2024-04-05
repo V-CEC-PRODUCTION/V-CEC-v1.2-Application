@@ -9,17 +9,15 @@ import 'package:vcec/domain/cecify/color/color_service.dart';
 import 'package:vcec/domain/cecify/episodes/episodes_model.dart';
 import 'package:vcec/domain/cecify/episodes/episodes_service.dart';
 import 'package:vcec/domain/cecify/filter_seasons/season_model.dart';
-import 'package:vcec/domain/cecify/filter_seasons/season_service.dart';
 import 'package:vcec/domain/failure/main_failure.dart';
 part 'cecify_cubit.freezed.dart';
 part 'cecify_state.dart';
 
 @injectable
 class CecifyCubit extends Cubit<CecifyState> {
-  final SeasonService _seasonService;
   final ColorService _colorService;
   final EpisodesService _episodesService;
-  CecifyCubit(this._seasonService, this._colorService, this._episodesService)
+  CecifyCubit(this._colorService, this._episodesService)
       : super(CecifyState.initial());
 
   void getColors() async {
@@ -44,6 +42,8 @@ class CecifyCubit extends Cubit<CecifyState> {
   }
 
   void getEpisodes(int season) async {
+    print('hinidhin2');
+    print(season);
     emit(state.copyWith(
       selectedSeason: season,
       isLoading: true,

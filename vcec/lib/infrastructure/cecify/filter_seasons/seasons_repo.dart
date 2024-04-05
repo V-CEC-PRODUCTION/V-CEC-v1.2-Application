@@ -18,7 +18,7 @@ class SeasonsRepo extends SeasonService {
       if (response.statusCode == 200 || response.statusCode == 201) {
         final seasons = SeasonModel.fromJson(response.data);
         final seasons0 = seasons.seasonResult;
-        print(seasons0.toString());
+      //  print(seasons0.toString());
         return Right(seasons0!);
       } else {
         return const Left(MainFailure.serverFailure());

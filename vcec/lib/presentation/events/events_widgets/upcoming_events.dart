@@ -1,9 +1,12 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:vcec/application/events/events_cubit.dart';
 import 'package:vcec/core/colors.dart';
+import 'package:vcec/core/constants.dart';
 import 'package:vcec/domain/auth_token_manager/auth_token_manager.dart';
 import 'package:vcec/domain/events/model/event_model/event_types.dart';
 import 'package:vcec/domain/failure/main_failure.dart';
@@ -28,55 +31,66 @@ class UpcomingEvents extends StatelessWidget {
       );
       AuthTokenManager.instance.setForum('all');
     });
-    return BlocConsumer<EventsCubit, EventsState>(
-      listener: (context, state) {
-        state.isFailureOrSuccess.fold(
-          () {},
-          (either) => either.fold(
-            (failure) {
-              if (!state.isLoading) {
-                if (failure == const MainFailure.serverFailure()) {
-                  displaySnackBar(context: context, text: "Server is down");
-                } else if (failure == const MainFailure.clientFailure()) {
-                  displaySnackBar(
-                      context: context,
-                      text: "Something wrong with your network11");
-                } else if (failure == const MainFailure.authFailure()) {
-                  displaySnackBar(
-                      context: context, text: 'Access token timed out');
-                } else {
-                  displaySnackBar(
-                      context: context, text: "Something Unexpected Happened");
-                }
-              }
-            },
-            (upcomingEvents) {},
-          ),
-        );
-      },
-      builder: (context, state) {
-        return state.isFailureOrSuccess.fold(() {
-          return Column(
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const SubHeading(text: 'Upcoming Events'),
-                    TextButton(
-                      onPressed: () {},
-                      child: const Text(
-                        'View All',
-                        style: TextStyle(
-                          color: kBlackBlurr,
-                        ),
-                      ),
-                    )
-                  ],
+              const SubHeading(text: 'Upcoming Events'),
+              TextButton(
+                onPressed: () {
+                  final forum = AuthTokenManager.instance.forum;
+                  BlocProvider.of<EventsCubit>(context).fetchEvents(
+                    eventType: EventType.Upcoming,
+                    forum: forum!,
+                  );
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => ViewAllScreen(),
+                  ));
+                },
+                child: const Text(
+                  'View All',
+                  style: TextStyle(
+                    color: kBlackBlurr,
+                  ),
                 ),
+              )
+            ],
+          ),
+        ),
+        BlocConsumer<EventsCubit, EventsState>(
+          listener: (context, state) {
+            state.isFailureOrSuccess.fold(
+              () {},
+              (either) => either.fold(
+                (failure) {
+                  if (!state.isLoading) {
+                    if (failure == const MainFailure.serverFailure()) {
+                      displaySnackBar(context: context, text: "Server is down");
+                    } else if (failure == const MainFailure.clientFailure()) {
+                      displaySnackBar(
+                          context: context,
+                          text: "Something wrong with your network11");
+                    } else if (failure == const MainFailure.authFailure()) {
+                      displaySnackBar(
+                          context: context, text: 'Access token timed out');
+                    } else {
+                      displaySnackBar(
+                          context: context,
+                          text: "Something Unexpected Happened");
+                    }
+                  }
+                },
+                (upcomingEvents) {},
               ),
-              Shimmer.fromColors(
+            );
+          },
+          builder: (context, state) {
+            print(state);
+            return state.isFailureOrSuccess.fold(() {
+              return Shimmer.fromColors(
                 baseColor: const Color.fromARGB(255, 0, 0, 0),
                 highlightColor: const Color.fromARGB(255, 207, 207, 207),
                 child: Container(
@@ -88,80 +102,46 @@ class UpcomingEvents extends StatelessWidget {
                     borderRadius: BorderRadius.circular(20),
                   ),
                 ),
-              ),
-            ],
-          );
-        },
-            (either) => either.fold((l) {
-                  return Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 15),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            const SubHeading(text: 'Upcoming Events'),
-                            TextButton(
-                              onPressed: () {},
-                              child: const Text(
-                                'View All',
-                                style: TextStyle(
-                                  color: kBlackBlurr,
+              );
+            },
+                (either) => either.fold((l) {
+                      return Column(
+                        children: [
+                          Container(
+                            height: 260.h,
+                            width: 440.w,
+                            decoration: BoxDecoration(
+                                image: DecorationImage(
+                              image: const AssetImage('assets/img/events2.png'),
+                              fit: BoxFit.cover,
+                            )),
+                          ),
+                          kheight10,
+                          Text('No events',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 20))
+                        ],
+                      );
+                    }, (events) {
+                      return events.isEmpty
+                          ? Column(
+                              children: [
+                                Container(
+                                  height: 260.h,
+                                  width: 440.w,
+                                  decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                    image: const AssetImage(
+                                        'assets/img/events2.png'),
+                                    fit: BoxFit.cover,
+                                  )),
                                 ),
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                      Container(
-                        height: 288.h,
-                        width: 470.w,
-                        decoration: BoxDecoration(
-                          color: const Color.fromARGB(33, 255, 7, 7),
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                      ),
-                    ],
-                  );
-                }, (events) {
-                  return Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 15),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            const SubHeading(text: 'Upcoming Events'),
-                            TextButton(
-                              onPressed: () {
-                                final forum = AuthTokenManager.instance.forum;
-                                BlocProvider.of<EventsCubit>(context)
-                                    .fetchEvents(
-                                  eventType: EventType.Upcoming,
-                                  forum: forum!,
-                                );
-                                Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => ViewAllScreen(),
-                                ));
-                              },
-                              child: const Text(
-                                'View All',
-                                style: TextStyle(
-                                  color: kBlackBlurr,
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                      events.isEmpty
-                          ? Container(
-                              height: 288.h,
-                              width: 470.w,
-                              decoration: BoxDecoration(
-                                color: const Color.fromARGB(33, 255, 7, 7),
-                                borderRadius: BorderRadius.circular(20),
-                              ),
+                                kheight10,
+                                Text('No events',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 20))
+                              ],
                             )
                           : SingleChildScrollView(
                               scrollDirection: Axis.horizontal,
@@ -195,11 +175,11 @@ class UpcomingEvents extends StatelessWidget {
                                           },
                                         )),
                               ),
-                            ),
-                    ],
-                  );
-                }));
-      },
+                            );
+                    }));
+          },
+        )
+      ],
     );
   }
 }

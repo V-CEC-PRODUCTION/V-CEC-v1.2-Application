@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:vcec/application/announcements/announcements_cubit.dart';
 import 'package:vcec/core/colors.dart';
+import 'package:vcec/core/constants.dart';
 import 'package:vcec/domain/auth_token_manager/auth_token_manager.dart';
 import 'package:vcec/presentation/common_widgets/events_card_widget.dart';
 import 'package:vcec/presentation/common_widgets/sub_heading.dart';
@@ -62,23 +63,43 @@ class AnnouncementsEventsWidget extends StatelessWidget {
             );
           },
               (either) => either.fold((l) {
-                    return Container(
-                      height: 288.h,
-                      width: 470.w,
-                      decoration: BoxDecoration(
-                        color: const Color.fromARGB(33, 255, 7, 7),
-                        borderRadius: BorderRadius.circular(20),
-                      ),
+                    return Column(
+                      children: [
+                        Container(
+                          height: 260.h,
+                          width: 440.w,
+                          decoration: BoxDecoration(
+                              image: DecorationImage(
+                            image: const AssetImage('assets/img/anno2.png'),
+                            fit: BoxFit.cover,
+                          )),
+                        ),
+                        kheight10,
+                        Text('No announcements',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 20))
+                      ],
                     );
                   }, (announcements) {
                     return announcements.isEmpty
-                        ? Container(
-                            height: 288.h,
-                            width: 470.w,
-                            decoration: BoxDecoration(
-                              color: const Color.fromARGB(33, 255, 7, 7),
-                              borderRadius: BorderRadius.circular(20),
-                            ),
+                        ? Column(
+                            children: [
+                              Container(
+                                height: 260.h,
+                                width: 440.w,
+                                decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                  image:
+                                      const AssetImage('assets/img/anno2.png'),
+                                  fit: BoxFit.cover,
+                                )),
+                              ),
+                              kheight10,
+                              Text('No announcements',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20))
+                            ],
                           )
                         : SingleChildScrollView(
                             scrollDirection: Axis.horizontal,

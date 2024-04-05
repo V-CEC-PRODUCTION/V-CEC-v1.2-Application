@@ -74,6 +74,7 @@ class CecifyRadioWidget extends StatelessWidget {
           );
         }
         if (state.colors.isNotEmpty && state.episodes.isNotEmpty) {
+          print('Season ${state.selectedSeason}'); 
           selectedSeason.value = 'Season ${state.selectedSeason}';
           selectedSeason.notifyListeners();
           return Padding(
@@ -91,29 +92,33 @@ class CecifyRadioWidget extends StatelessWidget {
                     Color(int.parse(
                         'FF' +
                             state
-                                .colors[
-                                    state.colors.length - state.selectedSeason]
+                                .colors[(state.colors.length -
+                                        state.selectedSeason) %
+                                    state.colors.length]
                                 .color1!,
                         radix: 16)),
                     Color(int.parse(
                         'FF' +
                             state
-                                .colors[
-                                    state.colors.length - state.selectedSeason]
+                                .colors[(state.colors.length -
+                                        state.selectedSeason) %
+                                    state.colors.length]
                                 .color2!,
                         radix: 16)),
                     Color(int.parse(
                         'FF' +
                             state
-                                .colors[
-                                    state.colors.length - state.selectedSeason]
+                                .colors[(state.colors.length -
+                                        state.selectedSeason) %
+                                    state.colors.length]
                                 .color3!,
                         radix: 16)),
                     Color(int.parse(
                         'FF' +
                             state
-                                .colors[
-                                    state.colors.length - state.selectedSeason]
+                                .colors[(state.colors.length -
+                                        state.selectedSeason) %
+                                    state.colors.length]
                                 .color4!,
                         radix: 16)),
                   ],
@@ -147,6 +152,7 @@ class CecifyRadioWidget extends StatelessWidget {
                           ),
                         ),
                         CecifySeasonDropDownWidget(
+                          colors: state.colors,
                           selectedSeason: selectedSeason,
                           seasonLength: state.colors.length,
                         )

@@ -20,7 +20,7 @@ class MainMenuScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      BlocProvider.of<TimetableCubit>(context).getTimetable();
+//BlocProvider.of<TimetableCubit>(context).getTimetable();
       BlocProvider.of<ProfileCubit>(context).getProfileDetails();
     });
     return Scaffold(
@@ -78,7 +78,7 @@ class MainMenuScreen extends StatelessWidget {
                 kheight10,
                 const Highlights(),
                 kheight10,
-                CecifyRadioWidget(),
+                   CecifyRadioWidget(),
                 kheight10,
                 //  Padding(
                 //     padding: const EdgeInsets.only(left: 20, top: 10),

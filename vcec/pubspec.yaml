@@ -122,6 +122,8 @@ flutter:
     - assets/img/ktu.png
     - assets/img/nothing.png
     - assets/img/splash/
+    - assets/img/events2.png
+    - assets/img/anno2.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
   # For details regarding adding assets from package dependencies, see
