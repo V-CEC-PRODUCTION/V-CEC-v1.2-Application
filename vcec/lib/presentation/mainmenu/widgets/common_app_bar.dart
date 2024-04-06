@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:progressive_image/progressive_image.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:vcec/core/colors.dart';
 import 'package:vcec/core/constants.dart';
 import 'package:vcec/presentation/common_widgets/notification_icon.dart';
 
@@ -18,7 +19,7 @@ class CommonAppBarWidget extends StatelessWidget
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size.width;
     return DecoratedBox(
-      decoration: const BoxDecoration(color: Color(0xff2E3136)),
+      decoration: const BoxDecoration(color: eventsappbarcolor),
       child: Padding(
         padding: const EdgeInsets.only(top: 15.0, left: 2.0),
         child: Row(

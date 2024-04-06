@@ -9,7 +9,9 @@ import 'package:vcec/domain/auth_token_manager/auth_token_manager.dart';
 import 'package:vcec/domain/events/model/event_model/event_types.dart';
 
 class ForumEventFilterWidget extends StatelessWidget {
-  const ForumEventFilterWidget({super.key});
+  ForumEventFilterWidget({super.key});
+
+  bool isSelected = false;
 
   @override
   Widget build(BuildContext context) {
@@ -130,7 +132,8 @@ class ForumEventFilterWidget extends StatelessWidget {
                                     );
                                   },
                                   style: ElevatedButton.styleFrom(
-                                    backgroundColor: kwhite,
+                                    backgroundColor:
+                                        isSelected ? kDarkGreen : kwhite,
                                     elevation: 4,
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(6),
@@ -139,8 +142,10 @@ class ForumEventFilterWidget extends StatelessWidget {
                                   ),
                                   child: Text(
                                     '${forums[index].displayName}',
-                                    style: const TextStyle(
-                                        color: kBlackBlurr, fontSize: 12),
+                                    style: TextStyle(
+                                        color:
+                                            isSelected ? kwhite : kBlackBlurr,
+                                        fontSize: 12),
                                   ),
                                 ),
                               ),

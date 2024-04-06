@@ -48,9 +48,10 @@ class EventsCardWidget extends StatelessWidget {
                 Radius.circular(11.5),
               ),
             ),
-            width: double.infinity,
-            height: ((size.width * 0.65) - 12) / 16 * 9,
+            // width: double.infinity,
+            height: ((size.width * 0.65) - 12) / 16 * 15.6, //9
             child: ProgressiveImage(
+                fit: BoxFit.cover,
                 blur: 1,
                 placeholder: NetworkImage('$thumpnailUrl'),
                 thumbnail: NetworkImage('$thumpnailUrl'),
@@ -231,7 +232,7 @@ class EventsCardWidget extends StatelessWidget {
                                               right: size.width * 0.12,
                                               child: Container(
                                                 width: size.width * 0.07,
-                                                height: size.width * 0.07,
+                                                height: size.width * 1.07,
                                                 decoration: BoxDecoration(
                                                   shape: BoxShape.circle,
                                                   color: Colors.green,

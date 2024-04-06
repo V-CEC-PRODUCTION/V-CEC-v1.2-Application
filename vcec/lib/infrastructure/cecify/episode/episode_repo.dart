@@ -20,7 +20,7 @@ class EpisodesRepo extends EpisodesService {
       if (response.statusCode == 200 || response.statusCode == 201) {
         final seasons = EpisodeModel.fromJson(response.data);
         final seasons0 = seasons.episodesResult;
-        print(seasons0.toString());
+      //  print(seasons0.toString());
         return Right(seasons0!);
       } else {
         return const Left(MainFailure.serverFailure());

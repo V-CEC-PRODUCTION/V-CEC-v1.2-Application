@@ -38,7 +38,7 @@ class EventsScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             kheight10,
-            const ForumEventFilterWidget(),
+            ForumEventFilterWidget(),
             const UpcomingEvents(),
             // const EventsForYouWidget(),
             const AnnouncementsEventsWidget(),

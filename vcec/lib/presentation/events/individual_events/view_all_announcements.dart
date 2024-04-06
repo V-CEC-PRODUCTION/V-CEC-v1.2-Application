@@ -47,7 +47,7 @@ class ViewAllAnnouncements extends StatelessWidget {
             title: Padding(
               padding: EdgeInsets.only(left: size1 * 0.24),
               child: Text(
-                'Events',
+                'Announcements',
                 style: TextStyle(
                     fontSize: size1 * 0.05, fontWeight: FontWeight.bold),
               ),
@@ -188,9 +188,7 @@ class ViewAllAnnouncements extends StatelessWidget {
                                 }
                               },
                               separatorBuilder: (context, index) {
-                                return const SizedBox(
-                                  height: 20,
-                                );
+                                return SizedBox();
                               },
                               itemCount:
                                   events.length + (state.isLoading ? 1 : 0));

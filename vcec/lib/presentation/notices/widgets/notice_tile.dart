@@ -41,8 +41,8 @@ class NoticeTileWidget extends StatelessWidget {
             child: ValueListenableBuilder(
                 valueListenable: _isexpanded,
                 builder: (BuildContext ctx, bool isexpanded, Widget? _) {
-                  return Text('Notification-${index! + 1}',
-                      maxLines: isexpanded != true ? 2 : 20,
+                  return Text(notice.title!, //'Notification-${index! + 1}',
+                      maxLines: isexpanded != true ? 2 : 10,
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(
                         color: Color.fromARGB(255, 0, 0, 0),
@@ -63,8 +63,8 @@ class NoticeTileWidget extends StatelessWidget {
         valueListenable: _isexpanded,
         builder: (BuildContext ctx, bool isexpanded, Widget? _) {
           return Text(
-            notice.title!,
-            maxLines: isexpanded != true ? 2 : 30,
+            notice.description!,
+            maxLines: isexpanded != true ? 2 : 10,
             overflow: TextOverflow.ellipsis,
             style: const TextStyle(
               fontSize: 11,

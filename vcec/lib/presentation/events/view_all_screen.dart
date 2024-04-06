@@ -193,9 +193,7 @@ class ViewAllScreen extends StatelessWidget {
                                 }
                               },
                               separatorBuilder: (context, index) {
-                                return const SizedBox(
-                                  height: 20,
-                                );
+                                return SizedBox();
                               },
                               itemCount:
                                   events.length + (state.isLoading ? 1 : 0));

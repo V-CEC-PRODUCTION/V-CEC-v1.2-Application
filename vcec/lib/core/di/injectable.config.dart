@@ -199,7 +199,6 @@ extension GetItInjectableX on _i1.GetIt {
     gh.factory<_i69.CarouselCubit>(
         () => _i69.CarouselCubit(gh<_i13.CarouselService>()));
     gh.factory<_i70.CecifyCubit>(() => _i70.CecifyCubit(
-          gh<_i54.SeasonService>(),
           gh<_i15.ColorService>(),
           gh<_i21.EpisodesService>(),
         ));

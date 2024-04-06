@@ -19,6 +19,6 @@ class CecifyState with _$CecifyState {
       isLoading: false,
       isFailureOrSuccess: none(),
       isFirstFetch: false,
-      selectedSeason: 0,
+      selectedSeason: 1,
       hasNext: true);
 }
