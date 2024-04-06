@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vcec/application/gallery/gallery_cubit.dart';
 import 'package:vcec/domain/gallery/gallery_model/gallery_file.dart';
 import 'package:vcec/presentation/mainmenu/subpages/video_player_screen.dart';
-import 'package:vcec/strings/strings.dart';
 
 class GallerySwipeView extends StatefulWidget {
   const GallerySwipeView({super.key, required this.offset});

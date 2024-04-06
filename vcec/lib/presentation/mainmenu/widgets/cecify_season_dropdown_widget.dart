@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:vcec/application/cecify/cecify_cubit.dart';
 import 'package:vcec/core/colors.dart';
-import 'package:vcec/domain/auth_token_manager/auth_token_manager.dart';
 
 class CecifySeasonDropDownWidget extends StatelessWidget {
   CecifySeasonDropDownWidget({

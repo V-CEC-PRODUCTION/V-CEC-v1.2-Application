@@ -1,12 +1,9 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:vcec/application/cecify/cecify_cubit.dart';
 import 'package:vcec/core/constants.dart';
-import 'package:vcec/domain/auth_token_manager/auth_token_manager.dart';
 import 'package:vcec/domain/failure/main_failure.dart';
 import 'package:vcec/presentation/cecify_radio/cecify_radio_screen.dart';
 import 'package:vcec/presentation/common_widgets/common_snackbar.dart';
@@ -77,7 +74,7 @@ class CecifyRadioWidget extends StatelessWidget {
           selectedSeason.value = 'Season ${state.selectedSeason}';
           selectedSeason.notifyListeners();
           return Padding(
-            padding: EdgeInsets.all(10.sp),
+            padding: EdgeInsets.symmetric(vertical: 11.5.sp, horizontal: 17.sp),
             child: AnimatedContainer(
               duration: const Duration(milliseconds: 500),
               height: 340.w,

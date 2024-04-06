@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:progressive_image/progressive_image.dart';
 import 'package:vcec/core/constants.dart';
-import 'package:vcec/strings/strings.dart';
 
 class EventsCardWidget extends StatelessWidget {
   const EventsCardWidget({
@@ -32,11 +31,11 @@ class EventsCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Container(
-      padding: const EdgeInsets.all(10),
+      padding: const EdgeInsets.all(6.5),
       margin: const EdgeInsets.only(left: 10),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(width: 1, color: const Color.fromARGB(88, 0, 0, 0)),
+        borderRadius: BorderRadius.circular(18),
+        border: Border.all(width: .5, color: const Color.fromARGB(88, 0, 0, 0)),
       ),
       width: size.width * 0.65,
       child: Column(
@@ -46,7 +45,7 @@ class EventsCardWidget extends StatelessWidget {
             clipBehavior: Clip.antiAlias,
             decoration: const BoxDecoration(
               borderRadius: BorderRadius.all(
-                Radius.circular(17),
+                Radius.circular(11.5),
               ),
             ),
             width: double.infinity,

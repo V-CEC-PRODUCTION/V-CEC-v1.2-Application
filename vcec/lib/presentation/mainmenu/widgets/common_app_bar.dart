@@ -4,7 +4,6 @@ import 'package:progressive_image/progressive_image.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:vcec/core/constants.dart';
 import 'package:vcec/presentation/common_widgets/notification_icon.dart';
-import 'package:vcec/strings/strings.dart';
 
 class CommonAppBarWidget extends StatelessWidget
     implements PreferredSizeWidget {

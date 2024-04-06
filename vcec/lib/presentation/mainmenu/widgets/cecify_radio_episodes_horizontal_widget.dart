@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:vcec/core/colors.dart';
 import 'package:vcec/domain/cecify/episodes/episodes_model.dart';
 
 class CecifyRadioEpisodesHorizontalWidget extends StatelessWidget {

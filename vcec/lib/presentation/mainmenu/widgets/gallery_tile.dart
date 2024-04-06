@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_wall_layout/flutter_wall_layout.dart';
 import 'package:progressive_image/progressive_image.dart';
 import 'package:vcec/presentation/mainmenu/widgets/gallery_swipe_view.dart';
-import 'package:vcec/strings/strings.dart';
 
 buildGalleryItem(
     {required int id,
