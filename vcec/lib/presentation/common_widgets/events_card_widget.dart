@@ -31,7 +31,6 @@ class EventsCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Container(
-      padding: const EdgeInsets.all(6.5),
       margin: const EdgeInsets.only(left: 10),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(18),
@@ -44,8 +43,9 @@ class EventsCardWidget extends StatelessWidget {
           Container(
             clipBehavior: Clip.antiAlias,
             decoration: const BoxDecoration(
-              borderRadius: BorderRadius.all(
-                Radius.circular(11.5),
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(20),
+                topRight: Radius.circular(20),
               ),
             ),
             // width: double.infinity,
@@ -59,10 +59,11 @@ class EventsCardWidget extends StatelessWidget {
                 width: double.infinity,
                 height: double.infinity),
           ),
-          kheight5,
+          kheight15,
           // Event Title and Time
           Row(
             children: [
+              kwidth25,
               Expanded(
                 child: Text(
                   title,
@@ -327,9 +328,10 @@ class EventsCardWidget extends StatelessWidget {
                   ],
                 )
               ],
-            )
+            ),
 
           // Event Date
+          kheight15,
         ],
       ),
     );
