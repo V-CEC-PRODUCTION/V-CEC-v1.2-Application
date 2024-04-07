@@ -5,4 +5,5 @@ abstract class LoginService {
   Future<Either<MainFailure, void>> loginWithEmailAndPass(
       String email, String password);
   Future<Either<MainFailure, void>> loginWithGoogle(String email);
+  Future<Either<MainFailure, void>> updateDeviceID();
 }

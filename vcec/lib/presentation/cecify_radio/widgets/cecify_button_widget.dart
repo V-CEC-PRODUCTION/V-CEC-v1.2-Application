@@ -1,16 +1,21 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class CecifyButtonWidget extends StatelessWidget {
-  const CecifyButtonWidget({super.key, required this.title, required this.url, required this.launchurl});
+  const CecifyButtonWidget(
+      {super.key,
+      required this.title,
+      required this.url,
+      required this.launchurl});
   final String title;
   final String url;
   final String launchurl;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
+      onTap: () async {
         launchUrl(Uri.parse(launchurl));
       },
       child: Container(

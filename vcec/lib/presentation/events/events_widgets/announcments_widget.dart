@@ -119,6 +119,7 @@ class AnnouncementsEventsWidget extends StatelessWidget {
                                           totalLikes:
                                               announcements[index].totalLikes,
                                           imgUrl: announcements[index].likedBy,
+                                          isHighlights: false,
                                         ),
                                         onTap: () {
                                           Navigator.of(context)
