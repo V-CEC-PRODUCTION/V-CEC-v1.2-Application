@@ -1,9 +1,9 @@
 import 'dart:developer';
 import 'dart:io';
-import 'package:device_info_plus/device_info_plus.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:injectable/injectable.dart';
 import 'package:vcec/domain/auth_token_manager/auth_token_manager.dart';
@@ -85,9 +85,7 @@ class SignupRepo implements SignupService {
       {required UserDetailsModel userDetailsModel}) async {
     final manager = AuthTokenManager.instance;
 
-    DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
-    AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
-    String deviceId = androidInfo.id;
+    String deviceId = await FirebaseMessaging.instance.getToken() ?? "";
 
     Object data = {
       "name": userDetailsModel.fullName,
