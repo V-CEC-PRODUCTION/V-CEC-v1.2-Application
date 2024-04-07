@@ -36,11 +36,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       TextEditingController(text: "515-525-125");
 
   final ValueNotifier<String> _semNotifier = ValueNotifier("S1");
-final ValueNotifier<String> _branchNotifier = ValueNotifier("CSE");
+  final ValueNotifier<String> _branchNotifier = ValueNotifier("CSE");
 
   final TextEditingController _regController =
       TextEditingController(text: "chn21cs102");
-  final TextEditingController _divController = TextEditingController(text: "D");
+  final ValueNotifier<String> _divisionNotifier = ValueNotifier("D");
   ValueNotifier<Image?> profilepicNotifier = ValueNotifier(null);
   Future<void> pickImage() async {
     final controller = CropController(
@@ -199,7 +199,7 @@ final ValueNotifier<String> _branchNotifier = ValueNotifier("CSE");
                 _semNotifier.value = r.semester!;
                 _branchNotifier.value = r.branch!;
                 _regController.text = r.registerNo!;
-                _divController.text = r.division!;
+                _divisionNotifier.value = r.division!;
                 profilepicNotifier.value =
                     Image(image: NetworkImage('${r.imageUrl}'));
               });
@@ -228,7 +228,7 @@ final ValueNotifier<String> _branchNotifier = ValueNotifier("CSE");
                                 sem: _semNotifier.value,
                                 branch: _branchNotifier.value,
                                 regno: _regController.text,
-                                div: _divController.text,
+                                div: _divisionNotifier.value,
                                 ieeeno: _ieeeController.text,
                                 image: file);
                       },
@@ -305,9 +305,9 @@ final ValueNotifier<String> _branchNotifier = ValueNotifier("CSE");
                       ),
                       Padding(
                         padding: EdgeInsets.only(right: size * 0.58),
-                        child:  _DropdownWithTitle(
+                        child: _DropdownWithTitle(
                           title: "Semester",
-                          items:const [
+                          items: const [
                             "S1",
                             "S2",
                             "S3",
@@ -317,24 +317,28 @@ final ValueNotifier<String> _branchNotifier = ValueNotifier("CSE");
                             "S7",
                             "S8"
                           ],
-                          selectedValue: _semNotifier ,
+                          selectedValue: _semNotifier,
                         ),
                       ),
                       Padding(
                         padding: EdgeInsets.only(right: size * 0.58),
-                        child:  _DropdownWithTitle(
+                        child: _DropdownWithTitle(
                           title: "Branch",
-                          items:const ["CSE", "ECE", "EEE"],
-                          selectedValue:_branchNotifier ,
+                          items: const ["CSE", "ECE", "EEE"],
+                          selectedValue: _branchNotifier,
                         ),
                       ),
                       _TextFieldWithTitle(
                         title: "Reg No",
                         controller: _regController,
                       ),
-                      _TextFieldWithTitle(
-                        title: "Division",
-                        controller: _divController,
+                      Padding(
+                        padding: EdgeInsets.only(right: size * 0.58),
+                        child: _DropdownWithTitle(
+                          title: "Division",
+                          items: const ["A", "B", "C", "D", "E"],
+                          selectedValue: _divisionNotifier,
+                        ),
                       ),
                       const SizedBox(
                         height: 60,
@@ -384,7 +388,8 @@ class _DropdownWithTitle extends StatefulWidget {
   final List<String> items;
   final ValueNotifier<String> selectedValue;
 
-  const _DropdownWithTitle({required this.title, required this.items, required this.selectedValue});
+  const _DropdownWithTitle(
+      {required this.title, required this.items, required this.selectedValue});
 
   @override
   _DropdownWithTitleState createState() => _DropdownWithTitleState();
@@ -402,28 +407,28 @@ class _DropdownWithTitleState extends State<_DropdownWithTitle> {
               fontSize: 14, fontWeight: FontWeight.w400, height: 0.1),
         ),
         ValueListenableBuilder(
-          valueListenable: widget.selectedValue,
-          builder: (context, value, child) {
-            return DropdownButton<String>(
-              value: widget.selectedValue.value,
-              underline: Container(
-                height: 1,
-                color: Colors.grey,
-              ),
-              onChanged: (String? newValue) {
-                setState(() {
-                  widget.selectedValue.value = newValue!;
-                });
-              },
-              items: widget.items.map<DropdownMenuItem<String>>((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value),
-                );
-              }).toList(),
-            );
-          }
-        ),
+            valueListenable: widget.selectedValue,
+            builder: (context, value, child) {
+              return DropdownButton<String>(
+                value: widget.selectedValue.value,
+                underline: Container(
+                  height: 1,
+                  color: Colors.grey,
+                ),
+                onChanged: (String? newValue) {
+                  setState(() {
+                    widget.selectedValue.value = newValue!;
+                  });
+                },
+                items:
+                    widget.items.map<DropdownMenuItem<String>>((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
+                }).toList(),
+              );
+            }),
         const SizedBox(
           height: 25,
         ),
