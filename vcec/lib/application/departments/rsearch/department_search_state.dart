@@ -12,7 +12,7 @@ class DepartmentSearchState with _$DepartmentSearchState {
   }) = _Initial;
   factory DepartmentSearchState.initial() {
     return _Initial(
-        staffs: [],
+        staffs: [],  
         failureOrSuccess: none(),
         isFirstFetch: false,
         isLoading: false,

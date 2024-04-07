@@ -23,12 +23,18 @@ class DepartmentSearchCubit extends Cubit<DepartmentSearchState> {
   bool _searchDepartmentsWithSearchBarIsExecuting = false;
   int pageNum = 1;
   int pageNum1 = 1;
-  void searchDepartments(String query, Department? deptType) async {
-    if (!_searchDepartmentsIsExecuting) {
+  void searchDepartments(
+    String query,
+    Department? deptType,
+  ) async {
+    if (!_searchDepartmentsIsExecuting &&
+        _searchDepartmentsWithSearchBarIsExecuting == false) {
       _searchDepartmentsIsExecuting = true;
       log(pageNum.toString());
       if (state.department != deptType) {
         pageNum = 1;
+      }
+      if (state.department != deptType || state.isFirstFetch == true) {
         emit(state.copyWith(
           staffs: [],
           failureOrSuccess: none(),
@@ -46,10 +52,13 @@ class DepartmentSearchCubit extends Cubit<DepartmentSearchState> {
       final result =
           await _searchService.searchDepartments(query, deptType, pageNum);
       result.fold(
-        (l) => emit(state.copyWith(
-          failureOrSuccess: some(left(l)),
-          isLoading: false,
-        )),
+        (l) {
+          emit(state.copyWith(
+            failureOrSuccess: some(left(l)),
+            isLoading: false,
+          ));
+          _searchDepartmentsIsExecuting = false;
+        },
         (r) {
           List<Staff> updatedStaffs = List.from(state.staffs);
           updatedStaffs.addAll(r.staffInfo!);
@@ -61,17 +70,23 @@ class DepartmentSearchCubit extends Cubit<DepartmentSearchState> {
           ));
           _searchDepartmentsIsExecuting = false;
           pageNum++;
+          if (pageNum >= 2) {
+            emit(state.copyWith(
+              isFirstFetch: false,
+            ));
+          }
         },
       );
     }
   }
 
   void searchDepartmentsWithSearchBar(
-      String query, Department? deptType) async {
-    if (!_searchDepartmentsWithSearchBarIsExecuting) {
-      print('hi');
+      String query, Department? deptType, bool scrolled) async {
+    if (!_searchDepartmentsWithSearchBarIsExecuting &&
+        _searchDepartmentsIsExecuting == false) {
+      pageNum = 1;
       _searchDepartmentsWithSearchBarIsExecuting = true;
-      if (state.department != deptType) {
+      if (state.department != deptType || state.isFirstFetch == true) {
         emit(state.copyWith(
           staffs: [],
           failureOrSuccess: none(),
@@ -96,7 +111,6 @@ class DepartmentSearchCubit extends Cubit<DepartmentSearchState> {
           _searchDepartmentsWithSearchBarIsExecuting = false;
         },
         (r) {
-          print('hinidhinnnn');
           List<Staff> updatedStaffs = List.from(state.staffs);
           updatedStaffs.addAll(r.staffInfo!);
           emit(state.copyWith(
@@ -107,7 +121,9 @@ class DepartmentSearchCubit extends Cubit<DepartmentSearchState> {
           ));
           // print(r.hasNext);
           _searchDepartmentsWithSearchBarIsExecuting = false;
-          pageNum1++;
+          if (scrolled) {
+            pageNum1++;
+          }
         },
       );
     }

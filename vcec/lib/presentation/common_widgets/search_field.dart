@@ -38,6 +38,7 @@ class SearchField extends StatelessWidget {
               .searchDepartmentsWithSearchBar(
             value,
             deptType,
+            false
           );
 
           if (value.isNotEmpty) {

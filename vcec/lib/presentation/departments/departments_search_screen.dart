@@ -25,10 +25,10 @@ class DepartmentSearchScreen extends StatefulWidget {
 class _DepartmentSearchScreenState extends State<DepartmentSearchScreen> {
   final scrollController = ScrollController();
   @override
-  void initState() {
-    final state = BlocProvider.of<DepartmentSearchCubit>(context).state;
-    if (state.hasNext) {
-      log("kala1");
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+     final state = BlocProvider.of<DepartmentSearchCubit>(context).state;
+   
       scrollController.addListener(() {
         if (scrollController.position.atEdge) {
           log("kala2");
@@ -37,16 +37,14 @@ class _DepartmentSearchScreenState extends State<DepartmentSearchScreen> {
             widget.value
                 ? BlocProvider.of<DepartmentSearchCubit>(context)
                     .searchDepartmentsWithSearchBar(
-                        widget.query, widget.deptType)
+                        widget.query, widget.deptType, true)
                 : BlocProvider.of<DepartmentSearchCubit>(context)
                     .searchDepartments('', widget.deptType);
           }
         }
       });
-    }
-    super.initState();
+    
   }
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<DepartmentSearchCubit, DepartmentSearchState>(
