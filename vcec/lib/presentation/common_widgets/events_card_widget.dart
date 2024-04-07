@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:progressive_image/progressive_image.dart';
 import 'package:vcec/core/constants.dart';
 
@@ -15,6 +16,7 @@ class EventsCardWidget extends StatelessWidget {
     this.totalLikes,
     required this.pimgUrl,
     this.totalRegistrations,
+    this.isHighlights = false,
   });
   final String thumpnailUrl;
   final int? totalRegistrations;
@@ -26,6 +28,7 @@ class EventsCardWidget extends StatelessWidget {
   final String? subtitle;
   final String? date;
   final String? tag;
+  final bool? isHighlights;
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +52,9 @@ class EventsCardWidget extends StatelessWidget {
               ),
             ),
             // width: double.infinity,
-            height: ((size.width * 0.65) - 12) / 16 * 15.6, //9
+            height: isHighlights!
+                ? ((size.width * 0.65) - 12) / 16 * 9
+                : ((size.width * 0.65) - 12) / 16 * 15.6, //9
             child: ProgressiveImage(
                 fit: BoxFit.cover,
                 blur: 1,
@@ -98,13 +103,16 @@ class EventsCardWidget extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           subtitle != null
-                              ? Text(
-                                  subtitle!,
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: const TextStyle(
-                                    height: 1.2,
-                                    fontSize: 13,
+                              ? Padding(
+                                  padding: EdgeInsets.only(left: 26.0.w),
+                                  child: Text(
+                                    subtitle!,
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: const TextStyle(
+                                      height: 1.2,
+                                      fontSize: 13,
+                                    ),
                                   ),
                                 )
                               : const SizedBox(),

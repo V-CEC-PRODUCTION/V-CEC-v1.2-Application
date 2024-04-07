@@ -164,6 +164,7 @@ class UpcomingEvents extends StatelessWidget {
                                             tag: '',
                                             totalRegistrations: events[index]
                                                 .totalRegistrations,
+                                            isHighlights: false,
                                           ),
                                           onTap: () {
                                             Navigator.of(context)

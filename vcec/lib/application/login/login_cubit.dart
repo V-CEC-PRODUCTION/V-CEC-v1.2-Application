@@ -24,18 +24,26 @@ class LoginWithEmailAndGoogleCubit extends Cubit<LoginWithEmailAndGoogleState> {
       isLoading: true,
     ));
     final response = await _loginService.loginWithEmailAndPass(email, password);
-    response.fold((l) {
+    await response.fold((l) {
       emit(state.copyWith(
         isLoading: false,
         isFailureOrSuccess: some(left(l)),
       ));
-    }, (r) {
+    }, (r) async {
       _authTokenService.deleteToken();
       _authTokenService.saveToken();
-      emit(state.copyWith(
-        isLoading: false,
-        isFailureOrSuccess: some(right(null)),
-      ));
+      final updateDeviceIdResponce = await _loginService.updateDeviceID();
+      updateDeviceIdResponce.fold((l) {
+        emit(state.copyWith(
+          isLoading: false,
+          isFailureOrSuccess: some(left(l)),
+        ));
+      }, (r) {
+        emit(state.copyWith(
+          isLoading: false,
+          isFailureOrSuccess: some(right(null)),
+        ));
+      });
     });
   }
 

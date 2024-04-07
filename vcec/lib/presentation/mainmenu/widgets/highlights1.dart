@@ -104,6 +104,7 @@ class Highlights extends StatelessWidget {
                               state.highlights!.result![index].thumbnailUrl!,
                           date: state.highlights!.result![index].uploadTime!,
                           tag: state.highlights!.result![index].tag,
+                          isHighlights: true,
                         ),
                       ),
                     ),
