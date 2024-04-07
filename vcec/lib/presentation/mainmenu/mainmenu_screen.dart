@@ -45,6 +45,7 @@ class MainMenuScreen extends StatelessWidget {
                     );
                   },
                   (success) {
+                    print('Success: ${success.result[0].currentcode}');
                     log("Success: ${success.imageThumbnailUrl}");
                     log("Success: ${success.thumbnailUrl}");
                     if (AuthTokenManager.instance.userRole ==

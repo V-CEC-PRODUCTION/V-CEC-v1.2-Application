@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:progressive_image/progressive_image.dart';
@@ -42,38 +44,44 @@ class CommonAppBarWidget extends StatelessWidget
                     : _Banner(imageUrl: imageUrl!, thumbnailUrl: thumbnailUrl!),
             Padding(
               padding: const EdgeInsets.only(top: 10.0, left: 12),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    date,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 13,
-                      fontWeight: FontWeight.w400,
+              child: Flexible(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      date,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 13,
+                        fontWeight: FontWeight.w400,
+                      ),
                     ),
-                  ),
-                  name == null
-                      ? const SizedBox(
-                          height: 10,
-                        )
-                      : Text(
-                          name!,
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
+                    name == null
+                        ? const SizedBox(
+                            height: 10,
+                          )
+                        : FittedBox(
+                            fit: BoxFit.scaleDown,
+                            child: Text(
+                              name!,
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
                           ),
-                        ),
-                ],
+                  ],
+                ),
               ),
             ),
-            SizedBox(
-              width: value == true ? size * 0.50 : size * 0.30,
-            ),
+            Spacer(),
             value == true
-                ? const NotificationIcon()
+                ? Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: const NotificationIcon(),
+                  )
                 : const Text(
                     'Get Notified!',
                     textAlign: TextAlign.left,
@@ -99,19 +107,30 @@ class _Banner extends StatelessWidget {
   final String thumbnailUrl;
   @override
   Widget build(BuildContext context) {
-    String url = imageUrl.replaceAll('auth//api/', 'auth/api/');
-    String turl = thumbnailUrl.replaceAll('auth//api/', 'auth/api/');
     return CircleAvatar(
       radius: 23,
       child: ClipOval(
-        child: ProgressiveImage(
-            blur: 1,
-            fit: BoxFit.cover,
-            placeholder: null,
-            thumbnail: NetworkImage(turl),
-            image: NetworkImage(url),
-            width: double.infinity,
-            height: double.infinity),
+        child: Image.network(
+          imageUrl,
+          fit: BoxFit.cover,
+          loadingBuilder: (BuildContext context, Widget child,
+              ImageChunkEvent? loadingProgress) {
+            if (loadingProgress == null) {
+              return child;
+            }
+            return Center(
+              child: ImageFiltered(
+                imageFilter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                child: Image.network(
+                  thumbnailUrl.isEmpty ? imageUrl : thumbnailUrl,
+                  fit: BoxFit.cover,
+                ),
+              ),
+            );
+          },
+          height: double.infinity,
+          width: double.infinity,
+        ),
       ),
     );
   }

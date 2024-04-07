@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:vcec/application/main_menu/highlights/highlights_cubit.dart';
 import 'package:vcec/core/constants.dart';
 import 'package:vcec/domain/failure/main_failure.dart';
 import 'package:vcec/presentation/common_widgets/events_card_widget.dart';
 import 'package:vcec/presentation/common_widgets/sub_heading.dart';
-import 'package:vcec/strings/strings.dart';
 
 class Highlights extends StatelessWidget {
   const Highlights({super.key});
@@ -85,23 +85,26 @@ class Highlights extends StatelessWidget {
                 state.highlights!.result!.isNotEmpty
                     ? Padding(
                         padding:
-                            EdgeInsets.only(left: size.width * 0.04, top: 10),
+                            EdgeInsets.only(left: size.width * 0.053, top: 10),
                         child: const SubHeading(text: 'Highlights'),
                       )
                     : const SizedBox(),
                 kheight15,
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: List.generate(
-                      state.highlights!.result!.length,
-                      (index) => EventsCardWidget(
-                        pimgUrl: state.highlights!.result![index].imageUrl!,
-                        title: state.highlights!.result![index].content!,
-                        thumpnailUrl:
-                            state.highlights!.result![index].thumbnailUrl!,
-                        date: state.highlights!.result![index].uploadTime!,
-                        tag: state.highlights!.result![index].tag,
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 4.5.sp),
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: List.generate(
+                        state.highlights!.result!.length,
+                        (index) => EventsCardWidget(
+                          pimgUrl: state.highlights!.result![index].imageUrl!,
+                          title: state.highlights!.result![index].content!,
+                          thumpnailUrl:
+                              state.highlights!.result![index].thumbnailUrl!,
+                          date: state.highlights!.result![index].uploadTime!,
+                          tag: state.highlights!.result![index].tag,
+                        ),
                       ),
                     ),
                   ),

@@ -35,15 +35,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   final TextEditingController _admissionController =
       TextEditingController(text: "515-525-125");
 
-  final TextEditingController _semController =
-      TextEditingController(text: "S3");
-
-  final TextEditingController _branchController =
-      TextEditingController(text: "CSE");
+  final ValueNotifier<String> _semNotifier = ValueNotifier("S1");
+  final ValueNotifier<String> _branchNotifier = ValueNotifier("CSE");
 
   final TextEditingController _regController =
       TextEditingController(text: "chn21cs102");
-  final TextEditingController _divController = TextEditingController(text: "D");
+  final ValueNotifier<String> _divisionNotifier = ValueNotifier("D");
   ValueNotifier<Image?> profilepicNotifier = ValueNotifier(null);
   Future<void> pickImage() async {
     final controller = CropController(
@@ -110,6 +107,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size.width;
     return BlocConsumer<EditProfileCubit, EditProfileState>(
       listener: (context, state) {
         state.failureOrSuccesss.fold(
@@ -198,10 +196,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 _emailController.text = r.email!;
                 _ieeeController.text = r.ieeeMembershipNo!;
                 _admissionController.text = r.admissionNo!;
-                _semController.text = r.semester!;
-                _branchController.text = r.branch!;
+                _semNotifier.value = r.semester!;
+                _branchNotifier.value = r.branch!;
                 _regController.text = r.registerNo!;
-                _divController.text = r.division!;
+                _divisionNotifier.value = r.division!;
                 profilepicNotifier.value =
                     Image(image: NetworkImage('${r.imageUrl}'));
               });
@@ -227,10 +225,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                 name: _nameController.text,
                                 email: _emailController.text,
                                 adno: _admissionController.text,
-                                sem: _semController.text,
-                                branch: _branchController.text,
+                                sem: _semNotifier.value,
+                                branch: _branchNotifier.value,
                                 regno: _regController.text,
-                                div: _divController.text,
+                                div: _divisionNotifier.value,
                                 ieeeno: _ieeeController.text,
                                 image: file);
                       },
@@ -305,21 +303,42 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         title: "Admission No",
                         controller: _admissionController,
                       ),
-                      _TextFieldWithTitle(
-                        title: "Semester",
-                        controller: _semController,
+                      Padding(
+                        padding: EdgeInsets.only(right: size * 0.58),
+                        child: _DropdownWithTitle(
+                          title: "Semester",
+                          items: const [
+                            "S1",
+                            "S2",
+                            "S3",
+                            "S4",
+                            "S5",
+                            "S6",
+                            "S7",
+                            "S8"
+                          ],
+                          selectedValue: _semNotifier,
+                        ),
                       ),
-                      _TextFieldWithTitle(
-                        title: "Branch",
-                        controller: _branchController,
+                      Padding(
+                        padding: EdgeInsets.only(right: size * 0.58),
+                        child: _DropdownWithTitle(
+                          title: "Branch",
+                          items: const ["CSE", "ECE", "EEE"],
+                          selectedValue: _branchNotifier,
+                        ),
                       ),
                       _TextFieldWithTitle(
                         title: "Reg No",
                         controller: _regController,
                       ),
-                      _TextFieldWithTitle(
-                        title: "Division",
-                        controller: _divController,
+                      Padding(
+                        padding: EdgeInsets.only(right: size * 0.58),
+                        child: _DropdownWithTitle(
+                          title: "Division",
+                          items: const ["A", "B", "C", "D", "E"],
+                          selectedValue: _divisionNotifier,
+                        ),
                       ),
                       const SizedBox(
                         height: 60,
@@ -359,6 +378,60 @@ class _TextFieldWithTitle extends StatelessWidget {
         const SizedBox(
           height: 25,
         )
+      ],
+    );
+  }
+}
+
+class _DropdownWithTitle extends StatefulWidget {
+  final String title;
+  final List<String> items;
+  final ValueNotifier<String> selectedValue;
+
+  const _DropdownWithTitle(
+      {required this.title, required this.items, required this.selectedValue});
+
+  @override
+  _DropdownWithTitleState createState() => _DropdownWithTitleState();
+}
+
+class _DropdownWithTitleState extends State<_DropdownWithTitle> {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          widget.title,
+          style: const TextStyle(
+              fontSize: 14, fontWeight: FontWeight.w400, height: 0.1),
+        ),
+        ValueListenableBuilder(
+            valueListenable: widget.selectedValue,
+            builder: (context, value, child) {
+              return DropdownButton<String>(
+                value: widget.selectedValue.value,
+                underline: Container(
+                  height: 1,
+                  color: Colors.grey,
+                ),
+                onChanged: (String? newValue) {
+                  setState(() {
+                    widget.selectedValue.value = newValue!;
+                  });
+                },
+                items:
+                    widget.items.map<DropdownMenuItem<String>>((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
+                }).toList(),
+              );
+            }),
+        const SizedBox(
+          height: 25,
+        ),
       ],
     );
   }

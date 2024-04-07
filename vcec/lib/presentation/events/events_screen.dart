@@ -25,6 +25,7 @@ class EventsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(imageUrl! +'nidhin');
     return Scaffold(
       appBar: CommonAppBarWidget(
         imageUrl: imageUrl,
@@ -38,7 +39,7 @@ class EventsScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             kheight10,
-            const ForumEventFilterWidget(),
+            ForumEventFilterWidget(),
             const UpcomingEvents(),
             // const EventsForYouWidget(),
             const AnnouncementsEventsWidget(),
@@ -57,8 +58,6 @@ class _Banner extends StatelessWidget {
   final String thumbnailUrl;
   @override
   Widget build(BuildContext context) {
-    String url = imageUrl.replaceAll('auth//api/', 'auth/api/');
-    String turl = thumbnailUrl.replaceAll('auth//api/', 'auth/api/');
     return CircleAvatar(
       radius: 20,
       child: ClipOval(
@@ -66,8 +65,8 @@ class _Banner extends StatelessWidget {
             blur: 1,
             fit: BoxFit.cover,
             placeholder: null,
-            thumbnail: NetworkImage(turl),
-            image: NetworkImage(url),
+            thumbnail: NetworkImage(thumbnailUrl),
+            image: NetworkImage(imageUrl),
             width: double.infinity,
             height: double.infinity),
       ),

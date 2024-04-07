@@ -19,6 +19,7 @@ class TimetableCubit extends Cubit<TimetableState> {
     this.roleService,
   ) : super(TimetableState.initial());
   void getTimetable() async {
+    print(' nidhinnnnnnn');
     await roleService.getRole().then((value) => value.fold((l) {}, (r) async {
           if (r.role == 'student') {
             AuthTokenManager.instance.setUserRole(UserRole.student);

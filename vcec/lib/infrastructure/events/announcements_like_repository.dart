@@ -18,7 +18,7 @@ class AnnouncementsLikeRepository extends AnnouncementsLikesService {
         'Authorization': 'Bearer $accessToken',
       };
       final response = await Dio(BaseOptions(headers: headers)).post(
-          '${baseUrl}forum/announcements/set/like/user/?event_id=$id&like_status=$val');
+          '${baseUrl}forum/announcements/set/like/user/?announcement_id=$id&like_status=$val');
       if (response.statusCode == 200 || response.statusCode == 201) {
         return const Right(true);
       } else {

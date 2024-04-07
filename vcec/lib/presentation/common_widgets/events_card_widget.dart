@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:progressive_image/progressive_image.dart';
 import 'package:vcec/core/constants.dart';
-import 'package:vcec/strings/strings.dart';
 
 class EventsCardWidget extends StatelessWidget {
   const EventsCardWidget({
@@ -34,8 +33,8 @@ class EventsCardWidget extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.only(left: 10),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(width: 1, color: const Color.fromARGB(88, 0, 0, 0)),
+        borderRadius: BorderRadius.circular(18),
+        border: Border.all(width: .5, color: const Color.fromARGB(88, 0, 0, 0)),
       ),
       width: size.width * 0.65,
       child: Column(
@@ -49,9 +48,10 @@ class EventsCardWidget extends StatelessWidget {
                 topRight: Radius.circular(20),
               ),
             ),
-            width: double.infinity,
-            height: ((size.width * 0.65) - 12) / 16 * 9,
+            // width: double.infinity,
+            height: ((size.width * 0.65) - 12) / 16 * 15.6, //9
             child: ProgressiveImage(
+                fit: BoxFit.cover,
                 blur: 1,
                 placeholder: NetworkImage('$thumpnailUrl'),
                 thumbnail: NetworkImage('$thumpnailUrl'),
@@ -233,7 +233,7 @@ class EventsCardWidget extends StatelessWidget {
                                               right: size.width * 0.12,
                                               child: Container(
                                                 width: size.width * 0.07,
-                                                height: size.width * 0.07,
+                                                height: size.width * 1.07,
                                                 decoration: BoxDecoration(
                                                   shape: BoxShape.circle,
                                                   color: Colors.green,

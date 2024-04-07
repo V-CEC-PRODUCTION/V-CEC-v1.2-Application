@@ -217,11 +217,12 @@ class IndEventsPage extends StatelessWidget {
                                             width: size1 * 0.1,
                                             decoration: BoxDecoration(
                                               shape: BoxShape.circle,
-                                              color: Colors.yellow,
+                                              color: const Color.fromARGB(
+                                                  255, 255, 255, 255),
                                               image: DecorationImage(
                                                 image: NetworkImage(
                                                     '${state.indEvents!.conductedBy![index].imageUrl}'),
-                                                fit: BoxFit.fill,
+                                                fit: BoxFit.contain,
                                               ),
                                             ),
                                           ),

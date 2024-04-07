@@ -38,7 +38,7 @@ class UpcomingEvents extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const SubHeading(text: 'Upcoming Events'),
+              const SubHeading(text: 'Events'),
               TextButton(
                 onPressed: () {
                   final forum = AuthTokenManager.instance.forum;

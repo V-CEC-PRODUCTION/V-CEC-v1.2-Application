@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:progressive_image/progressive_image.dart';
 import 'package:vcec/application/logout/log_out_cubit.dart';
+import 'package:vcec/application/main_menu/timetable/timetable_cubit.dart';
 import 'package:vcec/application/profile/profile_cubit.dart';
 import 'package:vcec/domain/failure/main_failure.dart';
 import 'package:vcec/presentation/auth_screens/login/login_screen.dart';
@@ -138,6 +139,7 @@ class ProfileScreen extends StatelessWidget {
                           leading: IconButton(
                               iconSize: size1 * 0.05,
                               onPressed: () {
+                                 BlocProvider.of<TimetableCubit>(context).getTimetable(); 
                                 Navigator.pop(context);
                               },
                               icon: const Icon(Icons.arrow_back_ios)),
