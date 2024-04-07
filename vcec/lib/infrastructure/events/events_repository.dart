@@ -18,7 +18,11 @@ class EventsRepository extends EventsService {
       required bool call}) async {
     int pageCount = 4;
     try {
-      final response = await Dio(BaseOptions(contentType: 'application/json')).get(call
+       final Map<String, dynamic> headers = {
+        'Content-Type': 'application/json',
+        'Authorization': 'Token 31e96b68c0f2187950dbf9d0c83c688facbeba62',
+      };
+      final response = await Dio(BaseOptions(headers: headers)).get(call
           ? '${baseUrl}forum/events/get-event/?status=${eventType.name}&forum=$forum&page=$pageNum&count=$pageCount'
           : '${baseUrl}forum/events/get-event/?status=${eventType.name}&forum=$forum');
       if (response.statusCode == 200 || response.statusCode == 201) {

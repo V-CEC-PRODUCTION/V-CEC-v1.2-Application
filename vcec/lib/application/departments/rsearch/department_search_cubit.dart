@@ -69,6 +69,7 @@ class DepartmentSearchCubit extends Cubit<DepartmentSearchState> {
   void searchDepartmentsWithSearchBar(
       String query, Department? deptType) async {
     if (!_searchDepartmentsWithSearchBarIsExecuting) {
+      print('hi');
       _searchDepartmentsWithSearchBarIsExecuting = true;
       if (state.department != deptType) {
         emit(state.copyWith(
@@ -87,11 +88,15 @@ class DepartmentSearchCubit extends Cubit<DepartmentSearchState> {
       final result =
           await _searchService.searchDepartments(query, deptType, pageNum1);
       result.fold(
-        (l) => emit(state.copyWith(
-          failureOrSuccess: some(left(l)),
-          isLoading: false,
-        )),
+        (l) {
+          emit(state.copyWith(
+            failureOrSuccess: some(left(l)),
+            isLoading: false,
+          ));
+          _searchDepartmentsWithSearchBarIsExecuting = false;
+        },
         (r) {
+          print('hinidhinnnn');
           List<Staff> updatedStaffs = List.from(state.staffs);
           updatedStaffs.addAll(r.staffInfo!);
           emit(state.copyWith(

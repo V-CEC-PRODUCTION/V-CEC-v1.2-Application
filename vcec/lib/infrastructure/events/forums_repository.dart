@@ -12,7 +12,11 @@ class ForumsRepository extends ForumsService {
   @override
   Future<Either<MainFailure, List<AllForum>>> getForums() async {
     try {
-      final response = await Dio(BaseOptions(contentType: 'application/json'))
+       final Map<String, dynamic> headers = {
+        'Content-Type': 'application/json',
+        'Authorization': 'Token 31e96b68c0f2187950dbf9d0c83c688facbeba62',
+      };
+      final response = await Dio(BaseOptions(headers: headers))
           .get('${baseUrl}forum/management/get/roles/');
       if (response.statusCode == 200 || response.statusCode == 201) {
         final forums0 = ForumModel.fromJson(response.toString());

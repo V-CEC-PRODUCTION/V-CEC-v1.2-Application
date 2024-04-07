@@ -96,10 +96,11 @@ class _DeptTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) =>
-            ADepartmentScreen(deptType: dept['dept'], department: dept['name']),
-      )),
+      onTap: () {
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => ADepartmentScreen(
+                deptType: dept['dept'], department: dept['name'])));
+      },
       child: Container(
         width: 150,
         height: 150,

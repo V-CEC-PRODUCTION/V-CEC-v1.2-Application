@@ -13,7 +13,11 @@ class AnnouncementRepository extends AnnouncementService {
       {required String forum, required int pageNum, required bool call}) async {
     int pageCount = 3;
     try {
-      final response = await Dio(BaseOptions(contentType: 'application/json'))
+       final Map<String, dynamic> headers = {
+        'Content-Type': 'application/json',
+        'Authorization': 'Token 31e96b68c0f2187950dbf9d0c83c688facbeba62',
+      };
+      final response = await Dio(BaseOptions(headers: headers))
           .get(call
               ? '${baseUrl}forum/announcements/get-announcement/?forum=$forum&page=$pageNum&count=$pageCount'
               : '${baseUrl}forum/announcements/get-announcement/?forum=$forum');

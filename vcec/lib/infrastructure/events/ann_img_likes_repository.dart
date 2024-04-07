@@ -13,7 +13,11 @@ class AnnImgLikesRepository extends AnnImgLikesService {
   Future<Either<MainFailure, List<EventLike>>> getLikes(
       {required int id}) async {
     try {
-      final response = await Dio(BaseOptions(contentType: 'application/json')).get(
+       final Map<String, dynamic> headers = {
+        'Content-Type': 'application/json',
+        'Authorization': 'Token 31e96b68c0f2187950dbf9d0c83c688facbeba62',
+      };
+      final response = await Dio(BaseOptions(headers: headers)).get(
           '${baseUrl}forum/announcements/get/likes/announcement/ind?announcement_id=$id');
       if (response.statusCode == 200 || response.statusCode == 201) {
         final likes0 = LikesModel.fromJson(response.toString());
