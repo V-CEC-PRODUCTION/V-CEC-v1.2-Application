@@ -20,8 +20,7 @@ class MainMenuScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      BlocProvider.of<TimetableCubit>(context).getTimetable();
-      BlocProvider.of<ProfileCubit>(context).getProfileDetails();
+      BlocProvider.of<TimetableCubit>(context).getTimetable(); 
     });
     return Scaffold(
       body: BlocBuilder<TimetableCubit, TimetableState>(

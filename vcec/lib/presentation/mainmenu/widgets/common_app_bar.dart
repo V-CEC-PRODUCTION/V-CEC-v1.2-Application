@@ -19,7 +19,6 @@ class CommonAppBarWidget extends StatelessWidget
   final date = DateFormat('dd-MM-yyyy').format(DateTime.now());
   @override
   Widget build(BuildContext context) {
-    print(imageUrl! + 'nidhin');
     final size = MediaQuery.of(context).size.width;
     return DecoratedBox(
       decoration: const BoxDecoration(color: eventsappbarcolor),
@@ -45,38 +44,44 @@ class CommonAppBarWidget extends StatelessWidget
                     : _Banner(imageUrl: imageUrl!, thumbnailUrl: thumbnailUrl!),
             Padding(
               padding: const EdgeInsets.only(top: 10.0, left: 12),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    date,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 13,
-                      fontWeight: FontWeight.w400,
+              child: Flexible(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      date,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 13,
+                        fontWeight: FontWeight.w400,
+                      ),
                     ),
-                  ),
-                  name == null
-                      ? const SizedBox(
-                          height: 10,
-                        )
-                      : Text(
-                          name!,
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
+                    name == null
+                        ? const SizedBox(
+                            height: 10,
+                          )
+                        : FittedBox(
+                            fit: BoxFit.scaleDown,
+                            child: Text(
+                              name!,
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
                           ),
-                        ),
-                ],
+                  ],
+                ),
               ),
             ),
-            SizedBox(
-              width: value == true ? size * 0.50 : size * 0.30,
-            ),
+            Spacer(),
             value == true
-                ? const NotificationIcon()
+                ? Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: const NotificationIcon(),
+                  )
                 : const Text(
                     'Get Notified!',
                     textAlign: TextAlign.left,
@@ -102,7 +107,6 @@ class _Banner extends StatelessWidget {
   final String thumbnailUrl;
   @override
   Widget build(BuildContext context) {
-    print('banner' + imageUrl + thumbnailUrl);
     return CircleAvatar(
       radius: 23,
       child: ClipOval(
