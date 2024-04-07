@@ -46,8 +46,13 @@ class DepartmentSearchRepo implements DepartmentSearchService {
         break;
     }
     try {
-      log('${baseUrl}staff/info/directory/search/$dept?search=$query&page=$pageNum&count=$pageCount');
-      final respose = await Dio(BaseOptions(contentType: 'application/json')).get(
+      final Map<String, dynamic> headers = {
+        'Content-Type': 'application/json',
+        'Authorization': 'Token 31e96b68c0f2187950dbf9d0c83c688facbeba62',
+      };
+      print(
+          '${baseUrl}staff/info/directory/search/$dept?search=$query&page=$pageNum&count=$pageCount');
+      final respose = await Dio(BaseOptions(headers: headers)).get(
           '${baseUrl}staff/info/directory/search/$dept?search=$query&page=$pageNum&count=$pageCount');
 
       if (respose.statusCode == 200 || respose.statusCode == 201) {
@@ -58,6 +63,7 @@ class DepartmentSearchRepo implements DepartmentSearchService {
         return const Left(MainFailure.serverFailure());
       }
     } catch (e) {
+      print("nidhin" + e.toString());
       log(e.toString());
       if (e is DioException && e.response?.statusCode == 500) {
         log(e.response?.data.toString() ?? "err");

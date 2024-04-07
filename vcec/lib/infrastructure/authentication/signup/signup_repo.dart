@@ -23,9 +23,11 @@ class SignupRepo implements SignupService {
   Future<Either<MainFailure, OtpModel>> verifyEmail(
       {required String email}) async {
     try {
-      final Response response = await Dio(BaseOptions(headers: {
-        "Content-Type": "application/json",
-      })).post(
+       final Map<String, dynamic> headers = {
+        'Content-Type': 'application/json',
+        'Authorization': 'Token 31e96b68c0f2187950dbf9d0c83c688facbeba62',
+      };
+      final Response response = await Dio(BaseOptions(headers: headers)).post(
         "${baseUrl}users/auth/send-otp/",
         data: {"email": email},
       );
