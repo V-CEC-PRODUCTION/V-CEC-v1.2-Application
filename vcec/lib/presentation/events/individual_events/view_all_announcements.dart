@@ -38,19 +38,18 @@ class ViewAllAnnouncements extends StatelessWidget {
     final size1 = MediaQuery.of(context).size.width;
     return Scaffold(
         appBar: AppBar(
+            centerTitle: true,
             leading: IconButton(
                 iconSize: size1 * 0.05,
                 onPressed: () {
                   Navigator.pop(context);
                 },
                 icon: const Icon(Icons.arrow_back_ios)),
-            title: Padding(
-              padding: EdgeInsets.only(left: size1 * 0.24),
-              child: Text(
-                'Announcements',
-                style: TextStyle(
-                    fontSize: size1 * 0.05, fontWeight: FontWeight.bold),
-              ),
+            title: Text(
+              'Announcements',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  fontSize: size1 * 0.05, fontWeight: FontWeight.bold),
             )),
         body: BlocConsumer<AnnouncementCubit, AnnouncementState>(
             listener: (context, state) {

@@ -20,7 +20,7 @@ class MainMenuScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-//BlocProvider.of<TimetableCubit>(context).getTimetable();
+      BlocProvider.of<TimetableCubit>(context).getTimetable();
       BlocProvider.of<ProfileCubit>(context).getProfileDetails();
     });
     return Scaffold(
@@ -45,6 +45,7 @@ class MainMenuScreen extends StatelessWidget {
                     );
                   },
                   (success) {
+                    print('Success: ${success.result[0].currentcode}');
                     log("Success: ${success.imageThumbnailUrl}");
                     log("Success: ${success.thumbnailUrl}");
                     if (AuthTokenManager.instance.userRole ==

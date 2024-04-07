@@ -3,14 +3,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class CecifyButtonWidget extends StatelessWidget {
-  const CecifyButtonWidget({super.key, required this.title, required this.url});
+  const CecifyButtonWidget({super.key, required this.title, required this.url, required this.launchurl});
   final String title;
   final String url;
+  final String launchurl;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        launchUrl(Uri.parse(url));
+        launchUrl(Uri.parse(launchurl));
       },
       child: Container(
         decoration: BoxDecoration(

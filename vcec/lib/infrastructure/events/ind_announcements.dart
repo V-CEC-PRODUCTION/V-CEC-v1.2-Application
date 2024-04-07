@@ -13,6 +13,7 @@ class AnnouncementsRepository extends IndAnnouncementsService {
   Future<Either<MainFailure, IndAnnouncementsModel>> getIndAnnouncements(
       {required int id}) async {
     try {
+      print(id);
       final accessToken = AuthTokenManager.instance.accessToken;
 
       final Map<String, dynamic> headers = {
@@ -20,7 +21,7 @@ class AnnouncementsRepository extends IndAnnouncementsService {
         'Authorization': 'Bearer $accessToken',
       };
       final response = await Dio(BaseOptions(headers: headers))
-          .get('${baseUrl}forum/announcements/get-announcement/$id/');
+          .get('${baseUrl}forum/announcements/get-announcement/ind/$id/');
       if (response.statusCode == 200 || response.statusCode == 201) {
         final announcements0 =
             IndAnnouncementsModel.fromJson(response.toString());
@@ -30,6 +31,7 @@ class AnnouncementsRepository extends IndAnnouncementsService {
         return const Left(MainFailure.serverFailure());
       }
     } catch (e) {
+      print(e);
       if (e is DioException && e.response?.statusCode == 401) {
         return const Left(AuthFailure());
       } else if (e is DioException && e.response?.statusCode == 500 ||

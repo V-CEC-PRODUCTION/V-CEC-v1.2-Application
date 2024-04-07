@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:vcec/domain/cecify/episodes/episodes_model.dart';
 
 class CecifyRadioEpisodesHorizontalWidget extends StatelessWidget {
@@ -76,54 +77,74 @@ class CecifyRadioEpisodesHorizontalWidget extends StatelessWidget {
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceEvenly,
                                       children: [
-                                        Container(
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(20.w),
-                                            border: Border.all(
-                                              width: 1.5.w,
+                                        GestureDetector(
+                                          onTap: () {
+                                            print(imageUrl[index].youtubeUrl!);
+                                            print('hi');
+                                            _launchUrl(Uri.parse(
+                                                imageUrl[index].youtubeUrl!));
+                                          },
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(20.w),
+                                              border: Border.all(
+                                                width: 1.5.w,
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                            width: 35.w,
+                                            height: 35.w,
+                                            child: Icon(
+                                              Icons.play_arrow,
                                               color: Colors.white,
                                             ),
-                                          ),
-                                          width: 35.w,
-                                          height: 35.w,
-                                          child: Icon(
-                                            Icons.play_arrow,
-                                            color: Colors.white,
                                           ),
                                         ),
-                                        Container(
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(20.w),
-                                            border: Border.all(
-                                              width: 1.5.w,
-                                              color: Colors.white,
+                                        GestureDetector(
+                                          onTap: () {
+                                            _launchUrl(Uri.parse(
+                                                imageUrl[index].spotifyUrl!));
+                                          },
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(20.w),
+                                              border: Border.all(
+                                                width: 1.5.w,
+                                                color: Colors.white,
+                                              ),
                                             ),
-                                          ),
-                                          width: 35.w,
-                                          height: 35.w,
-                                          child: Image(
-                                            height: 10.w,
-                                            image: AssetImage(
-                                                'assets/img/spotify-bw.png'),
+                                            width: 35.w,
+                                            height: 35.w,
+                                            child: Image(
+                                              height: 10.w,
+                                              image: AssetImage(
+                                                  'assets/img/spotify-bw.png'),
+                                            ),
                                           ),
                                         ),
-                                        Container(
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(20.w),
-                                            border: Border.all(
-                                              width: 1.5.w,
-                                              color: Colors.white,
+                                        GestureDetector(
+                                          onTap: () {
+                                            _launchUrl(Uri.parse(imageUrl[index]
+                                                .googlePodcastUrl!));
+                                          },
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(20.w),
+                                              border: Border.all(
+                                                width: 1.5.w,
+                                                color: Colors.white,
+                                              ),
                                             ),
-                                          ),
-                                          width: 35.w,
-                                          height: 35.w,
-                                          child: Image(
-                                            height: 10.w,
-                                            image: AssetImage(
-                                                'assets/img/g-podcast-bw.png'),
+                                            width: 35.w,
+                                            height: 35.w,
+                                            child: Image(
+                                              height: 10.w,
+                                              image: AssetImage(
+                                                  'assets/img/g-podcast-bw.png'),
+                                            ),
                                           ),
                                         ),
                                       ],
@@ -166,5 +187,11 @@ class CecifyRadioEpisodesHorizontalWidget extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future<void> _launchUrl(Uri url1) async {
+    if (!await launchUrl(url1)) {
+      throw Exception('Could not launch $url1');
+    }
   }
 }

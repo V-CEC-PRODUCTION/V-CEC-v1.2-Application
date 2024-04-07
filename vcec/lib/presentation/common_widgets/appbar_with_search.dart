@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:progressive_image/progressive_image.dart';
@@ -99,20 +101,30 @@ class _Banner extends StatelessWidget {
   final String thumbnailUrl;
   @override
   Widget build(BuildContext context) {
-    String url = imageUrl.replaceAll('auth//api/', 'auth/api/');
-    String turl = thumbnailUrl.replaceAll('auth//api/', 'auth/api/');
-    // print(url);
-    return CircleAvatar(
+    return  CircleAvatar(
       radius: 23,
       child: ClipOval(
-        child: ProgressiveImage(
-            blur: 1,
-            fit: BoxFit.cover,
-            placeholder: null,
-            thumbnail: NetworkImage(turl),
-            image: NetworkImage(url),
-            width: double.infinity,
-            height: double.infinity),
+        child: Image.network(
+          imageUrl,
+          fit: BoxFit.cover,
+          loadingBuilder: (BuildContext context, Widget child,
+              ImageChunkEvent? loadingProgress) {
+            if (loadingProgress == null) {
+              return child;
+            }
+            return Center(
+              child: ImageFiltered(
+                imageFilter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                child: Image.network(
+                  thumbnailUrl.isEmpty ? imageUrl : thumbnailUrl,
+                  fit: BoxFit.cover,
+                ),
+              ),
+            );
+          },
+          height: double.infinity,
+          width: double.infinity,
+        ),
       ),
     );
   }
